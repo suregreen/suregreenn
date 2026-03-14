@@ -1412,28 +1412,54 @@ body::after{
 <body>
 <!-- ── TELA DE LOGIN ── -->
 <div id="login-screen">
-  <!-- Background effects -->
-  <div style="position:absolute;width:600px;height:600px;top:-150px;left:-150px;background:radial-gradient(circle,rgba(34,240,117,.06) 0%,transparent 65%);pointer-events:none;"></div>
-  <div style="position:absolute;width:500px;height:500px;bottom:-100px;right:-100px;background:radial-gradient(circle,rgba(34,240,117,.04) 0%,transparent 65%);pointer-events:none;"></div>
-  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(34,240,117,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(34,240,117,.018) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
-
   <div class="login-box" style="position:relative;z-index:1;">
-
-    <!-- Logo -->
-    <div class="login-logo" style="text-align:center;margin-bottom:32px;display:flex;flex-direction:column;align-items:center;">
-      <div style="width:62px;height:62px;background:rgba(34,240,117,.08);border:1px solid rgba(34,240,117,.2);border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 0 40px rgba(34,240,117,.12);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <div class="login-logo">
+      <div class="login-icon"><svg width="48" height="48" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#67e8f9"/></linearGradient>
+    <linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38bdf8" stop-opacity="0.30"/><stop offset="100%" stop-color="#38bdf8" stop-opacity="0.00"/></linearGradient>
+    <linearGradient id="lb1" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0f4c75"/><stop offset="100%" stop-color="#38bdf8" stop-opacity="0.7"/></linearGradient>
+    <linearGradient id="lb2" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0c3860"/><stop offset="100%" stop-color="#67e8f9"/></linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="36" fill="#07111f"/>
+  <line x1="20" y1="148" x2="162" y2="148" stroke="#1e3a5a" stroke-width="0.8"/>
+  <line x1="20" y1="128" x2="162" y2="128" stroke="#1e3a5a" stroke-width="0.8"/>
+  <line x1="20" y1="108" x2="162" y2="108" stroke="#1e3a5a" stroke-width="0.8"/>
+  <line x1="20" y1="88"  x2="162" y2="88"  stroke="#1e3a5a" stroke-width="0.8"/>
+  <line x1="40"  y1="50" x2="40"  y2="158" stroke="#1e3a5a" stroke-width="0.5"/>
+  <line x1="72"  y1="50" x2="72"  y2="158" stroke="#1e3a5a" stroke-width="0.5"/>
+  <line x1="104" y1="50" x2="104" y2="158" stroke="#1e3a5a" stroke-width="0.5"/>
+  <line x1="136" y1="50" x2="136" y2="158" stroke="#1e3a5a" stroke-width="0.5"/>
+  <line x1="20" y1="158" x2="164" y2="158" stroke="#2d5a8a" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="20" y1="50"  x2="20"  y2="158" stroke="#2d5a8a" stroke-width="1.2" stroke-linecap="round"/>
+  <rect x="32"  y="138" width="12" height="20" rx="2" fill="url(#lb1)" opacity="0.6"/>
+  <rect x="50"  y="130" width="12" height="28" rx="2" fill="url(#lb1)" opacity="0.6"/>
+  <rect x="68"  y="122" width="12" height="36" rx="2" fill="url(#lb1)" opacity="0.65"/>
+  <rect x="86"  y="126" width="12" height="32" rx="2" fill="url(#lb1)" opacity="0.65"/>
+  <rect x="104" y="112" width="12" height="46" rx="2" fill="url(#lb2)" opacity="0.7"/>
+  <rect x="122" y="98"  width="12" height="60" rx="2" fill="url(#lb2)" opacity="0.75"/>
+  <rect x="140" y="82"  width="12" height="76" rx="2" fill="url(#lb2)" opacity="0.85"/>
+  <path d="M30,142 C40,136 52,128 64,118 C76,108 82,114 94,106 C106,98 116,90 128,76 C140,62 150,56 160,52 L160,158 L30,158 Z" fill="url(#lg2)"/>
+  <path d="M30,142 C40,136 52,128 64,118 C76,108 82,114 94,106 C106,98 116,90 128,76 C140,62 150,56 160,52" fill="none" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="30"  cy="142" r="3" fill="#38bdf8" opacity="0.7"/>
+  <circle cx="64"  cy="118" r="3" fill="#38bdf8" opacity="0.8"/>
+  <circle cx="94"  cy="106" r="3" fill="#38bdf8" opacity="0.85"/>
+  <circle cx="128" cy="76"  r="3" fill="#38bdf8"/>
+  <circle cx="160" cy="52"  r="5" fill="#67e8f9"/>
+  <circle cx="160" cy="52"  r="10" fill="none" stroke="#67e8f9" stroke-width="1.5" opacity="0.35"/>
+  <rect x="136" y="34" width="46" height="16" rx="4" fill="#0f2d4a" stroke="#38bdf8" stroke-width="0.8" opacity="0.95"/>
+  <text x="159" y="45" font-family="monospace" font-size="10" font-weight="700" fill="#67e8f9" text-anchor="middle">+18.4%</text>
+</svg></div>
+      <div>
+        <div class="login-title" style="text-align:left;margin-bottom:4px;">Sure<em>Green</em></div>
+        <div class="login-sub" style="text-align:left;">Transforme suas apostas em lucro consistente</div>
       </div>
-      <div class="login-title" style="text-align:center;margin-bottom:6px;">Sure<em>Green</em></div>
-      <div class="login-sub" style="text-align:center;">Apostas com método e precisão</div>
     </div>
 
     <!-- Cards flutuantes laterais -->
     <div id="floating-cards"></div>
 
-    <!-- Form card -->
-    <div class="login-card" style="position:relative;">
-      <div style="position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(34,240,117,.3),transparent);"></div>
+    <div class="login-card">
       <div class="login-field">
         <label class="login-label">E-mail</label>
         <input class="login-input" id="l-user" type="email" placeholder="Digite seu e-mail" autocomplete="username">
@@ -1447,32 +1473,8 @@ body::after{
       <div class="login-err" id="l-err">E-mail ou senha incorretos.</div>
     </div>
 
-    <!-- Pills -->
-    <div style="display:flex;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap;">
-      <div id="lpill1" style="display:flex;align-items:center;gap:6px;padding:7px 13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease;">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        <span style="font-size:11.5px;font-weight:600;color:#3a5040;">Surebet automática</span>
-      </div>
-      <div id="lpill2" style="display:flex;align-items:center;gap:6px;padding:7px 13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .4s ease .12s,transform .4s ease .12s;">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        <span style="font-size:11.5px;font-weight:600;color:#3a5040;">Bankroll & ROI</span>
-      </div>
-      <div id="lpill3" style="display:flex;align-items:center;gap:6px;padding:7px 13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .4s ease .24s,transform .4s ease .24s;">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span style="font-size:11.5px;font-weight:600;color:#3a5040;">ROI em tempo real</span>
-      </div>
-    </div>
-    <script>
-      setTimeout(()=>{
-        ['lpill1','lpill2','lpill3'].forEach(id=>{
-          const el=document.getElementById(id);
-          if(el){el.style.opacity='1';el.style.transform='translateY(0)';}
-        });
-      },500);
-    </script>
-
-    <div class="login-footer" style="margin-top:20px;">SureGreen &nbsp;·&nbsp; 2025</div>
-    <div style="text-align:center;margin-top:12px;">
+    <div class="login-footer">SureGreen &nbsp;·&nbsp; suregreen.app</div>
+    <div style="text-align:center;margin-top:16px;">
       <button onclick="showRegister()" style="background:transparent;border:none;color:var(--w3);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline;">Não tem conta? Criar acesso</button>
     </div>
   </div>
