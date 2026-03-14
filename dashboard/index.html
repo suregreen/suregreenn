@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SureGreen — Gestão de Apostas</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230a1628'/%3E%3Cstop offset='100%25' stop-color='%230d1f3c'/%3E%3C/linearGradient%3E%3ClinearGradient id='line' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%2367e8f9'/%3E%3C/linearGradient%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='1.5' result='blur'/%3E%3CfeMerge%3E%3CfeMergeNode in='blur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23bg)'/%3E%3Crect width='64' height='64' rx='14' fill='none' stroke='%2338bdf8' stroke-width='1.5' stroke-opacity='0.3'/%3E%3Cline x1='10' y1='52' x2='54' y2='52' stroke='%231e3a5a' stroke-width='0.8'/%3E%3Cline x1='10' y1='42' x2='54' y2='42' stroke='%231e3a5a' stroke-width='0.8'/%3E%3Cline x1='10' y1='32' x2='54' y2='32' stroke='%231e3a5a' stroke-width='0.8'/%3E%3Cpath d='M10,48 C18,42 26,36 34,26 C40,18 46,14 54,10 L54,52 L10,52 Z' fill='%2338bdf8' fill-opacity='0.12'/%3E%3Cpath d='M10,48 C18,42 26,36 34,26 C40,18 46,14 54,10' fill='none' stroke='url(%23line)' stroke-width='2.5' stroke-linecap='round' filter='url(%23glow)'/%3E%3Ccircle cx='10' cy='48' r='2.5' fill='%2338bdf8' opacity='0.7'/%3E%3Ccircle cx='34' cy='26' r='2.5' fill='%2338bdf8' opacity='0.85'/%3E%3Ccircle cx='54' cy='10' r='3.5' fill='%2367e8f9' filter='url(%23glow)'/%3E%3Crect x='46' y='6' width='16' height='10' rx='3' fill='%230d1f3c' stroke='%2338bdf8' stroke-width='0.8' opacity='0.95'/%3E%3Ctext x='54' y='13.5' font-family='monospace' font-size='6' font-weight='700' fill='%2367e8f9' text-anchor='middle'%3E%2B18%25%3C/text%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1628'/%3E%3Cpath d='M10,48 C18,42 26,36 34,26 C40,18 46,14 54,10' fill='none' stroke='%2367e8f9' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='54' cy='10' r='3.5' fill='%2367e8f9'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2307111f'/><line x1='8' y1='56' x2='58' y2='56' stroke='%232d5a8a' stroke-width='1.5'/><line x1='8' y1='44' x2='58' y2='44' stroke='%231e3a5a' stroke-width='0.8'/><line x1='8' y1='32' x2='58' y2='32' stroke='%231e3a5a' stroke-width='0.8'/><path d='M10,50 C20,44 30,38 40,28 C48,20 52,16 58,12 L58,56 L10,56 Z' fill='%2338bdf8' fill-opacity='0.2'/><path d='M10,50 C20,44 30,38 40,28 C48,20 52,16 58,12' fill='none' stroke='%2367e8f9' stroke-width='3' stroke-linecap='round'/><circle cx='58' cy='12' r='4' fill='%2367e8f9'/></svg><rect width='64' height='64' rx='12' fill='%230e0e0e'/><rect width='64' height='64' rx='12' fill='none' stroke='%23c9a84c' stroke-width='2'/><text x='14' y='46' font-family='Georgia,serif' font-size='36' font-weight='bold' fill='white'>X</text><text x='34' y='46' font-family='Georgia,serif' font-size='36' font-weight='bold' fill='%23e2b96a'>B</text></svg>">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 
@@ -1411,106 +1410,173 @@ body::after{
 #hv-bankroll .page { padding-top: 0; }
 </style>
 <body>
-
-<!-- LOGIN SCREEN -->
-<div id="login-screen" style="display:flex;align-items:center;justify-content:center;min-height:100vh;position:fixed;inset:0;z-index:9999;background:#080b0f;overflow:hidden;">
-
-  <!-- Background glow effects -->
-  <div style="position:absolute;width:600px;height:600px;top:-100px;left:-150px;background:radial-gradient(circle,rgba(34,240,117,.06) 0%,transparent 65%);pointer-events:none;"></div>
+<!-- ── TELA DE LOGIN ── -->
+<div id="login-screen">
+  <!-- Background effects -->
+  <div style="position:absolute;width:600px;height:600px;top:-150px;left:-150px;background:radial-gradient(circle,rgba(34,240,117,.06) 0%,transparent 65%);pointer-events:none;"></div>
   <div style="position:absolute;width:500px;height:500px;bottom:-100px;right:-100px;background:radial-gradient(circle,rgba(34,240,117,.04) 0%,transparent 65%);pointer-events:none;"></div>
-  <!-- Grid lines -->
   <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(34,240,117,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(34,240,117,.018) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
 
-  <div style="width:100%;max-width:400px;padding:0 20px;position:relative;z-index:1;">
+  <div class="login-box" style="position:relative;z-index:1;">
 
     <!-- Logo -->
-    <div style="text-align:center;margin-bottom:36px;">
-      <div style="width:58px;height:58px;background:rgba(34,240,117,.08);border:1px solid rgba(34,240,117,.2);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 0 30px rgba(34,240,117,.1);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <div class="login-logo" style="text-align:center;margin-bottom:32px;display:flex;flex-direction:column;align-items:center;">
+      <div style="width:62px;height:62px;background:rgba(34,240,117,.08);border:1px solid rgba(34,240,117,.2);border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 0 40px rgba(34,240,117,.12);">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
-      <div style="font-size:28px;font-weight:800;color:#f2f6f4;letter-spacing:-.6px;line-height:1;">Sure<span style="color:#22f075;">Green</span></div>
-      <div style="font-size:13px;color:#4a6460;margin-top:8px;font-weight:400;letter-spacing:.2px;">Apostas com método e precisão</div>
+      <div class="login-title" style="text-align:center;margin-bottom:6px;">Sure<em>Green</em></div>
+      <div class="login-sub" style="text-align:center;">Apostas com método e precisão</div>
     </div>
 
-    <!-- Card -->
-    <div style="background:#0f1620;border:1px solid rgba(34,240,117,.12);border-radius:24px;padding:34px 30px;box-shadow:0 0 60px rgba(0,0,0,.6),0 0 0 1px rgba(34,240,117,.04);">
+    <!-- Cards flutuantes laterais -->
+    <div id="floating-cards"></div>
 
-      <!-- Top line glow -->
-      <div style="position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(34,240,117,.35),transparent);border-radius:1px;"></div>
-
-      <div style="margin-bottom:18px;">
-        <label style="display:block;font-size:12.5px;color:#6e8a7a;margin-bottom:8px;font-weight:500;letter-spacing:.3px;text-transform:uppercase;">E-mail</label>
-        <input id="loginEmail" type="email" placeholder="seu@email.com"
-          style="width:100%;background:#080c12;border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:13px 15px;color:#f2f6f4;font-size:15px;outline:none;font-family:inherit;transition:border-color .2s;letter-spacing:.1px;"
-          onfocus="this.style.borderColor='rgba(34,240,117,.35)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'" />
+    <!-- Form card -->
+    <div class="login-card" style="position:relative;">
+      <div style="position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(34,240,117,.3),transparent);"></div>
+      <div class="login-field">
+        <label class="login-label">E-mail</label>
+        <input class="login-input" id="l-user" type="email" placeholder="Digite seu e-mail" autocomplete="username">
       </div>
-
-      <div style="margin-bottom:22px;">
-        <label style="display:block;font-size:12.5px;color:#6e8a7a;margin-bottom:8px;font-weight:500;letter-spacing:.3px;text-transform:uppercase;">Senha</label>
-        <input id="loginPass" type="password" placeholder="••••••••"
-          style="width:100%;background:#080c12;border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:13px 15px;color:#f2f6f4;font-size:15px;outline:none;font-family:inherit;transition:border-color .2s;"
-          onfocus="this.style.borderColor='rgba(34,240,117,.35)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'" />
+      <div class="login-field">
+        <label class="login-label">Senha</label>
+        <input class="login-input" id="l-pass" type="password" placeholder="Digite sua senha" autocomplete="current-password"
+          onkeydown="if(event.key==='Enter')doLogin()">
       </div>
-
-      <div id="loginErr" style="display:none;color:#f87171;font-size:13px;margin-bottom:16px;padding:11px 13px;background:rgba(248,113,113,.07);border-radius:10px;border:1px solid rgba(248,113,113,.18);"></div>
-
-      <button id="loginBtn" onclick="doLogin()"
-        style="width:100%;background:#22f075;color:#020d05;border:none;padding:15px;border-radius:999px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .25s;letter-spacing:.2px;box-shadow:0 4px 20px rgba(34,240,117,.3);"
-        onmouseover="this.style.background='#40ffaa';this.style.boxShadow='0 6px 28px rgba(34,240,117,.5)'"
-        onmouseout="this.style.background='#22f075';this.style.boxShadow='0 4px 20px rgba(34,240,117,.3)'">
-        Entrar na plataforma
-      </button>
-
-      <!-- Divider -->
-      <div style="display:flex;align-items:center;gap:12px;margin:22px 0 0;">
-        <div style="flex:1;height:1px;background:rgba(255,255,255,.06);"></div>
-        <span style="font-size:12px;color:#3a5040;">SureGreen &copy; 2025</span>
-        <div style="flex:1;height:1px;background:rgba(255,255,255,.06);"></div>
-      </div>
-
+      <button class="login-btn" onclick="doLogin()">Entrar na plataforma</button>
+      <div class="login-err" id="l-err">E-mail ou senha incorretos.</div>
     </div>
 
-    <!-- Animated feature pills -->
-    <div id="login-pills" style="display:flex;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap;">
-      <div class="lpill" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:#0f1620;border:1px solid rgba(255,255,255,.05);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease;">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        <span style="font-size:12px;font-weight:600;color:#8ea3bc;">Surebet automática</span>
+    <!-- Pills -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap;">
+      <div id="lpill1" style="display:flex;align-items:center;gap:6px;padding:7px 13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span style="font-size:11.5px;font-weight:600;color:#3a5040;">Surebet automática</span>
       </div>
-      <div class="lpill" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:#0f1620;border:1px solid rgba(255,255,255,.05);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .4s ease .12s,transform .4s ease .12s;">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        <span style="font-size:12px;font-weight:600;color:#8ea3bc;">Bankroll & ROI</span>
+      <div id="lpill2" style="display:flex;align-items:center;gap:6px;padding:7px 13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .4s ease .12s,transform .4s ease .12s;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span style="font-size:11.5px;font-weight:600;color:#3a5040;">Bankroll & ROI</span>
       </div>
-      <div class="lpill" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:#0f1620;border:1px solid rgba(255,255,255,.05);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .4s ease .24s,transform .4s ease .24s;">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/><polyline points="8 12 12 16 16 12"/></svg>
-        <span style="font-size:12px;font-weight:600;color:#8ea3bc;">ROI em tempo real</span>
+      <div id="lpill3" style="display:flex;align-items:center;gap:6px;padding:7px 13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .4s ease .24s,transform .4s ease .24s;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span style="font-size:11.5px;font-weight:600;color:#3a5040;">ROI em tempo real</span>
       </div>
     </div>
     <script>
-    setTimeout(()=>{
-      document.querySelectorAll('.lpill').forEach(p=>{
-        p.style.opacity='1';
-        p.style.transform='translateY(0)';
-      });
-    },400);
+      setTimeout(()=>{
+        ['lpill1','lpill2','lpill3'].forEach(id=>{
+          const el=document.getElementById(id);
+          if(el){el.style.opacity='1';el.style.transform='translateY(0)';}
+        });
+      },500);
     </script>
 
+    <div class="login-footer" style="margin-top:20px;">SureGreen &nbsp;·&nbsp; 2025</div>
+    <div style="text-align:center;margin-top:12px;">
+      <button onclick="showRegister()" style="background:transparent;border:none;color:var(--w3);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline;">Não tem conta? Criar acesso</button>
+    </div>
   </div>
 </div>
 
+<!-- ── TELA DE CADASTRO ── -->
+<div id="register-screen" style="display:none;position:fixed;inset:0;z-index:9999;background:#080808;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-icon"><svg width="48" height="48" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#67e8f9"/></linearGradient>
+    <linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38bdf8" stop-opacity="0.30"/><stop offset="100%" stop-color="#38bdf8" stop-opacity="0.00"/></linearGradient>
+    <linearGradient id="lb1" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0f4c75"/><stop offset="100%" stop-color="#38bdf8" stop-opacity="0.7"/></linearGradient>
+    <linearGradient id="lb2" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0c3860"/><stop offset="100%" stop-color="#67e8f9"/></linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="36" fill="#07111f"/>
+  <line x1="20" y1="148" x2="162" y2="148" stroke="#1e3a5a" stroke-width="0.8"/>
+  <line x1="20" y1="128" x2="162" y2="128" stroke="#1e3a5a" stroke-width="0.8"/>
+  <line x1="20" y1="108" x2="162" y2="108" stroke="#1e3a5a" stroke-width="0.8"/>
+  <line x1="20" y1="88"  x2="162" y2="88"  stroke="#1e3a5a" stroke-width="0.8"/>
+  <line x1="40"  y1="50" x2="40"  y2="158" stroke="#1e3a5a" stroke-width="0.5"/>
+  <line x1="72"  y1="50" x2="72"  y2="158" stroke="#1e3a5a" stroke-width="0.5"/>
+  <line x1="104" y1="50" x2="104" y2="158" stroke="#1e3a5a" stroke-width="0.5"/>
+  <line x1="136" y1="50" x2="136" y2="158" stroke="#1e3a5a" stroke-width="0.5"/>
+  <line x1="20" y1="158" x2="164" y2="158" stroke="#2d5a8a" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="20" y1="50"  x2="20"  y2="158" stroke="#2d5a8a" stroke-width="1.2" stroke-linecap="round"/>
+  <rect x="32"  y="138" width="12" height="20" rx="2" fill="url(#lb1)" opacity="0.6"/>
+  <rect x="50"  y="130" width="12" height="28" rx="2" fill="url(#lb1)" opacity="0.6"/>
+  <rect x="68"  y="122" width="12" height="36" rx="2" fill="url(#lb1)" opacity="0.65"/>
+  <rect x="86"  y="126" width="12" height="32" rx="2" fill="url(#lb1)" opacity="0.65"/>
+  <rect x="104" y="112" width="12" height="46" rx="2" fill="url(#lb2)" opacity="0.7"/>
+  <rect x="122" y="98"  width="12" height="60" rx="2" fill="url(#lb2)" opacity="0.75"/>
+  <rect x="140" y="82"  width="12" height="76" rx="2" fill="url(#lb2)" opacity="0.85"/>
+  <path d="M30,142 C40,136 52,128 64,118 C76,108 82,114 94,106 C106,98 116,90 128,76 C140,62 150,56 160,52 L160,158 L30,158 Z" fill="url(#lg2)"/>
+  <path d="M30,142 C40,136 52,128 64,118 C76,108 82,114 94,106 C106,98 116,90 128,76 C140,62 150,56 160,52" fill="none" stroke="url(#lg1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="30"  cy="142" r="3" fill="#38bdf8" opacity="0.7"/>
+  <circle cx="64"  cy="118" r="3" fill="#38bdf8" opacity="0.8"/>
+  <circle cx="94"  cy="106" r="3" fill="#38bdf8" opacity="0.85"/>
+  <circle cx="128" cy="76"  r="3" fill="#38bdf8"/>
+  <circle cx="160" cy="52"  r="5" fill="#67e8f9"/>
+  <circle cx="160" cy="52"  r="10" fill="none" stroke="#67e8f9" stroke-width="1.5" opacity="0.35"/>
+  <rect x="136" y="34" width="46" height="16" rx="4" fill="#0f2d4a" stroke="#38bdf8" stroke-width="0.8" opacity="0.95"/>
+  <text x="159" y="45" font-family="monospace" font-size="10" font-weight="700" fill="#67e8f9" text-anchor="middle">+18.4%</text>
+</svg></div>
+      <div>
+        <div class="login-title" style="text-align:left;margin-bottom:4px;">Sure<em>Green</em></div>
+        <div class="login-sub" style="text-align:left;">Crie sua conta e comece a lucrar hoje</div>
+      </div>
+    </div>
+    <div class="login-card">
+      <div class="login-field">
+        <label class="login-label">Código de acesso</label>
+        <input class="login-input" id="r-code" type="text" placeholder="Código fornecido por SureGreen">
+      </div>
+      <div class="login-field">
+        <label class="login-label">E-mail</label>
+        <input class="login-input" id="r-email" type="email" placeholder="seu@email.com">
+      </div>
+      <div class="login-field">
+        <label class="login-label">Senha</label>
+        <input class="login-input" id="r-pass" type="password" placeholder="Mínimo 6 caracteres"
+          onkeydown="if(event.key==='Enter')doRegister()">
+      </div>
+      <div class="login-field">
+        <label class="login-label">Confirmar senha</label>
+        <input class="login-input" id="r-pass2" type="password" placeholder="Repita a senha">
+      </div>
+      <button class="login-btn" onclick="doRegister()">Criar conta</button>
+      <div class="login-err" id="r-err">Código inválido.</div>
+    </div>
+    <div style="text-align:center;margin-top:16px;">
+      <button onclick="showLogin()" style="background:transparent;border:none;color:var(--w3);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline;">Já tem conta? Entrar</button>
+    </div>
+  </div>
+</div>
 
-<div class="shell" id="app-shell" style="display:none;flex-direction:column;min-height:100vh;">
+<div class="shell" id="app-shell" style="display:none;">
 
 
 <!-- NAV -->
 <nav class="topnav">
-  <div class="brand" style="border-right:1px solid rgba(255,255,255,0.08);padding-right:28px;margin-right:8px;display:flex;align-items:center;gap:11px;">
-    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="38" height="38" rx="8" fill="#0f1f0f"/>
-      <polyline points="4,19 9,19 13,10 16,28 19,14 22,19 28,19 34,19" stroke="#4ade80" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <svg width="175" height="38" viewBox="0 0 175 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <text x="0" y="27" font-family="'Space Grotesk','DM Sans',Arial,sans-serif" font-size="25" font-weight="800" letter-spacing="-0.5"><tspan fill="#ffffff">Sure</tspan><tspan fill="#4ade80">Green</tspan></text>
-    </svg>
+  <div class="brand">
+    <div class="brand-icon"><svg width="22" height="22" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ng1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#67e8f9"/></linearGradient>
+    <linearGradient id="ng2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38bdf8" stop-opacity="0.25"/><stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/></linearGradient>
+    <linearGradient id="nb1" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0c3860"/><stop offset="100%" stop-color="#67e8f9"/></linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="36" fill="#07111f"/>
+  <line x1="20" y1="148" x2="162" y2="148" stroke="#1e3a5a" stroke-width="1"/>
+  <line x1="20" y1="118" x2="162" y2="118" stroke="#1e3a5a" stroke-width="0.7"/>
+  <line x1="20" y1="88"  x2="162" y2="88"  stroke="#1e3a5a" stroke-width="0.7"/>
+  <line x1="20" y1="158" x2="164" y2="158" stroke="#2d5a8a" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="36"  y="130" width="14" height="28" rx="3" fill="url(#nb1)" opacity="0.6"/>
+  <rect x="68"  y="115" width="14" height="43" rx="3" fill="url(#nb1)" opacity="0.7"/>
+  <rect x="100" y="98"  width="14" height="60" rx="3" fill="url(#nb1)" opacity="0.8"/>
+  <rect x="132" y="78"  width="14" height="80" rx="3" fill="url(#nb1)" opacity="0.9"/>
+  <path d="M28,145 C55,132 80,118 105,100 C125,86 142,70 160,52 L160,158 L28,158 Z" fill="url(#ng2)"/>
+  <path d="M28,145 C55,132 80,118 105,100 C125,86 142,70 160,52" fill="none" stroke="url(#ng1)" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="160" cy="52" r="6"  fill="#67e8f9"/>
+  <circle cx="160" cy="52" r="12" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.3"/>
+</svg></div>
+    <div class="brand-name">Sure<em>Green</em><span class="brand-tag">APP</span></div>
   </div>
   <div class="nav-tabs">
     <button class="ntab on" onclick="goPage('pg-org',this)">Organizador</button>
@@ -2109,8 +2175,222 @@ const db    = getFirestore(app);
 
 // ── Importar query/where para busca no Firestore ──
 
+// ── Mostrar/ocultar telas ──
+window.showRegister = function() {
+  document.getElementById('login-screen').style.display = 'none';
+  const rs = document.getElementById('register-screen');
+  rs.style.display = 'flex';
+}
+window.showLogin = function() {
+  document.getElementById('register-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+}
 
+// ── Cadastro ──
+window.doRegister = async function() {
+  const code  = document.getElementById('r-code').value.trim().toUpperCase();
+  const email = document.getElementById('r-email').value.trim();
+  const pass  = document.getElementById('r-pass').value;
+  const pass2 = document.getElementById('r-pass2').value;
+  const err   = document.getElementById('r-err');
+  const btn   = document.querySelector('#register-screen .login-btn');
 
+  err.classList.remove('show');
+
+  if (!code) {
+    err.textContent = '❌ Digite o código de acesso.';
+    err.classList.add('show'); return;
+  }
+  if (!email) {
+    err.textContent = '❌ Digite um e-mail válido.';
+    err.classList.add('show'); return;
+  }
+  if (pass.length < 6) {
+    err.textContent = '❌ A senha precisa ter pelo menos 6 caracteres.';
+    err.classList.add('show'); return;
+  }
+  if (pass !== pass2) {
+    err.textContent = '❌ As senhas não coincidem.';
+    err.classList.add('show'); return;
+  }
+
+  btn.textContent = 'Verificando código...';
+  btn.disabled = true;
+
+  try {
+    // Busca o código no Firestore
+    const { collection: col, query: q, where, getDocs: gd, doc, updateDoc } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+    const codigosRef = col(db, 'codigos');
+    const snap = await gd(q(codigosRef, where('__name__', '==', code)));
+
+    if (snap.empty) {
+      err.textContent = '❌ Código de acesso inválido.';
+      err.classList.add('show');
+      btn.textContent = 'Criar conta';
+      btn.disabled = false;
+      return;
+    }
+
+    const codigoDoc = snap.docs[0];
+    const dados = codigoDoc.data();
+
+    // Verifica se já foi usado
+    if (dados.usado === true) {
+      err.textContent = '❌ Este código já foi utilizado.';
+      err.classList.add('show');
+      btn.textContent = 'Criar conta';
+      btn.disabled = false;
+      return;
+    }
+
+    // Verifica se expirou
+    if (dados.expira) {
+      const hoje = new Date().toISOString().slice(0, 10);
+      if (hoje > dados.expira) {
+        err.textContent = '❌ Este código está expirado.';
+        err.classList.add('show');
+        btn.textContent = 'Criar conta';
+        btn.disabled = false;
+        return;
+      }
+    }
+
+    // Código válido — cria a conta
+    btn.textContent = 'Criando conta...';
+    await createUserWithEmailAndPassword(auth, email, pass);
+
+    // Marca código como usado e registra o email
+    await updateDoc(doc(db, 'codigos', codigoDoc.id), {
+      usado: true,
+      email: email
+    });
+
+    // onAuthStateChanged cuida do resto
+
+  } catch(e) {
+    let msg = '❌ Erro ao criar conta.';
+    if (e.code === 'auth/email-already-in-use') msg = '❌ Este e-mail já está cadastrado.';
+    if (e.code === 'auth/invalid-email')        msg = '❌ E-mail inválido.';
+    err.textContent = msg;
+    err.classList.add('show');
+    btn.textContent = 'Criar conta';
+    btn.disabled = false;
+  }
+}
+
+// ── Login ──
+window.doLogin = async function() {
+  const email = document.getElementById('l-user').value.trim();
+  const pass  = document.getElementById('l-pass').value;
+  const err   = document.getElementById('l-err');
+  const btn   = document.querySelector('#login-screen .login-btn');
+  if (!email || !pass) {
+    err.textContent = '❌ Preencha e-mail e senha.';
+    err.classList.add('show');
+    return;
+  }
+  btn.textContent = 'Entrando...';
+  btn.disabled = true;
+  err.classList.remove('show');
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    err.classList.remove('show');
+  } catch(e) {
+    let msg = 'E-mail ou senha incorretos.';
+    if (e.code === 'auth/network-request-failed') msg = '❌ Erro de conexão. Verifique sua internet.';
+    if (e.code === 'auth/too-many-requests') msg = '❌ Muitas tentativas. Aguarde alguns minutos.';
+    if (e.code === 'auth/user-not-found') msg = '❌ Usuário não encontrado.';
+    if (e.code === 'auth/wrong-password') msg = '❌ Senha incorreta.';
+    if (e.code === 'auth/invalid-credential') msg = '❌ E-mail ou senha incorretos.';
+    err.textContent = msg;
+    err.classList.add('show');
+    document.getElementById('l-pass').value = '';
+    document.getElementById('l-pass').focus();
+    btn.textContent = 'Entrar na plataforma';
+    btn.disabled = false;
+  }
+}
+
+// ── Logout ──
+window.doLogout = async function() {
+  await signOut(auth);
+}
+
+// ── Auth state ──
+onAuthStateChanged(auth, user => {
+  const ls  = document.getElementById('login-screen');
+  const ash = document.getElementById('app-shell');
+  if (user) {
+    ls.style.display = 'none';
+    ash.style.display = 'flex';
+    ash.style.flexDirection = 'column';
+    ash.style.minHeight = '100vh';
+    // Mostra email do usuário na nav
+    const liveEl = document.querySelector('.live');
+    if (liveEl) liveEl.innerHTML = `<span style="margin-right:8px;font-size:11px;color:var(--w3)">${user.email}</span> <button onclick="doLogout()" style="background:transparent;border:1px solid var(--k5);border-radius:6px;color:var(--w3);cursor:pointer;font-size:10px;padding:3px 8px;font-family:'DM Sans',sans-serif;">Sair</button>`;
+    // Carrega entradas do usuário
+    loadEntries(user.uid);
+    loadExtras(user.uid);
+    loadDiario(user.uid);
+  } else {
+    ls.style.display = 'flex';
+    ash.style.display = 'none';
+  }
+});
+
+// ── Carrega entradas do Firestore ──
+function loadEntries(uid) {
+  const q = query(collection(db, 'users', uid, 'entries'), orderBy('id', 'desc'));
+  onSnapshot(q, snap => {
+    window._entries = [];
+    snap.forEach(d => window._entries.push(d.data()));
+    window._entries.sort((a,b) => b.id - a.id);
+    if (typeof window.render === 'function') window.render();
+    if (typeof window.updStats === 'function') window.updStats();
+    if (typeof window.diarAtualizarHoje === 'function') window.diarAtualizarHoje();
+  });
+}
+
+// ── Salva entrada no Firestore ──
+window.fbSave = async function(entry) {
+  const user = auth.currentUser;
+  if (!user) return;
+  await setDoc(doc(db, 'users', user.uid, 'entries', String(entry.id)), entry);
+}
+
+// ── Deleta entrada no Firestore ──
+window.fbDelete = async function(id) {
+  const user = auth.currentUser;
+  if (!user) return;
+  await deleteDoc(doc(db, 'users', user.uid, 'entries', String(id)));
+}
+
+// ── Extras (Cassino / Outros) ──────────────────────────
+window._extras = [];
+
+function loadExtras(uid) {
+  const q = query(collection(db, 'users', uid, 'extras'), orderBy('id', 'desc'));
+  onSnapshot(q, snap => {
+    window._extras = [];
+    snap.forEach(d => window._extras.push(d.data()));
+    window._extras.sort((a,b) => b.id - a.id);
+    if (typeof window.updStats === 'function') window.updStats();
+    else if (typeof window.updLucroDia === 'function') window.updLucroDia();
+    if (typeof window.diarAtualizarHoje === 'function') window.diarAtualizarHoje();
+  });
+}
+
+window.fbSaveExtra = async function(extra) {
+  const user = auth.currentUser;
+  if (!user) return;
+  await setDoc(doc(db, 'users', user.uid, 'extras', String(extra.id)), extra);
+};
+
+window.fbDeleteExtra = async function(id) {
+  const user = auth.currentUser;
+  if (!user) return;
+  await deleteDoc(doc(db, 'users', user.uid, 'extras', String(id)));
+};
 
 // ── Diário de Fechamento ──────────────────────────────────
 window._diario = [];
@@ -2137,62 +2417,6 @@ window.fbDeleteDiario = async function(data) {
 };
 
 window._fbReady = true;
-
-// ── Auth State ──────────────────────────────────────────
-onAuthStateChanged(auth, user => {
-  const loginScreen = document.getElementById('login-screen');
-  const appShell    = document.getElementById('app-shell');
-  if (user) {
-    // Logged in — hide login, show app
-    loginScreen.style.display = 'none';
-    appShell.style.display    = 'flex';
-    // Load user data
-    if (typeof window.loadDiario === 'function') window.loadDiario(user.uid);
-    if (typeof window.loadEntries === 'function') window.loadEntries(user.uid);
-    if (typeof window.fbLoadEntries === 'function') window.fbLoadEntries(user.uid);
-  } else {
-    // Not logged in — show login, hide app
-    loginScreen.style.display = 'flex';
-    appShell.style.display    = 'none';
-  }
-});
-
-// ── Login Function ──────────────────────────────────────
-window.doLogin = async function() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPass').value;
-  const btn   = document.getElementById('loginBtn');
-  const err   = document.getElementById('loginErr');
-
-  err.style.display = 'none';
-  btn.textContent   = 'Entrando...';
-  btn.style.opacity = '.7';
-  btn.disabled      = true;
-
-  try {
-    await signInWithEmailAndPassword(auth, email, pass);
-    // onAuthStateChanged will handle the redirect
-  } catch(e) {
-    let msg = 'E-mail ou senha incorretos.';
-    if (e.code === 'auth/invalid-email')    msg = 'E-mail inválido.';
-    if (e.code === 'auth/too-many-requests') msg = 'Muitas tentativas. Aguarde alguns minutos.';
-    if (e.code === 'auth/network-request-failed') msg = 'Erro de conexão. Verifique a internet.';
-    err.textContent   = msg;
-    err.style.display = 'block';
-    btn.textContent   = 'Entrar na plataforma';
-    btn.style.opacity = '1';
-    btn.disabled      = false;
-  }
-};
-
-// Allow Enter key to submit login
-document.addEventListener('DOMContentLoaded', () => {
-  ['loginEmail','loginPass'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
-  });
-});
-
 </script>
 
 
@@ -4223,6 +4447,72 @@ function entryHTML(e) {
 </script>
 
 
+<script>
+(function(){
+  const cards = [
+    {side:'left', top:'12%', icon:'📊', val:'+500', lbl:'Apostadores ativos'},
+    {side:'right',top:'15%', icon:'💰', val:'R$2.3M', lbl:'Volume gerenciado'},
+    {side:'left', top:'42%', icon:'📈', val:'18.4%', lbl:'ROI médio mensal'},
+    {side:'right',top:'45%', icon:'🎯', val:'92%', lbl:'Taxa de acerto'},
+    {side:'left', top:'72%', icon:'✅', val:'Seguro', lbl:'Dados 100% privados'},
+    {side:'right',top:'68%', icon:'⚡', val:'Tempo real', lbl:'Resultados ao vivo'},
+  ];
 
+  // Cria os elementos
+  cards.forEach((c,i)=>{
+    const el = document.createElement('div');
+    el.className = 'fc fc-'+c.side;
+    el.id = 'fc'+i;
+    el.style.top = c.top;
+    el.innerHTML = '<div class="fc-icon">'+c.icon+'</div>'
+      +'<div class="fc-val">'+c.val+'</div>'
+      +'<div class="fc-lbl"><span class="fc-dot"></span>'+c.lbl+'</div>';
+    document.getElementById('login-screen').appendChild(el);
+  });
+
+  let timers = [];
+  function startCycle(){
+    // Mostra cada card em sequência com delay, depois some
+    cards.forEach((c,i)=>{
+      // Aparece
+      const t1 = setTimeout(()=>{
+        const el = document.getElementById('fc'+i);
+        if(el) el.classList.add('fc-show');
+      }, i * 1100 + 400);
+      // Some
+      const t2 = setTimeout(()=>{
+        const el = document.getElementById('fc'+i);
+        if(el) el.classList.remove('fc-show');
+      }, i * 1100 + 6000);
+      timers.push(t1,t2);
+    });
+    // Reinicia o ciclo
+    const total = cards.length * 1100 + 7500;
+    const t3 = setTimeout(()=>{
+      if(document.getElementById('login-screen') &&
+         !document.getElementById('login-screen').classList.contains('hide')){
+        startCycle();
+      }
+    }, total);
+    timers.push(t3);
+  }
+
+  // Inicia somente quando login está visível
+  function tryStart(){
+    const ls = document.getElementById('login-screen');
+    if(ls && ls.style.display !== 'none'){
+      startCycle();
+    } else {
+      setTimeout(tryStart, 300);
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', tryStart);
+  } else {
+    tryStart();
+  }
+})();
+</script>
 </body>
 </html>
