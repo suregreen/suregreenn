@@ -1066,7 +1066,7 @@ body::after{
 .ld-extras-btn,.btn-export,.btn-dashed,.btn-cancel,.btn-del,.btn-edit,.hist-arr,.fchip,.hptab,.co-fix-btn,.btn-rcasa{
   border-radius:12px;
 }
-.layout{grid-template-columns:220px 420px minmax(0,1fr);gap:22px;align-items:start;}
+.layout{grid-template-columns:200px 360px minmax(0,1fr);gap:20px;align-items:start;}
 .form-panel{top:102px;}
 .card{padding:26px;}
 .card-head,.co-section-title,.ent-title,.co-panel-title,.hist-month-label,.cal-month-lbl,.ld-modal-title,.edit-modal-title{
@@ -1589,7 +1589,180 @@ body::after{
   .sn-logo-img { width: 80%; }
 }
 
-/* ══ CUSTOM TIPO SELECT ══ */
+/* ══ PRO STATS GRID ══ */
+.pro-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.pro-stat {
+  background: linear-gradient(145deg, rgba(15,23,36,.98), rgba(10,16,26,.99));
+  border: 1px solid rgba(130,160,200,.10);
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .2s, transform .2s;
+}
+.pro-stat:hover {
+  border-color: rgba(103,232,249,.18);
+  transform: translateY(-2px);
+}
+.pro-stat::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(103,232,249,.3), transparent);
+  border-radius: 18px 18px 0 0;
+}
+.pro-stat--accent::after {
+  background: linear-gradient(90deg, transparent, #22c55e, transparent);
+}
+.pro-stat__icon {
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: rgba(34,197,94,.12);
+  border: 1px solid rgba(34,197,94,.2);
+  display: flex; align-items: center; justify-content: center;
+  color: #22c55e;
+  margin-bottom: 14px;
+}
+.pro-stat__icon--blue { background: rgba(56,189,248,.12); border-color: rgba(56,189,248,.2); color: #38bdf8; }
+.pro-stat__icon--purple { background: rgba(167,139,250,.12); border-color: rgba(167,139,250,.2); color: #a78bfa; }
+.pro-stat__icon--yellow { background: rgba(250,204,21,.10); border-color: rgba(250,204,21,.18); color: #facc15; }
+.pro-stat__lbl {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--w3);
+  margin-bottom: 8px;
+}
+.pro-stat__val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--w);
+  margin-bottom: 8px;
+}
+.pro-val--pos { color: #4ade80 !important; }
+.pro-val--neg { color: #fb7185 !important; }
+.pro-stat__sub {
+  font-size: 11px;
+  color: var(--w3);
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+
+/* ══ PRO DAY BAR ══ */
+.pro-day {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(145deg, rgba(15,23,36,.98), rgba(10,16,26,.99));
+  border: 1px solid rgba(130,160,200,.10);
+  border-radius: 18px;
+  padding: 20px 26px;
+  margin-bottom: 24px;
+  gap: 0;
+}
+.pro-day__block {
+  flex: 1;
+  min-width: 0;
+}
+.pro-day__sep {
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,.07);
+  margin: 0 32px;
+  flex-shrink: 0;
+}
+.pro-day__lbl {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--w3);
+  margin-bottom: 6px;
+}
+.pro-day__val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: #4ade80;
+  margin-bottom: 4px;
+}
+.pro-day__val--neg { color: #fb7185; }
+.pro-day__sub {
+  font-size: 11px;
+  color: var(--w3);
+}
+.pro-day__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.pro-day__date {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--w2);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.pro-day__reset {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: var(--w3);
+}
+.pro-day__reset::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gr);
+  opacity: .6;
+  animation: bl 2s ease-in-out infinite;
+}
+.pro-day__extras {
+  background: rgba(56,189,248,.06);
+  border: 1px solid rgba(103,232,249,.18);
+  border-radius: 8px;
+  color: var(--g2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: all .18s;
+}
+.pro-day__extras:hover {
+  background: rgba(56,189,248,.12);
+  border-color: rgba(103,232,249,.35);
+}
+
+@media (max-width: 900px) {
+  .pro-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .pro-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pro-day { flex-wrap: wrap; gap: 16px; }
+  .pro-day__sep { display: none; }
+  .pro-day__right { flex-direction: row; flex-wrap: wrap; margin-left: 0; width: 100%; justify-content: flex-start; }
+  .pro-day__val { font-size: 22px; }
+  .pro-stat__val { font-size: 20px; }
+}
+
+
 .tipo-select {
   position: relative;
   user-select: none;
@@ -1679,6 +1852,97 @@ body::after{
   .sidebar-nav { display: none; }
   .main-content { margin-left: 0; }
 }
+
+/* ══ ENTRIES CARD ══ */
+.entries-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 !important;
+  overflow: hidden;
+  min-width: 0;
+}
+.entries-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.entries-head__left { display: flex; align-items: center; gap: 12px; }
+.entries-head__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--w); letter-spacing: -.01em;
+}
+.entries-head__count {
+  font-size: 11px; font-weight: 600; color: var(--w3);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 999px; padding: 3px 10px;
+}
+.entries-head__right { display: flex; gap: 8px; }
+.entries-export-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+  color: var(--w3);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all .18s;
+}
+.entries-export-btn:hover { background: rgba(56,189,248,.08); border-color: rgba(103,232,249,.22); color: var(--g2); }
+.entries-export-btn--pdf:hover { background: rgba(251,113,133,.08); border-color: rgba(251,113,133,.22); color: #fb7185; }
+
+.entries-search {
+  display: flex; align-items: center; gap: 10px;
+  margin: 14px 24px 0;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px; padding: 10px 14px;
+  transition: border-color .2s;
+}
+.entries-search:focus-within { border-color: rgba(103,232,249,.35); background: rgba(255,255,255,.05); }
+.entries-search svg { color: var(--w3); flex-shrink: 0; }
+.entries-search__input {
+  flex: 1; background: transparent; border: none; outline: none;
+  color: var(--w); font-family: 'DM Sans', sans-serif; font-size: 13px; min-width: 0;
+}
+.entries-search__input::placeholder { color: var(--w3); }
+
+.entries-filters {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  padding: 12px 24px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.entries-chip {
+  padding: 5px 13px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.07);
+  background: rgba(255,255,255,.03);
+  color: var(--w3);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all .18s; white-space: nowrap;
+}
+.entries-chip:hover { border-color: rgba(103,232,249,.2); color: var(--w2); }
+.entries-chip.on, .fchip.on {
+  background: rgba(56,189,248,.12) !important;
+  border-color: rgba(103,232,249,.3) !important;
+  color: #ebfdff !important;
+}
+
+.entries-list {
+  padding: 12px 16px 16px;
+  overflow-y: auto;
+  max-height: 680px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.08) transparent;
+}
+.entries-list::-webkit-scrollbar { width: 4px; }
+.entries-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 4px; }
 </style>
 <body>
 <!-- ── TELA DE LOGIN ── -->
@@ -1793,47 +2057,59 @@ body::after{
 <!-- ══════════════════════════ PAGE 1: ORGANIZADOR ══════════════════════════ -->
 <div id="pg-org" class="page on">
 
-  <div class="stats">
-    <div class="stat">
-      <div class="stlbl">Lucro Total</div>
-      <div class="stval" id="sL">R$ 0,00</div>
-      <div class="stsub" id="sE">0 entradas</div>
+  <!-- MÉTRICAS PRINCIPAIS -->
+  <div class="pro-stats">
+    <div class="pro-stat pro-stat--accent">
+      <div class="pro-stat__icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <div class="pro-stat__lbl">Lucro Total</div>
+      <div class="pro-stat__val" id="sL">R$ 0,00</div>
+      <div class="pro-stat__sub" id="sE">0 entradas</div>
     </div>
-    <div class="stat">
-      <div class="stlbl">Volume Apostado</div>
-      <div class="stval wh" id="sV">R$ 0,00</div>
-      <div class="stsub" id="sR">ROI 0,0%</div>
+    <div class="pro-stat">
+      <div class="pro-stat__icon pro-stat__icon--blue">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      </div>
+      <div class="pro-stat__lbl">Volume Apostado</div>
+      <div class="pro-stat__val" id="sV">R$ 0,00</div>
+      <div class="pro-stat__sub" id="sR">ROI 0,0%</div>
     </div>
-    <div class="stat">
-      <div class="stlbl">Ganhas / Perdidas</div>
-      <div class="stval wh" id="sGP">0 / 0</div>
-      <div class="stsub" id="sW">Taxa 0%</div>
+    <div class="pro-stat">
+      <div class="pro-stat__icon pro-stat__icon--purple">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      </div>
+      <div class="pro-stat__lbl">Ganhas / Perdidas</div>
+      <div class="pro-stat__val" id="sGP">0 / 0</div>
+      <div class="pro-stat__sub" id="sW">Taxa 0%</div>
     </div>
-    <div class="stat">
-      <div class="stlbl">Pendentes</div>
-      <div class="stval wh" id="sP">0</div>
-      <div class="stsub" id="sPV">R$ 0,00 em aberto</div>
+    <div class="pro-stat">
+      <div class="pro-stat__icon pro-stat__icon--yellow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="pro-stat__lbl">Pendentes</div>
+      <div class="pro-stat__val" id="sP">0</div>
+      <div class="pro-stat__sub" id="sPV">R$ 0,00 em aberto</div>
     </div>
   </div>
 
-
-  <!-- Lucro do Dia -->
-  <div class="ld-card">
-    <div class="ld-left">
-      <div class="ld-label">Lucro do Dia</div>
-      <div class="ld-valor" id="ld-valor">R$ 0,00</div>
-      <div class="ld-sub" id="ld-sub">Nenhuma entrada hoje</div>
+  <!-- LUCRO / PERDA DO DIA -->
+  <div class="pro-day">
+    <div class="pro-day__block">
+      <div class="pro-day__lbl">Lucro do Dia</div>
+      <div class="pro-day__val" id="ld-valor">R$ 0,00</div>
+      <div class="pro-day__sub" id="ld-sub">Nenhuma entrada hoje</div>
     </div>
-    <div class="ld-divider"></div>
-    <div class="ld-left">
-      <div class="ld-perda-label">Perda do Dia</div>
-      <div class="ld-perda-valor" id="ld-perda">R$ 0,00</div>
-      <div class="ld-perda-sub" id="ld-perda-sub">Nenhuma perda hoje</div>
+    <div class="pro-day__sep"></div>
+    <div class="pro-day__block">
+      <div class="pro-day__lbl">Perda do Dia</div>
+      <div class="pro-day__val pro-day__val--neg" id="ld-perda">R$ 0,00</div>
+      <div class="pro-day__sub" id="ld-perda-sub">Nenhuma perda hoje</div>
     </div>
-    <div class="ld-right" style="gap:8px;">
-      <div class="ld-date" id="ld-date">—</div>
-      <div class="ld-reset" id="ld-reset">Zera à meia-noite</div>
-      <button class="btn-export" onclick="ldOpenModal()">+ Extras</button>
+    <div class="pro-day__right">
+      <div class="pro-day__date" id="ld-date">—</div>
+      <div class="pro-day__reset" id="ld-reset">Zera à meia-noite</div>
+      <button class="pro-day__extras" onclick="ldOpenModal()">+ Extras</button>
     </div>
   </div>
 
@@ -2054,38 +2330,44 @@ body::after{
     </div>
 
     <!-- ENTRIES -->
-    <div class="card">
-      <div class="ent-head">
-        <div class="ent-title">Entradas Registradas</div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div class="ecnt" id="eCnt">0 entradas</div>
+    <div class="card entries-card">
+      <!-- Header -->
+      <div class="entries-head">
+        <div class="entries-head__left">
+          <div class="entries-head__title">Entradas Registradas</div>
+          <div class="entries-head__count" id="eCnt">0 entradas</div>
+        </div>
+        <div class="entries-head__right">
+          <button class="entries-export-btn" onclick="exportXLSX()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Excel
+          </button>
+          <button class="entries-export-btn entries-export-btn--pdf" onclick="exportPDF()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            PDF
+          </button>
         </div>
       </div>
-      <div class="export-bar">
-        <button class="btn-export" onclick="exportXLSX()">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          Excel
-        </button>
-        <button class="btn-export pdf" onclick="exportPDF()">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          PDF
-        </button>
+
+      <!-- Search -->
+      <div class="entries-search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="entries-search__input" id="srch" type="text" placeholder="Buscar partida, casa, tipo..." oninput="render()">
       </div>
-      <div class="srch-wrap">
-        <span class="srch-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-        <input class="fi" id="srch" type="text" placeholder="Buscar partida, casa, tipo..." oninput="render()">
+
+      <!-- Filters -->
+      <div class="entries-filters">
+        <button class="entries-chip on" onclick="setF('all',this)">Todas</button>
+        <button class="entries-chip" onclick="setF('pending',this)">Pendentes</button>
+        <button class="entries-chip" onclick="setF('won',this)">Ganhas</button>
+        <button class="entries-chip" onclick="setF('lost',this)">Perdidas</button>
+        <button class="entries-chip" onclick="setF('surebet',this)">Surebet</button>
+        <button class="entries-chip" onclick="setF('superodds',this)">Super Odds</button>
+        <button class="entries-chip" onclick="setF('apostagrats',this)">Duplo Green</button>
       </div>
-      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--w3);margin-bottom:8px;margin-top:4px;">Filtrar</div>
-      <div class="filters">
-        <button class="fchip on" onclick="setF('all',this)">Todas</button>
-        <button class="fchip" onclick="setF('pending',this)">Pendentes</button>
-        <button class="fchip" onclick="setF('won',this)">Ganhas</button>
-        <button class="fchip" onclick="setF('lost',this)">Perdidas</button>
-        <button class="fchip" onclick="setF('surebet',this)">Surebet</button>
-        <button class="fchip" onclick="setF('superodds',this)">Super Odds</button>
-        <button class="fchip" onclick="setF('apostagrats',this)">Duplo Green</button>
-      </div>
-      <div id="list"></div>
+
+      <!-- List -->
+      <div class="entries-list" id="list"></div>
     </div>
   </div>
 </div>
@@ -2759,7 +3041,7 @@ addCasa(); // init 1 casa
 
 function setF(f, btn) {
   filt = f;
-  document.querySelectorAll('.fchip').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.fchip, .entries-chip').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
   render();
 }
@@ -2962,7 +3244,7 @@ function updStats() {
   const f   = v => 'R$ ' + Math.abs(v).toFixed(2).replace('.', ',');
   const lEl = document.getElementById('sL');
   lEl.textContent = (lu >= 0 ? '' : '- ') + f(lu);
-  lEl.className = 'stval ' + (lu > 0 ? 'pos' : lu < 0 ? 'neg' : '');
+  lEl.className = 'pro-stat__val ' + (lu > 0 ? 'pro-val--pos' : lu < 0 ? 'pro-val--neg' : '');
   document.getElementById('sE').textContent  = `${entries.length} entrada${entries.length !== 1 ? 's' : ''}`;
   document.getElementById('sV').textContent  = f(vo);
   document.getElementById('sR').textContent  = `ROI ${roi.toFixed(1)}%`;
@@ -3028,7 +3310,7 @@ function updLucroDia() {
 
   if (vEl) {
     vEl.textContent = f(lucroTotal);
-    vEl.className   = 'ld-valor' + (lucroTotal > 0 ? ' pos' : '');
+    vEl.className   = 'pro-day__val' + (lucroTotal > 0 ? '' : lucroTotal < 0 ? ' pro-day__val--neg' : '');
   }
   if (sEl) {
     sEl.textContent = cntLucro === 0 ? 'Nenhum ganho hoje'
@@ -3036,7 +3318,7 @@ function updLucroDia() {
   }
   if (pEl) {
     pEl.textContent = f(perdaTotal);
-    pEl.className   = 'ld-perda-valor' + (perdaTotal > 0 ? ' has' : '');
+    pEl.className   = 'pro-day__val ' + (perdaTotal > 0 ? 'pro-day__val--neg' : '');
   }
   if (psEl) {
     psEl.textContent = cntPerda === 0 ? 'Nenhuma perda hoje'
