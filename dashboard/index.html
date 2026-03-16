@@ -434,8 +434,8 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:1px;z-index:2
 .co-comm-pct{margin-left:auto;width:68px;background:#1a2240;border:1px solid rgba(255,255,255,0.1);
   border-radius:7px;padding:5px 10px;color:#fff;font-family:'Space Grotesk',sans-serif;
   font-size:13px;font-weight:600;text-align:center;outline:none;
-  display:none;transition:border-color .2s;appearance:none;}
-.co-comm-pct.show{display:block;}
+  display:none !important;transition:border-color .2s;appearance:none;}
+.co-comm-pct.show{display:block !important;}
 .co-comm-pct:focus{border-color:var(--g);}
 
 /* ── RESULTADO — DOIS PAINÉIS ── */
@@ -4008,113 +4008,47 @@ function ldRenderExtras() {
 // ════════════════════════════════════════
 // CALCULAR ODD
 // ════════════════════════════════════════
-let coN = 3;
+
+let coN      = 3;
+let coBase   = 1;
+let coLastLucro = 0;
+const coManual = {};
+let _coWriting = false; // true enquanto o código está escrevendo nos campos
+const coLayVals = {}; // guarda stakes calculados das casas LAY
 
 function coSetN(n, btn) {
   coN = n;
-  coBase = 1;
   document.querySelectorAll('.co-num').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
+  if (btn) btn.classList.add('on');
+  for (let i = 1; i <= 5; i++) coManual[i] = false;
+  if (coBase > coN) coBase = 1;
   coRender();
 }
 
-function coRender() {
-  // salva valores atuais antes de re-renderizar
-  const prev = {};
-  for (let i = 1; i <= 5; i++) {
-    prev[i] = {
-      odd:   document.getElementById('co_odd'  + i)?.value || '',
-      tipo:  document.getElementById('co_tipo' + i)?.value || 'back',
-      aum:   document.getElementById('co_aum'  + i)?.value || '0',
-      comm:  document.getElementById('co_cc'   + i)?.checked || false,
-      commv: document.getElementById('co_cv'   + i)?.value || '5',
-      fb:    document.getElementById('co_fb'   + i)?.checked || false,
-      fixed: document.getElementById('co_fix'  + i)?.classList.contains('active') || false
-    };
-  }
+function coOnOddChange(n) {
+  coCalc();
+}
 
-  const wrap = document.getElementById('coCards');
-  // CSS mobile (#mobile-css) já controla < 600px com !important
-  // aqui só definimos tablet e desktop via style inline
-  const isTablet = window.innerWidth <= 900 && window.innerWidth > 600;
-  const isDesktop = window.innerWidth > 900;
-  if (isTablet) {
-    wrap.style.gridTemplateColumns = 'repeat(' + Math.min(coN, 2) + ', 1fr)';
-  } else if (isDesktop) {
-    wrap.style.gridTemplateColumns = 'repeat(' + coN + ', 1fr)';
-  } else {
-    wrap.style.gridTemplateColumns = ''; // deixa o CSS mobile controlar
-  }
-  wrap.style.overflowX = '';
-  wrap.style.minWidth = '0';
+function coOnTipoChange(n) {
+  coManual[n] = false;
+  for (let i = 1; i <= coN; i++) if (i !== n) coManual[i] = false;
+  coRender();
+}
 
-  wrap.innerHTML = Array.from({ length: coN }, (_, i) => {
-    const n = i + 1;
-    const p = prev[n] || {};
-    return `
-    <div class="co-card">
-      <div class="co-card-title">Casa ${n}</div>
+function coOnValChange(n) {
+  if (_coWriting) return; // código escrevendo — não é o usuário
+  const elId = n === 1 ? 'co_val1_inp' : 'co_val' + n;
+  const el = document.getElementById(elId);
+  const v = parseFloat(el?.value) || 0;
+  coManual[n] = v > 0;
+  coCalc();
+}
 
-      <div class="co-field">
-        <div class="co-lbl">Odd</div>
-        <input class="co-inp" id="co_odd${n}" type="number"
-          placeholder="2.00" step="0.01" min="1.01"
-          value="${p.odd}" oninput="coCalc()">
-        <div class="co-odd-final">
-          <span class="co-odd-final-lbl">Odd Final:</span>
-          <span class="co-odd-final-val" id="co_ofv${n}">—</span>
-        </div>
-      </div>
-
-      <div class="co-field">
-        <div class="co-lbl">Tipo</div>
-        <select class="co-inp" id="co_tipo${n}" onchange="coCalc()">
-          <option value="back" ${(p.tipo||'back')==='back'?'selected':''}>Back</option>
-          <option value="lay"  ${p.tipo==='lay'?'selected':''}>Lay</option>
-        </select>
-      </div>
-
-      <div class="co-field">
-        <div class="co-lbl">Aumento (%)</div>
-        <input class="co-inp" id="co_aum${n}" type="number"
-          placeholder="0%" step="0.1" min="0"
-          value="${p.aum||'0'}" oninput="coCalc()">
-      </div>
-
-      <div class="co-field">
-        <div class="co-lbl">${n === 1 ? 'Valor' : 'Valor'} ${n > 1 ? `<span onclick="coResetVal(${n})">↺ auto</span>` : ''}</div>
-        ${n === 1
-          ? `<input class="co-inp" id="co_val1_inp" type="number"
-               placeholder="Ex: 100,00" step="0.01" min="0.01" oninput="coCalc()">`
-          : `<input class="co-inp co-val-result" id="co_val${n}" type="number"
-               placeholder="—" step="0.01" min="0"
-               oninput="this.setAttribute('data-manual','1');coCalc()">`
-        }
-      </div>
-
-      <div class="co-extras-wrap">
-        <div class="co-comm-wrap">
-          <input type="checkbox" class="co-comm-check" id="co_cc${n}"
-            ${p.comm?'checked':''} onchange="coToggleComm(${n})">
-          <label class="co-comm-lbl" for="co_cc${n}">Comissão</label>
-          <input class="co-comm-pct ${p.comm?'show':''}" id="co_cv${n}"
-            type="number" placeholder="%" step="0.1" min="0" max="100"
-            value="${p.commv||'5'}" oninput="coCalc()">
-        </div>
-        <div class="co-comm-wrap co-fb-wrap">
-          <input type="checkbox" class="co-comm-check co-fb-check" id="co_fb${n}"
-            ${p.fb?'checked':''} onchange="coCalc()">
-          <label class="co-comm-lbl co-fb-lbl" for="co_fb${n}">Freebet</label>
-        </div>
-      </div>
-      <div class="co-fix-wrap">
-        <button class="co-fix-btn ${p.fixed?'active':''}" id="co_fix${n}" onclick="coFixStake(${n})">
-          ${p.fixed ? '📌 Fixado' : '📌 Fixar Stake'}
-        </button>
-      </div>
-    </div>`;
-  }).join('');
-
+function coSetAuto(n) {
+  coManual[n] = false;
+  const elId = n === 1 ? 'co_val1_inp' : 'co_val' + n;
+  const el = document.getElementById(elId);
+  if (el) el.value = '';
   coCalc();
 }
 
@@ -4122,33 +4056,101 @@ function coToggleComm(n) {
   const chk = document.getElementById('co_cc' + n);
   const inp = document.getElementById('co_cv' + n);
   inp.classList.toggle('show', chk.checked);
-  coCalc();
+  coOnOddChange(n);
 }
-
-function coResetVal(n) {
-  const el = document.getElementById('co_val' + n);
-  if (el) { el.value = ''; el.removeAttribute('data-manual'); }
-  coCalc();
-}
-
-// Casa "base" para o cálculo — padrão é sempre a Casa 1
-let coBase = 1;
-let coLastLucro = 0; // último lucro garantido calculado pelo coCalc
 
 function coFixStake(n) {
   coBase = n;
-  // Atualiza visual de todos os botões
   for (let i = 1; i <= coN; i++) {
     const btn = document.getElementById('co_fix' + i);
     if (!btn) continue;
-    if (i === n) {
-      btn.classList.add('active');
-      btn.textContent = '📌 Fixado';
-    } else {
-      btn.classList.remove('active');
-      btn.textContent = '📌 Fixar Stake';
-    }
+    btn.classList.toggle('active', i === n);
+    btn.textContent = i === n ? '📌 Fixado' : '📌 Fixar Stake';
   }
+  for (let i = 1; i <= coN; i++) if (i !== n) coManual[i] = false;
+  coCalc();
+}
+
+function coRender() {
+  const wrap = document.getElementById('coCards');
+  const isTablet  = window.innerWidth <= 900 && window.innerWidth > 600;
+  const isDesktop = window.innerWidth > 900;
+  wrap.style.gridTemplateColumns = isDesktop
+    ? 'repeat(' + coN + ', 1fr)'
+    : isTablet ? 'repeat(' + Math.min(coN, 2) + ', 1fr)' : '';
+
+  const prev = {};
+  for (let i = 1; i <= coN; i++) {
+    const valEl = i === 1 ? document.getElementById('co_val1_inp') : document.getElementById('co_val' + i);
+    prev[i] = {
+      odd:   document.getElementById('co_odd' + i)?.value   || '',
+      tipo:  document.getElementById('co_tipo' + i)?.value  || 'back',
+      aum:   document.getElementById('co_aum' + i)?.value   || '0',
+      comm:  document.getElementById('co_cc' + i)?.checked  || false,
+      commv: document.getElementById('co_cv' + i)?.value    || '5',
+      fb:    document.getElementById('co_fb' + i)?.checked  || false,
+      fixed: document.getElementById('co_fix' + i)?.classList.contains('active') || false,
+      val:   valEl?.value || '',
+    };
+  }
+
+  wrap.innerHTML = Array.from({ length: coN }, (_, idx) => {
+    const n   = idx + 1;
+    const p   = prev[n] || {};
+    const lay = p.tipo === 'lay';
+    const valField = lay
+      // LAY: campo somente-leitura com a stake calculada + stake display abaixo
+      ? `<div class="co-field">
+           <div class="co-lbl">Stake <span style="font-size:9px;color:var(--w3)">(calculado)</span></div>
+           <div class="co-odd-final" id="co_lay_stake${n}" style="background:rgba(56,189,248,.07);border-color:rgba(103,232,249,.25)">
+             <span class="co-odd-final-lbl">Stake:</span>
+             <span class="co-odd-final-val" id="co_lay_val${n}" style="color:#67e8f9">—</span>
+           </div>
+         </div>`
+      // BACK/FREEBET: input normal
+      : `<div class="co-field">
+           <div class="co-lbl">Valor${n > 1 ? ' <span style="font-size:10px;color:var(--g2);cursor:pointer;text-decoration:underline" onclick="coSetAuto(' + n + ')">↺ auto</span>' : ''}</div>
+           ${n === 1
+             ? '<input class="co-inp" id="co_val1_inp" type="number" placeholder="Ex: 100,00" step="0.01" min="0.01" value="' + p.val + '" oninput="coOnValChange(1)">'
+             : '<input class="co-inp" id="co_val' + n + '" type="number" placeholder="—" step="0.01" min="0" value="' + p.val + '" oninput="coOnValChange(' + n + ')">'
+           }
+         </div>`;
+
+    return `<div class="co-card">
+      <div class="co-card-title">Casa ${n}</div>
+      <div class="co-field">
+        <div class="co-lbl">Odd</div>
+        <input class="co-inp" id="co_odd${n}" type="number" placeholder="2.00" step="0.01" min="1.01" value="${p.odd}" oninput="coOnOddChange(${n})">
+      </div>
+      <div class="co-field">
+        <div class="co-lbl">Tipo</div>
+        <select class="co-inp" id="co_tipo${n}" onchange="coOnTipoChange(${n})">
+          <option value="back" ${(p.tipo||'back')==='back'?'selected':''}>Back</option>
+          <option value="lay" ${p.tipo==='lay'?'selected':''}>Lay</option>
+        </select>
+      </div>
+      <div class="co-field">
+        <div class="co-lbl">Aumento (%)</div>
+        <input class="co-inp" id="co_aum${n}" type="number" placeholder="0%" step="0.1" min="0" value="${p.aum||'0'}" oninput="coOnOddChange(${n})">
+      </div>
+      ${valField}
+      <div class="co-extras-wrap">
+        <div class="co-comm-wrap">
+          <input type="checkbox" class="co-comm-check" id="co_cc${n}" ${p.comm?'checked':''} onchange="coToggleComm(${n})">
+          <label class="co-comm-lbl" for="co_cc${n}">Comissão</label>
+          <input class="co-comm-pct ${p.comm?'show':''}" id="co_cv${n}" type="number" placeholder="%" step="0.1" min="0" max="100" value="${p.commv||'5'}" oninput="coOnOddChange(${n})">
+        </div>
+        <div class="co-comm-wrap co-fb-wrap">
+          <input type="checkbox" class="co-comm-check co-fb-check" id="co_fb${n}" ${p.fb?'checked':''} onchange="coOnOddChange(${n})">
+          <label class="co-comm-lbl co-fb-lbl" for="co_fb${n}">Freebet</label>
+        </div>
+      </div>
+      <div class="co-fix-wrap">
+        <button class="co-fix-btn ${p.fixed?'active':''}" id="co_fix${n}" onclick="coFixStake(${n})">${p.fixed ? '📌 Fixado' : '📌 Fixar Stake'}</button>
+      </div>
+    </div>`;
+  }).join('');
+
   coCalc();
 }
 
@@ -4156,7 +4158,6 @@ function coCalc() {
   const res      = document.getElementById('coResult');
   const sendWrap = document.getElementById('coSendWrap');
 
-  // ── Lê cada casa ──
   const casas = [];
   for (let i = 1; i <= coN; i++) {
     const oddRaw    = parseFloat(document.getElementById('co_odd'  + i)?.value) || 0;
@@ -4167,25 +4168,15 @@ function coCalc() {
     const comm      = commPct / 100;
     const isFreebet = document.getElementById('co_fb'   + i)?.checked || false;
     const oddFinal  = oddRaw > 1 ? oddRaw * (1 + aum / 100) : 0;
-    const valEl     = i === 1
-      ? document.getElementById('co_val1_inp')
-      : document.getElementById('co_val' + i);
+    const valEl     = i === 1 ? document.getElementById('co_val1_inp') : document.getElementById('co_val' + i);
     const stakeRaw  = parseFloat(valEl?.value) || 0;
-    // Campo é "manual" se tem atributo data-manual="1" (setado no oninput)
-    // A casa base nunca é "manual" — ela sempre é a referência
-    const isManual  = i !== coBase && valEl?.getAttribute('data-manual') === '1';
-    casas.push({ n: i, oddRaw, oddFinal, tipo, aum, comm, commPct, isFreebet, stakeRaw, isManual });
+    const isManual  = !!coManual[i] && stakeRaw > 0;
+    casas.push({ n: i, oddFinal, tipo, aum, comm, isFreebet, stakeRaw, isManual });
   }
 
-  // ── Atualiza badges Odd Final ──
-  casas.forEach(ca => {
-    const el = document.getElementById('co_ofv' + ca.n);
-    if (el) el.textContent = ca.oddFinal > 1 ? ca.oddFinal.toFixed(2) : '—';
-  });
+  // (odd final removido do display visual)
 
-  // Casa base = a fixada (ou 1 por padrão), desde que tenha odd e valor válidos
-  const baseIdx = (coBase <= coN && casas[coBase-1]?.oddFinal > 1 && casas[coBase-1]?.stakeRaw > 0)
-    ? coBase - 1 : 0;
+  const baseIdx  = (coBase <= coN && casas[coBase-1]?.oddFinal > 1 && casas[coBase-1]?.stakeRaw > 0) ? coBase - 1 : 0;
   const casaBase = casas[baseIdx];
   const validas  = casas.filter(ca => ca.oddFinal > 1);
 
@@ -4195,117 +4186,121 @@ function coCalc() {
     return;
   }
 
-  const hasFreebet = casas.some(ca => ca.isFreebet);
-
-  // ── K = retorno da casa base ──
   let K;
   if (casaBase.isFreebet)            K = casaBase.stakeRaw * (casaBase.oddFinal - 1);
   else if (casaBase.tipo === 'back') K = casaBase.stakeRaw * casaBase.oddFinal;
-  else                               K = casaBase.stakeRaw * (1 - casaBase.comm);
+  else                               K = casaBase.stakeRaw * (casaBase.oddFinal - casaBase.comm);
 
-  // ── Stake de cada casa ──
   casas.forEach(ca => {
-    if (ca.n === casaBase.n) {
-      ca.stakeIdeal = ca.stakeRaw;
-    } else if (ca.oddFinal > 1) {
-      if (ca.isManual) {
-        ca.stakeIdeal = ca.stakeRaw;
+    if (ca.n === casaBase.n) { ca.stakeIdeal = ca.stakeRaw; }
+    else if (ca.oddFinal <= 1) { ca.stakeIdeal = 0; }
+    else if (ca.isManual) { ca.stakeIdeal = ca.stakeRaw; }
+    else {
+      if (ca.isFreebet)            ca.stakeIdeal = K / (ca.oddFinal - 1);
+      else if (ca.tipo === 'back') ca.stakeIdeal = K / ca.oddFinal;
+      else                         ca.stakeIdeal = K / (ca.oddFinal - ca.comm);
+
+      if (ca.tipo === 'lay') {
+        // LAY: atualiza só o display, não escreve em input
+        const dispEl = document.getElementById('co_lay_val' + ca.n);
+        if (dispEl) dispEl.textContent = 'R$ ' + ca.stakeIdeal.toFixed(2).replace('.', ',');
       } else {
-        // Calcula automaticamente a partir da base
-        if (ca.isFreebet)            ca.stakeIdeal = K / (ca.oddFinal - 1);
-        else if (ca.tipo === 'back') ca.stakeIdeal = K / ca.oddFinal;
-        else                         ca.stakeIdeal = K / (1 - ca.comm);
-        // Preenche o campo (exceto a base)
+        // BACK: escreve no campo input
         const elId = ca.n === 1 ? 'co_val1_inp' : 'co_val' + ca.n;
-        const el = document.getElementById(elId);
-        if (el) el.value = ca.stakeIdeal.toFixed(2);
+        const el   = document.getElementById(elId);
+        if (el) {
+          _coWriting = true;
+          el.value = ca.stakeIdeal.toFixed(2);
+          _coWriting = false;
+        }
       }
-    } else {
-      ca.stakeIdeal = 0;
     }
-    ca.liability = ca.tipo === 'lay' && ca.stakeIdeal > 0
-      ? ca.stakeIdeal * (ca.oddFinal - 1) : 0;
+    ca.liability = ca.tipo === 'lay' && ca.stakeIdeal > 0 ? ca.stakeIdeal * (ca.oddFinal - 1) : 0;
+    const liabEl = document.getElementById('co_liab' + ca.n);
+    if (liabEl) liabEl.textContent = ca.liability > 0 ? 'R$ ' + ca.liability.toFixed(2).replace('.', ',') : '—';
   });
 
-  // ── Investimento total ──
-  const custoReal = casas.reduce((s, ca) =>
-    s + (!ca.isFreebet && ca.stakeIdeal ? ca.stakeIdeal : 0), 0);
+  casaBase.liability = casaBase.tipo === 'lay' && casaBase.stakeRaw > 0 ? casaBase.stakeRaw * (casaBase.oddFinal - 1) : 0;
+  const liabBaseEl = document.getElementById('co_liab' + casaBase.n);
+  if (liabBaseEl) liabBaseEl.textContent = casaBase.liability > 0 ? 'R$ ' + casaBase.liability.toFixed(2).replace('.', ',') : '—';
 
-  // ── Retorno e lucro por cenário ──
+  const custoReal = casas.reduce((s, ca) => {
+    if (!ca.stakeIdeal || ca.oddFinal <= 1 || ca.isFreebet) return s;
+    return s + (ca.tipo === 'lay' ? ca.liability : ca.stakeIdeal);
+  }, 0);
+
   casas.forEach(ca => {
     if (!ca.stakeIdeal || ca.oddFinal <= 1) { ca.retorno = 0; ca.lucroCenario = 0; return; }
     if (ca.isFreebet)            ca.retorno = ca.stakeIdeal * (ca.oddFinal - 1);
     else if (ca.tipo === 'back') ca.retorno = ca.stakeIdeal * ca.oddFinal;
     else                         ca.retorno = ca.stakeIdeal * (1 - ca.comm);
-    ca.lucroCenario = ca.retorno - custoReal;
+    const custo = ca.tipo === 'lay' ? custoReal - ca.liability : custoReal;
+    ca.lucroCenario = ca.retorno - custo;
   });
 
-  // ── Lucro garantido = pior cenário ──
-  const retornos  = casas.filter(ca => ca.retorno > 0).map(ca => ca.retorno);
-  const Kreal     = retornos.length > 0 ? Math.min(...retornos) : K;
-  const lucroReal = Kreal - custoReal;
+  // Retorno REAL no bolso por cenário (o que volta pro bolso quando aquela casa ganha):
+  // BACK ganha: retorno = stakeIdeal * oddFinal
+  // LAY ganha:  retorno = stakeIdeal*(1-comm) + liability  (recebe stake do back + recupera liability)
+  //             = stakeIdeal*(oddFinal - comm) = K (por construção)
+  // FREEBET:    retorno = stakeIdeal*(oddFinal-1)
+  casas.forEach(ca => {
+    if (!ca.stakeIdeal || ca.oddFinal <= 1) { ca.retornoBolso = 0; return; }
+    if (ca.isFreebet)            ca.retornoBolso = ca.stakeIdeal * (ca.oddFinal - 1);
+    else if (ca.tipo === 'back') ca.retornoBolso = ca.stakeIdeal * ca.oddFinal;
+    else /* lay */               ca.retornoBolso = ca.stakeIdeal * (ca.oddFinal - ca.comm);
+  });
+  const retornosBolso = casas.filter(ca => ca.retornoBolso > 0).map(ca => ca.retornoBolso);
+  const Kreal = retornosBolso.length > 0 ? Math.min(...retornosBolso) : K;
+  // lucroReal = menor lucro entre todos os cenários (lucro garantido)
+  const lucrosCenario = casas.filter(ca => ca.stakeIdeal > 0 && ca.oddFinal > 1).map(ca => ca.lucroCenario);
+  const lucroReal = lucrosCenario.length > 0 ? Math.min(...lucrosCenario) : Kreal - custoReal;
   const roiPct    = custoReal > 0 ? (lucroReal / custoReal) * 100 : 0;
-  coLastLucro     = lucroReal; // guarda para coSendToOrg
+  coLastLucro     = lucroReal;
 
-  // ── Margem ──
-  const backValidas = validas.filter(ca => ca.tipo === 'back' && !ca.isFreebet);
-  const margin  = backValidas.length >= 2
-    ? backValidas.reduce((s, ca) => s + 1 / ca.oddFinal, 0) : null;
-  const isSure  = margin !== null && margin < 1;
+  const temLay     = validas.some(ca => ca.tipo === 'lay');
+  const hasFreebet = casas.some(ca => ca.isFreebet);
+  const backV      = validas.filter(ca => ca.tipo === 'back' && !ca.isFreebet);
+  const margin     = backV.length >= 2 ? backV.reduce((s, ca) => s + 1 / ca.oddFinal, 0) : null;
+  const isSure     = (validas.some(ca => ca.tipo === 'back' && !ca.isFreebet) && temLay) || (margin !== null && margin < 1);
 
-  // ── Dois painéis: Resultados + Distribuição ──
   const casasAtivas = casas.filter(ca => ca.stakeIdeal > 0 && ca.oddFinal > 1);
-  const lucroColor = lucroReal >= 0 ? 'green' : 'red';
-  const lucroSign  = lucroReal >= 0 ? '+' : '';
-  const roiSign    = roiPct   >= 0 ? '+' : '';
-  const badgeClass = (hasFreebet || isSure) ? 'ok' : 'bad';
-  const badgeTxt   = hasFreebet ? 'Freebet' : isSure ? 'Surebet' : 'Sem cobertura';
+  const lc  = lucroReal >= 0 ? 'green' : 'red';
+  const ls  = lucroReal >= 0 ? '+' : '';
+  const rs  = roiPct   >= 0 ? '+' : '';
+  const bc  = (hasFreebet || isSure) ? 'ok' : 'bad';
+  const bt  = hasFreebet ? 'Freebet' : isSure ? (temLay ? 'Matched Bet' : 'Surebet') : 'Sem cobertura';
   const fmt = v => v.toFixed(2).replace('.', ',');
 
-  const leftPanel = `
-    <div class="co-panel">
-      <div class="co-panel-title">Resultados</div>
-      <div class="co-panel-row">
-        <span class="co-panel-lbl">Lucro garantido:</span>
-        <span class="co-panel-val ${lucroColor}">${lucroSign}R$ ${fmt(lucroReal)}</span>
-      </div>
-      <div class="co-panel-row">
-        <span class="co-panel-lbl">ROI:</span>
-        <span class="co-panel-val ${lucroColor}">${roiSign}${fmt(roiPct)}%</span>
-      </div>
-      <div class="co-panel-row">
-        <span class="co-panel-lbl">Investimento total:</span>
-        <span class="co-panel-val white">R$ ${fmt(custoReal)}</span>
-      </div>
-    </div>`;
+  const leftPanel = `<div class="co-panel">
+    <div class="co-panel-title">Resultados</div>
+    <div class="co-panel-row"><span class="co-panel-lbl">Lucro garantido:</span><span class="co-panel-val ${lc}">${ls}R$ ${fmt(lucroReal)}</span></div>
+    <div class="co-panel-row"><span class="co-panel-lbl">ROI:</span><span class="co-panel-val ${lc}">${rs}${fmt(roiPct)}%</span></div>
+    <div class="co-panel-row"><span class="co-panel-lbl">Investimento total:</span><span class="co-panel-val white">R$ ${fmt(custoReal)}</span></div>
+  </div>`;
 
   const distRows = casasAtivas.map(ca => {
-    const pct   = custoReal > 0 ? ((ca.stakeIdeal / custoReal) * 100).toFixed(2) : '0.00';
+    const isLay = ca.tipo === 'lay';
     const cor   = ca.lucroCenario >= 0 ? '#4ade80' : '#f87171';
-    const lSign = ca.lucroCenario >= 0 ? '' : '-';
-    return `<div class="co-dist-row">
-      <span class="co-dist-nome">Casa ${ca.n}:</span>
-      <span class="co-dist-stake">R$ ${fmt(ca.stakeIdeal)} <span class="co-dist-pct">(${pct}%)</span></span>
-      <span class="co-dist-lucro" style="color:${cor}">Lucro: ${lSign}R$ ${fmt(Math.abs(ca.lucroCenario))}</span>
-    </div>`;
+    const sig   = ca.lucroCenario >= 0 ? '+' : '-';
+    const info = `<div style="font-size:13px;font-weight:700;color:#f5fbff;margin-top:4px">R$ ${fmt(ca.stakeIdeal)}</div>`;
+    return `<div style="padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.06)">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span style="font-size:13px;font-weight:700;color:#fff">Casa ${ca.n}</span>
+        <span style="font-size:13px;font-weight:700;color:${cor}">${sig}R$ ${fmt(Math.abs(ca.lucroCenario))}</span>
+      </div>${info}</div>`;
   }).join('');
 
-  const rightPanel = `
-    <div class="co-panel">
-      <div class="co-dist-header">
-        <div class="co-panel-title" style="padding:0;border:none;font-size:15px;">Distribuição das apostas</div>
-        <span class="co-panel-badge ${badgeClass}">${badgeTxt}</span>
-      </div>
-      ${distRows}
-      <div class="co-dist-retorno">
-        <span class="co-dist-retorno-lbl">Retorno garantido:</span>
-        <span class="co-dist-retorno-val">R$ ${fmt(Kreal)}</span>
-      </div>
-    </div>`;
+  const rightPanel = `<div class="co-panel">
+    <div class="co-dist-header">
+      <div class="co-panel-title" style="padding:0;border:none;font-size:15px">Distribuição</div>
+      <span class="co-panel-badge ${bc}">${bt}</span>
+    </div>
+    ${distRows}
+    <div class="co-dist-retorno"><span class="co-dist-retorno-lbl">Retorno garantido:</span><span class="co-dist-retorno-val">R$ ${fmt(Kreal)}</span></div>
+  </div>`;
 
   res.className = 'co-result show';
   res.innerHTML = leftPanel + rightPanel;
-
   if (sendWrap) sendWrap.style.display = 'flex';
 }
 
@@ -4315,36 +4310,37 @@ function coSendToOrg() {
   if (stakeTotal <= 0) { showToast('⚠️', 'Preencha o valor da Casa 1 primeiro.'); return; }
 
   const casas = [];
-  let stakeSoma = 0;
+  let custoSoma = 0; // custo real: stake para BACK, liability para LAY
   for (let i = 1; i <= coN; i++) {
-    const valEl = i === 1
+    const valEl   = i === 1
       ? document.getElementById('co_val1_inp')
       : document.getElementById('co_val' + i);
-    const stakeI = i === 1
-      ? parseFloat(valEl?.value) || 0
-      : parseFloat(valEl?.value) || 0;
-    const oddRaw   = parseFloat(document.getElementById('co_odd'  + i)?.value) || 0;
-    const tipo     = document.getElementById('co_tipo' + i)?.value || 'back';
-    const aum      = parseFloat(document.getElementById('co_aum'  + i)?.value) || 0;
-    const hasComm  = document.getElementById('co_cc' + i)?.checked;
-    const commPct  = hasComm ? (parseFloat(document.getElementById('co_cv' + i)?.value) || 0) : 0;
-    const oddCalc  = oddRaw > 1 ? oddRaw * (1 + aum / 100) : 0;
+    const stakeI  = parseFloat(valEl?.value) || 0;
+    const oddRaw  = parseFloat(document.getElementById('co_odd'  + i)?.value) || 0;
+    const tipo    = document.getElementById('co_tipo' + i)?.value || 'back';
+    const aum     = parseFloat(document.getElementById('co_aum'  + i)?.value) || 0;
+    const hasComm = document.getElementById('co_cc' + i)?.checked;
+    const commPct = hasComm ? (parseFloat(document.getElementById('co_cv' + i)?.value) || 0) : 0;
+    const oddCalc = oddRaw > 1 ? oddRaw * (1 + aum / 100) : 0;
     if (oddCalc > 1 && stakeI > 0) {
-      stakeSoma += stakeI;
+      const liability = tipo === 'lay' ? stakeI * (oddCalc - 1) : 0;
+      custoSoma += tipo === 'lay' ? liability : stakeI;
       casas.push({
-        nome: 'Casa ' + i,
+        nome: 'Casa ' + i + (tipo === 'lay' ? ' (LAY)' : ''),
         odd: oddCalc,
+        tipo,
+        stakeIdeal: stakeI,
+        liability,
         res: i === 1 ? 'casa' : i === 2 ? 'empate' : 'fora',
-        stakeIdeal: stakeI
       });
     }
   }
 
   if (!casas.length) { showToast('⚠️', 'Nenhuma odd preenchida.'); return; }
 
-  // Usa o lucro garantido calculado pelo coCalc (guardado em coLastLucro)
   const lucroReal = typeof coLastLucro === 'number' ? coLastLucro : 0;
-  const tipoVal   = lucroReal > 0 ? 'surebet' : 'superodds';
+  const temLay    = casas.some(c => c.tipo === 'lay');
+  const tipoVal   = temLay ? 'surebet' : (lucroReal > 0 ? 'surebet' : 'superodds');
 
   // Navega para o organizador
   document.querySelectorAll('.page').forEach(p => { p.classList.remove('on'); p.style.display='none'; });
@@ -4372,9 +4368,9 @@ function coSendToOrg() {
       if (resEl) resEl.value = ca.res;
     });
 
-    // Stake total (soma de todas as casas)
+    // Stake total = custo real (back stakes + liabilities lay)
     const stEl = document.getElementById('fStake');
-    if (stEl) { stEl.value = stakeSoma.toFixed(2); highlight(stEl); }
+    if (stEl) { stEl.value = custoSoma.toFixed(2); highlight(stEl); }
 
     // Força lucro/prejuízo estimado correto no display
     const calcEl = document.getElementById('calcVal');
@@ -4437,7 +4433,15 @@ document.addEventListener('click', function(e) {
 });
 
 
-window.addEventListener('resize', () => coRender());
+// Resize: só re-renderiza se a LARGURA mudou (ignora teclado virtual no mobile)
+let _coLastWidth = window.innerWidth;
+window.addEventListener('resize', () => {
+  const w = window.innerWidth;
+  if (w !== _coLastWidth) {
+    _coLastWidth = w;
+    coRender();
+  }
+});
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
