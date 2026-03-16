@@ -2058,12 +2058,134 @@ body::after{content:none;}
   .emeta { gap: 8px 12px !important; }
 
   /* ── Calculadora ── */
-  .co-cards       { grid-template-columns: 1fr !important; }
-  .co-result.show { grid-template-columns: 1fr !important; }
-  .co-topbar      { flex-direction: column !important; gap: 8px !important; }
-  .co-num-bar     { flex-wrap: wrap; gap: 6px; }
-  .co-send-btn    { width: 100% !important; justify-content: center; }
-  .co-send-wrap   { justify-content: stretch; }
+
+  /* Topbar: título + botões de nº de casas */
+  .co-topbar {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    flex-wrap: wrap;
+  }
+  .co-section-title { font-size: 16px !important; }
+  .co-num-bar       { gap: 6px; flex-wrap: wrap; }
+  .co-num           { width: 40px !important; height: 38px !important; font-size: 13px !important; }
+
+  /* Cards das casas: sempre 1 coluna no mobile */
+  .co-cards { grid-template-columns: 1fr !important; gap: 12px !important; }
+
+  /* co-card: padding confortável para toque */
+  .co-card {
+    padding-bottom: 18px !important;
+    border-radius: 16px !important;
+    overflow: visible !important;
+  }
+
+  /* Título do card (Casa 1, Casa 2…) */
+  .co-card-title { font-size: 12px !important; padding: 13px 16px !important; }
+
+  /* Campos internos: margem lateral consistente */
+  .co-field { margin: 12px 14px 0 !important; }
+
+  /* Label do campo */
+  .co-lbl { font-size: 10px !important; margin-bottom: 6px !important; }
+
+  /* Inputs e selects: altura confortável para toque */
+  .co-inp,
+  .co-val-result {
+    padding: 13px 14px !important;
+    font-size: 16px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Odd final: compacto */
+  .co-odd-final {
+    padding: 8px 12px !important;
+    margin-top: 6px !important;
+    border-radius: 10px !important;
+  }
+  .co-odd-final-lbl { font-size: 11px !important; }
+  .co-odd-final-val { font-size: 14px !important; }
+
+  /* Extras (comissão + freebet): layout limpo */
+  .co-extras-wrap {
+    margin: 12px 14px 0 !important;
+    gap: 0 !important;
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 0 !important;
+  }
+  .co-comm-wrap {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 12px 14px !important;
+  }
+  .co-fb-wrap {
+    border-top: 1px solid rgba(255,255,255,.07) !important;
+    padding-top: 12px !important;
+  }
+  .co-comm-check {
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0;
+  }
+  .co-comm-lbl {
+    font-size: 13px !important;
+    color: rgba(255,255,255,.55) !important;
+    flex: 1;
+  }
+  /* Campo % da comissão: alinha à direita */
+  .co-comm-pct {
+    width: 64px !important;
+    padding: 7px 10px !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+  }
+
+  /* Botão Fixar Stake */
+  .co-fix-wrap { margin: 12px 14px 0 !important; }
+  .co-fix-btn  {
+    padding: 12px !important;
+    font-size: 13px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Resultado: sempre coluna única */
+  .co-result.show { grid-template-columns: 1fr !important; gap: 12px !important; }
+
+  /* Painéis de resultado */
+  .co-panel       { border-radius: 14px !important; overflow: hidden !important; }
+  .co-panel-title { font-size: 16px !important; padding: 14px 16px !important; }
+  .co-panel-row   { padding: 13px 16px !important; }
+  .co-panel-lbl   { font-size: 12px !important; }
+  .co-panel-val   { font-size: 15px !important; }
+
+  /* Distribuição das apostas */
+  .co-dist-header { padding: 14px 16px !important; }
+  .co-dist-row    {
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    padding: 12px 16px !important;
+  }
+  .co-dist-nome   { min-width: 60px !important; font-size: 12px !important; }
+  .co-dist-stake  { font-size: 14px !important; }
+  .co-dist-lucro  {
+    min-width: unset !important;
+    width: 100% !important;
+    text-align: left !important;
+    font-size: 12px !important;
+    color: rgba(255,255,255,.5) !important;
+  }
+  .co-dist-retorno { padding: 13px 16px !important; }
+  .co-dist-retorno-lbl { font-size: 12px !important; }
+  .co-dist-retorno-val { font-size: 16px !important; }
+
+  /* Botão enviar para organizador */
+  .co-send-wrap { justify-content: stretch !important; margin-top: 8px !important; }
+  .co-send-btn  { width: 100% !important; justify-content: center !important; padding: 15px !important; font-size: 13px !important; border-radius: 14px !important; }
 
   /* ── Histórico ── */
   .hist-grid    { grid-template-columns: 1fr !important; }
@@ -3912,15 +4034,16 @@ function coRender() {
   }
 
   const wrap = document.getElementById('coCards');
-  const isMobile = window.innerWidth <= 600;
-  const isTablet = window.innerWidth <= 900;
-  
-  if (isMobile) {
-    wrap.style.gridTemplateColumns = '1fr';
-  } else if (isTablet) {
+  // CSS mobile (#mobile-css) já controla < 600px com !important
+  // aqui só definimos tablet e desktop via style inline
+  const isTablet = window.innerWidth <= 900 && window.innerWidth > 600;
+  const isDesktop = window.innerWidth > 900;
+  if (isTablet) {
     wrap.style.gridTemplateColumns = 'repeat(' + Math.min(coN, 2) + ', 1fr)';
-  } else {
+  } else if (isDesktop) {
     wrap.style.gridTemplateColumns = 'repeat(' + coN + ', 1fr)';
+  } else {
+    wrap.style.gridTemplateColumns = ''; // deixa o CSS mobile controlar
   }
   wrap.style.overflowX = '';
   wrap.style.minWidth = '0';
