@@ -114,25 +114,7 @@
   .login-icon{width:44px;height:44px;}
   .login-icon svg{width:38px;height:38px;}
 }
-.fc{
-  position:fixed;z-index:9998;
-  background:rgba(10,20,38,0.92);
-  border:1px solid rgba(56,189,248,0.22);
-  border-radius:16px;padding:18px 22px;
-  backdrop-filter:blur(16px);
-  min-width:190px;max-width:230px;
-  pointer-events:none;
-  transition:opacity 1s ease,transform 1s ease;
-  opacity:0;
-}
-.fc.fc-left{left:32px;transform:translateX(-36px);}
-.fc.fc-right{right:32px;transform:translateX(36px);}
-.fc.fc-show{opacity:1;transform:translateX(0);}
-.fc-val{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:#67e8f9;line-height:1;margin-bottom:5px;}
-.fc-lbl{font-size:12px;color:#475569;letter-spacing:.04em;}
-.fc-icon{font-size:22px;margin-bottom:10px;}
-.fc-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.8);margin-right:6px;vertical-align:middle;}
-@media(max-width:960px){.fc{display:none!important;}}
+
 
 :root{
   --k:#080808;--k2:#0e0e0e;--k3:#141414;--k4:#1a1a1a;--k5:#222;
@@ -1608,8 +1590,8 @@ body::after{content:none;}
   margin-bottom: 14px;
 }
 .pro-stat {
-  background: linear-gradient(145deg, rgba(15,23,36,.98), rgba(10,16,26,.99));
-  border: 1px solid rgba(130,160,200,.10);
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
   border-radius: 18px;
   padding: 22px 22px 18px;
   position: relative;
@@ -1673,8 +1655,8 @@ body::after{content:none;}
 .pro-day {
   display: flex;
   align-items: center;
-  background: linear-gradient(145deg, rgba(15,23,36,.98), rgba(10,16,26,.99));
-  border: 1px solid rgba(130,160,200,.10);
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
   border-radius: 18px;
   padding: 20px 26px;
   margin-bottom: 24px;
@@ -1746,10 +1728,10 @@ body::after{content:none;}
   animation: bl 2s ease-in-out infinite;
 }
 .pro-day__extras {
-  background: rgba(56,189,248,.06);
-  border: 1px solid rgba(103,232,249,.18);
+  background: rgba(34,197,94,.06);
+  border: 1px solid rgba(34,197,94,.18);
   border-radius: 8px;
-  color: var(--g2);
+  color: #22c55e;
   font-family: 'DM Sans', sans-serif;
   font-size: 11px; font-weight: 700;
   padding: 5px 14px;
@@ -1757,8 +1739,8 @@ body::after{content:none;}
   transition: all .18s;
 }
 .pro-day__extras:hover {
-  background: rgba(56,189,248,.12);
-  border-color: rgba(103,232,249,.35);
+  background: rgba(34,197,94,.12);
+  border-color: rgba(34,197,94,.35);
 }
 
 @media (max-width: 900px) {
@@ -1766,11 +1748,13 @@ body::after{content:none;}
 }
 @media (max-width: 600px) {
   .pro-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .pro-day { flex-wrap: wrap; gap: 16px; }
-  .pro-day__sep { display: none; }
-  .pro-day__right { flex-direction: row; flex-wrap: wrap; margin-left: 0; width: 100%; justify-content: flex-start; }
-  .pro-day__val { font-size: 22px; }
-  .pro-stat__val { font-size: 20px; }
+  .pro-day { flex-wrap: wrap; gap: 12px; padding: 16px; }
+.pro-day__sep { display: none; }
+.pro-day__block { min-width: 0; flex: 1 1 120px; overflow: hidden; }
+.pro-day__right { flex-direction: row; flex-wrap: wrap; margin-left: 0; width: 100%; justify-content: flex-start; gap: 6px; }
+.pro-day__val { font-size: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pro-day__date { font-size: 10px; padding: 3px 8px; }
+  .pro-stat__val { font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
 
 
@@ -2128,7 +2112,7 @@ body::after{content:none;}
     </div>
 
     <!-- Cards flutuantes laterais -->
-    <div id="floating-cards"></div>
+    
 
     <div class="login-card">
       <div class="login-field">
@@ -3299,7 +3283,7 @@ function addBet() {
     id: Date.now(), tipo: 'aposta', desc,
     casas: [{ nome: casa || 'Casa', odd, res: 'casa' }],
     stake, lucroEst,
-    link: '', obs: obs || '',
+    link: '', obs: '',
     status: 'pending', pl: 0,
     date: new Date().toLocaleDateString('pt-BR'),
     time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
@@ -3420,15 +3404,7 @@ function updStats() {
   document.getElementById('sW').textContent  = `Taxa ${wr.toFixed(0)}%`;
   document.getElementById('sP').textContent  = p.length;
   document.getElementById('sPV').textContent = `${f(pv)} em aberto`;
-  // sidebar
-  const sbL = document.getElementById('sb-lucro');
-  if(sbL){ sbL.textContent = (lu >= 0 ? '' : '- ') + f(lu); sbL.className = 'sb-mini-val ' + (lu > 0 ? 'pos' : lu < 0 ? 'neg' : ''); }
-  const sbR = document.getElementById('sb-roi');
-  if(sbR){ sbR.textContent = roi.toFixed(1) + '%'; }
-  const sbT = document.getElementById('sb-taxa');
-  if(sbT){ sbT.textContent = wr.toFixed(0) + '%'; }
-  const sbP = document.getElementById('sb-pend');
-  if(sbP){ sbP.textContent = p.length; }
+  // sidebar elements removed
   updLucroDia();
 }
 
@@ -5155,72 +5131,6 @@ function entryHTML(e) {
 </script>
 
 
-<script>
-(function(){
-  const cards = [
-    {side:'left', top:'12%', icon:'▲', val:'+500', lbl:'Apostadores ativos'},
-    {side:'right',top:'15%', icon:'◈', val:'R$2.3M', lbl:'Volume gerenciado'},
-    {side:'left', top:'42%', icon:'↗', val:'18.4%', lbl:'ROI médio mensal'},
-    {side:'right',top:'45%', icon:'◎', val:'92%', lbl:'Taxa de acerto'},
-    {side:'left', top:'72%', icon:'✓', val:'Seguro', lbl:'Dados 100% privados'},
-    {side:'right',top:'68%', icon:'◆', val:'Tempo real', lbl:'Resultados ao vivo'},
-  ];
-
-  // Cria os elementos
-  cards.forEach((c,i)=>{
-    const el = document.createElement('div');
-    el.className = 'fc fc-'+c.side;
-    el.id = 'fc'+i;
-    el.style.top = c.top;
-    el.innerHTML = '<div class="fc-icon">'+c.icon+'</div>'
-      +'<div class="fc-val">'+c.val+'</div>'
-      +'<div class="fc-lbl"><span class="fc-dot"></span>'+c.lbl+'</div>';
-    document.getElementById('login-screen').appendChild(el);
-  });
-
-  let timers = [];
-  function startCycle(){
-    // Mostra cada card em sequência com delay, depois some
-    cards.forEach((c,i)=>{
-      // Aparece
-      const t1 = setTimeout(()=>{
-        const el = document.getElementById('fc'+i);
-        if(el) el.classList.add('fc-show');
-      }, i * 1100 + 400);
-      // Some
-      const t2 = setTimeout(()=>{
-        const el = document.getElementById('fc'+i);
-        if(el) el.classList.remove('fc-show');
-      }, i * 1100 + 6000);
-      timers.push(t1,t2);
-    });
-    // Reinicia o ciclo
-    const total = cards.length * 1100 + 7500;
-    const t3 = setTimeout(()=>{
-      if(document.getElementById('login-screen') &&
-         !document.getElementById('login-screen').classList.contains('hide')){
-        startCycle();
-      }
-    }, total);
-    timers.push(t3);
-  }
-
-  // Inicia somente quando login está visível
-  function tryStart(){
-    const ls = document.getElementById('login-screen');
-    if(ls && ls.style.display !== 'none'){
-      startCycle();
-    } else {
-      setTimeout(tryStart, 300);
-    }
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', tryStart);
-  } else {
-    tryStart();
-  }
-})();
 
 // ════ MODAL POLÍTICAS ════
 var _policyContent = {
