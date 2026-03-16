@@ -1926,7 +1926,7 @@ body::after{content:none;}
   .form-panel { position: static !important; max-height: none !important; overflow-y: visible !important; }
   .layout { grid-template-columns: 1fr !important; gap: 16px !important; }
   /* Evitar scroll horizontal */
-  * { max-width: 100vw; }
+  html, body { overflow-x: hidden; max-width: 100vw; }
   .hist-roi-card { overflow-x: hidden; }
   .card, .co-card { overflow: hidden; }
   .casa-row { grid-template-columns: 14px 1fr 70px 85px auto !important; font-size: 12px; }
@@ -5179,8 +5179,7 @@ function entryHTML(e) {
 }
 </script>
 
-
-
+<script>
 // ════ MODAL POLÍTICAS ════
 var _policyContent = {
   termos: { title: 'Termos de Uso', sections: [
