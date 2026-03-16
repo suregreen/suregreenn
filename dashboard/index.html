@@ -114,7 +114,25 @@
   .login-icon{width:44px;height:44px;}
   .login-icon svg{width:38px;height:38px;}
 }
-
+.fc{
+  position:fixed;z-index:9998;
+  background:rgba(10,20,38,0.92);
+  border:1px solid rgba(56,189,248,0.22);
+  border-radius:16px;padding:18px 22px;
+  backdrop-filter:blur(16px);
+  min-width:190px;max-width:230px;
+  pointer-events:none;
+  transition:opacity 1s ease,transform 1s ease;
+  opacity:0;
+}
+.fc.fc-left{left:32px;transform:translateX(-36px);}
+.fc.fc-right{right:32px;transform:translateX(36px);}
+.fc.fc-show{opacity:1;transform:translateX(0);}
+.fc-val{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:#67e8f9;line-height:1;margin-bottom:5px;}
+.fc-lbl{font-size:12px;color:#475569;letter-spacing:.04em;}
+.fc-icon{font-size:22px;margin-bottom:10px;}
+.fc-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.8);margin-right:6px;vertical-align:middle;}
+@media(max-width:960px){.fc{display:none!important;}}
 
 :root{
   --k:#080808;--k2:#0e0e0e;--k3:#141414;--k4:#1a1a1a;--k5:#222;
@@ -1590,8 +1608,8 @@ body::after{content:none;}
   margin-bottom: 14px;
 }
 .pro-stat {
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.07);
+  background: linear-gradient(145deg, rgba(15,23,36,.98), rgba(10,16,26,.99));
+  border: 1px solid rgba(130,160,200,.10);
   border-radius: 18px;
   padding: 22px 22px 18px;
   position: relative;
@@ -1655,8 +1673,8 @@ body::after{content:none;}
 .pro-day {
   display: flex;
   align-items: center;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.07);
+  background: linear-gradient(145deg, rgba(15,23,36,.98), rgba(10,16,26,.99));
+  border: 1px solid rgba(130,160,200,.10);
   border-radius: 18px;
   padding: 20px 26px;
   margin-bottom: 24px;
@@ -1728,10 +1746,10 @@ body::after{content:none;}
   animation: bl 2s ease-in-out infinite;
 }
 .pro-day__extras {
-  background: rgba(34,197,94,.06);
-  border: 1px solid rgba(34,197,94,.18);
+  background: rgba(56,189,248,.06);
+  border: 1px solid rgba(103,232,249,.18);
   border-radius: 8px;
-  color: #22c55e;
+  color: var(--g2);
   font-family: 'DM Sans', sans-serif;
   font-size: 11px; font-weight: 700;
   padding: 5px 14px;
@@ -1739,8 +1757,8 @@ body::after{content:none;}
   transition: all .18s;
 }
 .pro-day__extras:hover {
-  background: rgba(34,197,94,.12);
-  border-color: rgba(34,197,94,.35);
+  background: rgba(56,189,248,.12);
+  border-color: rgba(103,232,249,.35);
 }
 
 @media (max-width: 900px) {
@@ -1748,13 +1766,11 @@ body::after{content:none;}
 }
 @media (max-width: 600px) {
   .pro-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .pro-day { flex-wrap: wrap; gap: 12px; padding: 16px; }
-.pro-day__sep { display: none; }
-.pro-day__block { min-width: 0; flex: 1 1 120px; overflow: hidden; }
-.pro-day__right { flex-direction: row; flex-wrap: wrap; margin-left: 0; width: 100%; justify-content: flex-start; gap: 6px; }
-.pro-day__val { font-size: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.pro-day__date { font-size: 10px; padding: 3px 8px; }
-  .pro-stat__val { font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pro-day { flex-wrap: wrap; gap: 16px; }
+  .pro-day__sep { display: none; }
+  .pro-day__right { flex-direction: row; flex-wrap: wrap; margin-left: 0; width: 100%; justify-content: flex-start; }
+  .pro-day__val { font-size: 22px; }
+  .pro-stat__val { font-size: 20px; }
 }
 
 
@@ -2087,6 +2103,31 @@ body::after{content:none;}
 .entries-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 4px; }
 
 
+
+/* ── Diário Responsivo ── */
+.diar-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+.diar-layout{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start;}
+.diar-sidebar{position:sticky;top:calc(var(--nav-h)+16px);display:flex;flex-direction:column;gap:16px;}
+@media(max-width:900px){
+  .diar-layout{grid-template-columns:1fr;}
+  .diar-sidebar{position:static;}
+}
+@media(max-width:600px){
+  .diar-kpis{grid-template-columns:1fr!important;gap:8px!important;}
+  .diar-layout{grid-template-columns:1fr!important;gap:12px!important;}
+  .diar-sidebar{position:static!important;}
+  .bk-kpi{padding:14px 16px!important;overflow:hidden;}
+  .bk-kpi__val{font-size:20px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .bk-kpi__label{font-size:10px!important;}
+  .bk-kpi__sub{font-size:10px!important;}
+  .pro-day{flex-wrap:wrap!important;gap:12px!important;padding:16px!important;}
+  .pro-day__block{flex:1 1 130px!important;min-width:0!important;overflow:hidden!important;}
+  .pro-day__sep{display:none!important;}
+  .pro-day__val{font-size:20px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  .pro-day__right{flex-direction:row!important;flex-wrap:wrap!important;margin-left:0!important;width:100%!important;justify-content:flex-start!important;gap:6px!important;}
+  .pro-day__date{font-size:10px!important;padding:3px 8px!important;}
+  .pro-day__reset{font-size:10px!important;}
+}
 </style>
 <body>
 <!-- ── TELA DE LOGIN ── -->
@@ -2644,7 +2685,7 @@ body::after{content:none;}
   <div id="hv-diario" style="display:none;">
 
     <!-- KPIs do dia -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;">
+    <div class="diar-kpis">
       <div class="bk-kpi bk-kpi--green">
         <div class="bk-kpi__label">Lucro do Dia</div>
         <div class="bk-kpi__val" id="diar-auto-lucro">R$ 0,00</div>
@@ -2663,10 +2704,10 @@ body::after{content:none;}
     </div>
 
     <!-- Layout principal -->
-    <div style="display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start;">
+    <div class="diar-layout">
 
       <!-- Sidebar: fechar o dia -->
-      <div style="position:sticky;top:calc(var(--nav-h)+16px);display:flex;flex-direction:column;gap:16px;">
+      <div class="diar-sidebar">
 
         <div class="card" style="margin-bottom:0;">
           <div class="card-head" style="font-size:15px;margin-bottom:4px;">Fechar o Dia</div>
@@ -3404,7 +3445,15 @@ function updStats() {
   document.getElementById('sW').textContent  = `Taxa ${wr.toFixed(0)}%`;
   document.getElementById('sP').textContent  = p.length;
   document.getElementById('sPV').textContent = `${f(pv)} em aberto`;
-  // sidebar elements removed
+  // sidebar
+  const sbL = document.getElementById('sb-lucro');
+  if(sbL){ sbL.textContent = (lu >= 0 ? '' : '- ') + f(lu); sbL.className = 'sb-mini-val ' + (lu > 0 ? 'pos' : lu < 0 ? 'neg' : ''); }
+  const sbR = document.getElementById('sb-roi');
+  if(sbR){ sbR.textContent = roi.toFixed(1) + '%'; }
+  const sbT = document.getElementById('sb-taxa');
+  if(sbT){ sbT.textContent = wr.toFixed(0) + '%'; }
+  const sbP = document.getElementById('sb-pend');
+  if(sbP){ sbP.textContent = p.length; }
   updLucroDia();
 }
 
