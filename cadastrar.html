@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cadastrar Códigos</title>
+<style>
+  body { font-family: sans-serif; background: #0d1117; color: #fff; padding: 40px; }
+  button { background: #22c55e; color: #000; padding: 14px 28px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+  #log { margin-top: 24px; background: #1a1f2e; padding: 16px; border-radius: 8px; height: 400px; overflow-y: auto; font-family: monospace; font-size: 13px; }
+</style>
+</head>
+<body>
+<h2 style="color:#22c55e">Cadastrar Códigos SureGreen</h2>
+<p>Clique no botão para cadastrar os 100 códigos no Firestore.</p>
+<button onclick="cadastrar()">🚀 Cadastrar 100 Códigos</button>
+<div id="log"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyAwVfYGWzkJ74FaWpeF2LQhRTMlCEyJdFw",
+  authDomain: "xuxa-bet.firebaseapp.com",
+  projectId: "xuxa-bet",
+  storageBucket: "xuxa-bet.firebasestorage.app",
+  messagingSenderId: "825878560179",
+  appId: "1:825878560179:web:9f838f06dc4c2894111fc6"
+});
+
+const db = getFirestore(app);
+
+const codigos = [
+  "SUREGKP47","SUREGMT83","SUREGXQ21","SUREGBL95","SUREGFD62",
+  "SUREGRW38","SUREGYA14","SUREGCS76","SUREGEJ59","SUREGOH32",
+  "SUREGUG85","SUREGIV41","SUREGQN67","SUREGDK23","SUREGFW90",
+  "SUREGML54","SUREGBT18","SUREGXR72","SUREGAC46","SUREGPS39",
+  "SUREGHE81","SUREGJO25","SUREGUZ63","SUREGGY47","SUREGRB92",
+  "SUREGVI38","SUREGLT65","SUREGMD21","SUREGOK74","SUREGSP83",
+  "SUREGEF16","SUREGQH52","SUREGAR39","SUREGBU78","SUREGCY43",
+  "SUREGDK61","SUREGFW95","SUREGIX27","SUREGJO84","SUREGLT36",
+  "SUREGMP59","SUREGNU72","SUREGOH18","SUREGQR45","SUREGST83",
+  "SUREGUX26","SUREGVY61","SUREGWA94","SUREGXB37","SUREGYA52",
+  "SUREGBC78","SUREGCD43","SUREGDF16","SUREGEL85","SUREGFI32",
+  "SUREGGH59","SUREGHI74","SUREGIJ21","SUREGKE38","SUREGML67",
+  "SUREGNO94","SUREGOP41","SUREGQR28","SUREGRS73","SUREGST46",
+  "SUREGTU89","SUREGUX12","SUREGVY57","SUREGWZ84","SUREGXA31",
+  "SUREGBY68","SUREGCD95","SUREGEF42","SUREGGH79","SUREGIL26",
+  "SUREGJO53","SUREGKU88","SUREGML35","SUREGNO62","SUREGOP17",
+  "SUREGQR74","SUREGST41","SUREGTU86","SUREGUX23","SUREGVY58",
+  "SUREGWA91","SUREGXB34","SUREGYA67","SUREGBC42","SUREGCD85",
+  "SUREGEF28","SUREGEF71","SUREGGH36","SUREGIL83","SUREGJO24",
+  "SUREGKU59","SUREGML76","SUREGNO31","SUREGOP68","SUREGQR92"
+];
+
+window.cadastrar = async function() {
+  const log = document.getElementById("log");
+  log.innerHTML = "Iniciando...<br>";
+  for (const codigo of codigos) {
+    try {
+      await setDoc(doc(db, "codigos", codigo), {
+        usado: false,
+        reservado: false,
+        email: "",
+      });
+      log.innerHTML += `✅ ${codigo}<br>`;
+      log.scrollTop = log.scrollHeight;
+    } catch(e) {
+      log.innerHTML += `❌ Erro em ${codigo}: ${e.message}<br>`;
+    }
+  }
+  log.innerHTML += "<br>🎉 Concluído!";
+}
+</script>
+</body>
+</html>
