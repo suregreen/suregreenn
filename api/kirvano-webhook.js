@@ -23,7 +23,6 @@ module.exports = async function handler(req, res) {
   try {
     const body = req.body;
 
-    // Kirvano envia status em MAIÚSCULO: "APPROVED"
     const status = (body?.status || body?.data?.status || "").toUpperCase();
     const email = body?.customer?.email || body?.data?.customer?.email;
 
@@ -56,7 +55,7 @@ module.exports = async function handler(req, res) {
     });
 
     await resend.emails.send({
-      from: "SureGreen <noreply@suregreen.com.br>",
+      from: "SureGreen <onboarding@resend.dev>",
       to: email,
       subject: "Seu acesso SureGreen chegou!",
       html: `
@@ -81,17 +80,4 @@ module.exports = async function handler(req, res) {
               Acessar SureGreen →
             </a>
           </div>
-          <p style="color:rgba(255,255,255,.3);font-size:11px;text-align:center;margin-top:24px">Este código é pessoal e intransferível.</p>
-        </div>
-      `,
-    });
-
-    await codigoDoc.ref.update({ usado: true, reservado: false });
-
-    return res.status(200).json({ success: true, message: "Codigo enviado com sucesso!" });
-
-  } catch (err) {
-    console.error("Erro no webhook:", err);
-    return res.status(500).json({ error: "Erro interno: " + err.message });
-  }
-};
+          <p style="color:rgba(255,255,255,.3);font-size:11px;t
