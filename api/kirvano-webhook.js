@@ -80,4 +80,7 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ success: true });
 
   } catch (err) {
-    console
+    console.error("Erro no webhook:", err);
+    return res.status(500).json({ error: err.message });
+  }
+};
