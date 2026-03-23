@@ -367,15 +367,29 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
         <div class="modal-logo-mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
         <div class="modal-logo-text">Sure<span>Green</span></div>
       </div>
-      <button class="modal-back" onclick="showModalScreen('form')">&#8592; Voltar</button>
-      <div class="modal-title">Recuperar senha</div>
-      <div class="modal-sub">Informe seu e-mail e enviaremos um link para redefinir sua senha.</div>
+      <button class="modal-back" onclick="showModalScreen('form')">&#8592; Voltar para o login</button>
+      <div style="text-align:center;margin-bottom:1.4rem">
+        <div style="width:54px;height:54px;border-radius:50%;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;color:var(--g)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="modal-title" style="font-size:1.2rem">Recuperar senha</div>
+        <div class="modal-sub" style="margin-bottom:0">Digite o e-mail da sua conta e enviaremos um link para criar uma nova senha.</div>
+      </div>
       <div class="modal-msg" id="forgotMsg"></div>
       <div class="modal-field">
         <label class="modal-label" for="forgot-email">E-mail da conta</label>
         <input class="modal-input" id="forgot-email" type="email" placeholder="seu@email.com" autocomplete="email">
       </div>
-      <button class="modal-btn" id="forgotBtn" onclick="handleForgotPassword()">Enviar link de recuperação</button>
+      <button class="modal-btn" id="forgotBtn" onclick="handleForgotPassword()">
+        <span style="display:flex;align-items:center;justify-content:center;gap:.5rem">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Enviar link de recuperação
+        </span>
+      </button>
+      <div style="margin-top:1rem;background:rgba(34,240,117,.04);border:1px solid rgba(34,240,117,.1);border-radius:9px;padding:.65rem .9rem;display:flex;align-items:flex-start;gap:.55rem">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span style="font-size:.73rem;color:var(--text2);line-height:1.5">O e-mail chegará de <strong style="color:var(--g)">noreply@suregreen.com.br</strong>. Se não aparecer na caixa de entrada, verifique o <strong style="color:rgba(238,242,240,.6)">spam</strong>.</span>
+      </div>
     </div>
 
     <!-- FORGOT SUCCESS -->
@@ -664,7 +678,7 @@ function tFaq(btn){const item=btn.closest('.faq-item'),isOpen=item.classList.con
 </script>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { getFirestore, doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -772,25 +786,19 @@ window.handleForgotPassword = async function() {
   btn.disabled = true; btn.textContent = 'Enviando...';
 
   try {
-    // 1. Firebase gera o link de reset
-    await sendPasswordResetEmail(auth, email);
-
-    // 2. Vercel Function envia o e-mail bonito via Resend (chave fica segura no servidor)
-    await fetch('/api/send-reset-email', {
+    // Envia apenas via Resend (backend gera o link e manda o e-mail bonito)
+    const res = await fetch('/api/send-reset-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })
     });
 
+    // Sempre mostra sucesso (segurança: não revelar se e-mail existe)
     window.showModalScreen('forgotSuccess');
 
   } catch (err) {
     btn.disabled = false; btn.textContent = 'Enviar link de recuperação';
-    if (err.code === 'auth/user-not-found') {
-      msg.className = 'modal-msg error'; msg.textContent = 'Nenhuma conta encontrada com este e-mail.';
-    } else {
-      msg.className = 'modal-msg error'; msg.textContent = 'Erro ao enviar. Tente novamente.';
-    }
+    msg.className = 'modal-msg error'; msg.textContent = 'Erro ao enviar. Tente novamente.';
   }
 }
 </script>
