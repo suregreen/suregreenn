@@ -15,15 +15,25 @@ if (!getApps().length) {
 const db = getFirestore();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Metodo nao permitido" });
   }
 
   try {
-    const body = req.body;
+    let body = req.body;
+
+    // Se o body vier como string, faz o parse manual
+    if (typeof body === "string") {
+      body = JSON.parse(body);
+    }
+
+    console.log("Body recebido:", JSON.stringify(body));
+
     const status = (body && body.status ? body.status : "").toUpperCase();
     const email = body && body.customer ? body.customer.email : null;
+
+    console.log("Status:", status, "Email:", email);
 
     if (status !== "APPROVED") {
       return res.status(200).json({ message: "Pagamento nao aprovado: " + status });
@@ -45,6 +55,8 @@ module.exports = async function handler(req, res) {
 
     const codigoDoc = snap.docs[0];
     const codigo = codigoDoc.id;
+
+    console.log("Codigo selecionado:", codigo);
 
     await codigoDoc.ref.update({ reservado: true, email: email, reservadoEm: new Date() });
 
@@ -68,19 +80,21 @@ module.exports = async function handler(req, res) {
       + "<p style='color:rgba(255,255,255,.3);font-size:11px;text-align:center;margin-top:24px'>Este codigo e pessoal e intransferivel.</p>"
       + "</div>";
 
-    await resend.emails.send({
+    const emailResult = await resend.emails.send({
       from: "SureGreen <onboarding@resend.dev>",
       to: email,
       subject: "Seu acesso SureGreen chegou!",
       html: htmlEmail,
     });
 
+    console.log("Email enviado:", JSON.stringify(emailResult));
+
     await codigoDoc.ref.update({ usado: true, reservado: false });
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, codigo: codigo });
 
   } catch (err) {
-    console.error("Erro no webhook:", err);
+    console.error("Erro no webhook:", err.message, err.stack);
     return res.status(500).json({ error: err.message });
   }
-};
+}
