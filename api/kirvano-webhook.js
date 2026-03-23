@@ -23,7 +23,6 @@ export default async function handler(req, res) {
   try {
     let body = req.body;
 
-    // Se o body vier como string, faz o parse manual
     if (typeof body === "string") {
       body = JSON.parse(body);
     }
@@ -81,7 +80,7 @@ export default async function handler(req, res) {
       + "</div>";
 
     const emailResult = await resend.emails.send({
-      from: "SureGreen <onboarding@resend.dev>",
+      from: "SureGreen <noreply@suregreen.com.br>",
       to: email,
       subject: "Seu acesso SureGreen chegou!",
       html: htmlEmail,
