@@ -1,13 +1,13 @@
-const { initializeApp, cert, getApps } = require('firebase-admin/app');
-const { getAuth } = require('firebase-admin/auth');
-const { Resend } = require('resend');
+const { initializeApp, cert, getApps } = require("firebase-admin/app");
+const { getAuth } = require("firebase-admin/auth");
+const { Resend } = require("resend");
 
 if (!getApps().length) {
   initializeApp({
     credential: cert({
       projectId: process.env.FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
     }),
   });
 }
@@ -15,18 +15,18 @@ if (!getApps().length) {
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 module.exports = async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).end();
+  if (req.method !== "POST") return res.status(405).end();
 
   const { email } = req.body;
-  if (!email) return res.status(400).json({ error: 'E-mail obrigatório' });
+  if (!email) return res.status(400).json({ error: "E-mail obrigatório" });
 
   try {
     const resetLink = await getAuth().generatePasswordResetLink(email);
 
-    await resend.emails.send({
-      from: 'noreply@suregreen.com.br',
+    const emailResult = await resend.emails.send({
+      from: "SureGreen <noreply@suregreen.com.br>",
       to: email,
-      subject: 'Redefinição de senha — SureGreen',
+      subject: "Redefinição de senha — SureGreen",
       html: `
         <!DOCTYPE html><html lang="pt-BR">
         <body style="margin:0;padding:0;background:#080b0f;font-family:'Inter',Arial,sans-serif">
@@ -60,10 +60,22 @@ module.exports = async function handler(req, res) {
       `,
     });
 
+    console.log("Reset email enviado:", JSON.stringify(emailResult));
+
+    if (emailResult.error) {
+      console.error("Erro Resend:", emailResult.error);
+      return res.status(500).json({ error: "Falha ao enviar e-mail: " + emailResult.error.message });
+    }
+
     return res.status(200).json({ ok: true });
 
   } catch (err) {
-    console.error('Erro reset senha:', err);
-    return res.status(500).json({ error: err.message }); // ← agora mostra o erro real
+    console.error("Erro reset senha:", err.message, err.stack);
+
+    if (err.code === "auth/user-not-found") {
+      return res.status(200).json({ ok: true });
+    }
+
+    return res.status(500).json({ error: err.message });
   }
 };
