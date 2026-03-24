@@ -1,6 +1,6 @@
-import { initializeApp, cert, getApps } from 'firebase-admin/app';
-import { getAuth } from 'firebase-admin/auth';
-import { Resend } from 'resend';
+const { initializeApp, cert, getApps } = require('firebase-admin/app');
+const { getAuth } = require('firebase-admin/auth');
+const { Resend } = require('resend');
 
 if (!getApps().length) {
   initializeApp({
@@ -14,7 +14,7 @@ if (!getApps().length) {
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
   const { email } = req.body;
@@ -64,6 +64,6 @@ export default async function handler(req, res) {
 
   } catch (err) {
     console.error('Erro reset senha:', err);
-    return res.status(200).json({ ok: true });
+    return res.status(500).json({ error: err.message }); // ← agora mostra o erro real
   }
-}
+};
