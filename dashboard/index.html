@@ -6058,11 +6058,18 @@ window.doForgotPassword = async function() {
     document.getElementById('l-user').focus(); return;
   }
   try {
-    await sendPasswordResetEmail(auth, email);
+    // ✅ CORRIGIDO: usa API da Vercel para enviar e-mail bonito via Resend
+    const res = await fetch('https://suregreenn.vercel.app/api/send-reset-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erro ao enviar');
     err.textContent = '✓ E-mail de recuperação enviado! Verifique sua caixa de entrada.';
     err.style.color = '#4AD55E'; err.classList.add('show');
   } catch(e) {
-    err.textContent = '⚠ E-mail não encontrado.';
+    err.textContent = '⚠ E-mail não encontrado ou erro ao enviar.';
     err.style.color = '#ef4444'; err.classList.add('show');
   }
 }
