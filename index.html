@@ -664,7 +664,7 @@ function tFaq(btn){const item=btn.closest('.faq-item'),isOpen=item.classList.con
 </script>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { getFirestore, doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -772,8 +772,8 @@ window.handleForgotPassword = async function() {
   btn.disabled = true; btn.textContent = 'Enviando...';
 
   try {
-    // Vercel Function gera o link + envia e-mail bonito via Resend
-    const res = await fetch('/api/send-reset-email', {
+    // ✅ CORRIGIDO: URL completa para evitar problema de redirecionamento do www
+    const res = await fetch('https://suregreenn.vercel.app/api/send-reset-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })
