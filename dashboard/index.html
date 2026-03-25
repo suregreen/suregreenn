@@ -6049,28 +6049,49 @@ window.doLogin = async function() {
   }
 }
 
-window.doForgotPassword = async function() {
-  const email = document.getElementById('l-user').value.trim();
-  const err = document.getElementById('l-err');
-  if (!email) {
-    err.textContent = '⚠ Digite seu e-mail acima para recuperar a senha.';
-    err.style.color = '#facc15'; err.classList.add('show');
-    document.getElementById('l-user').focus(); return;
+window.doForgotPassword = function() {
+  document.getElementById('fg-overlay').style.display = 'flex';
+  document.getElementById('fg-email').value = '';
+  document.getElementById('fg-msg').style.display = 'none';
+  document.getElementById('fg-form').style.display = 'block';
+  document.getElementById('fg-success').style.display = 'none';
+  var b = document.getElementById('fg-btn');
+  b.textContent = 'Enviar link de recuperacao';
+  b.disabled = false;
+  setTimeout(function(){ document.getElementById('fg-email').focus(); }, 150);
+}
+
+window.closeForgotModal = function() {
+  document.getElementById('fg-overlay').style.display = 'none';
+}
+
+window.submitForgotModal = async function() {
+  var email = document.getElementById('fg-email').value.trim();
+  var msg = document.getElementById('fg-msg');
+  var btn = document.getElementById('fg-btn');
+  if (!email || email.indexOf('@') < 1) {
+    msg.style.cssText = 'display:block;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);color:#f87171;font-size:.78rem;padding:.5rem .8rem;border-radius:7px;margin-bottom:.8rem;';
+    msg.textContent = 'Informe um e-mail valido.';
+    return;
   }
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  msg.style.display = 'none';
   try {
-    // ✅ CORRIGIDO: usa API da Vercel para enviar e-mail bonito via Resend
-    const res = await fetch('https://suregreenn.vercel.app/api/send-reset-email', {
+    var res = await fetch('https://suregreenn.vercel.app/api/send-reset-email', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email })
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email})
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Erro ao enviar');
-    err.textContent = '✓ E-mail de recuperação enviado! Verifique sua caixa de entrada.';
-    err.style.color = '#4AD55E'; err.classList.add('show');
-  } catch(e) {
-    err.textContent = '⚠ E-mail não encontrado ou erro ao enviar.';
-    err.style.color = '#ef4444'; err.classList.add('show');
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erro');
+    document.getElementById('fg-form').style.display = 'none';
+    document.getElementById('fg-success').style.display = 'block';
+  } catch(ex) {
+    btn.disabled = false;
+    btn.textContent = 'Enviar link de recuperacao';
+    msg.style.cssText = 'display:block;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);color:#f87171;font-size:.78rem;padding:.5rem .8rem;border-radius:7px;margin-bottom:.8rem;';
+    msg.textContent = 'E-mail nao encontrado ou erro ao enviar.';
   }
 }
 
@@ -8790,6 +8811,44 @@ function diarAgendarMeiaNoite() {
 // Fecha onboarding clicando no backdrop
 document.getElementById('onboarding-modal').addEventListener('click', function(e) {
   if (e.target === this) obSkip();
+});
+</script>
+
+<div id="fg-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:1.5rem;">
+  <div style="background:#0f1621;border:1px solid rgba(34,240,117,.2);border-radius:20px;padding:2.2rem 2rem;width:100%;max-width:380px;position:relative;box-shadow:0 0 80px rgba(34,240,117,.08),0 30px 70px rgba(0,0,0,.8);">
+    <button onclick="closeForgotModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-size:1.4rem;line-height:1;padding:.2rem .5rem;">&#x2715;</button>
+    <div id="fg-form">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1.4rem;">
+        <div style="width:28px;height:28px;border-radius:7px;background:#131a24;border:1px solid rgba(34,240,117,.2);display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <span style="font-size:1rem;font-weight:800;color:#eef2f0;">SureGreen</span>
+      </div>
+      <div style="font-size:1.2rem;font-weight:800;color:#eef2f0;margin-bottom:.4rem;">Recuperar senha</div>
+      <div style="font-size:.83rem;color:#5a7568;margin-bottom:1.4rem;line-height:1.6;">Informe seu e-mail e enviaremos um link para redefinir sua senha.</div>
+      <div id="fg-msg" style="display:none;"></div>
+      <div style="margin-bottom:1rem;">
+        <label style="font-size:.7rem;font-weight:600;color:#5a7568;display:block;margin-bottom:.35rem;letter-spacing:.3px;text-transform:uppercase;">E-mail da conta</label>
+        <input id="fg-email" type="email" placeholder="seu@email.com" autocomplete="email" style="width:100%;background:#0b1320;border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:.75rem 1rem;font-size:.88rem;color:#eef2f0;outline:none;box-sizing:border-box;">
+      </div>
+      <button id="fg-btn" onclick="submitForgotModal()" style="width:100%;background:#4AD55E;color:#020d05;border:none;padding:1rem;border-radius:999px;font-size:.95rem;font-weight:800;cursor:pointer;box-shadow:0 4px 22px rgba(34,240,117,.28);">Enviar link de recuperacao</button>
+    </div>
+    <div id="fg-success" style="display:none;text-align:center;padding:.5rem 0;">
+      <div style="width:56px;height:56px;border-radius:50%;background:rgba(34,240,117,.07);border:1px solid rgba(34,240,117,.2);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;color:#4AD55E;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div style="font-size:1.15rem;font-weight:800;color:#eef2f0;margin-bottom:.5rem;">E-mail enviado!</div>
+      <div style="font-size:.84rem;color:#5a7568;line-height:1.7;margin-bottom:1.5rem;">Verifique sua caixa de entrada e clique no link para redefinir a senha. Nao recebeu? Confira o spam.</div>
+      <button onclick="closeForgotModal()" style="width:100%;background:#4AD55E;color:#020d05;border:none;padding:1rem;border-radius:999px;font-size:.95rem;font-weight:800;cursor:pointer;">Voltar ao login</button>
+    </div>
+  </div>
+</div>
+<script>
+document.getElementById('fg-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeForgotModal();
+});
+document.getElementById('fg-email').addEventListener('keydown', function(e) {
+  if (e.keyCode === 13) submitForgotModal();
 });
 </script>
 </body>
