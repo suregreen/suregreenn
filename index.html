@@ -691,12 +691,15 @@ footer{background:#030508;border-top:1px solid var(--border);padding:4rem 2.5rem
 .modal-back:hover{color:var(--g)}
 
 /* ── RESPONSIVE ── */
+
+/* TABLET — 1024px */
 @media(max-width:1024px){
   nav{padding:0 1.5rem}
   .nav-mid{display:none}
-  .hero{padding:3rem 1.5rem 4rem}
+  .hero{padding:3.5rem 1.5rem 4.5rem}
   .hero-inner{grid-template-columns:1fr;gap:3rem}
-  h1{font-size:2.8rem}
+  h1{font-size:2.8rem;letter-spacing:-1.2px}
+  h2{font-size:2rem}
   .pillars{grid-template-columns:1fr}
   .ir-inner{grid-template-columns:1fr;gap:3rem}
   .testi-grid{grid-template-columns:1fr 1fr}
@@ -704,52 +707,172 @@ footer{background:#030508;border-top:1px solid var(--border);padding:4rem 2.5rem
   .bento-grid{grid-template-columns:1fr 1fr}
   .bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 1}
   .timeline-nodes{grid-template-columns:1fr 1fr}
-  .timeline-track,.timeline-progress{display:none}
+  .timeline-nodes::before{display:none}
   .divider-inner{grid-template-columns:repeat(3,1fr)}
   .dash-browser{transform:none;box-shadow:0 0 0 1px rgba(29,240,120,.07),0 16px 50px rgba(0,0,0,.85)}
-  .sec{padding:4.5rem 1.5rem}
-  .bento-section{padding:4.5rem 1.5rem}
-  .ir-section{padding:4.5rem 1.5rem}
+  .sec{padding:5rem 1.5rem}
+  .bento-section{padding:5rem 1.5rem}
+  .ir-section{padding:5rem 1.5rem}
+  .dor-inner{max-width:100%}
+  .hero-p{max-width:100%}
 }
+
+/* MOBILE — 768px */
 @media(max-width:768px){
+  /* NAV */
   nav{padding:0 1.25rem;height:62px}
   .nav-burger{display:flex}
   .nav-mid{display:none!important}
   .nav-login{display:none}
-  .nav-cta{padding:.58rem 1.3rem;font-size:.84rem}
-  h1{font-size:2.2rem;letter-spacing:-1px}
-  h2{font-size:1.75rem}
+  .nav-cta{padding:.6rem 1.25rem;font-size:.85rem}
+  .nav-logo-text{font-size:1.1rem}
+
+  /* HERO */
+  h1{font-size:2.1rem;letter-spacing:-1px;line-height:1.1}
+  h1 .light{font-size:2rem}
+  h2{font-size:1.75rem;letter-spacing:-.5px}
   .hero{padding:2.5rem 1.25rem 3.5rem;min-height:auto}
-  .hero-btns{flex-direction:column;width:100%;gap:.6rem}
-  .btn-main,.btn-out{width:100%;text-align:center;justify-content:center;padding:.9rem 1.2rem}
+  .hero-inner{gap:2.5rem}
+  .hero-eyebrow{font-size:.65rem;padding:.3rem .8rem}
+  .hero-p{font-size:1rem;margin-bottom:1.8rem}
+  .hero-btns{flex-direction:column;width:100%;gap:.65rem}
+  .btn-main{width:100%;text-align:center;padding:1rem 1.2rem;font-size:.97rem}
+  .btn-out{width:100%;text-align:center;padding:1rem 1.2rem;font-size:.97rem}
+  .hero-trust{gap:.7rem}
+  .trust-i{font-size:.78rem}
+
+  /* DASHBOARD MOCKUP */
+  .dash-outer{padding:.5rem 0}
+  .kpis{grid-template-columns:repeat(2,1fr);gap:.35rem}
+  .auto-strip{flex-wrap:wrap}
+  .auto-item{min-width:calc(50% - .18rem)}
+  .dash-blocks{grid-template-columns:1fr}
+  .ops-table th:nth-child(3),.ops-table td:nth-child(3){display:none}
+
+  /* STATS DIVIDER */
   .divider-inner{grid-template-columns:1fr}
   .div-item:not(:last-child)::after{display:none}
-  .div-item{padding:2rem 1.5rem;border-bottom:1px solid var(--border)}
-  .div-val{font-size:2.2rem}
-  .testi-grid{grid-template-columns:1fr}
-  .foot-cols{grid-template-columns:1fr;gap:1.8rem}
-  .cta-bottom{padding:5rem 1.25rem}
-  .cta-btns{flex-direction:column;align-items:center}
-  .cta-btns .btn-main,.cta-btns .btn-out{width:100%;max-width:340px;text-align:center;justify-content:center}
+  .div-item{padding:2rem 1.25rem;border-bottom:1px solid var(--border)}
+  .div-item:last-child{border-bottom:none}
+  .div-val{font-size:2.4rem}
+  .div-label{font-size:.7rem}
+  .div-sub{font-size:.82rem}
+
+  /* SECTIONS */
+  .sec{padding:4rem 1.25rem}
+  .bento-section{padding:4rem 1.25rem}
+  .ir-section{padding:4rem 1.25rem}
+  .sec-label{font-size:.68rem}
+  .sec-sub{font-size:.95rem;max-width:100%}
+
+  /* DOR DO CLIENTE */
   .dor-inner{max-width:100%}
-  .timeline-nodes{grid-template-columns:1fr}
-  .bento-grid{grid-template-columns:1fr}
-  .bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 1}
-  .ir-inner{grid-template-columns:1fr}
-  .pillars{grid-template-columns:1fr}
-  .kpis{grid-template-columns:repeat(2,1fr)}
-  .dash-blocks{grid-template-columns:1fr}
-  .auto-strip{flex-wrap:wrap}
-  .foot-bottom{justify-content:center;text-align:center}
-  .sec{padding:3.5rem 1.25rem}
-  .bento-section{padding:3.5rem 1.25rem}
-  .ir-section{padding:3.5rem 1.25rem}
+  h2.dor-h2{font-size:1.75rem;line-height:1.15}
+  .dor-p{font-size:.92rem}
+  .pain-item,.gain-item{font-size:.9rem;gap:.6rem}
+  .pi-dot{width:20px;height:20px;min-width:20px;font-size:.6rem}
+
+  /* TIMELINE — 1 coluna no mobile */
+  .timeline-nodes{grid-template-columns:1fr;gap:1rem}
+  .timeline-nodes::before{display:none}
+  .tnode{flex-direction:row;text-align:left;gap:1rem;align-items:flex-start}
+  .tnode-num{width:44px;height:44px;min-width:44px;font-size:.85rem;border-radius:50%}
+  .tnode-card{padding:1rem}
+  .tnode-tag{font-size:.55rem}
+  .tnode-title{font-size:.88rem}
+  .tnode-desc{font-size:.8rem}
+
+  /* PILARES */
+  .pillars{grid-template-columns:1fr;border-radius:12px}
+  .pillar{padding:1.5rem}
+  .pillar-title{font-size:.95rem}
+  .pillar-desc{font-size:.85rem}
+  .pillar-item{font-size:.83rem}
+
+  /* BENTO */
+  .bento-grid{grid-template-columns:1fr;border-radius:12px}
+  .bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 1;grid-row:span 1}
+  .bento-cell{padding:1.3rem 1.4rem}
+  .bento-title{font-size:.95rem}
+  .bc-a .bento-title{font-size:1rem}
+  .bento-desc{font-size:.85rem}
+  .calc-input-val{font-size:1.35rem}
+
+  /* IR SECTION */
+  .ir-inner{grid-template-columns:1fr;gap:2.5rem}
+  h2.ir-h2{font-size:1.75rem}
+  .ir-desc{font-size:.9rem}
+  .ir-text{font-size:.88rem}
+  .ir-kpis{grid-template-columns:1fr 1fr}
+  .ir-kpi-v{font-size:.95rem}
+
+  /* TESTIMONIALS */
+  .testi-grid{grid-template-columns:1fr;border-radius:12px}
+  .testi{padding:1.4rem}
+  .testi-txt{font-size:.9rem}
+
+  /* FOUNDER */
+  .founder-section{padding:4rem 1.25rem!important}
+  blockquote{padding-left:1.1rem!important}
+  blockquote p:first-child{font-size:1.05rem!important}
+  blockquote p{font-size:.9rem!important}
+
+  /* PRICING */
+  .price-wrap{padding:0}
+  .price-card{padding:1.8rem 1.4rem;border-radius:16px}
+  .price-big{font-size:3.5rem}
+  .price-list li{font-size:.88rem}
+  .price-btn{font-size:.95rem;padding:1rem}
+
+  /* CTA BOTTOM */
+  .cta-bottom{padding:5rem 1.25rem}
+  .cta-bottom h2{font-size:1.85rem}
+  .cta-bottom p{font-size:.92rem}
+  .cta-btns{flex-direction:column;align-items:stretch;gap:.65rem}
+  .cta-btns .btn-main,.cta-btns .btn-out{width:100%;text-align:center}
   .cta-ring{display:none}
+
+  /* FAQ */
+  .faq-list{margin-top:2rem}
+  .faq-btn{font-size:.9rem;padding:.9rem 1rem}
+  .faq-txt{font-size:.88rem;padding:0 1rem 1rem}
+
+  /* FOOTER */
+  .foot-cols{grid-template-columns:1fr;gap:2rem}
+  .foot-bottom{flex-direction:column;gap:.5rem;text-align:center}
+  .foot-desc{font-size:.82rem}
+  footer{padding:3rem 1.25rem 2rem}
+
+  /* DOR SECTION */
+  .dor-section-main{padding:4rem 1.25rem 5rem!important}
+
+  /* FOUNDER SECTION */
+  .founder-section{padding:4rem 1.25rem!important}
+  .founder-section blockquote{padding-left:1rem!important}
+  .founder-section blockquote > p:first-child{font-size:1rem!important;line-height:1.65!important}
+  .founder-section blockquote p{font-size:.9rem!important;line-height:1.85!important}
+  .founder-section > div{padding:0!important}
+
+  /* MODAL */
+  .modal{padding:1.6rem 1.4rem;border-radius:14px}
+  .modal-title{font-size:1.15rem}
+
+  /* MOBILE MENU */
+  #mobileMenu{top:62px}
 }
+
+/* SMALL MOBILE — 400px */
 @media(max-width:400px){
-  h1{font-size:1.9rem}
-  .nav-logo-text{font-size:.9rem}
+  h1{font-size:1.85rem}
+  h2{font-size:1.6rem}
+  .nav-logo-text{font-size:1rem}
+  .nav-cta{padding:.55rem 1rem;font-size:.8rem}
+  .price-big{font-size:3rem}
+  .div-val{font-size:2rem}
+  .hero-eyebrow{display:none}
+  .tnode-num{width:38px;height:38px;min-width:38px;font-size:.78rem}
 }
+
 *{box-sizing:border-box!important}
 html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!important}
 </style>
@@ -951,7 +1074,7 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
 </div>
 
 <!-- DOR DO CLIENTE -->
-<section style="padding:7rem 2.5rem 8rem;background:var(--bg)">
+<section class="dor-section-main" style="padding:7rem 2.5rem 8rem;background:var(--bg)">
   <div class="sec-wrap">
     <div class="dor-inner reveal">
       <div class="dor-label">O problema real</div>
@@ -1164,6 +1287,55 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
       <div class="testi"><div class="stars">★★★★★</div><div class="testi-txt">"O duplo green sempre me confundia nos calculos. A IA calcula na hora e registra o lucro extra automaticamente. Parece mágica, mas é só tecnologia boa de verdade."</div><div class="testi-who"><div class="testi-av">C</div><div><div class="testi-name">Camila T.</div><div class="testi-role">Membro de 3 grupos VIP · Rio de Janeiro</div></div></div></div>
       <div class="testi"><div class="stars">★★★★★</div><div class="testi-txt">"O fechamento diário automático mudou minha vida. Antes ficava 30 min somando tudo na planilha. Agora abro o app e está tudo lá, incluindo o IR já calculado."</div><div class="testi-who"><div class="testi-av">R</div><div><div class="testi-name">Rafael S.</div><div class="testi-role">Ex-usuário de planilha · Belo Horizonte</div></div></div></div>
     </div>
+  </div>
+</section>
+
+<!-- FOUNDER STORY -->
+<section class="founder-section" style="padding:7rem 2.5rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div style="max-width:720px;margin:0 auto" class="reveal">
+
+    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:2.5rem">
+      <div style="width:38px;height:38px;border-radius:50%;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:var(--g);flex-shrink:0">S</div>
+      <div>
+        <div style="font-size:.88rem;font-weight:700;color:var(--text)">Fundador do SureGreen</div>
+        <div style="font-size:.75rem;color:var(--text3)">Apostador profissional há mais de 5 anos</div>
+      </div>
+    </div>
+
+    <blockquote style="border-left:2px solid var(--g);padding-left:1.6rem;margin:0">
+
+      <p style="font-size:1.2rem;font-weight:600;color:var(--text);line-height:1.7;margin-bottom:1.4rem">
+        "Eu criei o SureGreen depois de anos lidando com um problema que quase todo apostador ignora."
+      </p>
+
+      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1rem">
+        Trabalho com surebets há mais de 5 anos. E quem realmente vive isso sabe: não é só fazer uma aposta. É lidar com freebets, conversões, super odds, duplo green, odds aumentadas — tudo ao mesmo tempo. Várias casas abertas. Vários CPFs operando. Entradas chegando o tempo inteiro.
+      </p>
+
+      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1rem">
+        E no meio de tudo isso, o menor erro custa caro.
+      </p>
+
+      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1.6rem">
+        Porque o problema nunca foi a estratégia — <strong style="color:var(--text)">foi a execução.</strong> Já perdi muito dinheiro em entradas simplesmente por calcular errado ou esquecer de registrar uma operação. São pequenos erros que, ao longo do tempo, <strong style="color:#f87171">viram um prejuízo grande.</strong>
+      </p>
+
+      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1.8rem">
+        Se eu quisesse continuar operando nesse nível, eu precisava de um sistema.
+      </p>
+
+      <div style="display:flex;align-items:flex-start;gap:.85rem;background:var(--gdim);border:1px solid var(--border-g);border-radius:10px;padding:1.1rem 1.4rem;margin-bottom:1.4rem">
+        <div style="width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--g);margin-top:.45rem;flex-shrink:0"></div>
+        <p style="font-size:1rem;font-weight:600;color:var(--text);line-height:1.65;margin:0">
+          "Foi por isso que eu criei o SureGreen — para automatizar tudo aquilo que, por anos, me fez perder dinheiro sem perceber."
+        </p>
+      </div>
+
+      <p style="font-size:.92rem;color:var(--text3);line-height:1.75;font-style:italic">
+        Hoje, cada entrada é calculada, registrada e organizada. Sem planilha. Sem erro. Com controle total.
+      </p>
+
+    </blockquote>
   </div>
 </section>
 
