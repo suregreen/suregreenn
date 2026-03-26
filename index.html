@@ -3,296 +3,755 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
-<title>SureGreen — Calculadora Surebet + Gestão de Apostas com IR 2026</title>
-<meta name="description" content="Calculadora Surebet automática, gestão de apostas esportivas, controle de bankroll e declaração de IR 2026 integrada. Comece por R$ 0,99.">
+<title>SureGreen — Calcula, Registra e Declara IR 2026 Automático</title>
+<meta name="description" content="Para de perder dinheiro com erro de cálculo e planilha bagunçada. O SureGreen calcula, registra e declara seu IR 2026 automaticamente. Comece por R$ 0,99.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://suregreen.com.br">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://suregreen.com.br">
-<meta property="og:title" content="SureGreen — Calculadora Surebet + Gestão de Apostas com IR 2026">
+<meta property="og:title" content="SureGreen — Gestão de Apostas com IR 2026">
 <meta property="og:description" content="A única plataforma que registra sua aposta, calcula o lucro e já anota no IR automaticamente.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117'/%3E%3Cpolyline points='6,38 16,38 22,20 30,48 38,26 44,38 58,38' fill='none' stroke='%2322c55e' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<meta name="theme-color" content="#080b0f">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#06090d">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#080b0f;--bg2:#0b0f15;--card:#0f1621;--card2:#131a24;
-  --g:#22f075;--g2:#1ada65;--gdim:rgba(34,240,117,.07);
-  --border:rgba(255,255,255,.06);--border-g:rgba(34,240,117,.18);
-  --text:#eef2f0;--text2:#5a7568;--text3:#2e4038;
-  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  --bg:#06090d;
+  --bg2:#080c12;
+  --card:#0c1119;
+  --card2:#0f1520;
+  --card3:#111826;
+  --g:#1df078;
+  --g2:#16d868;
+  --gdim:rgba(29,240,120,.08);
+  --border:rgba(255,255,255,.08);
+  --border-g:rgba(29,240,120,.22);
+  --border-g2:rgba(29,240,120,.35);
+  --text:#f0f5f1;
+  --text2:#8aab96;
+  --text3:#4d7060;
+  --font:'Inter',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --r:10px;
+  --r2:16px;
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:999;height:66px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:rgba(8,11,15,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
-.nav-logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--text);flex-shrink:0}
-.nav-logo-mark{width:32px;height:32px;border-radius:8px;background:#131a24;border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center}
-.nav-logo-text{font-size:1.3rem;font-weight:800;letter-spacing:-.3px}.nlg{color:var(--g)}
-.nav-mid{display:flex;align-items:center;gap:.05rem;flex:1;justify-content:center}
-.nav-mid a{color:rgba(238,242,240,.42);text-decoration:none;font-size:.85rem;font-weight:500;padding:.4rem .9rem;border-radius:7px;transition:color .15s;white-space:nowrap}
-.nav-mid a:hover{color:var(--text)}
-.nav-right{display:flex;align-items:center;gap:.55rem;flex-shrink:0}
-.nav-login{color:rgba(238,242,240,.45);text-decoration:none;font-size:.84rem;font-weight:500;padding:.42rem .9rem;border-radius:7px;transition:color .15s;white-space:nowrap}
-.nav-login:hover{color:var(--text)}
-.nav-cta{background:var(--g);color:#020d05;border:none;padding:.56rem 1.3rem;border-radius:999px;font-family:var(--font);font-size:.84rem;font-weight:700;cursor:pointer;transition:all .18s;white-space:nowrap}
-.nav-cta:hover{background:#3affa0;box-shadow:0 0 20px rgba(34,240,117,.4)}
+/* NOISE */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.015;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:128px}
 
-/* HERO */
-.hero{position:relative;overflow:hidden;min-height:calc(100vh - 66px);display:flex;align-items:center;padding:4rem 2.5rem 5rem}
-.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 50% 65% at 68% 50%,rgba(34,240,117,.065) 0%,transparent 65%);pointer-events:none}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(34,240,117,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(34,240,117,.018) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;mask-image:radial-gradient(ellipse 80% 80% at 68% 48%,black 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 68% 48%,black 0%,transparent 70%)}
-.hero-inner{max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;position:relative;z-index:1}
-.hero-badge{display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--border-g);background:var(--gdim);color:var(--g);font-size:.75rem;font-weight:600;padding:.38rem .95rem;border-radius:999px;margin-bottom:1.6rem}
-.bdot{width:5px;height:5px;background:var(--g);border-radius:50%;animation:pulse 2.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(1.8)}}
-h1{font-size:3.6rem;font-weight:900;line-height:1.06;letter-spacing:-2px;margin-bottom:1.4rem;color:var(--text)}
-h1 .g{color:var(--g)}
-.hero-p{font-size:1rem;color:var(--text2);line-height:1.85;max-width:420px;margin-bottom:2.4rem}
-.hero-p strong{color:rgba(238,242,240,.7);font-weight:600}
-.hero-btns{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-bottom:2rem}
-.btn-main{background:var(--g);color:#020d05;border:none;padding:.95rem 2rem;border-radius:999px;font-family:var(--font);font-size:.97rem;font-weight:800;cursor:pointer;transition:all .2s;box-shadow:0 4px 22px rgba(34,240,117,.25)}
-.btn-main:hover{background:#3affa0;box-shadow:0 6px 32px rgba(34,240,117,.5);transform:translateY(-2px)}
-.btn-out{background:transparent;color:rgba(238,242,240,.4);border:1px solid rgba(255,255,255,.1);padding:.95rem 1.7rem;border-radius:999px;font-family:var(--font);font-size:.97rem;font-weight:500;cursor:pointer;transition:all .2s}
-.btn-out:hover{border-color:var(--border-g);color:var(--g)}
-.hero-trust{display:flex;flex-wrap:wrap;gap:1.2rem}
-.trust-i{display:flex;align-items:center;gap:.35rem;font-size:.78rem;color:var(--text3);font-weight:500}
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:999;
+  height:68px;padding:0 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  background:rgba(6,9,13,.97);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border)
+}
+.nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;flex-shrink:0}
+.nav-logo-mark{width:38px;height:38px;border-radius:10px;background:var(--card2);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center}
+.nav-logo-text{font-size:1.3rem;font-weight:800;color:var(--text);letter-spacing:-.5px}
+.nav-logo-text .g{color:var(--g)}
+.nav-mid{display:flex;align-items:center;gap:0;flex:1;justify-content:center}
+.nav-mid a{color:rgba(240,245,241,.5);text-decoration:none;font-size:.88rem;font-weight:500;padding:.4rem .95rem;border-radius:7px;transition:color .15s;white-space:nowrap}
+.nav-mid a:hover{color:var(--text)}
+/* BIG NAV BUTTONS */
+.nav-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.nav-login{
+  color:var(--text);
+  text-decoration:none;
+  font-size:.92rem;font-weight:600;
+  padding:.65rem 1.5rem;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,.15);
+  transition:all .18s;white-space:nowrap
+}
+.nav-login:hover{border-color:var(--border-g);color:var(--g)}
+.nav-cta{
+  background:var(--g);color:#020d06;
+  border:none;
+  padding:.68rem 1.65rem;
+  border-radius:8px;
+  font-family:var(--font);font-size:.92rem;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  white-space:nowrap;letter-spacing:-.1px;
+  box-shadow:0 0 22px rgba(29,240,120,.3)
+}
+.nav-cta:hover{background:#3dff90;box-shadow:0 0 36px rgba(29,240,120,.55);transform:translateY(-1px)}
+/* Mobile hamburger */
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--text2);border-radius:2px;transition:all .25s}
+
+/* ── HERO ── */
+.hero{
+  position:relative;overflow:hidden;
+  min-height:calc(100vh - 68px);
+  display:flex;align-items:center;
+  padding:5rem 2.5rem 6rem
+}
+.hero-ambient{
+  position:absolute;top:45%;left:65%;
+  transform:translate(-50%,-50%);
+  width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(29,240,120,.065) 0%,transparent 65%);
+  animation:ambientPulse 6s ease-in-out infinite;
+  pointer-events:none;z-index:0
+}
+@keyframes ambientPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.1);opacity:1}}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(29,240,120,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(29,240,120,.012) 1px,transparent 1px);
+  background-size:80px 80px;pointer-events:none;
+  mask-image:radial-gradient(ellipse 70% 70% at 68% 50%,black 0%,transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 68% 50%,black 0%,transparent 70%)
+}
+#particles{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-line{position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(29,240,120,.1),transparent)}
+.hero-inner{
+  max-width:1240px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;
+  align-items:center;position:relative;z-index:1
+}
+
+/* hero left */
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.45rem;
+  border:1px solid var(--border-g);
+  background:rgba(29,240,120,.05);
+  color:var(--g);font-size:.7rem;font-weight:600;
+  padding:.35rem .95rem;border-radius:6px;
+  margin-bottom:1.6rem;letter-spacing:.6px;text-transform:uppercase
+}
+.bdot{width:5px;height:5px;background:var(--g);border-radius:50%;animation:pulse 2.2s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.6)}}
+
+/* TYPOGRAPHY SYSTEM — all Inter, no curves */
+h1{
+  font-family:var(--font);
+  font-size:clamp(2.6rem,5vw,4rem);
+  font-weight:800;
+  line-height:1.06;
+  letter-spacing:-1.5px;
+  margin-bottom:1.4rem;
+  color:var(--text)
+}
+h1 .accent{color:var(--g)}
+h1 .light{font-weight:300;color:rgba(237,242,238,.55)}
+
+.hero-p{font-size:1.1rem;color:var(--text2);line-height:1.85;max-width:430px;margin-bottom:2.2rem;font-weight:400}
+.hero-p strong{color:rgba(240,245,241,.85);font-weight:600}
+
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-bottom:2rem}
+.btn-main{
+  background:var(--g);color:#020d06;
+  border:none;padding:1.05rem 2.2rem;
+  border-radius:8px;
+  font-family:var(--font);font-size:1rem;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  box-shadow:0 4px 24px rgba(29,240,120,.3);
+  letter-spacing:-.2px;white-space:nowrap
+}
+.btn-main:hover{background:#3dff90;box-shadow:0 6px 36px rgba(29,240,120,.55);transform:translateY(-2px)}
+.btn-out{
+  background:transparent;color:rgba(240,245,241,.65);
+  border:1px solid rgba(255,255,255,.15);
+  padding:1.05rem 1.8rem;border-radius:8px;
+  font-family:var(--font);font-size:1rem;font-weight:500;
+  cursor:pointer;transition:all .2s;white-space:nowrap
+}
+.btn-out:hover{border-color:var(--border-g);color:var(--text)}
+
+.hero-trust{display:flex;flex-wrap:wrap;gap:1rem}
+.trust-i{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text3);font-weight:500}
 .trust-i svg{color:var(--g);flex-shrink:0}
 
-/* DASHBOARD */
-.dash-outer{position:relative;padding:1.5rem 0 1.5rem .5rem}
-.dash-outer::before{content:'';position:absolute;top:10%;right:-5%;width:70%;height:80%;background:radial-gradient(ellipse at center,rgba(34,240,117,.1) 0%,transparent 65%);pointer-events:none;z-index:0;filter:blur(28px)}
-.dash-browser{position:relative;z-index:1;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:-20px 36px 90px rgba(0,0,0,.9),0 0 80px rgba(34,240,117,.07);transform:perspective(1100px) rotateY(-5deg) rotateX(3deg);transform-origin:60% 50%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+/* ── DASHBOARD MOCKUP ── */
+.dash-outer{position:relative;padding:1rem 0 1rem .5rem}
+.dash-glow{position:absolute;top:5%;right:-10%;width:80%;height:90%;background:radial-gradient(ellipse,rgba(29,240,120,.09) 0%,transparent 65%);pointer-events:none;z-index:0;filter:blur(36px)}
+.dash-browser{
+  position:relative;z-index:1;border-radius:12px;overflow:hidden;
+  border:1px solid rgba(29,240,120,.1);
+  box-shadow:-20px 36px 80px rgba(0,0,0,.9),0 0 70px rgba(29,240,120,.045);
+  transform:perspective(1100px) rotateY(-5deg) rotateX(2.5deg);
+  transform-origin:60% 50%;transition:transform .5s cubic-bezier(.4,0,.2,1)
+}
 .dash-outer:hover .dash-browser{transform:perspective(1100px) rotateY(-2deg) rotateX(1deg)}
-.dash-chrome{background:#0c1320;border-bottom:1px solid rgba(255,255,255,.05);padding:.55rem .9rem;display:flex;align-items:center;gap:.7rem}
-.dash-chrome-dots{display:flex;gap:.35rem}
-.dash-chrome-dot{width:9px;height:9px;border-radius:50%}
-.dash-chrome-url{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:5px;padding:.24rem .7rem;display:flex;align-items:center;gap:.45rem;font-size:.65rem;color:rgba(238,242,240,.3);font-family:var(--mono)}
-.dash-chrome-url-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2.2s ease-in-out infinite;flex-shrink:0}
-.dashboard{background:var(--card);overflow:hidden}
-.dash-body{padding:1.1rem}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.65rem}
-.kpi{background:#090f18;border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:.8rem .9rem}
-.kpi-l{font-size:.58rem;color:var(--text2);font-weight:500;margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.2px}
-.kpi-v{font-size:1.1rem;font-weight:800;line-height:1;font-family:var(--mono);color:var(--g)}
-.kpi-v.w{color:var(--text)}
-.kpi-s{font-size:.56rem;margin-top:.18rem;font-weight:600;color:var(--g);opacity:.7}
-.meta-bar{background:rgba(34,240,117,.03);border:1px solid rgba(34,240,117,.08);border-radius:8px;padding:.5rem .8rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.65rem}
-.mb-lbl{font-size:.58rem;color:var(--g);font-weight:700;white-space:nowrap}
-.mb-track{flex:1;height:3px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden}
-.mb-fill{height:100%;background:var(--g);border-radius:2px;width:0;transition:width 1.5s cubic-bezier(.4,0,.2,1)}
-.mb-pct{font-size:.58rem;color:var(--g);font-weight:700;font-family:var(--mono);white-space:nowrap}
-.chart-box{background:#080f18;border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:.85rem .85rem 0;margin-bottom:.6rem;overflow:hidden}
-.ch-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.55rem}
-.ch-lbl{font-size:.58rem;color:var(--text2);font-weight:500}
-.ch-tag{font-size:.55rem;color:var(--text2);background:rgba(255,255,255,.03);padding:.12rem .42rem;border-radius:4px;font-family:var(--mono)}
-.bars{display:flex;align-items:flex-end;gap:3px;height:70px}
-.bar{flex:1;border-radius:3px 3px 0 0;transition:height 1.1s cubic-bezier(.4,0,.2,1)}
-.bar.p{background:rgba(34,240,117,.55)}.bar.n{background:rgba(248,113,113,.35)}
-.df{display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap;padding-top:.5rem}
-.houses{display:flex;align-items:center;gap:.3rem;flex-wrap:wrap}
-.hl{font-size:.57rem;color:var(--text3);font-weight:500}
-.hp{background:var(--gdim);border:1px solid var(--border-g);color:var(--g);font-size:.58rem;font-weight:700;padding:.15rem .52rem;border-radius:999px}
-.dash-tag{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:var(--text2);font-size:.57rem;font-weight:600;padding:.15rem .5rem;border-radius:999px}
+.dash-chrome{background:#08101a;border-bottom:1px solid rgba(255,255,255,.05);padding:.5rem .85rem;display:flex;align-items:center;gap:.6rem}
+.dash-chrome-dots{display:flex;gap:.3rem}
+.dash-chrome-dot{width:8px;height:8px;border-radius:50%}
+.dash-chrome-url{flex:1;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.04);border-radius:5px;padding:.2rem .7rem;display:flex;align-items:center;gap:.4rem;font-size:.6rem;color:rgba(237,242,238,.22);font-family:var(--mono)}
+.dash-chrome-url-dot{width:5px;height:5px;border-radius:50%;background:var(--g);animation:pulse 2.2s ease-in-out infinite;flex-shrink:0}
+.dashboard{background:#070c13;overflow:hidden}
+.dash-body{padding:.9rem}
+.dash-status{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;padding:.45rem .65rem;background:rgba(29,240,120,.04);border:1px solid rgba(29,240,120,.08);border-radius:8px}
+.ds-left{display:flex;align-items:center;gap:.45rem}
+.ds-live{width:5px;height:5px;border-radius:50%;background:var(--g);box-shadow:0 0 5px var(--g);animation:pulse 2.2s ease-in-out infinite;flex-shrink:0}
+.ds-status{font-size:.55rem;font-weight:700;color:var(--g);font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px}
+.ds-sep{color:rgba(29,240,120,.2);font-size:.55rem}
+.ds-day{font-size:.55rem;color:var(--text2);font-family:var(--mono)}
+.ds-right{display:flex;gap:.28rem}
+.ds-badge{font-size:.5rem;font-weight:700;padding:.12rem .4rem;border-radius:4px;font-family:var(--mono);letter-spacing:.3px}
+.ds-badge.calc{background:rgba(29,240,120,.1);border:1px solid rgba(29,240,120,.18);color:var(--g)}
+.ds-badge.reg{background:rgba(99,179,255,.08);border:1px solid rgba(99,179,255,.15);color:#63b3ff}
+.ds-badge.ir{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.14);color:#fbbf24}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.55rem}
+.kpi{background:#060b12;border:1px solid rgba(255,255,255,.04);border-radius:8px;padding:.65rem .75rem;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;border-radius:8px 8px 0 0}
+.kpi.green::before{background:linear-gradient(90deg,transparent,var(--g),transparent)}
+.kpi-l{font-size:.5rem;color:var(--text2);font-weight:600;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.4px}
+.kpi-v{font-size:1rem;font-weight:700;line-height:1;font-family:var(--mono);color:var(--g)}
+.kpi-v.w{color:var(--text)}.kpi-v.a{color:#fbbf24}
+.kpi-s{font-size:.48rem;margin-top:.14rem;font-weight:500;color:var(--text3);letter-spacing:.2px}
+.dash-blocks{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:.5rem}
+.db{background:#060b12;border:1px solid rgba(255,255,255,.04);border-radius:8px;padding:.6rem .7rem}
+.db-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
+.db-label{font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:.28rem}
+.db-label.fin{color:#63b3ff}.db-label.op{color:var(--g)}
+.db-dot{width:4px;height:4px;border-radius:50%;flex-shrink:0}
+.db-dot.fin{background:#63b3ff}.db-dot.op{background:var(--g)}
+.db-tag{font-size:.45rem;padding:.08rem .3rem;border-radius:3px;font-family:var(--mono);font-weight:600;background:rgba(29,240,120,.08);border:1px solid rgba(29,240,120,.12);color:var(--g)}
+.meta-row{display:flex;align-items:center;gap:.45rem}
+.meta-row+.meta-row{margin-top:.24rem}
+.meta-lbl{font-size:.5rem;color:var(--text2);font-weight:500;min-width:48px}
+.meta-track{flex:1;height:2px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden}
+.meta-fill{height:100%;border-radius:2px}
+.meta-fill.green{background:linear-gradient(90deg,var(--g2),var(--g));width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+.meta-fill.blue{background:linear-gradient(90deg,#4f8ef7,#63b3ff);width:0;transition:width 1.6s cubic-bezier(.4,0,.2,1)}
+.meta-pct{font-size:.5rem;color:var(--text2);font-weight:700;font-family:var(--mono);min-width:24px;text-align:right}
+.meta-pct.green{color:var(--g)}.meta-pct.blue{color:#63b3ff}
+.bars{display:flex;align-items:flex-end;gap:2px;height:44px}
+.bar{flex:1;border-radius:2px 2px 0 0;transition:height 1.1s cubic-bezier(.4,0,.2,1)}
+.bar.p{background:rgba(29,240,120,.45)}.bar.n{background:rgba(248,113,113,.28)}
+.auto-strip{display:flex;gap:.35rem;margin-bottom:.5rem}
+.auto-item{flex:1;background:#060b12;border:1px solid rgba(255,255,255,.04);border-radius:8px;padding:.45rem .55rem;display:flex;align-items:center;gap:.35rem}
+.auto-ico{width:16px;height:16px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.auto-ico.g{background:rgba(29,240,120,.1);border:1px solid rgba(29,240,120,.18)}
+.auto-ico.b{background:rgba(99,179,255,.08);border:1px solid rgba(99,179,255,.14)}
+.auto-ico.y{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.14)}
+.auto-txt{font-size:.5rem;color:var(--text2);font-weight:600;line-height:1.3}
+.auto-txt span{display:block;font-size:.46rem;color:var(--text3)}
+.df{display:flex;align-items:center;justify-content:space-between;gap:.4rem;flex-wrap:wrap}
+.houses{display:flex;align-items:center;gap:.24rem;flex-wrap:wrap}
+.hl{font-size:.5rem;color:var(--text3);font-weight:500}
+.hp{background:var(--gdim);border:1px solid var(--border-g);color:var(--g);font-size:.5rem;font-weight:700;padding:.1rem .4rem;border-radius:999px}
+.dash-tag{background:rgba(255,255,255,.02);border:1px solid var(--border);color:var(--text2);font-size:.5rem;font-weight:600;padding:.1rem .4rem;border-radius:999px}
 
-/* DIVIDER */
-.divider{padding:2.5rem 2.5rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.divider-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
-.div-item{text-align:center}
-.div-val{font-size:1.7rem;font-weight:900;color:var(--g);letter-spacing:-1px;font-family:var(--mono)}
-.div-lbl{font-size:.8rem;color:var(--text2);margin-top:.25rem}
+/* ── STATS DIVIDER — premium ── */
+.divider{padding:0;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.divider-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.div-item{
+  padding:2.8rem 2rem;text-align:center;
+  position:relative
+}
+.div-item:not(:last-child)::after{
+  content:'';
+  position:absolute;right:0;top:25%;bottom:25%;
+  width:1px;background:var(--border)
+}
+.div-label{
+  font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:2px;
+  color:var(--text3);margin-bottom:.7rem
+}
+.div-val{
+  font-size:3rem;font-weight:800;
+  color:var(--text);letter-spacing:-2px;
+  font-family:var(--mono);line-height:1;
+  margin-bottom:.45rem
+}
+.div-val .unit{font-size:1.5rem;font-weight:600;color:var(--text2);vertical-align:super;margin-right:2px}
+.div-val .accent{color:var(--g)}
+.div-sub{font-size:.85rem;color:var(--text2);font-weight:400;line-height:1.5}
 
-/* SECTIONS */
-.sec{padding:6.5rem 2.5rem}
+/* ── SECTIONS SHARED ── */
+.sec{padding:6rem 2.5rem}
 .sec.dark{background:var(--bg)}.sec.mid{background:var(--bg2)}
-.sec-label{font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;text-align:center;color:var(--g);margin-bottom:.8rem;opacity:.7}
-.sec-title{font-size:2.5rem;font-weight:900;text-align:center;letter-spacing:-1.2px;line-height:1.1;margin-bottom:.85rem;color:var(--text)}
-.sec-title .g{color:var(--g)}
-.sec-sub{font-size:.93rem;color:var(--text2);text-align:center;max-width:480px;margin:0 auto 3.5rem;line-height:1.82}
+.sec-wrap{max-width:1200px;margin:0 auto}
+.sec-label{
+  font-size:.72rem;font-weight:600;letter-spacing:3px;
+  text-transform:uppercase;text-align:center;
+  color:var(--g);margin-bottom:.8rem;opacity:.8
+}
+h2{
+  font-family:var(--font);
+  font-size:clamp(2rem,3.5vw,2.8rem);
+  font-weight:800;
+  text-align:center;
+  letter-spacing:-1px;line-height:1.1;
+  margin-bottom:.8rem;color:var(--text)
+}
+h2 .accent{color:var(--g)}
+.sec-sub{
+  font-size:1rem;color:var(--text2);
+  text-align:center;max-width:480px;
+  margin:0 auto 3rem;line-height:1.8;font-weight:400
+}
 
-/* COMO FUNCIONA */
-.flow-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:18px;overflow:hidden;border:1px solid var(--border)}
-.flow-node{background:var(--card);padding:1.8rem 1.5rem;display:flex;flex-direction:column;gap:.8rem;transition:background .22s}
-.flow-node:hover{background:var(--card2)}
-.flow-num{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:900;color:#020d05;background:var(--g);flex-shrink:0}
-.flow-title{font-size:.97rem;font-weight:700;color:var(--text);line-height:1.3}
-.flow-desc{font-size:.84rem;color:var(--text2);line-height:1.75}
-.flow-tag{display:inline-flex;align-items:center;gap:.25rem;font-size:.65rem;font-weight:700;padding:.18rem .6rem;border-radius:6px;background:var(--gdim);border:1px solid var(--border-g);color:var(--g);margin-top:auto}
+/* ── DOR DO CLIENTE ── */
+.dor-inner{
+  max-width:680px;margin:0 auto;
+  display:flex;flex-direction:column;gap:0
+}
+.dor-section-wrapper{padding:6rem 2.5rem 7rem;background:var(--bg)}
+.dor-label{
+  font-size:.72rem;font-weight:600;letter-spacing:3px;
+  text-transform:uppercase;color:var(--g);
+  margin-bottom:.8rem;opacity:.8;
+  display:flex;align-items:center;gap:.55rem
+}
+.dor-label::before{content:'';width:20px;height:1px;background:var(--g);opacity:.6}
+h2.dor-h2{
+  text-align:left;margin-bottom:1.1rem;
+  font-size:clamp(1.9rem,3vw,2.6rem)
+}
+.dor-p{font-size:1rem;color:var(--text2);line-height:1.85;margin-bottom:1.6rem}
+.pain-list{display:flex;flex-direction:column;gap:.55rem}
+.pain-item,.gain-item{
+  display:flex;align-items:flex-start;gap:.75rem;
+  font-size:.95rem;line-height:1.65;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .55s ease, transform .55s ease
+}
+.pain-item.anim-in,.gain-item.anim-in{opacity:1;transform:translateY(0)}
+.pain-item{color:var(--text2)}
+.gain-item{color:var(--text2);margin-top:.2rem}
+.pi-dot{
+  width:22px;height:22px;min-width:22px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:700;
+  margin-top:.15rem;flex-shrink:0
+}
+.pi-dot.bad{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.18);color:#f87171}
+.pi-dot.good{background:var(--gdim);border:1px solid var(--border-g);color:var(--g)}
+.gain-item strong{color:var(--text);font-weight:600}
 
-/* FUNCIONALIDADES */
-.feat-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:18px;overflow:hidden;border:1px solid var(--border)}
-.feat{background:var(--card);padding:2rem;display:flex;flex-direction:column;gap:.7rem;transition:background .22s}
-.feat:hover{background:var(--card2)}.feat.featured{background:var(--card2)}
-.feat-ico{width:42px;height:42px;border-radius:10px;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;color:var(--g)}
-.feat-label{font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--g);opacity:.6}
-.feat-title{font-size:.97rem;font-weight:700;color:var(--text);line-height:1.3}
-.feat-desc{font-size:.84rem;color:var(--text2);line-height:1.78}
+/* ── TIMELINE — sequential number glow ── */
+.timeline-wrap{max-width:1080px;margin:0 auto;position:relative}
+.timeline-nodes{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;position:relative;z-index:2}
 
-/* IR SECTION */
-.ir-section{padding:6.5rem 2.5rem;background:var(--bg);position:relative;overflow:hidden}
-.ir-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
-.ir-label{font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g);margin-bottom:.9rem;opacity:.7}
-.ir-h2{font-size:2.4rem;font-weight:900;letter-spacing:-1.2px;line-height:1.1;margin-bottom:1rem;color:var(--text)}
-.ir-h2 span{color:var(--g)}
-.ir-desc{font-size:.92rem;color:var(--text2);line-height:1.85;margin-bottom:1.8rem}
-.ir-list{display:flex;flex-direction:column;gap:.75rem}
-.ir-item{display:flex;align-items:flex-start;gap:.7rem}
-.ir-ck{width:18px;height:18px;min-width:18px;border-radius:50%;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;color:var(--g);margin-top:.1rem;flex-shrink:0}
-.ir-text{font-size:.87rem;color:var(--text2);line-height:1.55}
+/* connector line between numbers */
+.timeline-nodes::before{
+  content:'';position:absolute;
+  top:27px;left:calc(12.5% + 27px);right:calc(12.5% + 27px);
+  height:1px;background:var(--border);z-index:0
+}
+
+.tnode{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.2rem}
+
+/* THE NUMBER — starts gray, turns green */
+.tnode-num{
+  width:54px;height:54px;border-radius:50%;
+  background:var(--card2);
+  border:2px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;font-weight:700;
+  color:rgba(255,255,255,.25);
+  font-family:var(--mono);flex-shrink:0;
+  position:relative;z-index:1;
+  transition:background .4s ease, border-color .4s ease, color .4s ease, box-shadow .4s ease
+}
+
+/* ACTIVE = verde */
+.tnode.step-active .tnode-num{
+  background:var(--g);
+  border-color:var(--g);
+  color:#020d06;
+  box-shadow:0 0 0 6px rgba(29,240,120,.15), 0 0 28px rgba(29,240,120,.35)
+}
+
+/* connector line that fills as steps activate */
+.tnode-line{
+  position:absolute;top:27px;
+  left:50%;right:calc(-50% + 0px);
+  height:1px;
+  background:var(--g);
+  transform-origin:left;transform:scaleX(0);
+  transition:transform .5s ease;
+  z-index:0
+}
+.tnode.step-active .tnode-line{transform:scaleX(1)}
+.tnode:last-child .tnode-line{display:none}
+
+.tnode-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r2);padding:1.4rem 1.1rem;
+  transition:all .3s;width:100%
+}
+.tnode.step-active .tnode-card{
+  border-color:var(--border-g);
+  background:var(--card2)
+}
+.tnode-tag{
+  display:inline-block;font-size:.62rem;font-weight:700;
+  padding:.16rem .55rem;border-radius:4px;
+  background:var(--gdim);border:1px solid var(--border-g);
+  color:var(--g);font-family:var(--mono);
+  margin-bottom:.55rem;letter-spacing:.5px;text-transform:uppercase
+}
+.tnode-title{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.45rem;line-height:1.35}
+.tnode-desc{font-size:.85rem;color:var(--text2);line-height:1.75;font-weight:400}
+
+/* ── PILLARS ── */
+.pillars{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border-radius:var(--r2);overflow:hidden;
+  border:1px solid var(--border)
+}
+.pillar{
+  background:var(--card);padding:2rem;
+  display:flex;flex-direction:column;gap:.9rem;
+  position:relative;overflow:hidden;transition:background .2s
+}
+.pillar:hover{background:var(--card2)}
+.pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.pillar.fin::before{background:linear-gradient(90deg,transparent,#63b3ff,transparent)}
+.pillar.op::before{background:linear-gradient(90deg,transparent,var(--g),transparent)}
+.pillar.fiscal::before{background:linear-gradient(90deg,transparent,#fbbf24,transparent)}
+.pillar-header{display:flex;align-items:flex-start;gap:.75rem}
+.pillar-ico{width:36px;height:36px;min-width:36px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.pillar-ico.fin{background:rgba(99,179,255,.08);border:1px solid rgba(99,179,255,.14);color:#63b3ff}
+.pillar-ico.op{background:var(--gdim);border:1px solid var(--border-g);color:var(--g)}
+.pillar-ico.fiscal{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.14);color:#fbbf24}
+.pillar-cat{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.2rem}
+.pillar-cat.fin{color:#63b3ff}.pillar-cat.op{color:var(--g)}.pillar-cat.fiscal{color:#fbbf24}
+.pillar-title{font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.3}
+.pillar-desc{font-size:.9rem;color:var(--text2);line-height:1.8}
+.pillar-items{display:flex;flex-direction:column;gap:.55rem}
+.pillar-item{display:flex;align-items:flex-start;gap:.55rem;font-size:.88rem;color:var(--text2);line-height:1.6}
+.pillar-item-dot{width:14px;height:14px;min-width:14px;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:.1rem;flex-shrink:0}
+.pillar-item-dot.fin{background:rgba(99,179,255,.08);border:1px solid rgba(99,179,255,.14);color:#63b3ff}
+.pillar-item-dot.op{background:var(--gdim);border:1px solid var(--border-g);color:var(--g)}
+.pillar-item-dot.fiscal{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.14);color:#fbbf24}
+
+/* ── BENTO GRID ── */
+.bento-section{padding:6rem 2.5rem;background:var(--bg2)}
+.bento-grid{
+  max-width:1100px;margin:3rem auto 0;
+  display:grid;grid-template-columns:repeat(12,1fr);gap:1px;
+  background:var(--border-g);border-radius:var(--r2);
+  overflow:hidden;border:1px solid var(--border-g)
+}
+.bento-cell{background:var(--card2);padding:1.5rem 1.7rem;transition:background .2s;position:relative;overflow:hidden}
+.bento-cell:hover{background:var(--card3)}
+.bento-cell::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .3s}
+.bento-cell:hover::after{opacity:1}
+.bc-a{grid-column:span 5;grid-row:span 2}.bc-a::after{background:linear-gradient(90deg,transparent,var(--g),transparent)}
+.bc-b{grid-column:span 4}.bc-b::after{background:linear-gradient(90deg,transparent,#63b3ff,transparent)}
+.bc-c{grid-column:span 3}.bc-c::after{background:linear-gradient(90deg,transparent,#fbbf24,transparent)}
+.bc-d{grid-column:span 4}.bc-d::after{background:linear-gradient(90deg,transparent,#63b3ff,transparent)}
+.bc-e{grid-column:span 3}.bc-e::after{background:linear-gradient(90deg,transparent,var(--g),transparent)}
+.bento-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.bento-icon.g{background:var(--gdim);border:1px solid var(--border-g);color:var(--g)}
+.bento-icon.b{background:rgba(99,179,255,.07);border:1px solid rgba(99,179,255,.14);color:#63b3ff}
+.bento-icon.y{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.14);color:#fbbf24}
+.bento-tag{font-size:.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.35rem;display:block}
+.bento-tag.g{color:var(--g)}.bento-tag.b{color:#63b3ff}.bento-tag.y{color:#fbbf24}
+.bento-title{font-size:1rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:.45rem}
+.bc-a .bento-title{font-size:1.2rem}
+.bento-desc{font-size:.9rem;color:var(--text2);line-height:1.78}
+/* ── LIVE CALCULATOR ── */
+.calc-live{margin-top:1.2rem;background:#03070f;border:1px solid rgba(29,240,120,.14);border-radius:10px;overflow:hidden}
+.calc-header{display:flex;align-items:center;justify-content:space-between;padding:.55rem .9rem;background:rgba(29,240,120,.04);border-bottom:1px solid rgba(29,240,120,.08)}
+.calc-header-label{font-size:.6rem;font-weight:700;color:var(--g);font-family:var(--mono);letter-spacing:1px;text-transform:uppercase}
+.calc-live-dot{width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g);animation:pulse 2s ease-in-out infinite}
+.calc-input-area{padding:.8rem .9rem;border-bottom:1px solid rgba(255,255,255,.04)}
+.calc-input-label{font-size:.58rem;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.25rem}
+.calc-input-val{font-size:1.6rem;font-weight:700;color:var(--text);font-family:var(--mono);letter-spacing:-1px;line-height:1;display:flex;align-items:baseline;gap:.3rem}
+.calc-input-val .currency{font-size:.9rem;color:var(--text2);font-weight:500}
+.calc-input-cursor{display:inline-block;width:2px;height:1.3rem;background:var(--g);vertical-align:middle;animation:blink .8s step-end infinite;margin-left:2px}
+@keyframes blink{50%{opacity:0}}
+.calc-rows{padding:.55rem .9rem;display:flex;flex-direction:column;gap:0}
+.cr{display:flex;justify-content:space-between;align-items:center;padding:.38rem 0;border-bottom:1px solid rgba(255,255,255,.04);opacity:0;transform:translateX(-6px);transition:opacity .3s ease,transform .3s ease}
+.cr:last-child{border-bottom:none}
+.cr.vis{opacity:1;transform:translateX(0)}
+.cr-label{font-size:.72rem;color:var(--text2);font-family:var(--mono)}
+.cr-val{font-size:.78rem;font-weight:700;font-family:var(--mono);color:var(--g)}
+.cr-val.blue{color:#63b3ff}.cr-val.amber{color:#fbbf24}
+.calc-result{display:flex;justify-content:space-between;align-items:center;margin:.5rem .9rem .7rem;padding:.65rem .85rem;background:rgba(29,240,120,.08);border:1px solid rgba(29,240,120,.2);border-radius:7px;opacity:0;transform:translateY(4px);transition:opacity .4s ease,transform .4s ease}
+.calc-result.vis{opacity:1;transform:translateY(0)}
+.calc-result-label{font-size:.7rem;font-weight:700;color:var(--text);font-family:var(--mono)}
+.calc-result-val{font-size:1rem;font-weight:800;color:var(--g);font-family:var(--mono);letter-spacing:-.5px}
+.calc-check{width:18px;height:18px;border-radius:50%;background:var(--g);color:#020d06;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;margin-left:.5rem;flex-shrink:0}
+
+/* ── DASHBOARD OPS TABLE (hero) ── */
+.ops-table{width:100%;border-collapse:collapse;font-size:.5rem;font-family:var(--mono)}
+.ops-table th{text-align:left;color:var(--text3);font-weight:600;padding:.28rem .5rem;border-bottom:1px solid rgba(255,255,255,.04);letter-spacing:.3px;text-transform:uppercase}
+.ops-table td{padding:.3rem .5rem;border-bottom:1px solid rgba(255,255,255,.025)}
+.ops-table tr:last-child td{border-bottom:none}
+.ops-badge{display:inline-block;padding:.1rem .35rem;border-radius:3px;font-size:.46rem;font-weight:700;letter-spacing:.3px}
+.ops-badge.sb{background:rgba(29,240,120,.1);border:1px solid rgba(29,240,120,.18);color:var(--g)}
+.ops-badge.fb{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.16);color:#fbbf24}
+.ops-badge.so{background:rgba(99,179,255,.08);border:1px solid rgba(99,179,255,.14);color:#63b3ff}
+.ops-badge.dg{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.16);color:#a78bfa}
+.ops-status{display:flex;align-items:center;gap:.25rem}
+.ops-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.ops-dot.green{background:var(--g)}
+.ops-dot.pend{background:#fbbf24;animation:pulse 2s ease-in-out infinite}
+.ops-profit{font-weight:700}
+.ops-profit.pos{color:var(--g)}
+.ops-profit.neg{color:#f87171}
+
+/* ── TOP 1 BADGE ── */
+.top1-bar{
+  background:linear-gradient(90deg,rgba(29,240,120,.06),rgba(29,240,120,.12),rgba(29,240,120,.06));
+  border-bottom:1px solid rgba(29,240,120,.12);
+  padding:.6rem 2.5rem;
+  display:flex;align-items:center;justify-content:center;
+  gap:2.5rem;flex-wrap:wrap
+}
+.top1-item{display:flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:600;color:var(--text2);white-space:nowrap}
+.top1-item svg{color:var(--g);flex-shrink:0}
+.top1-item strong{color:var(--text);font-weight:700}
+
+/* ── AUTHORITY SECTION ── */
+.authority{
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:3rem 2.5rem
+}
+.authority-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.auth-item{text-align:center}
+.auth-num{font-size:2.2rem;font-weight:800;color:var(--text);font-family:var(--mono);letter-spacing:-1.5px;line-height:1}
+.auth-num .g{color:var(--g)}
+.auth-label{font-size:.8rem;color:var(--text2);margin-top:.4rem;line-height:1.4}
+@media(max-width:768px){
+  .authority-inner{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .top1-bar{gap:1rem;padding:.5rem 1rem}
+}
+.ir-section{padding:6rem 2.5rem;background:var(--bg);position:relative;overflow:hidden}
+.ir-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 38% 55% at 55% 50%,rgba(29,240,120,.04) 0%,transparent 65%);pointer-events:none}
+.ir-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.ir-label{font-size:.68rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem;opacity:.8;display:flex;align-items:center;gap:.5rem}
+.ir-label::before{content:'';width:20px;height:1px;background:#fbbf24;opacity:.5}
+h2.ir-h2{text-align:left;font-size:clamp(1.7rem,3vw,2.4rem);margin-bottom:.9rem}
+h2.ir-h2 .accent-y{color:#fbbf24}
+.ir-desc{font-size:.95rem;color:var(--text2);line-height:1.85;margin-bottom:1.6rem}
+.ir-list{display:flex;flex-direction:column;gap:.7rem}
+.ir-item{display:flex;align-items:flex-start;gap:.65rem}
+.ir-ck{width:18px;height:18px;min-width:18px;border-radius:5px;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);display:flex;align-items:center;justify-content:center;color:#fbbf24;margin-top:.12rem;flex-shrink:0}
+.ir-text{font-size:.92rem;color:var(--text2);line-height:1.6}
 .ir-text strong{color:var(--text);font-weight:600}
-.ir-card{background:var(--card);border:1px solid var(--border-g);border-radius:18px;padding:1.6rem;box-shadow:0 0 60px rgba(34,240,117,.06),0 24px 60px rgba(0,0,0,.5)}
-.ir-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
-.ir-card-title{font-size:.7rem;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:.8px;opacity:.8}
-.ir-yr{background:var(--gdim);border:1px solid var(--border-g);color:var(--g);font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:999px}
-.ir-kpis{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.8rem}
-.ir-kpi{background:#080e18;border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:.8rem .95rem}
-.ir-kpi-l{font-size:.58rem;color:var(--text2);font-weight:500;margin-bottom:.22rem;text-transform:uppercase;letter-spacing:.1px}
-.ir-kpi-v{font-size:1.1rem;font-weight:800;line-height:1;font-family:var(--mono);color:var(--g)}
-.ir-kpi-v.w{color:var(--text)}.ir-kpi-v.r{color:#f87171}
-.ir-tipos{background:#080e18;border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:.8rem .95rem;margin-bottom:.8rem}
-.ir-tipos-l{font-size:.58rem;color:var(--text2);font-weight:500;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.1px}
-.ir-tipo{display:flex;justify-content:space-between;align-items:center;font-size:.76rem;padding:.2rem 0}
+.ir-card{background:var(--card);border:1px solid rgba(251,191,36,.15);border-radius:var(--r2);padding:1.5rem;box-shadow:0 0 50px rgba(251,191,36,.04),0 20px 50px rgba(0,0,0,.5)}
+.ir-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
+.ir-card-title{font-size:.62rem;color:#fbbf24;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.85}
+.ir-yr{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.16);color:#fbbf24;font-size:.62rem;font-weight:700;padding:.16rem .55rem;border-radius:5px;font-family:var(--mono)}
+.ir-kpis{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.75rem}
+.ir-kpi{background:#060b12;border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem}
+.ir-kpi-l{font-size:.52rem;color:var(--text2);font-weight:500;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.2px}
+.ir-kpi-v{font-size:1rem;font-weight:700;line-height:1;font-family:var(--mono);color:var(--g)}
+.ir-kpi-v.w{color:var(--text)}.ir-kpi-v.y{color:#fbbf24}.ir-kpi-v.r{color:#f87171}
+.ir-tipos{background:#060b12;border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem;margin-bottom:.75rem}
+.ir-tipos-l{font-size:.52rem;color:var(--text2);font-weight:500;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.2px}
+.ir-tipo{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;padding:.2rem 0}
 .ir-tipo+.ir-tipo{border-top:1px solid rgba(255,255,255,.03)}
-.ir-tipo-n{color:var(--text2)}.ir-tipo-v{color:var(--g);font-weight:600;font-family:var(--mono)}
-.ir-export{width:100%;background:var(--gdim);border:1px solid var(--border-g);color:var(--g);border-radius:10px;padding:.8rem;font-family:var(--font);font-size:.82rem;font-weight:600;cursor:default;display:flex;align-items:center;justify-content:center;gap:.45rem}
-.ir-disc{font-size:.62rem;color:var(--text3);text-align:center;margin-top:.5rem}
+.ir-tipo-n{color:var(--text2)}.ir-tipo-v{color:#fbbf24;font-weight:600;font-family:var(--mono)}
+.ir-export{width:100%;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);color:#fbbf24;border-radius:8px;padding:.75rem;font-family:var(--font);font-size:.8rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.ir-disc{font-size:.58rem;color:var(--text3);text-align:center;margin-top:.45rem}
 
-/* PRICING */
-.price-wrap{max-width:480px;margin:0 auto;padding:0 1rem}
-.price-card{background:var(--card);border:1.5px solid var(--border-g);border-radius:24px;padding:2.5rem;position:relative;overflow:hidden;box-shadow:0 0 100px rgba(34,240,117,.1),0 36px 80px rgba(0,0,0,.6)}
-.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:180px;background:radial-gradient(ellipse 100% 70% at 50% 0%,rgba(34,240,117,.09) 0%,transparent 70%);pointer-events:none}
-.price-trial-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--g);color:#020d05;font-size:.72rem;font-weight:800;padding:.42rem 1.1rem;border-radius:999px;margin-bottom:1.6rem;letter-spacing:.5px;text-transform:uppercase}
-.price-num{display:flex;align-items:baseline;gap:.22rem;margin-bottom:.3rem}
-.price-rs{font-size:1.3rem;font-weight:700;color:var(--text2);margin-top:.4rem}
-.price-big{font-size:4.5rem;font-weight:900;color:var(--text);letter-spacing:-3px;line-height:1;font-family:var(--mono)}
-.price-dec{font-size:2rem;font-weight:700;color:var(--text2)}
-.price-mo{font-size:.82rem;color:var(--text2);margin-bottom:2rem}
-.price-divider{border:none;border-top:1px solid rgba(255,255,255,.05);margin:1.5rem 0}
-.price-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem}
-.price-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.87rem;color:var(--text2);line-height:1.5}
-.pck{width:20px;height:20px;min-width:20px;border-radius:50%;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.price-btn{width:100%;background:var(--g);color:#020d05;border:none;padding:1.15rem;border-radius:999px;font-family:var(--font);font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s;margin-bottom:.8rem;box-shadow:0 4px 28px rgba(34,240,117,.35)}
-.price-btn:hover{background:#3affa0;box-shadow:0 8px 44px rgba(34,240,117,.6);transform:translateY(-2px)}
-.price-fine{text-align:center;font-size:.74rem;color:var(--text3)}
-
-/* DEPOIMENTOS */
-.testi-grid{max-width:1200px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:18px;overflow:hidden;border:1px solid var(--border)}
-.testi{background:var(--card);padding:2rem;display:flex;flex-direction:column;gap:1.2rem;transition:background .22s}
+/* ── TESTIMONIALS ── */
+.testi-grid{max-width:1100px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--r2);overflow:hidden;border:1px solid var(--border)}
+.testi{background:var(--card);padding:1.8rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s}
 .testi:hover{background:var(--card2)}
-.stars{display:flex;gap:.15rem;color:var(--g)}
-.testi-txt{font-size:.86rem;color:var(--text2);line-height:1.82;flex:1}
-.testi-who{display:flex;align-items:center;gap:.75rem;padding-top:1rem;border-top:1px solid var(--border)}
-.testi-av{width:38px;height:38px;min-width:38px;border-radius:50%;background:var(--card2);border:1px solid var(--border-g);overflow:hidden;display:flex;align-items:center;justify-content:center}
-.testi-name{font-size:.85rem;font-weight:700;color:var(--text)}
-.testi-role{font-size:.72rem;color:var(--text2)}
+.stars{display:flex;gap:.1rem;color:var(--g);font-size:.9rem}
+.testi-txt{font-size:.95rem;color:var(--text2);line-height:1.85;flex:1}
+.testi-who{display:flex;align-items:center;gap:.65rem;padding-top:.9rem;border-top:1px solid var(--border)}
+.testi-av{width:34px;height:34px;min-width:34px;border-radius:50%;background:var(--card2);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.testi-name{font-size:.92rem;font-weight:700;color:var(--text)}
+.testi-role{font-size:.78rem;color:var(--text2)}
 
-/* FAQ */
-.faq-list{max-width:760px;margin:3rem auto 0;display:flex;flex-direction:column;gap:.5rem}
-.faq-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s}
+/* ── PRICING ── */
+.price-wrap{max-width:460px;margin:0 auto;padding:0 1rem}
+.price-card{
+  background:var(--card);
+  border:1px solid var(--border-g2);
+  border-radius:20px;padding:2.5rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 0 100px rgba(29,240,120,.08),0 32px 70px rgba(0,0,0,.55)
+}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:160px;background:radial-gradient(ellipse 100% 80% at 50% 0%,rgba(29,240,120,.06) 0%,transparent 70%);pointer-events:none}
+.price-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent)}
+.price-trial-badge{display:inline-flex;align-items:center;gap:.38rem;background:var(--g);color:#020d06;font-size:.68rem;font-weight:700;padding:.38rem 1rem;border-radius:6px;margin-bottom:1.4rem;letter-spacing:.5px;text-transform:uppercase}
+.price-num{display:flex;align-items:baseline;gap:.18rem;margin-bottom:.25rem}
+.price-rs{font-size:1.1rem;font-weight:600;color:var(--text2);margin-top:.3rem}
+.price-big{font-size:4.2rem;font-weight:800;color:var(--text);letter-spacing:-3px;line-height:1;font-family:var(--mono)}
+.price-dec{font-size:1.8rem;font-weight:600;color:var(--text2)}
+.price-mo{font-size:.8rem;color:var(--text2);margin-bottom:1.8rem}
+.price-divider{border:none;border-top:1px solid var(--border);margin:1.3rem 0}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.8rem}
+.price-list li{display:flex;align-items:flex-start;gap:.65rem;font-size:.92rem;color:var(--text2);line-height:1.5}
+.pck{width:17px;height:17px;min-width:17px;border-radius:5px;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.price-btn{
+  width:100%;background:var(--g);color:#020d06;border:none;
+  padding:1.1rem;border-radius:8px;
+  font-family:var(--font);font-size:.95rem;font-weight:700;
+  cursor:pointer;transition:all .2s;margin-bottom:.7rem;
+  box-shadow:0 4px 28px rgba(29,240,120,.35)
+}
+.price-btn:hover{background:#3dff90;box-shadow:0 8px 44px rgba(29,240,120,.6);transform:translateY(-2px)}
+.price-fine{text-align:center;font-size:.7rem;color:var(--text3)}
+
+/* ── FAQ ── */
+.faq-list{max-width:720px;margin:3rem auto 0;display:flex;flex-direction:column;gap:.35rem}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s}
 .faq-item.open{border-color:var(--border-g)}
-.faq-btn{width:100%;background:none;border:none;text-align:left;padding:1.15rem 1.35rem;font-family:var(--font);font-size:.9rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}
-.faq-ico{width:24px;height:24px;min-width:24px;border-radius:50%;border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:1rem;transition:transform .2s,background .2s}
+.faq-btn{width:100%;background:none;border:none;text-align:left;padding:1rem 1.25rem;font-family:var(--font);font-size:.95rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq-ico{width:20px;height:20px;min-width:20px;border-radius:50%;border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:.85rem;transition:transform .2s,background .2s;flex-shrink:0}
 .faq-item.open .faq-ico{transform:rotate(45deg);background:var(--gdim)}
 .faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
 .faq-item.open .faq-body{max-height:300px}
-.faq-txt{padding:0 1.35rem 1.25rem;font-size:.85rem;color:var(--text2);line-height:1.82}
+.faq-txt{padding:0 1.25rem 1.1rem;font-size:.92rem;color:var(--text2);line-height:1.82}
 
-/* FOOTER */
-footer{background:#050709;border-top:1px solid var(--border);padding:4rem 2.5rem 2.5rem}
+/* ── CTA BOTTOM ── */
+.cta-bottom{padding:7rem 2.5rem;background:var(--bg);position:relative;overflow:hidden;text-align:center}
+.cta-bottom::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 45% 55% at 50% 50%,rgba(29,240,120,.05) 0%,transparent 65%);pointer-events:none}
+.cta-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;pointer-events:none}
+.cta-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(29,240,120,.05)}
+.cta-ring:nth-child(1){width:180px;height:180px;animation:rPulse 4s ease-in-out infinite}
+.cta-ring:nth-child(2){width:340px;height:340px;animation:rPulse 4s .7s ease-in-out infinite}
+.cta-ring:nth-child(3){width:500px;height:500px;animation:rPulse 4s 1.4s ease-in-out infinite}
+@keyframes rPulse{0%,100%{opacity:.25;transform:translate(-50%,-50%) scale(1)}50%{opacity:.6;transform:translate(-50%,-50%) scale(1.025)}}
+.cta-bottom-inner{position:relative;z-index:1;max-width:620px;margin:0 auto}
+.cta-bottom h2{font-size:clamp(2rem,4vw,3rem);letter-spacing:-1.2px;margin-bottom:.9rem}
+.cta-bottom p{font-size:1rem;color:var(--text2);line-height:1.75;margin-bottom:2.2rem}
+.cta-bottom p strong{color:var(--g)}
+.cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+/* ── FOOTER ── */
+footer{background:#030508;border-top:1px solid var(--border);padding:4rem 2.5rem 2.5rem}
 .foot-wrap{max-width:1200px;margin:0 auto}
-.foot-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.5fr;gap:3rem;margin-bottom:3rem}
-.foot-logo{display:flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--text);font-size:1.05rem;font-weight:800;margin-bottom:.7rem}
-.foot-logo span{color:var(--g)}
-.foot-desc{font-size:.82rem;color:var(--text2);line-height:1.72;margin-bottom:1.3rem}
-.foot-soc{display:flex;gap:.5rem}
-.fsoc{width:33px;height:33px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2);text-decoration:none;transition:all .18s}
+.foot-cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.4fr;gap:3rem;margin-bottom:2.5rem}
+.foot-logo{display:flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--text);font-size:1rem;font-weight:700;margin-bottom:.65rem;letter-spacing:-.2px}
+.foot-logo .g{color:var(--g)}
+.foot-desc{font-size:.78rem;color:var(--text2);line-height:1.75;margin-bottom:1.2rem}
+.foot-soc{display:flex;gap:.45rem}
+.fsoc{width:30px;height:30px;border-radius:7px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2);text-decoration:none;transition:all .18s}
 .fsoc:hover{border-color:var(--border-g);color:var(--g)}
-.foot-h{font-size:.84rem;font-weight:700;color:var(--text);margin-bottom:1.1rem}
-.foot-links{list-style:none;display:flex;flex-direction:column;gap:.65rem}
-.foot-links a{font-size:.82rem;color:var(--text2);text-decoration:none;transition:color .15s}
+.foot-h{font-size:.8rem;font-weight:700;color:var(--text);margin-bottom:.9rem;letter-spacing:-.1px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.foot-links a{font-size:.78rem;color:var(--text2);text-decoration:none;transition:color .15s}
 .foot-links a:hover{color:var(--g)}
-.foot-nl-desc{font-size:.82rem;color:var(--text2);margin-bottom:.9rem;line-height:1.65}
-.foot-nl-row{display:flex;gap:.4rem}
-.foot-nl-in{flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.65rem .9rem;font-family:var(--font);font-size:.82rem;color:var(--text);outline:none;transition:border-color .18s}
+.foot-nl-desc{font-size:.78rem;color:var(--text2);margin-bottom:.8rem;line-height:1.65}
+.foot-nl-row{display:flex;gap:.35rem}
+.foot-nl-in{flex:1;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:.6rem .85rem;font-family:var(--font);font-size:.78rem;color:var(--text);outline:none;transition:border-color .18s}
 .foot-nl-in::placeholder{color:var(--text3)}.foot-nl-in:focus{border-color:var(--border-g)}
-.foot-nl-btn{background:var(--g);color:#020d05;border:none;width:40px;height:40px;min-width:40px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s}
-.foot-nl-btn:hover{background:#3affa0}
-.foot-bottom{border-top:1px solid var(--border);padding-top:1.6rem;text-align:center}
-.foot-copy{font-size:.76rem;color:var(--text3)}
+.foot-nl-btn{background:var(--g);color:#020d06;border:none;width:36px;height:36px;min-width:36px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s}
+.foot-nl-btn:hover{background:#3dff90}
+.foot-bottom{border-top:1px solid var(--border);padding-top:1.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.foot-copy{font-size:.7rem;color:var(--text3)}
 
 /* REVEAL */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
 .reveal.visible{opacity:1;transform:none}
 
-/* RESPONSIVE */
-@media(max-width:980px){
-  nav{padding:0 1.2rem}.hero{padding:2.5rem 1.2rem 4rem}.hero-inner{grid-template-columns:1fr;gap:2.5rem}
-  h1{font-size:2.6rem}.sec-title{font-size:2rem}
-  .flow-grid{grid-template-columns:1fr 1fr}.feat-grid{grid-template-columns:1fr 1fr}
-  .ir-inner{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.foot-cols{grid-template-columns:1fr 1fr}
-  .nav-mid{display:none}.sec{padding:4.5rem 1.2rem}.ir-section{padding:4.5rem 1.2rem}.divider{padding:2rem 1.2rem}
-  .dash-browser{transform:none;box-shadow:0 0 0 1px rgba(34,240,117,.08),0 16px 50px rgba(0,0,0,.8)}
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--card);border:1px solid var(--border-g);border-radius:18px;padding:2rem 1.9rem;width:100%;max-width:400px;position:relative;box-shadow:0 0 80px rgba(29,240,120,.09),0 28px 60px rgba(0,0,0,.7);transform:translateY(16px) scale(.97);transition:transform .22s cubic-bezier(.4,0,.2,1)}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:.9rem;right:.9rem;background:none;border:none;color:var(--text2);cursor:pointer;font-size:1.3rem;line-height:1;padding:.28rem;transition:color .15s}
+.modal-close:hover{color:var(--text)}
+.modal-logo{display:flex;align-items:center;gap:.4rem;margin-bottom:1.2rem}
+.modal-logo-mark{width:26px;height:26px;border-radius:7px;background:#131a24;border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center}
+.modal-logo-text{font-size:1rem;font-weight:700;color:var(--text);letter-spacing:-.2px}
+.modal-logo-text span{color:var(--g)}
+.modal-title{font-size:1.25rem;font-weight:800;color:var(--text);letter-spacing:-.4px;margin-bottom:.28rem}
+.modal-sub{font-size:.8rem;color:var(--text2);margin-bottom:1.1rem;line-height:1.55}
+.modal-sub strong{color:var(--g)}
+.modal-msg{font-size:.75rem;padding:.44rem .75rem;border-radius:7px;margin-bottom:.75rem;display:none}
+.modal-msg.error{display:block;background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.18);color:#f87171}
+.modal-field{margin-bottom:.85rem}
+.modal-label{font-size:.68rem;font-weight:600;color:var(--text2);display:block;margin-bottom:.3rem;letter-spacing:.3px;text-transform:uppercase}
+.modal-input{width:100%;background:#070e19;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.65rem .95rem;font-family:var(--font);font-size:.86rem;color:var(--text);outline:none;transition:border-color .18s}
+.modal-input:focus{border-color:var(--border-g);box-shadow:0 0 0 3px rgba(29,240,120,.05)}
+.modal-input::placeholder{color:var(--text3)}
+.modal-btn{width:100%;background:var(--g);color:#020d06;border:none;padding:.95rem;border-radius:8px;font-family:var(--font);font-size:.92rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:.28rem;box-shadow:0 4px 22px rgba(29,240,120,.28)}
+.modal-btn:hover{background:#3dff90;box-shadow:0 6px 36px rgba(29,240,120,.5);transform:translateY(-1px)}
+.modal-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.modal-divider{display:flex;align-items:center;gap:.65rem;margin:.9rem 0}
+.modal-divider::before,.modal-divider::after{content:'';flex:1;border-top:1px solid rgba(255,255,255,.05)}
+.modal-divider span{font-size:.68rem;color:var(--text3)}
+.modal-footer{text-align:center;font-size:.74rem;color:var(--text2)}
+.modal-footer a{color:var(--g);text-decoration:none;font-weight:600}
+.modal-footer a:hover{text-decoration:underline}
+.modal-success{text-align:center;padding:.4rem 0}
+.modal-success-ico{width:50px;height:50px;border-radius:50%;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;color:var(--g)}
+.modal-success-title{font-size:1.15rem;font-weight:800;color:var(--text);margin-bottom:.45rem}
+.modal-success-sub{font-size:.82rem;color:var(--text2);line-height:1.65}
+.modal-input-code{font-family:var(--mono);font-size:1rem;font-weight:700;letter-spacing:3px;color:var(--g);text-align:center;text-transform:uppercase}
+.modal-input-code::placeholder{font-family:var(--font);font-size:.86rem;font-weight:400;letter-spacing:0;color:var(--text3);text-transform:none}
+.modal-code-hint{font-size:.66rem;color:var(--text3);margin-top:.28rem;text-align:center}
+.modal-back{background:none;border:none;color:var(--text2);font-size:.76rem;cursor:pointer;padding:0;margin-bottom:.9rem;display:flex;align-items:center;gap:.28rem;font-family:var(--font);transition:color .15s}
+.modal-back:hover{color:var(--g)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  nav{padding:0 1.5rem}
+  .nav-mid{display:none}
+  .hero{padding:3rem 1.5rem 4rem}
+  .hero-inner{grid-template-columns:1fr;gap:3rem}
+  h1{font-size:2.8rem}
+  .pillars{grid-template-columns:1fr}
+  .ir-inner{grid-template-columns:1fr;gap:3rem}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .foot-cols{grid-template-columns:1fr 1fr;gap:2rem}
+  .bento-grid{grid-template-columns:1fr 1fr}
+  .bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 1}
+  .timeline-nodes{grid-template-columns:1fr 1fr}
+  .timeline-track,.timeline-progress{display:none}
+  .divider-inner{grid-template-columns:repeat(3,1fr)}
+  .dash-browser{transform:none;box-shadow:0 0 0 1px rgba(29,240,120,.07),0 16px 50px rgba(0,0,0,.85)}
+  .sec{padding:4.5rem 1.5rem}
+  .bento-section{padding:4.5rem 1.5rem}
+  .ir-section{padding:4.5rem 1.5rem}
 }
-@media(max-width:600px){
-  .flow-grid,.feat-grid{grid-template-columns:1fr}
-  h1{font-size:1.9rem;letter-spacing:-1.2px}.sec-title{font-size:1.65rem}
-  .hero{padding:2rem 1rem 3rem}.hero-btns{flex-direction:column;width:100%;gap:.6rem}
-  .btn-main,.btn-out{width:100%;text-align:center;padding:.9rem 1rem;font-size:.93rem}
-  .sec{padding:3.5rem 1rem}.ir-section{padding:3.5rem 1rem}
-  nav{padding:0 1rem;height:58px}.nav-mid{display:none}
-  .kpis{grid-template-columns:repeat(2,1fr)}.foot-cols{grid-template-columns:1fr}
-  .ir-kpis{grid-template-columns:1fr 1fr}.divider-inner{grid-template-columns:1fr;gap:1.2rem}
+@media(max-width:768px){
+  nav{padding:0 1.25rem;height:62px}
+  .nav-burger{display:flex}
+  .nav-mid{display:none!important}
+  .nav-login{display:none}
+  .nav-cta{padding:.58rem 1.3rem;font-size:.84rem}
+  h1{font-size:2.2rem;letter-spacing:-1px}
+  h2{font-size:1.75rem}
+  .hero{padding:2.5rem 1.25rem 3.5rem;min-height:auto}
+  .hero-btns{flex-direction:column;width:100%;gap:.6rem}
+  .btn-main,.btn-out{width:100%;text-align:center;justify-content:center;padding:.9rem 1.2rem}
+  .divider-inner{grid-template-columns:1fr}
+  .div-item:not(:last-child)::after{display:none}
+  .div-item{padding:2rem 1.5rem;border-bottom:1px solid var(--border)}
+  .div-val{font-size:2.2rem}
+  .testi-grid{grid-template-columns:1fr}
+  .foot-cols{grid-template-columns:1fr;gap:1.8rem}
+  .cta-bottom{padding:5rem 1.25rem}
+  .cta-btns{flex-direction:column;align-items:center}
+  .cta-btns .btn-main,.cta-btns .btn-out{width:100%;max-width:340px;text-align:center;justify-content:center}
+  .dor-inner{max-width:100%}
+  .timeline-nodes{grid-template-columns:1fr}
+  .bento-grid{grid-template-columns:1fr}
+  .bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 1}
+  .ir-inner{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .dash-blocks{grid-template-columns:1fr}
+  .auto-strip{flex-wrap:wrap}
+  .foot-bottom{justify-content:center;text-align:center}
+  .sec{padding:3.5rem 1.25rem}
+  .bento-section{padding:3.5rem 1.25rem}
+  .ir-section{padding:3.5rem 1.25rem}
+  .cta-ring{display:none}
+}
+@media(max-width:400px){
+  h1{font-size:1.9rem}
+  .nav-logo-text{font-size:.9rem}
 }
 *{box-sizing:border-box!important}
 html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!important}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .22s}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--card);border:1px solid var(--border-g);border-radius:20px;padding:2.2rem 2rem;width:100%;max-width:400px;position:relative;box-shadow:0 0 80px rgba(34,240,117,.1),0 30px 70px rgba(0,0,0,.7);transform:translateY(18px) scale(.97);transition:transform .25s cubic-bezier(.4,0,.2,1)}
-.modal-overlay.open .modal{transform:translateY(0) scale(1)}
-.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text2);cursor:pointer;font-size:1.4rem;line-height:1;padding:.3rem;transition:color .15s}
-.modal-close:hover{color:var(--text)}
-.modal-logo{display:flex;align-items:center;gap:.45rem;margin-bottom:1.3rem}
-.modal-logo-mark{width:28px;height:28px;border-radius:7px;background:#131a24;border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center}
-.modal-logo-text{font-size:1.05rem;font-weight:800;color:var(--text)}
-.modal-logo-text span{color:var(--g)}
-.modal-title{font-size:1.35rem;font-weight:800;color:var(--text);letter-spacing:-.4px;margin-bottom:.3rem}
-.modal-sub{font-size:.83rem;color:var(--text2);margin-bottom:1.2rem;line-height:1.55}
-.modal-sub strong{color:var(--g)}
-.modal-price-note{background:var(--gdim);border:1px solid var(--border-g);border-radius:9px;padding:.6rem .85rem;display:flex;align-items:center;gap:.55rem;margin-bottom:1.2rem}
-.modal-price-note svg{color:var(--g);flex-shrink:0}
-.modal-price-note span{font-size:.76rem;color:var(--text2);line-height:1.4}
-.modal-price-note strong{color:var(--g)}
-.modal-msg{font-size:.78rem;padding:.5rem .8rem;border-radius:7px;margin-bottom:.8rem;display:none}
-.modal-msg.error{display:block;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);color:#f87171}
-.modal-field{margin-bottom:.9rem}
-.modal-label{font-size:.72rem;font-weight:600;color:var(--text2);display:block;margin-bottom:.32rem;letter-spacing:.3px;text-transform:uppercase}
-.modal-input{width:100%;background:#0b1320;border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:.7rem 1rem;font-family:var(--font);font-size:.88rem;color:var(--text);outline:none;transition:border-color .18s}
-.modal-input:focus{border-color:var(--border-g);box-shadow:0 0 0 3px rgba(34,240,117,.07)}
-.modal-input::placeholder{color:var(--text3)}
-.modal-btn{width:100%;background:var(--g);color:#020d05;border:none;padding:1rem;border-radius:999px;font-family:var(--font);font-size:.95rem;font-weight:800;cursor:pointer;transition:all .2s;margin-top:.3rem;box-shadow:0 4px 22px rgba(34,240,117,.28)}
-.modal-btn:hover{background:#3affa0;box-shadow:0 6px 36px rgba(34,240,117,.5);transform:translateY(-1px)}
-.modal-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.modal-divider{display:flex;align-items:center;gap:.7rem;margin:1rem 0}
-.modal-divider::before,.modal-divider::after{content:'';flex:1;border-top:1px solid rgba(255,255,255,.06)}
-.modal-divider span{font-size:.72rem;color:var(--text3)}
-.modal-footer{text-align:center;font-size:.78rem;color:var(--text2)}
-.modal-footer a{color:var(--g);text-decoration:none;font-weight:600}
-.modal-footer a:hover{text-decoration:underline}
-.modal-success{text-align:center;padding:.5rem 0}
-.modal-success-ico{width:54px;height:54px;border-radius:50%;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:var(--g)}
-.modal-success-title{font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:.5rem}
-.modal-success-sub{font-size:.84rem;color:var(--text2);line-height:1.65}
-
-.modal-input-code{font-family:var(--mono);font-size:1.05rem;font-weight:700;letter-spacing:3px;color:var(--g);text-align:center;text-transform:uppercase}
-.modal-input-code::placeholder{font-family:var(--font);font-size:.88rem;font-weight:400;letter-spacing:0;color:var(--text3);text-transform:none}
-.modal-code-hint{font-size:.7rem;color:var(--text3);margin-top:.3rem;text-align:center}
-
-.modal-back{background:none;border:none;color:var(--text2);font-size:.8rem;cursor:pointer;padding:0;margin-bottom:1rem;display:flex;align-items:center;gap:.3rem;font-family:var(--font);transition:color .15s}
-.modal-back:hover{color:var(--g)}
 </style>
 </head>
 <body>
@@ -300,8 +759,8 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-    <span class="nav-logo-text">Sure<span class="nlg">Green</span></span>
+    <div class="nav-logo-mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+    <span class="nav-logo-text">Sure<span class="g">Green</span></span>
   </a>
   <div class="nav-mid">
     <a href="#como-funciona">Como Funciona</a>
@@ -314,17 +773,32 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
     <a href="https://suregreen.com.br/dashboard/" class="nav-login">Entrar</a>
     <button class="nav-cta" onclick="openModal()">Criar conta</button>
   </div>
+  <button class="nav-burger" id="navBurger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- MODAL CRIAR CONTA -->
+<div id="mobileMenu" style="display:none;position:fixed;top:62px;left:0;right:0;z-index:998;background:rgba(6,9,13,.98);border-bottom:1px solid var(--border);padding:1.5rem;backdrop-filter:blur(24px)">
+  <div style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem">
+    <a href="#como-funciona" onclick="closeMenu()" style="color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500;padding:.65rem .2rem;border-bottom:1px solid var(--border)">Como Funciona</a>
+    <a href="#funcionalidades" onclick="closeMenu()" style="color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500;padding:.65rem .2rem;border-bottom:1px solid var(--border)">Funcionalidades</a>
+    <a href="#ir2026" onclick="closeMenu()" style="color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500;padding:.65rem .2rem;border-bottom:1px solid var(--border)">IR 2026</a>
+    <a href="#preco" onclick="closeMenu()" style="color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500;padding:.65rem .2rem;border-bottom:1px solid var(--border)">Preço</a>
+    <a href="#faq" onclick="closeMenu()" style="color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500;padding:.65rem .2rem">FAQ</a>
+  </div>
+  <div style="display:flex;gap:.65rem">
+    <a href="https://suregreen.com.br/dashboard/" style="flex:1;text-align:center;padding:.8rem;border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:.88rem;font-weight:600">Entrar</a>
+    <button onclick="openModal();closeMenu()" style="flex:1;background:var(--g);color:#020d06;border:none;padding:.8rem;border-radius:8px;font-family:var(--font);font-size:.88rem;font-weight:700;cursor:pointer">Criar conta</button>
+  </div>
+</div>
+
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal" id="modalBox">
     <button class="modal-close" onclick="closeModal()">&times;</button>
-
-    <!-- FORM -->
     <div id="modalForm">
       <div class="modal-logo">
-        <div class="modal-logo-mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="modal-logo-mark"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
         <div class="modal-logo-text">Sure<span>Green</span></div>
       </div>
       <div class="modal-title">Criar sua conta</div>
@@ -346,73 +820,59 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
       <button class="modal-btn" id="modalSubmitBtn" onclick="handleSignup()">Criar conta e acessar</button>
       <div class="modal-divider"><span>ou</span></div>
       <div class="modal-footer">Já tem conta? <a href="https://suregreen.com.br/dashboard/">Entrar agora</a></div>
-      <div class="modal-footer" style="margin-top:.6rem">Ainda não comprou? <a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank">Começar por R$ 0,99</a></div>
-      <div class="modal-footer" style="margin-top:.6rem"><a href="#" onclick="showModalScreen('forgot');return false;">Esqueci minha senha</a></div>
+      <div class="modal-footer" style="margin-top:.5rem">Ainda não comprou? <a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank">Começar por R$ 0,99</a></div>
+      <div class="modal-footer" style="margin-top:.5rem"><a href="#" onclick="showModalScreen('forgot');return false;">Esqueci minha senha</a></div>
     </div>
-
-    <!-- SUCCESS -->
     <div id="modalSuccess" style="display:none">
       <div class="modal-success">
-        <div class="modal-success-ico">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="modal-success-title">Acesso liberado! 🎉</div>
+        <div class="modal-success-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="modal-success-title">Acesso liberado!</div>
         <div class="modal-success-sub">Conta criada com sucesso.<br>Redirecionando para o dashboard...</div>
       </div>
     </div>
-
-    <!-- ESQUECI SENHA -->
     <div id="modalForgot" style="display:none">
-      <div class="modal-logo">
-        <div class="modal-logo-mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="modal-logo-text">Sure<span>Green</span></div>
-      </div>
+      <div class="modal-logo"><div class="modal-logo-mark"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="modal-logo-text">Sure<span>Green</span></div></div>
       <button class="modal-back" onclick="showModalScreen('form')">&#8592; Voltar</button>
       <div class="modal-title">Recuperar senha</div>
       <div class="modal-sub">Informe seu e-mail e enviaremos um link para redefinir sua senha.</div>
       <div class="modal-msg" id="forgotMsg"></div>
-      <div class="modal-field">
-        <label class="modal-label" for="forgot-email">E-mail da conta</label>
-        <input class="modal-input" id="forgot-email" type="email" placeholder="seu@email.com" autocomplete="email">
-      </div>
+      <div class="modal-field"><label class="modal-label" for="forgot-email">E-mail da conta</label><input class="modal-input" id="forgot-email" type="email" placeholder="seu@email.com" autocomplete="email"></div>
       <button class="modal-btn" id="forgotBtn" onclick="handleForgotPassword()">Enviar link de recuperação</button>
     </div>
-
-    <!-- FORGOT SUCCESS -->
     <div id="modalForgotSuccess" style="display:none">
       <div class="modal-success">
-        <div class="modal-success-ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
+        <div class="modal-success-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <div class="modal-success-title">E-mail enviado!</div>
-        <div class="modal-success-sub">Verifique sua caixa de entrada e siga as instruções para redefinir sua senha.<br><br>Não recebeu? Confira o spam.</div>
-        <button class="modal-btn" style="margin-top:1.5rem" onclick="showModalScreen('form')">Voltar ao login</button>
+        <div class="modal-success-sub">Verifique sua caixa de entrada.<br>Não recebeu? Confira o spam.</div>
+        <button class="modal-btn" style="margin-top:1.3rem" onclick="showModalScreen('form')">Voltar ao login</button>
       </div>
     </div>
-
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-glow"></div>
+  <canvas id="particles"></canvas>
+  <div class="hero-ambient"></div>
   <div class="hero-grid"></div>
+  <div class="hero-line"></div>
   <div class="hero-inner">
     <div class="reveal">
-      <div class="hero-badge"><span class="bdot"></span>Calculadora Surebet · Gestão · IR 2026</div>
-      <h1>Registra.<br>Calcula.<br>Declara.<br><span class="g">Automático.</span></h1>
-      <p class="hero-p">Plataforma completa para apostadores esportivos. <strong>Calculadora surebet automática</strong>, controle de bankroll, histórico visual e <strong>declaração de IR 2026 integrada</strong> — tudo em um só lugar.</p>
+      <div class="hero-eyebrow"><span class="bdot"></span>Gestão profissional de apostas esportivas</div>
+      <h1>Pare de perder<br><span class="accent">lucro</span> por falta<br><span class="light">de controle.</span></h1>
+      <p class="hero-p">Surebet, Freebet, Super Odd, Duplo Green — o SureGreen <strong>calcula os stakes, registra cada operação e fecha o dia sozinho.</strong> Sem planilha. Sem erro. Controle total.</p>
       <div class="hero-btns">
-        <button class="btn-main" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Começar por R$ 0,99</button>
+        <button class="btn-main" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Testar por R$ 0,99 agora</button>
         <button class="btn-out" onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">Ver como funciona</button>
       </div>
       <div class="hero-trust">
-        <span class="trust-i"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Primeira semana por R$ 0,99</span>
-        <span class="trust-i"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Cancele quando quiser</span>
-        <span class="trust-i"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>IR 2026 incluso</span>
+        <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Recupera em 1 operação</span>
+        <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Cancele quando quiser</span>
+        <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Acesso imediato</span>
       </div>
     </div>
-    <div class="dash-outer reveal" style="transition-delay:.18s">
+    <div class="dash-outer reveal" style="transition-delay:.15s">
+      <div class="dash-glow"></div>
       <div class="dash-browser">
         <div class="dash-chrome">
           <div class="dash-chrome-dots">
@@ -424,24 +884,43 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
         </div>
         <div class="dashboard">
           <div class="dash-body">
+            <div class="dash-status">
+              <div class="ds-left"><span class="ds-live"></span><span class="ds-status">OPERACIONAL</span><span class="ds-sep">·</span><span class="ds-day">25 Mar 2026 · 14:32</span></div>
+              <div class="ds-right"><span class="ds-badge calc">CALCULA</span><span class="ds-badge reg">REGISTRA</span><span class="ds-badge ir">IR 2026</span></div>
+            </div>
             <div class="kpis">
-              <div class="kpi"><div class="kpi-l">Lucro do dia</div><div class="kpi-v" id="kv1">R$ 0</div><div class="kpi-s">fechamento auto</div></div>
+              <div class="kpi green"><div class="kpi-l">Lucro do dia</div><div class="kpi-v" id="kv1">R$ 0</div><div class="kpi-s">AUTO · fechamento</div></div>
               <div class="kpi"><div class="kpi-l">ROI mensal</div><div class="kpi-v w" id="kv2">0.0%</div><div class="kpi-s">por casa</div></div>
               <div class="kpi"><div class="kpi-l">Meta do dia</div><div class="kpi-v" id="kv3">0%</div><div class="kpi-s">alerta ativo</div></div>
-              <div class="kpi"><div class="kpi-l">IR estimado</div><div class="kpi-v" id="kv4">R$ 0</div><div class="kpi-s">importado auto</div></div>
+              <div class="kpi"><div class="kpi-l">IR estimado</div><div class="kpi-v a" id="kv4">R$ 0</div><div class="kpi-s">AUTO · importado</div></div>
             </div>
-            <div class="meta-bar">
-              <span class="mb-lbl">Meta do dia</span>
-              <div class="mb-track"><div class="mb-fill" id="mbf"></div></div>
-              <span class="mb-pct" id="mbp">0%</span>
+            <div class="auto-strip">
+              <div class="auto-item"><div class="auto-ico g"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="auto-txt">Bankroll<span>Controle financeiro</span></div></div>
+              <div class="auto-item"><div class="auto-ico b"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#63b3ff" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="auto-txt">Operacao<span>Registro + Diario</span></div></div>
+              <div class="auto-item"><div class="auto-ico y"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div><div class="auto-txt">Fiscal<span>IR 2026 automatico</span></div></div>
             </div>
-            <div class="chart-box">
-              <div class="ch-head"><span class="ch-lbl">Curva de Bankroll — Histórico Mensal</span><span class="ch-tag">Comparativo</span></div>
-              <div class="bars" id="bars"></div>
+            <div class="dash-blocks">
+              <div class="db">
+                <div class="db-head"><div class="db-label fin"><span class="db-dot fin"></span>FINANCEIRO</div><span class="db-tag">AUTO</span></div>
+                <div class="meta-row"><span class="meta-lbl">Meta dia</span><div class="meta-track"><div class="meta-fill green" id="mbf"></div></div><span class="meta-pct green" id="mbp">0%</span></div>
+                <div class="meta-row"><span class="meta-lbl">Bankroll</span><div class="meta-track"><div class="meta-fill blue" id="bbf"></div></div><span class="meta-pct blue" id="bbp">0%</span></div>
+              </div>
+              <div class="db">
+                <div class="db-head"><div class="db-label op"><span class="db-dot op"></span>OPERAÇÕES HOJE</div></div>
+                <table class="ops-table">
+                  <thead><tr><th>Tipo</th><th>Casa</th><th>Lucro</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td><span class="ops-badge sb">SB</span></td><td style="color:var(--text2)">Bet365</td><td class="ops-profit pos">+18,40</td><td><div class="ops-status"><span class="ops-dot green"></span><span style="color:var(--g)">Green</span></div></td></tr>
+                    <tr><td><span class="ops-badge fb">FB</span></td><td style="color:var(--text2)">Betano</td><td class="ops-profit pos">+68,00</td><td><div class="ops-status"><span class="ops-dot green"></span><span style="color:var(--g)">Green</span></div></td></tr>
+                    <tr><td><span class="ops-badge dg">DG</span></td><td style="color:var(--text2)">Betsul</td><td class="ops-profit pos">+92,00</td><td><div class="ops-status"><span class="ops-dot green"></span><span style="color:var(--g)">2x ★</span></div></td></tr>
+                    <tr><td><span class="ops-badge so">SO</span></td><td style="color:var(--text2)">Sport.</td><td style="color:var(--text2)">—</td><td><div class="ops-status"><span class="ops-dot pend"></span><span style="color:#fbbf24">Aguard.</span></div></td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div class="df">
-              <div class="houses"><span class="hl">Casas:</span><span class="hp">Bet365</span><span class="hp">Betano</span><span class="hp">Superbet</span></div>
-              <div style="display:flex;gap:.3rem"><span class="dash-tag">IR Auto</span><span class="dash-tag">Fecha meia-noite</span></div>
+              <div class="houses"><span class="hl">Casas:</span><span class="hp">Bet365</span><span class="hp">Betano</span><span class="hp">Betsul</span><span class="hp">+10</span></div>
+              <span class="dash-tag">IR 2026 ativo</span>
             </div>
           </div>
         </div>
@@ -450,64 +929,190 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   </div>
 </section>
 
-<!-- NÚMEROS -->
+<!-- STATS DIVIDER — PREMIUM -->
 <div class="divider">
   <div class="divider-inner">
-    <div class="div-item reveal"><div class="div-val">4</div><div class="div-lbl">Automações completas</div></div>
-    <div class="div-item reveal" style="transition-delay:.1s"><div class="div-val">IR</div><div class="div-lbl">Declaração 2026 integrada</div></div>
-    <div class="div-item reveal" style="transition-delay:.2s"><div class="div-val">100%</div><div class="div-lbl">Web — celular e PC</div></div>
+    <div class="div-item reveal">
+      <div class="div-label">Lucro registrado hoje</div>
+      <div class="div-val"><span class="unit">R$</span><span id="stat1" data-target="284750" class="accent">0</span></div>
+      <div class="div-sub">pelos usuários da plataforma</div>
+    </div>
+    <div class="div-item reveal" style="transition-delay:.1s">
+      <div class="div-label">Apostadores ativos</div>
+      <div class="div-val"><span id="stat2" data-target="1240" class="accent">0</span></div>
+      <div class="div-sub">usando o SureGreen agora</div>
+    </div>
+    <div class="div-item reveal" style="transition-delay:.2s">
+      <div class="div-label">Taxa de satisfação</div>
+      <div class="div-val"><span id="stat3" data-target="99" class="accent">0</span><span class="unit" style="font-size:1.2rem;vertical-align:baseline;margin-left:2px">%</span></div>
+      <div class="div-sub">dos usuários recomendam</div>
+    </div>
   </div>
 </div>
 
-<!-- COMO FUNCIONA -->
-<section class="sec dark" id="como-funciona">
-  <div class="sec-label reveal">Como funciona</div>
-  <h2 class="sec-title reveal">Você aposta.<br>O SureGreen <span class="g">faz o resto.</span></h2>
-  <p class="sec-sub reveal" style="transition-delay:.05s">Do registro da aposta até a declaração do IR — tudo automatizado em 4 etapas.</p>
-  <div class="flow-grid reveal" style="transition-delay:.1s">
-    <div class="flow-node"><div class="flow-num">1</div><div class="flow-title">Registra a aposta</div><div class="flow-desc">Informe a odd, o stake e o tipo (Surebet, Freebet, Super Odds ou Duplo Green). Leva menos de 10 segundos.</div><span class="flow-tag">Surebet · Freebet · Super Odds</span></div>
-    <div class="flow-node"><div class="flow-num">2</div><div class="flow-title">Calcula o lucro</div><div class="flow-desc">A plataforma atualiza o bankroll, o ROI por casa e a curva de capital em tempo real — sem você calcular nada.</div><span class="flow-tag">Instantâneo e automático</span></div>
-    <div class="flow-node"><div class="flow-num">3</div><div class="flow-title">Fecha o dia</div><div class="flow-desc">Às 00:00:05, o sistema consolida o dia automaticamente. Lucro, perda e fechamento preenchidos — mesmo que você esqueça.</div><span class="flow-tag">Timer diário automático</span></div>
-    <div class="flow-node"><div class="flow-num">4</div><div class="flow-title">Anota no IR</div><div class="flow-desc">Cada aposta alimenta o módulo de IR 2026. Quando precisar declarar, um clique gera o relatório completo em PDF.</div><span class="flow-tag">Exclusivo no mercado</span></div>
+<!-- DOR DO CLIENTE -->
+<section style="padding:7rem 2.5rem 8rem;background:var(--bg)">
+  <div class="sec-wrap">
+    <div class="dor-inner reveal">
+      <div class="dor-label">O problema real</div>
+      <h2 class="dor-h2">Você não perde dinheiro apostando.<br>Perde por não <span class="accent">anotar direito.</span></h2>
+      <p class="dor-p">Quem está nos grupos VIP sabe: os sinais chegam rápido. Surebet, Freebet, Super Odd, Duplo Green — ao mesmo tempo, em grupos diferentes. Registrar tudo numa planilha é uma dor de cabeça que custa caro.</p>
+      <div class="pain-list" id="painList">
+        <div class="pain-item" id="pi1"><div class="pi-dot bad">✕</div><span>Você recebe 20+ sinais por dia e já perdeu a conta de qual registrou</span></div>
+        <div class="pain-item" id="pi2"><div class="pi-dot bad">✕</div><span>Perdeu freebet porque esqueceu de registrar o rolamento necessário</span></div>
+        <div class="pain-item" id="pi3"><div class="pi-dot bad">✕</div><span>Fim do dia sem saber exatamente quanto lucrou — ou quanto perdeu</span></div>
+        <div class="gain-item" id="pi4"><div class="pi-dot good">✓</div><span><strong>Com o SureGreen:</strong> você clica, a IA calcula, registra e fecha o dia automaticamente.</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- FUNCIONALIDADES -->
-<section class="sec mid" id="funcionalidades">
-  <div class="sec-label reveal">Funcionalidades</div>
-  <h2 class="sec-title reveal">Tudo que você precisa<br>para apostar com <span class="g">método</span></h2>
-  <p class="sec-sub reveal" style="transition-delay:.05s">Uma plataforma completa, sem ferramentas espalhadas em planilhas e apps diferentes.</p>
-  <div class="feat-grid reveal" style="transition-delay:.1s">
-    <div class="feat featured">
-      <div class="feat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg></div>
-      <div class="feat-label">Principal</div>
-      <div class="feat-title">Calculadora Surebet</div>
-      <div class="feat-desc">2 a 5 casas. Distribui o stake ideal automaticamente. Suporte a Freebets, lay com comissão de exchange e odd final calculada na hora.</div>
+<!-- COMO FUNCIONA -->
+<section class="sec mid" id="como-funciona">
+  <div class="sec-wrap">
+    <div class="sec-label">Passo a passo</div>
+    <h2>Da entrada ao fechamento,<br>você não pensa — <span class="accent">só clica</span></h2>
+    <p class="sec-sub">Quatro passos. A IA cuida do resto.</p>
+    <div class="timeline-wrap reveal">
+      <div class="timeline-nodes">
+        <div class="tnode" data-step="1">
+          <div class="tnode-num">01</div>
+          <div class="tnode-card">
+            <div class="tnode-tag">Passo 1</div>
+            <div class="tnode-title">Você recebeu o sinal no grupo VIP</div>
+            <div class="tnode-desc">Abra o SureGreen, selecione o tipo: Surebet, Freebet, Super Odd ou Duplo Green. Leva menos de 5 segundos.</div>
+          </div>
+        </div>
+        <div class="tnode" data-step="2">
+          <div class="tnode-num">02</div>
+          <div class="tnode-card">
+            <div class="tnode-tag">Passo 2</div>
+            <div class="tnode-title">A IA calcula tudo automaticamente</div>
+            <div class="tnode-desc">Stakes por casa, margem de lucro garantida, rolamento de freebet — calculado em tempo real. Sem fórmula. Sem erro.</div>
+          </div>
+        </div>
+        <div class="tnode" data-step="3">
+          <div class="tnode-num">03</div>
+          <div class="tnode-card">
+            <div class="tnode-tag">Passo 3</div>
+            <div class="tnode-title">Registre o resultado em 1 clique</div>
+            <div class="tnode-desc">Deu green, red ou duplo green? Um toque e o dashboard atualiza na hora com o lucro ou perda do dia.</div>
+          </div>
+        </div>
+        <div class="tnode" data-step="4">
+          <div class="tnode-num">04</div>
+          <div class="tnode-card">
+            <div class="tnode-tag">Fim do dia</div>
+            <div class="tnode-title">Fechamento automático com resumo completo</div>
+            <div class="tnode-desc">Lucro líquido, freebets ativas, greens do dia, IR 2026 — tudo gerado sozinho. Você só lê o resultado.</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="feat">
-      <div class="feat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-      <div class="feat-title">Histórico Visual</div>
-      <div class="feat-desc">Calendário colorido por intensidade de lucro. Identifique padrões, dias bons e ruins. Comparativo mês a mês com gráficos.</div>
+  </div>
+</section>
+
+<!-- PILARES -->
+<section class="sec dark" id="funcionalidades">
+  <div class="sec-wrap">
+    <div class="sec-label">O que o SureGreen faz</div>
+    <h2>Três pilares que colocam<br>seu lucro no <span class="accent">controle</span></h2>
+    <p class="sec-sub">Cada pilar resolve uma parte diferente da dor. Juntos, eliminam a planilha para sempre.</p>
+    <div class="pillars reveal">
+      <div class="pillar fin">
+        <div class="pillar-header"><div class="pillar-ico fin"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="pillar-cat fin">Financeiro</div><div class="pillar-title">Controle de Bankroll</div></div></div>
+        <div class="pillar-desc">Dashboard financeiro em tempo real. Veja quanto você tem, apostou e lucrou — sem somar na mão.</div>
+        <div class="pillar-items">
+          <div class="pillar-item"><div class="pillar-item-dot fin"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>ROI por casa, período e tipo</div>
+          <div class="pillar-item"><div class="pillar-item-dot fin"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Gráfico de evolução do lucro</div>
+          <div class="pillar-item"><div class="pillar-item-dot fin"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Meta diária com alerta automático</div>
+        </div>
+      </div>
+      <div class="pillar op">
+        <div class="pillar-header"><div class="pillar-ico op"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="pillar-cat op">Operacional</div><div class="pillar-title">Registro Inteligente</div></div></div>
+        <div class="pillar-desc">Cada sinal do grupo VIP registrado em segundos. Surebet, Freebet, Super Odd, Duplo Green.</div>
+        <div class="pillar-items">
+          <div class="pillar-item"><div class="pillar-item-dot op"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Cálculo automático de stakes por casa</div>
+          <div class="pillar-item"><div class="pillar-item-dot op"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Controle total de freebets e rolamento</div>
+          <div class="pillar-item"><div class="pillar-item-dot op"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Duplo Green detectado e calculado</div>
+        </div>
+      </div>
+      <div class="pillar fiscal">
+        <div class="pillar-header"><div class="pillar-ico fiscal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div><div class="pillar-cat fiscal">Fiscal</div><div class="pillar-title">IR 2026 Automatico</div></div></div>
+        <div class="pillar-desc">Cada operação já vai sendo anotada para o IR. Na hora de declarar, tudo pronto.</div>
+        <div class="pillar-items">
+          <div class="pillar-item"><div class="pillar-item-dot fiscal"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Importação automática no padrão Receita</div>
+          <div class="pillar-item"><div class="pillar-item-dot fiscal"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Separação por tipo: surebet, freebet, etc</div>
+          <div class="pillar-item"><div class="pillar-item-dot fiscal"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Zero retrabalho na declaração</div>
+        </div>
+      </div>
     </div>
-    <div class="feat">
-      <div class="feat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-      <div class="feat-title">Bankroll com ROI por Casa</div>
-      <div class="feat-desc">Curva de capital ao longo do tempo. ROI detalhado por casa — descubra onde você lucra mais e onde está perdendo dinheiro.</div>
-    </div>
-    <div class="feat">
-      <div class="feat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/></svg></div>
-      <div class="feat-title">Organizador de Apostas</div>
-      <div class="feat-desc">Registre Surebets, Super Odds, Freebets e Duplo Green como tipos separados. Cada estratégia contabilizada de forma independente.</div>
-    </div>
-    <div class="feat">
-      <div class="feat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div class="feat-title">Fechamento Automático</div>
-      <div class="feat-desc">Às 00:00:05 o sistema encerra o dia e abre novo período automaticamente. Registros organizados por data com precisão total.</div>
-    </div>
-    <div class="feat">
-      <div class="feat-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div>
-      <div class="feat-title">7 Casas Integradas</div>
-      <div class="feat-desc">Acesso rápido a Betano, Bet365, Superbet, Sportingbet, Bolsa de Apostas, Fullbet e Oddschecker durante uma operação.</div>
+  </div>
+</section>
+
+<!-- BENTO GRID -->
+<section class="bento-section">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="sec-label">Automacoes</div>
+    <h2>Cada clique seu dispara<br>uma <span class="accent">cadeia automática</span></h2>
+    <p class="sec-sub">Enquanto você aposta, a IA registra, calcula, organiza e já prepara o IR. Ao mesmo tempo.</p>
+    <div class="bento-grid reveal">
+      <div class="bento-cell bc-a">
+        <div class="bento-icon g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <span class="bento-tag g">Cálculo em tempo real</span>
+        <div class="bento-title">Você digita o stake. A IA distribui tudo.</div>
+        <div class="bento-desc">Ela calcula quanto apostar em cada casa para lucro garantido — em menos de 1 segundo.</div>
+        <div class="calc-live" id="calcLive">
+          <div class="calc-header">
+            <span class="calc-header-label">SureGreen · Calculadora</span>
+            <span class="calc-live-dot"></span>
+          </div>
+          <div class="calc-input-area">
+            <div class="calc-input-label">Stake total</div>
+            <div class="calc-input-val">
+              <span class="currency">R$</span>
+              <span id="calcStakeDisplay">0</span>
+              <span class="calc-input-cursor" id="calcCursor"></span>
+            </div>
+          </div>
+          <div class="calc-rows">
+            <div class="cr" id="cr1"><span class="cr-label">Bet365 &nbsp;@ 1.88</span><span class="cr-val" id="cv1">—</span></div>
+            <div class="cr" id="cr2"><span class="cr-label">Sportingbet @ 2.12</span><span class="cr-val" id="cv2">—</span></div>
+            <div class="cr" id="cr3"><span class="cr-label">Margem garantida</span><span class="cr-val amber" id="cv3">—</span></div>
+          </div>
+          <div class="calc-result" id="calcResult">
+            <span class="calc-result-label">Lucro garantido</span>
+            <div style="display:flex;align-items:center">
+              <span class="calc-result-val" id="calcProfit">+R$ 18,40</span>
+              <div class="calc-check">✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-cell bc-b">
+        <div class="bento-icon b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <span class="bento-tag b">Registro automatico</span>
+        <div class="bento-title">Operação registrada antes de você fechar a tela</div>
+        <div class="bento-desc">Tipo, casa, stake, odd, resultado, lucro. Nada se perde.</div>
+      </div>
+      <div class="bento-cell bc-c">
+        <div class="bento-icon y"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div>
+        <span class="bento-tag y">IR automatico</span>
+        <div class="bento-title">Cada entrada já vira dado fiscal</div>
+        <div class="bento-desc">A Receita pede. Você já tem.</div>
+      </div>
+      <div class="bento-cell bc-d">
+        <div class="bento-icon g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <span class="bento-tag g">Freebet inteligente</span>
+        <div class="bento-title">Nunca mais perca uma freebet por esquecimento</div>
+        <div class="bento-desc">Rastreia conquista, ativação e uso. Alerta automático.</div>
+      </div>
+      <div class="bento-cell bc-e">
+        <div class="bento-icon b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+        <span class="bento-tag b">Fechamento diario</span>
+        <div class="bento-title">O resumo do dia aparece sozinho</div>
+        <div class="bento-desc">Lucro, greens, freebets, IR — gerado sem você fazer nada.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -516,101 +1121,108 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
 <section class="ir-section" id="ir2026">
   <div class="ir-inner">
     <div class="reveal">
-      <div class="ir-label">Exclusivo no mercado</div>
-      <h2 class="ir-h2">Declaração de IR 2026<br>para <span>apostadores</span></h2>
-      <p class="ir-desc">Ganhos em apostas são tributáveis. Seus dados já estão aqui — a plataforma importa tudo automaticamente e gera o relatório em um clique.</p>
+      <div class="ir-label">Exclusivo</div>
+      <h2 class="ir-h2">A única plataforma que já prepara seu <span class="accent-y">IR 2026</span> enquanto voce aposta.</h2>
+      <p class="ir-desc">Apostadores que lucram mais de R$ 2.112 por mês precisam declarar. A maioria não sabe. Ou sabe e sofre para organizar tudo no ano seguinte.</p>
       <div class="ir-list">
-        <div class="ir-item"><div class="ir-ck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Importação automática</strong> — cada aposta já alimenta o módulo sem ação extra</div></div>
-        <div class="ir-item"><div class="ir-ck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Cálculo atualizado</strong> — imposto calculado com base nas regras do IR 2026</div></div>
-        <div class="ir-item"><div class="ir-ck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Separação completa</strong> — por tipo, por casa e por mês</div></div>
-        <div class="ir-item"><div class="ir-ck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Relatório PDF</strong> — pronto para entregar ao contador em 1 clique</div></div>
-        <div class="ir-item"><div class="ir-ck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Múltiplos anos</strong> — seletor de exercício fiscal</div></div>
+        <div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Importação automática</strong> no padrão da Receita Federal — sem planilha separada</div></div>
+        <div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Separado por tipo</strong> — surebet, freebet, super odd, duplo green, cada um na categoria correta</div></div>
+        <div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Histórico mensal</strong> — toda a movimentação do ano organizada, pronta para o contador</div></div>
+        <div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Zero retrabalho</strong> — o que você registrou hoje já está sendo contado para o próximo ano</div></div>
       </div>
     </div>
-    <div class="reveal" style="transition-delay:.15s">
+    <div class="reveal" style="transition-delay:.12s">
       <div class="ir-card">
-        <div class="ir-head"><div class="ir-card-title">Declaração IR Apostas</div><div class="ir-yr">Ano-base 2026</div></div>
+        <div class="ir-card-header"><div class="ir-card-title">Declaracao IR — SureGreen Export</div><div class="ir-yr">2026</div></div>
         <div class="ir-kpis">
-          <div class="ir-kpi"><div class="ir-kpi-l">Total bruto</div><div class="ir-kpi-v" id="irv1">R$ 0</div></div>
-          <div class="ir-kpi"><div class="ir-kpi-l">Total apostado</div><div class="ir-kpi-v w" id="irv2">R$ 0</div></div>
-          <div class="ir-kpi"><div class="ir-kpi-l">Lucro tributável</div><div class="ir-kpi-v" id="irv3">R$ 0</div></div>
-          <div class="ir-kpi"><div class="ir-kpi-l">Estimativa IR (30%)</div><div class="ir-kpi-v r" id="irv4">R$ 0</div></div>
+          <div class="ir-kpi"><div class="ir-kpi-l">Lucro tributavel</div><div class="ir-kpi-v y">R$ 8.240</div></div>
+          <div class="ir-kpi"><div class="ir-kpi-l">Operacoes</div><div class="ir-kpi-v w">347</div></div>
+          <div class="ir-kpi"><div class="ir-kpi-l">IR estimado</div><div class="ir-kpi-v r">R$ 2.472</div></div>
+          <div class="ir-kpi"><div class="ir-kpi-l">Lucro liquido</div><div class="ir-kpi-v">R$ 5.768</div></div>
         </div>
         <div class="ir-tipos">
-          <div class="ir-tipos-l">Lucro por tipo de aposta</div>
-          <div class="ir-tipo"><span class="ir-tipo-n">Surebet</span><span class="ir-tipo-v">R$ 1.240,00</span></div>
-          <div class="ir-tipo"><span class="ir-tipo-n">Super Odds</span><span class="ir-tipo-v">R$ 380,00</span></div>
-          <div class="ir-tipo"><span class="ir-tipo-n">Freebet</span><span class="ir-tipo-v">R$ 215,00</span></div>
-          <div class="ir-tipo"><span class="ir-tipo-n">Duplo Green</span><span class="ir-tipo-v">R$ 90,00</span></div>
+          <div class="ir-tipos-l">Breakdown por tipo</div>
+          <div class="ir-tipo"><span class="ir-tipo-n">Surebets</span><span class="ir-tipo-v">R$ 4.180</span></div>
+          <div class="ir-tipo"><span class="ir-tipo-n">Freebets</span><span class="ir-tipo-v">R$ 2.640</span></div>
+          <div class="ir-tipo"><span class="ir-tipo-n">Super Odds</span><span class="ir-tipo-v">R$ 960</span></div>
+          <div class="ir-tipo"><span class="ir-tipo-n">Duplo Green</span><span class="ir-tipo-v">R$ 460</span></div>
         </div>
-        <div class="ir-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar Declaração IR 2026 — PDF</div>
-        <div class="ir-disc">Estimativa baseada nas regras do IR 2026. Consulte um contador.</div>
+        <div class="ir-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar para Receita Federal</div>
+        <div class="ir-disc">Formato compativel com IRPF 2026 · Atualizado anualmente</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec mid">
+  <div class="sec-wrap">
+    <div class="sec-label">Depoimentos</div>
+    <h2>Apostadores reais.<br><span class="accent">Resultados reais.</span></h2>
+    <div class="testi-grid reveal">
+      <div class="testi"><div class="stars">★★★★★</div><div class="testi-txt">"Eu recebia mais de 20 sinais por dia e esquecia metade na planilha. Com o SureGreen, registro tudo em segundos. Meu lucro no mês subiu porque parei de perder freebets."</div><div class="testi-who"><div class="testi-av">M</div><div><div class="testi-name">Marcos R.</div><div class="testi-role">Apostador profissional · São Paulo</div></div></div></div>
+      <div class="testi"><div class="stars">★★★★★</div><div class="testi-txt">"O duplo green sempre me confundia nos calculos. A IA calcula na hora e registra o lucro extra automaticamente. Parece mágica, mas é só tecnologia boa de verdade."</div><div class="testi-who"><div class="testi-av">C</div><div><div class="testi-name">Camila T.</div><div class="testi-role">Membro de 3 grupos VIP · Rio de Janeiro</div></div></div></div>
+      <div class="testi"><div class="stars">★★★★★</div><div class="testi-txt">"O fechamento diário automático mudou minha vida. Antes ficava 30 min somando tudo na planilha. Agora abro o app e está tudo lá, incluindo o IR já calculado."</div><div class="testi-who"><div class="testi-av">R</div><div><div class="testi-name">Rafael S.</div><div class="testi-role">Ex-usuário de planilha · Belo Horizonte</div></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section id="preco" class="sec dark">
-  <div class="sec-label reveal">Plano e preço</div>
-  <h2 class="sec-title reveal">Simples e <span class="g">transparente</span></h2>
-  <p class="sec-sub reveal" style="transition-delay:.05s">Tudo incluso. Sem taxas escondidas. Cancele quando quiser.</p>
-  <div class="price-wrap reveal" style="transition-delay:.1s">
-    <div class="price-card">
-      <div class="price-trial-badge">⚡ 1ª semana por R$ 0,99</div>
-      <div class="price-num"><span class="price-rs">R$</span><span class="price-big">29</span><span class="price-dec">,90</span></div>
-      <p class="price-mo">por mês · após a 1ª semana · sem fidelidade</p>
-      <hr class="price-divider">
-      <ul class="price-list">
-        <li><div class="pck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span><strong>Calculadora Surebet</strong> — 2 a 5 casas, freebet, lay</span></li>
-        <li><div class="pck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span><strong>Organizador completo</strong> — Surebet, Super Odds, Freebet, Duplo Green</span></li>
-        <li><div class="pck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span><strong>Histórico</strong> — calendário visual de lucro por dia</span></li>
-        <li><div class="pck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span><strong>Bankroll</strong> — ROI por casa de apostas</span></li>
-        <li><div class="pck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span><strong>4 automações</strong> — fechamento, meta, IR e diário</span></li>
-        <li><div class="pck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span><strong>Declaração IR 2026</strong> — exclusivo no mercado</span></li>
-        <li><div class="pck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span><strong>Export</strong> — Excel e PDF</span></li>
-        <li><div class="pck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span><strong>Suporte</strong> — WhatsApp direto</span></li>
-      </ul>
-      <button class="price-btn" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Começar por R$ 0,99 →</button>
-      <p class="price-fine">R$ 0,99 na 1ª semana · depois R$ 29,90/mês · cancele quando quiser</p>
+<section class="sec dark" id="preco">
+  <div class="sec-wrap">
+    <div class="sec-label">Preço</div>
+    <h2>Começa com menos do que<br>uma <span class="accent">única operação perdida</span></h2>
+    <p class="sec-sub">Recupere o investimento na primeira surebet registrada.</p>
+    <div class="price-wrap reveal">
+      <div class="price-card">
+        <div class="price-trial-badge"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>7 dias por R$ 0,99</div>
+        <div class="price-num"><span class="price-rs">R$</span><span class="price-big">29</span><span class="price-dec">,90</span></div>
+        <div class="price-mo">por mes — apos o periodo de teste</div>
+        <hr class="price-divider">
+        <ul class="price-list">
+          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Cálculo automático de stakes para Surebet</li>
+          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Registro de Freebet, Super Odd e Duplo Green</li>
+          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Dashboard financeiro em tempo real</li>
+          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Fechamento diário automático</li>
+          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Declaração IR 2026 automática</li>
+          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>13+ casas de apostas compativeis</li>
+          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Web + Mobile + Tablet</li>
+          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Cancele quando quiser, sem multa</li>
+        </ul>
+        <button class="price-btn" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Começar por R$ 0,99 agora</button>
+        <div class="price-fine">Sem fidelidade · Acesso imediato · Cancele quando quiser</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- DEPOIMENTOS -->
-<section class="sec mid" id="depoimentos">
-  <div class="sec-label reveal">Depoimentos</div>
-  <h2 class="sec-title reveal">O que dizem nossos usuários</h2>
-  <div class="testi-grid reveal" style="transition-delay:.1s">
-    <div class="testi">
-      <div class="stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-      <p class="testi-txt">O IR integrado me salvou. Estava sem saber o que declarar e o relatório saiu pronto — separado por tipo e mês. Sem isso ia ter muita dor de cabeça.</p>
-      <div class="testi-who"><div class="testi-av"><svg width="38" height="38" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="21" fill="#1c2535"/><path d="M7 42 C7 32 14 28 21 28 C28 28 35 32 35 42" fill="#1a2d1a"/><rect x="18" y="24" width="6" height="5" rx="2" fill="#c8a882"/><ellipse cx="21" cy="19" rx="8" ry="9" fill="#c8a882"/><ellipse cx="21" cy="12" rx="8.5" ry="5" fill="#2c1810"/><ellipse cx="17.5" cy="18" rx="1.8" ry="1.8" fill="#2c1810"/><ellipse cx="24.5" cy="18" rx="1.8" ry="1.8" fill="#2c1810"/></svg></div><div><div class="testi-name">Carlos Mendes</div><div class="testi-role">Apostador — São Paulo</div></div></div>
+<!-- CTA BOTTOM -->
+<section class="cta-bottom">
+  <div class="cta-rings"><div class="cta-ring"></div><div class="cta-ring"></div><div class="cta-ring"></div></div>
+  <div class="cta-bottom-inner reveal">
+    <div class="sec-label">Comece hoje</div>
+    <h2>Seus grupos VIP merecem<br>uma ferramenta à altura.</h2>
+    <p>Pare de perder dinheiro por falta de controle. O SureGreen é a diferença entre apostar e <strong>lucrar de verdade</strong> — com tudo registrado, calculado e declarado.</p>
+    <div class="cta-btns">
+      <button class="btn-main" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Testar por R$ 0,99 agora</button>
+      <button class="btn-out" onclick="openModal()">Já tenho conta</button>
     </div>
-    <div class="testi">
-      <div class="stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-      <p class="testi-txt">O alerta de meta mudou minha disciplina. Bato os R$ 200 e paro. O fechamento automático à meia-noite também é incrível — nunca mais confundi apostas de dias diferentes.</p>
-      <div class="testi-who"><div class="testi-av"><svg width="38" height="38" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="21" fill="#1c2535"/><path d="M7 42 C7 32 14 28 21 28 C28 28 35 32 35 42" fill="#1a2a2d"/><rect x="18" y="24" width="6" height="5" rx="2" fill="#b8926a"/><ellipse cx="21" cy="19" rx="8" ry="9" fill="#b8926a"/><path d="M12 14 Q13 8 21 8 Q29 8 30 14 Q28 10 21 11 Q14 10 12 14Z" fill="#3a2215"/><ellipse cx="17.5" cy="18" rx="1.8" ry="1.8" fill="#3a2215"/><ellipse cx="24.5" cy="18" rx="1.8" ry="1.8" fill="#3a2215"/></svg></div><div><div class="testi-name">Rafael Santos</div><div class="testi-role">Apostador — Rio de Janeiro</div></div></div>
-    </div>
-    <div class="testi">
-      <div class="stars"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-      <p class="testi-txt">O ROI por casa revelou que eu perdia na Betway. Migrei tudo para Bet365 e Betano. Só esse dado já pagou meses de assinatura. O calendário visual também é fantástico.</p>
-      <div class="testi-who"><div class="testi-av"><svg width="38" height="38" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="21" fill="#1c2535"/><path d="M7 42 C7 32 14 28 21 28 C28 28 35 32 35 42" fill="#1a1a2d"/><rect x="18" y="24" width="6" height="5" rx="2" fill="#d4a870"/><ellipse cx="21" cy="19" rx="8" ry="9" fill="#d4a870"/><path d="M13 12 Q14 6 21 5 Q28 6 29 12" fill="#1a0f00"/><ellipse cx="17.5" cy="18" rx="1.8" ry="1.8" fill="#1a0f00"/><ellipse cx="24.5" cy="18" rx="1.8" ry="1.8" fill="#1a0f00"/></svg></div><div><div class="testi-name">Bruno Oliveira</div><div class="testi-role">Apostador — Belo Horizonte</div></div></div>
-    </div>
+    <p style="margin-top:1rem;font-size:.72rem;color:var(--text3)">Acesso imediato · Sem cartão no teste · Cancele quando quiser</p>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="sec dark" id="faq">
-  <div class="sec-label reveal">Perguntas frequentes</div>
-  <h2 class="sec-title reveal">Ficou com dúvida?</h2>
-  <div class="faq-list reveal" style="transition-delay:.08s">
-    <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">Como funciona o fluxo automático?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Você registra uma aposta informando a odd, o stake e o tipo. A partir daí, a plataforma calcula o lucro automaticamente, atualiza o bankroll e o ROI em tempo real, preenche o fechamento diário sem sua ação, e alimenta o módulo de IR 2026. Tudo conectado — você não precisa fazer nada além de registrar.</div></div></div>
-    <div class="faq-item open"><button class="faq-btn" onclick="tFaq(this)">O que inclui a Declaração de IR 2026?<div class="faq-ico" style="transform:rotate(45deg);background:var(--gdim)">+</div></button><div class="faq-body" style="max-height:300px"><div class="faq-txt">O módulo de IR é exclusivo do SureGreen — nenhum outro organizador oferece isso. Ele importa automaticamente todos os seus dados, calcula o total bruto recebido, o lucro tributável e estima o imposto com base nas regras do IR 2026. Gera um relatório completo em PDF separado por mês, por casa e por tipo de aposta. Recomendamos consultar um contador para situações específicas.</div></div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">Como funciona o fechamento automático à meia-noite?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">O sistema agenda um timer preciso para 00:00:05 de cada dia. No horário, a plataforma consolida as entradas do dia, preenche os valores de lucro e perda no fechamento diário e reinicia os contadores para o novo período — sem nenhuma ação sua.</div></div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">A calculadora suporta Freebets?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Sim. A calculadora tem suporte específico para freebets — onde o stake não retorna em caso de perda. Ela calcula o stake correto para cada posição considerando essa particularidade, e o organizador registra freebets como tipo separado.</div></div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">Meus dados ficam seguros?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Usamos o Firebase do Google — dados armazenados com criptografia e autenticação, sincronizados entre todos os seus dispositivos em tempo real. Zero risco de perda de dados.</div></div></div>
-    <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">Como recebo meu acesso?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Após confirmação do pagamento, você recebe um e-mail com seu código de acesso. Entre em suregreen.com.br, crie sua conta com o código e comece a usar na hora. Sem instalação — funciona em qualquer navegador.</div></div></div>
+<section class="sec mid" id="faq">
+  <div class="sec-wrap">
+    <div class="sec-label">Duvidas</div>
+    <h2>Tem perguntas?<br><span class="accent">A gente responde.</span></h2>
+    <div class="faq-list reveal">
+      <div class="faq-item"><button class="faq-btn">Preciso saber programar ou usar planilha para usar o SureGreen?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Não. Se você sabe receber um sinal no grupo e fazer uma aposta, você usa o SureGreen. A interface foi pensada para quem está no celular, com pressa, no meio de um sinal ao vivo.</div></div></div>
+      <div class="faq-item"><button class="faq-btn">O SureGreen funciona com qualquer casa de apostas?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Sim. O sistema já tem Bet365, Sportingbet, Betano, Betsul e mais de 13 casas pré-configuradas. Aceita casa personalizada se necessário.</div></div></div>
+      <div class="faq-item"><button class="faq-btn">O que acontece se eu cancelar? Perco meu histórico?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Não. Seu histórico fica salvo. Se você voltar, tudo estará lá. Você pode exportar seus dados a qualquer momento, incluindo o relatório de IR, mesmo cancelando.</div></div></div>
+      <div class="faq-item"><button class="faq-btn">Por que só R$ 0,99 no começo?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Porque queremos que você teste antes de decidir. Em 7 dias você vai registrar suas operações, ver o dashboard em tempo real e sentir a diferença. Apostamos que você vai querer continuar.</div></div></div>
+      <div class="faq-item"><button class="faq-btn">O SureGreen realmente declara o IR automaticamente?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">O SureGreen organiza e exporta todas as informações no formato compatível com o IRPF da Receita Federal. Você tem o relatório pronto — basta importar ou passar para o seu contador.</div></div></div>
+    </div>
   </div>
 </section>
 
@@ -619,178 +1231,177 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   <div class="foot-wrap">
     <div class="foot-cols">
       <div>
-        <a href="#" class="foot-logo"><div style="width:26px;height:26px;background:#131a24;border:1px solid var(--border-g);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22f075" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>Sure<span>Green</span></a>
-        <p class="foot-desc">Gestão profissional de apostas. O único organizador com Declaração de IR 2026 integrada.</p>
+        <a href="#" class="foot-logo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Sure<span class="g">Green</span></a>
+        <div class="foot-desc">A plataforma que transforma o caos de apostas em dados claros, lucro controlado e IR resolvido.</div>
         <div class="foot-soc">
-          <a href="#" class="fsoc"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-          <a href="https://wa.me/5511964549082" target="_blank" class="fsoc"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          <a href="#" class="fsoc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="fsoc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 2H3v16c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V2z"/><line x1="7" y1="22" x2="7" y2="13"/><line x1="17" y1="22" x2="17" y2="13"/><line x1="3" y1="13" x2="21" y2="13"/></svg></a>
         </div>
       </div>
       <div>
-        <div class="foot-h">Produto</div>
-        <ul class="foot-links"><li><a href="#como-funciona">Como Funciona</a></li><li><a href="#funcionalidades">Funcionalidades</a></li><li><a href="#ir2026">IR 2026</a></li><li><a href="#preco">Preço</a></li><li><a href="#faq">FAQ</a></li></ul>
+        <div class="foot-h">Plataforma</div>
+        <ul class="foot-links"><li><a href="#como-funciona">Como Funciona</a></li><li><a href="#funcionalidades">Funcionalidades</a></li><li><a href="#ir2026">IR 2026</a></li><li><a href="#preco">Preço</a></li><li><a href="https://suregreen.com.br/dashboard/">Acessar Dashboard</a></li></ul>
       </div>
       <div>
         <div class="foot-h">Suporte</div>
-        <ul class="foot-links"><li><a href="https://wa.me/5511964549082" target="_blank">WhatsApp</a></li><li><a href="#">Termos de Uso</a></li><li><a href="#">Política de Privacidade</a></li></ul>
+        <ul class="foot-links"><li><a href="#faq">FAQ</a></li><li><a href="#">Central de Ajuda</a></li><li><a href="#">Contato</a></li><li><a href="#">Termos de Uso</a></li><li><a href="#">Privacidade</a></li></ul>
       </div>
       <div>
-        <div class="foot-h">Fique por dentro</div>
-        <p class="foot-nl-desc">Dicas de apostas e novidades da plataforma</p>
-        <div class="foot-nl-row"><input type="email" class="foot-nl-in" placeholder="Seu e-mail"><button class="foot-nl-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div>
+        <div class="foot-h">Newsletter</div>
+        <div class="foot-nl-desc">Dicas de apostas esportivas e novidades do SureGreen.</div>
+        <div class="foot-nl-row">
+          <input class="foot-nl-in" type="email" placeholder="seu@email.com">
+          <button class="foot-nl-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </div>
       </div>
     </div>
-    <div class="foot-bottom"><p class="foot-copy">© 2026 SureGreen. Todos os direitos reservados. Apostas são atividade de risco — jogue com responsabilidade.</p></div>
+    <div class="foot-bottom">
+      <div class="foot-copy">© 2026 SureGreen. Todos os direitos reservados.</div>
+      <div class="foot-copy">Não somos uma casa de apostas. Somos uma ferramenta de gestão.</div>
+    </div>
   </div>
 </footer>
 
 <script>
-const bd=[28,38,30,48,-6,55,46,60,-10,68,58,74,65,82,92];
-const bw=document.getElementById('bars');
-bd.forEach(h=>{const b=document.createElement('div');const a=Math.abs(h);b.className='bar '+(h<0?'n':'p');b.style.height='0';b.dataset.h=(a/92*68)+'px';bw.appendChild(b)});
-function cnt(el,end,pfx,dec,dur){let v=0,steps=80,inc=end/steps;const t=setInterval(()=>{v+=inc;if(v>=end){v=end;clearInterval(t)}el.textContent=pfx+(dec?v.toFixed(2).replace('.',','):Math.floor(v).toLocaleString('pt-BR'))},dur/steps)}
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-setTimeout(()=>{
-  document.querySelectorAll('.bar').forEach((b,i)=>setTimeout(()=>{b.style.height=b.dataset.h;b.style.transition='height 1.1s cubic-bezier(.4,0,.2,1)'},i*42+260));
-  setTimeout(()=>{document.getElementById('mbf').style.width='78%';document.getElementById('mbp').textContent='78%'},700);
-  cnt(document.getElementById('kv1'),847.50,'R$ ',true,1900);
-  const re=document.getElementById('kv2');let rv=0;const rt=setInterval(()=>{rv+=.33;if(rv>=23.8){rv=23.8;clearInterval(rt)}re.textContent=rv.toFixed(1)+'%'},1700/72);
-  const me=document.getElementById('kv3');let mv=0;const mt=setInterval(()=>{mv++;if(mv>=78){mv=78;clearInterval(mt)}me.textContent=mv+'%'},1800/78);
-  cnt(document.getElementById('kv4'),1872,'R$ ',false,2000);
-  setTimeout(()=>{cnt(document.getElementById('irv1'),18420,'R$ ',false,1800);cnt(document.getElementById('irv2'),12180,'R$ ',false,1800);cnt(document.getElementById('irv3'),6240,'R$ ',false,1800);cnt(document.getElementById('irv4'),1872,'R$ ',false,1800)},600);
-},400);
-function tFaq(btn){const item=btn.closest('.faq-item'),isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>{i.classList.remove('open');const ic=i.querySelector('.faq-ico');ic.style.transform='';ic.style.background=''});if(!isOpen){item.classList.add('open');const ic=btn.querySelector('.faq-ico');ic.style.transform='rotate(45deg)';ic.style.background='var(--gdim)'}}
-</script>
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+/* PARTICLES */
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
+let W,H,parts=[];
+function rsz(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight}
+rsz();window.addEventListener('resize',rsz);
+function mkP(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:-Math.random()*.35-.08,sz:Math.random()*1.2+.3,op:Math.random()*.4+.08,life:0,max:Math.random()*280+180}}
+for(let i=0;i<55;i++)parts.push(mkP());
+(function tick(){ctx.clearRect(0,0,W,H);parts.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;p.life++;const f=p.life<25?p.life/25:p.life>p.max-25?(p.max-p.life)/25:1;ctx.beginPath();ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);ctx.fillStyle=`rgba(29,240,120,${p.op*f})`;ctx.fill();if(p.life>=p.max||p.y<0)parts[i]=mkP()});requestAnimationFrame(tick)})();
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAwVfYGWzkJ74FaWpeF2LQhRTMlCEyJdFw",
-  authDomain: "xuxa-bet.firebaseapp.com",
-  projectId: "xuxa-bet",
-  storageBucket: "xuxa-bet.firebasestorage.app",
-  messagingSenderId: "825878560179",
-  appId: "1:825878560179:web:9f838f06dc4c2894111fc6"
-};
+/* DASH ANIMATION */
+function animN(el,t,pre,suf,dec){const d=1400,t0=performance.now();(function u(n){const p=Math.min((n-t0)/d,1),e=1-Math.pow(1-p,3),v=e*t;el.textContent=(pre||'')+(dec?v.toFixed(dec):Math.round(v))+(suf||'');if(p<1)requestAnimationFrame(u)})(performance.now())}
+let dA=false;
+function animDash(){if(dA)return;dA=true;animN(document.getElementById('kv1'),312.4,'R$ ','',1);animN(document.getElementById('kv2'),4.3,'','%',1);animN(document.getElementById('kv3'),78,'','%');animN(document.getElementById('kv4'),93.7,'R$ ','',1);document.getElementById('mbf').style.width='78%';document.getElementById('mbp').textContent='78%';document.getElementById('bbf').style.width='63%';document.getElementById('bbp').textContent='63%';}
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+/* LIVE CALCULATOR ANIMATION */
+function runCalc(){
+  const stakeEl=document.getElementById('calcStakeDisplay');
+  const cursor=document.getElementById('calcCursor');
+  const cr1=document.getElementById('cr1'),cr2=document.getElementById('cr2'),cr3=document.getElementById('cr3');
+  const cv1=document.getElementById('cv1'),cv2=document.getElementById('cv2'),cv3=document.getElementById('cv3');
+  const result=document.getElementById('calcResult');
 
-window.openModal = function() {
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('mc-email').focus(), 250);
-}
-window.closeModal = function() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-window.closeModalOutside = function(e) {
-  if (e.target === document.getElementById('modalOverlay')) window.closeModal();
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') window.closeModal(); });
+  // reset
+  [cr1,cr2,cr3].forEach(r=>{r.classList.remove('vis')});
+  result.classList.remove('vis');
+  cv1.textContent='—';cv2.textContent='—';cv3.textContent='—';
+  stakeEl.textContent='0';cursor.style.display='inline-block';
 
-window.showModalScreen = function(screen) {
-  ['modalForm','modalSuccess','modalForgot','modalForgotSuccess'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-  });
-  if (screen === 'form')          document.getElementById('modalForm').style.display = 'block';
-  if (screen === 'success')       document.getElementById('modalSuccess').style.display = 'block';
-  if (screen === 'forgot')        document.getElementById('modalForgot').style.display = 'block';
-  if (screen === 'forgotSuccess') document.getElementById('modalForgotSuccess').style.display = 'block';
-  ['modalMsg','forgotMsg'].forEach(id => document.getElementById(id).className = 'modal-msg');
-}
-
-window.handleSignup = async function() {
-  const email = document.getElementById('mc-email').value.trim();
-  const pass  = document.getElementById('mc-pass').value;
-  const code  = document.getElementById('mc-code').value.trim().toUpperCase();
-  const msg   = document.getElementById('modalMsg');
-  const btn   = document.getElementById('modalSubmitBtn');
-  msg.className = 'modal-msg';
-
-  if (!email || email.indexOf('@') < 1) {
-    msg.className = 'modal-msg error'; msg.textContent = 'Informe um e-mail válido.'; return;
-  }
-  if (pass.length < 8) {
-    msg.className = 'modal-msg error'; msg.textContent = 'A senha precisa ter no mínimo 8 caracteres.'; return;
-  }
-  if (!code) {
-    msg.className = 'modal-msg error'; msg.textContent = 'Informe o código de acesso recebido por e-mail.'; return;
-  }
-
-  btn.disabled = true; btn.textContent = 'Validando código...';
-
-  try {
-    const codeRef = doc(db, 'codigos', code);
-    const codeSnap = await getDoc(codeRef);
-
-    if (!codeSnap.exists()) {
-      msg.className = 'modal-msg error';
-      msg.textContent = 'Código inválido. Verifique o e-mail da compra.';
-      btn.disabled = false; btn.textContent = 'Criar conta e acessar'; return;
+  // type stake value
+  const target=500;let current=0;
+  const typeInterval=setInterval(()=>{
+    current=Math.min(current+Math.ceil(target/18),target);
+    stakeEl.textContent=current.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+    if(current>=target){
+      clearInterval(typeInterval);
+      cursor.style.display='none';
+      // show rows one by one
+      setTimeout(()=>{cr1.classList.add('vis');cv1.textContent='R$ 267,50';cv1.className='cr-val';},400);
+      setTimeout(()=>{cr2.classList.add('vis');cv2.textContent='R$ 232,50';cv2.className='cr-val';},800);
+      setTimeout(()=>{cr3.classList.add('vis');cv3.textContent='3.68%';cv3.className='cr-val amber';},1100);
+      setTimeout(()=>{result.classList.add('vis');},1500);
+      // loop after 3.5s
+      setTimeout(()=>runCalc(),4500);
     }
+  },60);
+}
+const calcEl=document.getElementById('calcLive');
+if(calcEl){
+  const cObs=new IntersectionObserver(en=>{if(en[0].isIntersecting){setTimeout(runCalc,400);cObs.disconnect()}},{threshold:.4});
+  cObs.observe(calcEl);
+}
 
-    const codeData = codeSnap.data();
-    if (codeData.usado) {
-      msg.className = 'modal-msg error';
-      msg.textContent = 'Este código já foi utilizado.';
-      btn.disabled = false; btn.textContent = 'Criar conta e acessar'; return;
-    }
+/* STATS — premium animated */
+let stA=false;
+function animStats(){
+  if(stA)return;stA=true;
+  const s1=document.getElementById('stat1'),s2=document.getElementById('stat2'),s3=document.getElementById('stat3');
+  /* R$ 284.750 formatted */
+  const d=1600,t0=performance.now();
+  (function u(n){const p=Math.min((n-t0)/d,1),e=1-Math.pow(1-p,3);
+    s1.textContent=Math.round(e*284750).toLocaleString('pt-BR');
+    s2.textContent=Math.round(e*1240).toLocaleString('pt-BR');
+    s3.textContent=Math.round(e*99);
+    if(p<1)requestAnimationFrame(u)
+  })(performance.now())
+}
 
-    btn.textContent = 'Criando conta...';
-    const userCred = await createUserWithEmailAndPassword(auth, email, pass);
-    await updateDoc(codeRef, { usado: true, uid: userCred.user.uid, email: email });
-
-    window.showModalScreen('success');
-    setTimeout(() => { window.location.href = 'https://suregreen.com.br/dashboard/'; }, 2000);
-
-  } catch (err) {
-    btn.disabled = false; btn.textContent = 'Criar conta e acessar';
-    if (err.code === 'auth/email-already-in-use') {
-      msg.className = 'modal-msg error'; msg.textContent = 'Este e-mail já possui uma conta.';
+/* TIMELINE — slow sequential, infinite loop */
+function runTimeline(){
+  const nodes=document.querySelectorAll('.tnode');
+  let i=0;
+  // reset all
+  nodes.forEach(n=>n.classList.remove('step-active'));
+  function step(){
+    if(i<nodes.length){
+      nodes[i].classList.add('step-active');
+      i++;
+      setTimeout(step,1800); // 1.8s entre cada passo
     } else {
-      msg.className = 'modal-msg error'; msg.textContent = 'Erro: ' + err.message;
+      // pausa de 3s antes de reiniciar
+      setTimeout(()=>{
+        nodes.forEach(n=>n.classList.remove('step-active'));
+        setTimeout(runTimeline,800);
+      },3000);
     }
   }
+  setTimeout(step,600);
 }
+let tlStarted=false;
 
-window.handleForgotPassword = async function() {
-  const email = document.getElementById('forgot-email').value.trim();
-  const msg   = document.getElementById('forgotMsg');
-  const btn   = document.getElementById('forgotBtn');
-  msg.className = 'modal-msg';
+/* REVEAL OBSERVER */
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');io.unobserve(e.target)})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  if (!email || email.indexOf('@') < 1) {
-    msg.className = 'modal-msg error'; msg.textContent = 'Informe um e-mail válido.'; return;
-  }
+/* specific triggers */
+const dObs=new IntersectionObserver(en=>{if(en[0].isIntersecting){animDash();dObs.disconnect()}},{threshold:.25});
+const dEl=document.querySelector('.dash-outer');if(dEl)dObs.observe(dEl);
 
-  btn.disabled = true; btn.textContent = 'Enviando...';
+const sObs=new IntersectionObserver(en=>{if(en[0].isIntersecting){animStats();sObs.disconnect()}},{threshold:.4});
+const sEl=document.querySelector('.divider');if(sEl)sObs.observe(sEl);
 
-  try {
-    // ✅ CORRIGIDO: URL completa para evitar problema de redirecionamento do www
-    const res = await fetch('https://suregreenn.vercel.app/api/send-reset-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email })
-    });
+const tObs=new IntersectionObserver(en=>{if(en[0].isIntersecting&&!tlStarted){tlStarted=true;runTimeline();}},{threshold:.25});
+const tEl=document.getElementById('como-funciona');if(tEl)tObs.observe(tEl);
 
-    const data = await res.json();
+/* PAIN LIST — staggered reveal */
+const painObs = new IntersectionObserver(entries => {
+  if(!entries[0].isIntersecting) return;
+  ['pi1','pi2','pi3','pi4'].forEach((id, idx) => {
+    const el = document.getElementById(id);
+    if(el) setTimeout(() => el.classList.add('anim-in'), idx * 320);
+  });
+  painObs.disconnect();
+}, {threshold: 0.3});
+const painList = document.getElementById('painList');
+if(painList) painObs.observe(painList);
 
-    if (!res.ok) throw new Error(data.error || 'Erro ao enviar');
+/* FAQ */
+document.querySelectorAll('.faq-btn').forEach(btn=>{btn.addEventListener('click',()=>{const it=btn.parentElement,op=it.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!op)it.classList.add('open')})});
 
-    window.showModalScreen('forgotSuccess');
+/* MOBILE MENU */
+window.toggleMenu=function(){const m=document.getElementById('mobileMenu'),b=document.getElementById('navBurger');const open=m.style.display==='block';m.style.display=open?'none':'block';b.style.opacity=open?'1':'.6'}
+window.closeMenu=function(){document.getElementById('mobileMenu').style.display='none';document.getElementById('navBurger').style.opacity='1'}
 
-  } catch (err) {
-    btn.disabled = false; btn.textContent = 'Enviar link de recuperação';
-    msg.className = 'modal-msg error';
-    msg.textContent = 'Erro ao enviar. Verifique o e-mail e tente novamente.';
-  }
-}
+/* MODAL */
+window.openModal=function(){document.getElementById('modalOverlay').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('mc-email').focus(),220)}
+window.closeModal=function(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow=''}
+window.closeModalOutside=function(e){if(e.target===document.getElementById('modalOverlay'))window.closeModal()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')window.closeModal()});
+window.showModalScreen=function(s){['modalForm','modalSuccess','modalForgot','modalForgotSuccess'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none'});const map={form:'modalForm',success:'modalSuccess',forgot:'modalForgot',forgotSuccess:'modalForgotSuccess'};const el=document.getElementById(map[s]);if(el)el.style.display='block';['modalMsg','forgotMsg'].forEach(id=>{const el=document.getElementById(id);if(el)el.className='modal-msg'})}
+</script>
+
+<script type="module">
+import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import{getAuth,createUserWithEmailAndPassword}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import{getFirestore,doc,getDoc,updateDoc}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+const cfg={apiKey:"AIzaSyAwVfYGWzkJ74FaWpeF2LQhRTMlCEyJdFw",authDomain:"xuxa-bet.firebaseapp.com",projectId:"xuxa-bet",storageBucket:"xuxa-bet.firebasestorage.app",messagingSenderId:"825878560179",appId:"1:825878560179:web:9f838f06dc4c2894111fc6"};
+const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);
+window.handleSignup=async function(){const email=document.getElementById('mc-email').value.trim(),pass=document.getElementById('mc-pass').value,code=document.getElementById('mc-code').value.trim().toUpperCase(),msg=document.getElementById('modalMsg'),btn=document.getElementById('modalSubmitBtn');msg.className='modal-msg';if(!email||email.indexOf('@')<1){msg.className='modal-msg error';msg.textContent='Informe um e-mail valido.';return}if(pass.length<8){msg.className='modal-msg error';msg.textContent='A senha precisa ter no minimo 8 caracteres.';return}if(!code){msg.className='modal-msg error';msg.textContent='Informe o codigo de acesso.';return}btn.disabled=true;btn.textContent='Validando codigo...';try{const codeRef=doc(db,'codigos',code),codeSnap=await getDoc(codeRef);if(!codeSnap.exists()){msg.className='modal-msg error';msg.textContent='Codigo invalido.';btn.disabled=false;btn.textContent='Criar conta e acessar';return}const cd=codeSnap.data();if(cd.usado){msg.className='modal-msg error';msg.textContent='Este codigo ja foi utilizado.';btn.disabled=false;btn.textContent='Criar conta e acessar';return}btn.textContent='Criando conta...';const uc=await createUserWithEmailAndPassword(auth,email,pass);await updateDoc(codeRef,{usado:true,uid:uc.user.uid,email:email});window.showModalScreen('success');setTimeout(()=>{window.location.href='https://suregreen.com.br/dashboard/'},2000)}catch(err){btn.disabled=false;btn.textContent='Criar conta e acessar';if(err.code==='auth/email-already-in-use'){msg.className='modal-msg error';msg.textContent='Este e-mail ja possui uma conta.'}else{msg.className='modal-msg error';msg.textContent='Erro: '+err.message}}}
+window.handleForgotPassword=async function(){const email=document.getElementById('forgot-email').value.trim(),msg=document.getElementById('forgotMsg'),btn=document.getElementById('forgotBtn');msg.className='modal-msg';if(!email||email.indexOf('@')<1){msg.className='modal-msg error';msg.textContent='Informe um e-mail valido.';return}btn.disabled=true;btn.textContent='Enviando...';try{const res=await fetch('https://suregreenn.vercel.app/api/send-reset-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});const data=await res.json();if(!res.ok)throw new Error(data.error||'Erro');window.showModalScreen('forgotSuccess')}catch(err){btn.disabled=false;btn.textContent='Enviar link de recuperacao';msg.className='modal-msg error';msg.textContent='Erro ao enviar. Verifique o e-mail.'}}
 </script>
 </body>
 </html>
