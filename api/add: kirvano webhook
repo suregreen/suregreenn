@@ -1,0 +1,166 @@
+const { initializeApp, cert, getApps } = require("firebase-admin/app");
+const { getAuth } = require("firebase-admin/auth");
+const { getFirestore } = require("firebase-admin/firestore");
+const { Resend } = require("resend");
+
+if (!getApps().length) {
+  initializeApp({
+    credential: cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    }),
+  });
+}
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+module.exports = async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "POST") return res.status(405).end();
+
+  try {
+    const payload = req.body;
+    console.log("Kirvano webhook recebido:", JSON.stringify(payload));
+
+    // Kirvano envia status do pagamento — aceita apenas aprovados
+    const status = payload.status || payload.payment_status || "";
+    if (!["approved", "paid", "complete", "completed"].includes(status.toLowerCase())) {
+      console.log("Pagamento não aprovado, ignorando. Status:", status);
+      return res.status(200).json({ ok: true, ignored: true });
+    }
+
+    // Pega o e-mail do payload do Kirvano
+    const email =
+      payload.email ||
+      payload.customer?.email ||
+      payload.buyer?.email ||
+      null;
+
+    if (!email) {
+      console.error("E-mail não encontrado no payload:", JSON.stringify(payload));
+      return res.status(400).json({ error: "E-mail não encontrado no payload" });
+    }
+
+    const auth = getAuth();
+    const db = getFirestore();
+
+    let uid;
+    let isNewUser = false;
+
+    // Tenta buscar usuário existente — se não existir, cria
+    try {
+      const existing = await auth.getUserByEmail(email);
+      uid = existing.uid;
+      console.log("Usuário já existe:", uid);
+    } catch (e) {
+      if (e.code === "auth/user-not-found") {
+        // Gera senha temporária aleatória — usuário vai redefinir pelo link
+        const tempPassword =
+          Math.random().toString(36).slice(2) +
+          Math.random().toString(36).slice(2).toUpperCase() +
+          "!9";
+
+        const newUser = await auth.createUser({ email, password: tempPassword });
+        uid = newUser.uid;
+        isNewUser = true;
+        console.log("Novo usuário criado:", uid);
+      } else {
+        throw e;
+      }
+    }
+
+    // Calcula datas do plano
+    const now = new Date();
+    const trialEnd = new Date(now);
+    trialEnd.setDate(trialEnd.getDate() + 7);
+
+    // Salva/atualiza assinatura no Firestore
+    await db.collection("users").doc(uid).set(
+      {
+        email,
+        subscription: {
+          status: "trial",
+          plan: "monthly",
+          price: 47.90,
+          startedAt: now.toISOString(),
+          trialEndsAt: trialEnd.toISOString(),
+          expiresAt: trialEnd.toISOString(),
+        },
+        updatedAt: now.toISOString(),
+      },
+      { merge: true }
+    );
+
+    console.log("Assinatura salva no Firestore para:", uid);
+
+    // Gera link de login direto (sem precisar de senha)
+    const accessLink = await auth.generateSignInWithEmailLink(email, {
+      url: "https://suregreen.com.br/dashboard/",
+      handleCodeInApp: true,
+    });
+
+    // Envia e-mail de boas-vindas com acesso direto
+    const emailResult = await resend.emails.send({
+      from: "SureGreen <noreply@suregreen.com.br>",
+      to: email,
+      subject: isNewUser
+        ? "Seu acesso ao SureGreen está pronto ✅"
+        : "Sua assinatura SureGreen foi renovada ✅",
+      html: `
+        <!DOCTYPE html><html lang="pt-BR">
+        <body style="margin:0;padding:0;background:#080b0f;font-family:'Inter',Arial,sans-serif">
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#080b0f;padding:40px 20px">
+            <tr><td align="center">
+              <table width="100%" style="max-width:480px;background:#0f1621;border:1px solid rgba(34,240,117,.18);border-radius:16px;overflow:hidden">
+                <tr><td style="background:#0b0f15;padding:24px 32px;border-bottom:1px solid rgba(255,255,255,.06)">
+                  <span style="font-size:16px;font-weight:800;color:#eef2f0">Sure<span style="color:#22f075">Green</span></span>
+                </td></tr>
+                <tr><td style="padding:36px 32px">
+                  <div style="font-size:36px;margin-bottom:16px">🎉</div>
+                  <h1 style="margin:0 0 10px;font-size:22px;font-weight:900;color:#eef2f0">
+                    ${isNewUser ? "Bem-vindo ao SureGreen!" : "Acesso renovado!"}
+                  </h1>
+                  <p style="margin:0 0 8px;font-size:14px;color:#5a7568;line-height:1.7">
+                    ${isNewUser
+                      ? "Seu pagamento foi confirmado. Clique no botão abaixo para acessar o dashboard — sem precisar de senha."
+                      : "Sua assinatura foi renovada com sucesso. Clique para acessar o dashboard."}
+                  </p>
+                  <p style="margin:0 0 24px;font-size:13px;color:#3a5a45;line-height:1.6">
+                    ⏱ Seu trial de 7 dias começa agora. Após esse período, a assinatura mensal de <strong style="color:#eef2f0">R$ 47,90</strong> será cobrada automaticamente.
+                  </p>
+                  <a href="${accessLink}" style="display:inline-block;background:#22f075;color:#020d05;text-decoration:none;padding:14px 32px;border-radius:999px;font-weight:800;font-size:15px">
+                    Acessar o SureGreen →
+                  </a>
+                  <p style="margin:24px 0 0;font-size:12px;color:#2e4038;line-height:1.6">
+                    Este link é único e expira em 24 horas. Não compartilhe.
+                  </p>
+                </td></tr>
+                <tr><td style="background:#0b0f15;padding:18px 32px;border-top:1px solid rgba(255,255,255,.06);text-align:center">
+                  <p style="margin:0;font-size:11px;color:#2e4038">© 2026 SureGreen · <a href="https://suregreen.com.br" style="color:#22f075;text-decoration:none">suregreen.com.br</a></p>
+                </td></tr>
+              </table>
+            </td></tr>
+          </table>
+        </body></html>
+      `,
+    });
+
+    if (emailResult.error) {
+      console.error("Erro ao enviar e-mail de boas-vindas:", emailResult.error);
+      // Não retorna erro — usuário foi criado, só o e-mail falhou
+    } else {
+      console.log("E-mail de acesso enviado para:", email);
+    }
+
+    return res.status(200).json({ ok: true, uid, isNewUser });
+
+  } catch (err) {
+    console.error("Erro no webhook Kirvano:", err.message, err.stack);
+    return res.status(500).json({ error: err.message });
+  }
+};
