@@ -33,7 +33,7 @@ module.exports = async function handler(req, res) {
 
     console.log("Status:", status, "Email:", email);
 
-    if (status !== "APPROVED") {
+    if (!["APPROVED", "PAID", "COMPLETE", "COMPLETED"].includes(status)) {
       return res.status(200).json({ message: "Pagamento nao aprovado: " + status });
     }
 
