@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "API/kirvano-webhook.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/kirvano-webhook",
