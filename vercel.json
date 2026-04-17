@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/kirvano-webhook",
-      "destination": "/API/kirvano-webhook.js"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     }
   ]
 }
