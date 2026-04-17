@@ -1,5 +1,5 @@
 const { initializeApp, cert, getApps } = require("firebase-admin/app");
-const { getFirestore } = require("firebase-admin/firestore");
+const { getFirestore, Timestamp } = require("firebase-admin/firestore");
 const { Resend } = require("resend");
 
 if (!getApps().length) {
@@ -16,7 +16,6 @@ const db = getFirestore();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 module.exports = async function handler(req, res) {
-  // Aceita qualquer método por enquanto
   console.log("Metodo:", req.method);
   console.log("Headers:", JSON.stringify(req.headers));
   console.log("Body:", JSON.stringify(req.body));
@@ -40,6 +39,33 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ error: "Email nao encontrado" });
     }
 
+    // ── Calcula data de expiração (30 dias a partir de hoje) ──
+    const agora = new Date();
+    const expiracao = new Date(agora);
+    expiracao.setDate(expiracao.getDate() + 30);
+    const assinatura_expira = Timestamp.fromDate(expiracao);
+
+    // ── Verifica se esse email já tem um usuário cadastrado ──
+    // Se já existe, só renova a assinatura (não precisa de novo código)
+    const usuariosSnap = await db
+      .collection("usuarios")
+      .where("email", "==", email)
+      .limit(1)
+      .get();
+
+    if (!usuariosSnap.empty) {
+      // Cliente já existe — só renova a data de expiração
+      const usuarioDoc = usuariosSnap.docs[0];
+      await usuarioDoc.ref.update({
+        assinatura_expira: assinatura_expira,
+        renovadoEm: Timestamp.fromDate(agora),
+      });
+
+      console.log("Assinatura renovada para:", email);
+      return res.status(200).json({ success: true, renovacao: true, email });
+    }
+
+    // ── Cliente novo — busca um código disponível ──
     const snap = await db
       .collection("codigos")
       .where("usado", "==", false)
@@ -54,12 +80,26 @@ module.exports = async function handler(req, res) {
     const codigoDoc = snap.docs[0];
     const codigo = codigoDoc.id;
 
+    // Reserva o código (mas NÃO marca usado:true ainda)
+    // usado:true só é marcado quando o cliente criar a conta
     await codigoDoc.ref.update({
       reservado: true,
       email: email,
-      reservadoEm: new Date(),
+      reservadoEm: Timestamp.fromDate(agora),
+      assinatura_expira: assinatura_expira, // salva aqui também para referência
     });
 
+    // ── Salva dados do cliente em usuarios/ (sem uid ainda) ──
+    // O uid real é adicionado quando o cliente criar a conta no cadastro.html
+    await db.collection("usuarios").doc("pendente_" + codigo).set({
+      email: email,
+      codigo: codigo,
+      assinatura_expira: assinatura_expira,
+      criadoEm: Timestamp.fromDate(agora),
+      status: "pendente", // vira "ativo" quando criar a conta
+    });
+
+    // ── Envia e-mail com o código ──
     const htmlEmail =
       "<div style='font-family:sans-serif;max-width:480px;margin:0 auto;background:#0d1117;color:#fff;padding:32px;border-radius:16px'>" +
       "<h2 style='color:#22c55e;text-align:center'>Bem-vindo ao SureGreen!</h2>" +
@@ -82,8 +122,7 @@ module.exports = async function handler(req, res) {
       html: htmlEmail,
     });
 
-    await codigoDoc.ref.update({ usado: true, reservado: false });
-
+    console.log("Codigo enviado:", codigo, "para:", email);
     return res.status(200).json({ success: true, codigo: codigo });
 
   } catch (err) {
