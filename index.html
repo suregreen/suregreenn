@@ -17,20 +17,20 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#06090d;
-  --bg2:#080c12;
-  --card:#0c1119;
-  --card2:#0f1520;
-  --card3:#111826;
-  --g:#1df078;
-  --g2:#16d868;
-  --gdim:rgba(29,240,120,.08);
-  --border:rgba(255,255,255,.08);
-  --border-g:rgba(29,240,120,.22);
-  --border-g2:rgba(29,240,120,.35);
-  --text:#f0f5f1;
-  --text2:#8aab96;
-  --text3:#4d7060;
+  --bg:#f4f7f4;
+  --bg2:#eaf0ea;
+  --card:#ffffff;
+  --card2:#f0f5f0;
+  --card3:#e8f0e8;
+  --g:#16a34a;
+  --g2:#15803d;
+  --gdim:rgba(22,163,74,.08);
+  --border:rgba(0,0,0,.08);
+  --border-g:rgba(22,163,74,.22);
+  --border-g2:rgba(22,163,74,.35);
+  --text:#0f1f0f;
+  --text2:#3d6b4a;
+  --text3:#6b9e78;
   --font:'Inter',sans-serif;
   --mono:'IBM Plex Mono',monospace;
   --r:10px;
@@ -38,14 +38,14 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.015;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:128px}
-nav{position:sticky;top:0;z-index:999;height:68px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;background:rgba(6,9,13,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:128px}
+nav{position:sticky;top:0;z-index:999;height:68px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;background:rgba(244,247,244,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;flex-shrink:0}
 .nav-logo-mark{width:38px;height:38px;border-radius:10px;background:var(--card2);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center}
 .nav-logo-text{font-size:1.3rem;font-weight:800;color:var(--text);letter-spacing:-.5px}
 .nav-logo-text .g{color:var(--g)}
 .nav-mid{display:flex;align-items:center;gap:0;flex:1;justify-content:center}
-.nav-mid a{color:rgba(240,245,241,.5);text-decoration:none;font-size:.88rem;font-weight:500;padding:.4rem .95rem;border-radius:7px;transition:color .15s;white-space:nowrap}
+.nav-mid a{color:rgba(15,31,15,.5);text-decoration:none;font-size:.88rem;font-weight:500;padding:.4rem .95rem;border-radius:7px;transition:color .15s;white-space:nowrap}
 .nav-mid a:hover{color:var(--text)}
 .nav-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
 .nav-login{color:var(--text);text-decoration:none;font-size:.92rem;font-weight:600;padding:.65rem 1.5rem;border-radius:8px;border:1px solid rgba(255,255,255,.15);transition:all .18s;white-space:nowrap}
@@ -227,7 +227,7 @@ h2.dor-h2{text-align:left;margin-bottom:1.1rem;font-size:clamp(1.9rem,3vw,2.6rem
 .bento-title{font-size:1rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:.45rem}
 .bc-a .bento-title{font-size:1.2rem}
 .bento-desc{font-size:.9rem;color:var(--text2);line-height:1.78}
-.calc-live{margin-top:1.2rem;background:#03070f;border:1px solid rgba(29,240,120,.14);border-radius:10px;overflow:hidden}
+.calc-live{margin-top:1.2rem;background:#0f1a12;border:1px solid rgba(29,240,120,.14);border-radius:10px;overflow:hidden}
 .calc-header{display:flex;align-items:center;justify-content:space-between;padding:.55rem .9rem;background:rgba(29,240,120,.04);border-bottom:1px solid rgba(29,240,120,.08)}
 .calc-header-label{font-size:.6rem;font-weight:700;color:var(--g);font-family:var(--mono);letter-spacing:1px;text-transform:uppercase}
 .calc-live-dot{width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g);animation:pulse 2s ease-in-out infinite}
@@ -278,31 +278,31 @@ h2.dor-h2{text-align:left;margin-bottom:1.1rem;font-size:clamp(1.9rem,3vw,2.6rem
 .ir-section{padding:6rem 2.5rem;background:var(--bg);position:relative;overflow:hidden}
 .ir-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 38% 55% at 55% 50%,rgba(29,240,120,.04) 0%,transparent 65%);pointer-events:none}
 .ir-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
-.ir-label{font-size:.68rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem;opacity:.8;display:flex;align-items:center;gap:.5rem}
-.ir-label::before{content:'';width:20px;height:1px;background:#fbbf24;opacity:.5}
+.ir-label{font-size:.68rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--g);margin-bottom:.75rem;opacity:.8;display:flex;align-items:center;gap:.5rem}
+.ir-label::before{content:'';width:20px;height:1px;background:var(--g);opacity:.5}
 h2.ir-h2{text-align:left;font-size:clamp(1.7rem,3vw,2.4rem);margin-bottom:.9rem}
-h2.ir-h2 .accent-y{color:#fbbf24}
+h2.ir-h2 .accent-y{color:var(--g)}
 .ir-desc{font-size:.95rem;color:var(--text2);line-height:1.85;margin-bottom:1.6rem}
 .ir-list{display:flex;flex-direction:column;gap:.7rem}
 .ir-item{display:flex;align-items:flex-start;gap:.65rem}
-.ir-ck{width:18px;height:18px;min-width:18px;border-radius:5px;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);display:flex;align-items:center;justify-content:center;color:#fbbf24;margin-top:.12rem;flex-shrink:0}
+.ir-ck{width:18px;height:18px;min-width:18px;border-radius:5px;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;color:var(--g);margin-top:.12rem;flex-shrink:0}
 .ir-text{font-size:.92rem;color:var(--text2);line-height:1.6}
 .ir-text strong{color:var(--text);font-weight:600}
-.ir-card{background:var(--card);border:1px solid rgba(251,191,36,.15);border-radius:var(--r2);padding:1.5rem;box-shadow:0 0 50px rgba(251,191,36,.04),0 20px 50px rgba(0,0,0,.5)}
+.ir-card{background:#ffffff;border:1px solid var(--border-g);border-radius:var(--r2);padding:1.5rem;box-shadow:0 4px 24px rgba(0,0,0,.08)}
 .ir-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
-.ir-card-title{font-size:.62rem;color:#fbbf24;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.85}
+.ir-card-title{font-size:.62rem;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.85}
 .ir-yr{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.16);color:#fbbf24;font-size:.62rem;font-weight:700;padding:.16rem .55rem;border-radius:5px;font-family:var(--mono)}
 .ir-kpis{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.75rem}
-.ir-kpi{background:#060b12;border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem}
+.ir-kpi{background:#f8faf8;border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem}
 .ir-kpi-l{font-size:.52rem;color:var(--text2);font-weight:500;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.2px}
 .ir-kpi-v{font-size:1rem;font-weight:700;line-height:1;font-family:var(--mono);color:var(--g)}
-.ir-kpi-v.w{color:var(--text)}.ir-kpi-v.y{color:#fbbf24}.ir-kpi-v.r{color:#f87171}
-.ir-tipos{background:#060b12;border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem;margin-bottom:.75rem}
+.ir-kpi-v.w{color:var(--text)}.ir-kpi-v.y{color:var(--g)}.ir-kpi-v.r{color:#dc2626}
+.ir-tipos{background:#f8faf8;border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem;margin-bottom:.75rem}
 .ir-tipos-l{font-size:.52rem;color:var(--text2);font-weight:500;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.2px}
 .ir-tipo{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;padding:.2rem 0}
 .ir-tipo+.ir-tipo{border-top:1px solid rgba(255,255,255,.03)}
-.ir-tipo-n{color:var(--text2)}.ir-tipo-v{color:#fbbf24;font-weight:600;font-family:var(--mono)}
-.ir-export{width:100%;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);color:#fbbf24;border-radius:8px;padding:.75rem;font-family:var(--font);font-size:.8rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.ir-tipo-n{color:var(--text2)}.ir-tipo-v{color:var(--g);font-weight:600;font-family:var(--mono)}
+.ir-export{width:100%;background:var(--gdim);border:1px solid var(--border-g);color:var(--g);border-radius:8px;padding:.75rem;font-family:var(--font);font-size:.8rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.4rem}
 .ir-disc{font-size:.58rem;color:var(--text3);text-align:center;margin-top:.45rem}
 .testi-grid{max-width:1100px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--r2);overflow:hidden;border:1px solid var(--border)}
 .testi{background:var(--card);padding:1.8rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s}
@@ -352,7 +352,7 @@ h2.ir-h2 .accent-y{color:#fbbf24}
 .cta-bottom p{font-size:1rem;color:var(--text2);line-height:1.75;margin-bottom:2.2rem}
 .cta-bottom p strong{color:var(--g)}
 .cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
-footer{background:#030508;border-top:1px solid var(--border);padding:4rem 2.5rem 2.5rem}
+footer{background:#1a2e1a;border-top:1px solid rgba(255,255,255,.08);padding:4rem 2.5rem 2.5rem}
 .foot-wrap{max-width:1200px;margin:0 auto}
 .foot-cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.4fr;gap:3rem;margin-bottom:2.5rem}
 .foot-logo{display:flex;align-items:center;gap:.45rem;text-decoration:none;color:var(--text);font-size:1rem;font-weight:700;margin-bottom:.65rem;letter-spacing:-.2px}
@@ -392,9 +392,9 @@ footer{background:#030508;border-top:1px solid var(--border);padding:4rem 2.5rem
 .modal-msg.error{display:block;background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.18);color:#f87171}
 .modal-field{margin-bottom:.85rem}
 .modal-label{font-size:.68rem;font-weight:600;color:var(--text2);display:block;margin-bottom:.3rem;letter-spacing:.3px;text-transform:uppercase}
-.modal-input{width:100%;background:#070e19;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.65rem .95rem;font-family:var(--font);font-size:.86rem;color:var(--text);outline:none;transition:border-color .18s}
-.modal-input:focus{border-color:var(--border-g);box-shadow:0 0 0 3px rgba(29,240,120,.05)}
-.modal-input::placeholder{color:var(--text3)}
+.modal-input{width:100%;background:#f8faf8;border:1px solid var(--border);border-radius:8px;padding:.65rem .95rem;font-family:var(--font);font-size:.86rem;color:var(--text);outline:none;transition:border-color .18s}
+.modal-input:focus{border-color:var(--border-g);box-shadow:0 0 0 3px rgba(22,163,74,.08)}
+.modal-input::placeholder{color:#9ca3af}
 .modal-btn{width:100%;background:var(--g);color:#020d06;border:none;padding:.95rem;border-radius:8px;font-family:var(--font);font-size:.92rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:.28rem;box-shadow:0 4px 22px rgba(29,240,120,.28)}
 .modal-btn:hover{background:#3dff90;box-shadow:0 6px 36px rgba(29,240,120,.5);transform:translateY(-1px)}
 .modal-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
@@ -442,7 +442,7 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   </button>
 </nav>
 
-<div id="mobileMenu" style="display:none;position:fixed;top:62px;left:0;right:0;z-index:998;background:rgba(6,9,13,.98);border-bottom:1px solid var(--border);padding:1.5rem;backdrop-filter:blur(24px)">
+<div id="mobileMenu" style="display:none;position:fixed;top:62px;left:0;right:0;z-index:998;background:rgba(244,247,244,.98);border-bottom:1px solid var(--border);padding:1.5rem;backdrop-filter:blur(24px)">
   <div style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem">
     <a href="#como-funciona" onclick="closeMenu()" style="color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500;padding:.65rem .2rem;border-bottom:1px solid var(--border)">Como Funciona</a>
     <a href="#funcionalidades" onclick="closeMenu()" style="color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500;padding:.65rem .2rem;border-bottom:1px solid var(--border)">Funcionalidades</a>
@@ -484,7 +484,7 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
       <button class="modal-btn" id="modalSubmitBtn" onclick="handleSignup()">Criar conta e acessar</button>
       <div class="modal-divider"><span>ou</span></div>
       <div class="modal-footer">Já tem conta? <a href="https://suregreen.com.br/dashboard/">Entrar agora</a></div>
-      <div class="modal-footer" style="margin-top:.5rem">Ainda não comprou? <a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank">Começar por R$ 0,99</a></div>
+      <div class="modal-footer" style="margin-top:.5rem">Ainda não assinou? <a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank">Assinar agora</a></div>
       <div class="modal-footer" style="margin-top:.5rem"><a href="#" onclick="showModalScreen('forgot');return false;">Esqueci minha senha</a></div>
     </div>
     <div id="modalSuccess" style="display:none">
@@ -526,13 +526,13 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
       <h1>Pare de perder<br><span class="accent">lucro</span> por falta<br><span class="light">de controle.</span></h1>
       <p class="hero-p">Surebet, Freebet, Super Odd, Duplo Green — o SureGreen <strong>calcula os stakes, registra cada operação e fecha o dia sozinho.</strong> Sem planilha. Sem erro. Controle total.</p>
       <div class="hero-btns">
-        <button class="btn-main" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Testar por R$ 0,99 agora</button>
+        <button class="btn-main" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Começar agora — R$ 37,99/mês</button>
         <button class="btn-out" onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">Ver como funciona</button>
       </div>
       <div class="hero-trust">
-        <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Recupera em 1 operação</span>
-        <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Cancele quando quiser</span>
         <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Acesso imediato</span>
+        <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Cancele quando quiser</span>
+        <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Sem fidelidade</span>
       </div>
     </div>
     <div class="dash-outer reveal" style="transition-delay:.15s">
@@ -695,31 +695,73 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   </div>
 </section>
 
-<section class="sec dark" id="preco">
-  <div class="sec-wrap">
-    <div class="sec-label">Preço</div>
-    <h2>Começa com menos do que<br>uma <span class="accent">única operação perdida</span></h2>
-    <p class="sec-sub">Recupere o investimento na primeira surebet registrada.</p>
-    <div class="price-wrap reveal">
-      <div class="price-card">
-        <div class="price-trial-badge"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>7 dias por R$ 0,99</div>
-        <div class="price-num"><span class="price-rs">R$</span><span class="price-big">29</span><span class="price-dec">,90</span></div>
-        <div class="price-mo">por mes — apos o periodo de teste</div>
-        <hr class="price-divider">
-        <ul class="price-list">
-          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Cálculo automático de stakes para Surebet</li>
-          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Registro de Freebet, Super Odd e Duplo Green</li>
-          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Dashboard financeiro em tempo real</li>
-          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Fechamento diário automático</li>
-          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Declaração IR 2026 automática</li>
-          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>13+ casas de apostas compativeis</li>
-          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Web + Mobile + Tablet</li>
-          <li><div class="pck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Cancele quando quiser, sem multa</li>
-        </ul>
-        <button class="price-btn" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Começar por R$ 0,99 agora</button>
-        <div class="price-fine">Sem fidelidade · Acesso imediato · Cancele quando quiser</div>
+<section style="padding:6rem 2.5rem;background:#f4f7f4" id="preco">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sec-label">Planos</div>
+    <h2>Escolha o plano <span class="accent">ideal para você</span></h2>
+    <p class="sec-sub">Acesso completo à plataforma. Sem taxas ocultas.</p>
+
+    <div style="max-width:780px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem" class="reveal">
+
+      <!-- MENSAL -->
+      <div style="background:#ffffff;border:1px solid #d1d9d1;border-radius:16px;padding:2rem;position:relative;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#6b9e78;margin-bottom:1.2rem">Mensal</div>
+        <div style="display:flex;align-items:flex-start;gap:.25rem;margin-bottom:.25rem">
+          <span style="font-size:.9rem;font-weight:600;color:#6b9e78;padding-top:.55rem">R$</span>
+          <span style="font-size:3.6rem;font-weight:800;color:#0f1f0f;letter-spacing:-2px;line-height:1;font-family:'IBM Plex Mono',monospace">37</span>
+          <span style="font-size:1.8rem;font-weight:600;color:#6b9e78;padding-top:.5rem">,99</span>
+        </div>
+        <div style="font-size:.78rem;color:#6b9e78;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid #e8ede8">por mês · cobrado mensalmente</div>
+        <div style="display:flex;flex-direction:column;gap:.8rem;margin-bottom:1.8rem">
+          <div style="display:flex;align-items:center;gap:.7rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.87rem;color:#3d6b4a">Cálculo automático de stakes</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.87rem;color:#3d6b4a">Freebet, Super Odd e Duplo Green</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.87rem;color:#3d6b4a">Dashboard financeiro em tempo real</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.87rem;color:#3d6b4a">Declaração IR 2026 automática</span></div>
+        </div>
+        <button onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')" style="width:100%;padding:.9rem;background:transparent;border:1.5px solid #16a34a;border-radius:9px;color:#16a34a;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s">Assinar Mensal</button>
+        <div style="text-align:center;font-size:.68rem;color:#9ca3af;margin-top:.65rem">Cancele quando quiser</div>
+      </div>
+
+      <!-- TRIMESTRAL -->
+      <div style="background:#0c1a0c;border:1px solid #1a3a1a;border-radius:16px;padding:2rem;position:relative;box-shadow:0 8px 32px rgba(22,163,74,.15)">
+        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;font-size:.58rem;font-weight:800;padding:.28rem .9rem;border-radius:0 0 7px 7px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap">Melhor Custo-Benefício</div>
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#4ade80;margin-bottom:1.2rem;margin-top:.5rem">Trimestral</div>
+        <div style="font-size:.75rem;color:#4b5563;text-decoration:line-through;margin-bottom:.15rem;font-family:'IBM Plex Mono',monospace">R$ 113,97</div>
+        <div style="display:flex;align-items:flex-start;gap:.25rem;margin-bottom:.25rem">
+          <span style="font-size:.9rem;font-weight:600;color:#9ca3af;padding-top:.55rem">R$</span>
+          <span style="font-size:3.6rem;font-weight:800;color:#ffffff;letter-spacing:-2px;line-height:1;font-family:'IBM Plex Mono',monospace">89</span>
+          <span style="font-size:1.8rem;font-weight:600;color:#4ade80;padding-top:.5rem">,90</span>
+        </div>
+        <div style="font-size:.78rem;color:#9ca3af;margin-bottom:.6rem">à vista · equivale a <strong style="color:#4ade80">R$ 29,96/mês</strong></div>
+        <div style="display:inline-block;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);color:#4ade80;font-size:.68rem;font-weight:600;padding:.22rem .7rem;border-radius:5px;margin-bottom:1.4rem;letter-spacing:.3px">Economia de R$ 24,07</div>
+        <div style="border-top:1px solid rgba(255,255,255,.07);padding-top:1.4rem;display:flex;flex-direction:column;gap:.8rem;margin-bottom:1.8rem">
+          <div style="display:flex;align-items:center;gap:.7rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.87rem;color:#d1fae5">Tudo do plano mensal incluso</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.87rem;color:#d1fae5">3 meses de acesso completo</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.87rem;color:#d1fae5">Prioridade no suporte</span></div>
+          <div style="display:flex;align-items:center;gap:.7rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span style="font-size:.87rem;color:#d1fae5">Melhor custo-benefício</span></div>
+        </div>
+        <button onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')" style="width:100%;padding:.9rem;background:#16a34a;border:none;border-radius:9px;color:#ffffff;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 18px rgba(22,163,74,.35)">Assinar Trimestral — R$ 89,90</button>
+        <div style="text-align:center;font-size:.68rem;color:#6b7280;margin-top:.65rem">Pagamento único · Acesso imediato</div>
+      </div>
+
+    </div>
+
+    <!-- Garantias -->
+    <div style="max-width:780px;margin:1.2rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem">
+      <div style="text-align:center;padding:.9rem 1rem;background:#ffffff;border:1px solid #d1d9d1;border-radius:9px">
+        <div style="font-size:.72rem;font-weight:700;color:#0f1f0f;margin-bottom:.18rem">Acesso Imediato</div>
+        <div style="font-size:.67rem;color:#6b9e78">Após confirmação do pagamento</div>
+      </div>
+      <div style="text-align:center;padding:.9rem 1rem;background:#ffffff;border:1px solid #d1d9d1;border-radius:9px">
+        <div style="font-size:.72rem;font-weight:700;color:#0f1f0f;margin-bottom:.18rem">Sem Fidelidade</div>
+        <div style="font-size:.67rem;color:#6b9e78">Cancele quando quiser</div>
+      </div>
+      <div style="text-align:center;padding:.9rem 1rem;background:#ffffff;border:1px solid #d1d9d1;border-radius:9px">
+        <div style="font-size:.72rem;font-weight:700;color:#0f1f0f;margin-bottom:.18rem">Suporte Incluído</div>
+        <div style="font-size:.67rem;color:#6b9e78">Atendimento por e-mail e chat</div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -730,10 +772,10 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
     <h2>Seus grupos VIP merecem<br>uma ferramenta à altura.</h2>
     <p>Pare de perder dinheiro por falta de controle. O SureGreen é a diferença entre apostar e <strong>lucrar de verdade</strong> — com tudo registrado, calculado e declarado.</p>
     <div class="cta-btns">
-      <button class="btn-main" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Testar por R$ 0,99 agora</button>
+      <button class="btn-main" onclick="window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Começar agora — R$ 37,99/mês</button>
       <button class="btn-out" onclick="openModal()">Já tenho conta</button>
     </div>
-    <p style="margin-top:1rem;font-size:.72rem;color:var(--text3)">Acesso imediato · Sem cartão no teste · Cancele quando quiser</p>
+    <p style="margin-top:1rem;font-size:.72rem;color:var(--text3)">Acesso imediato · Sem fidelidade · Cancele quando quiser</p>
   </div>
 </section>
 
@@ -745,7 +787,7 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
       <div class="faq-item"><button class="faq-btn">Preciso saber programar ou usar planilha para usar o SureGreen?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Não. Se você sabe receber um sinal no grupo e fazer uma aposta, você usa o SureGreen. A interface foi pensada para quem está no celular, com pressa, no meio de um sinal ao vivo.</div></div></div>
       <div class="faq-item"><button class="faq-btn">O SureGreen funciona com qualquer casa de apostas?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Sim. O sistema já tem Bet365, Sportingbet, Betano, Betsul e mais de 13 casas pré-configuradas. Aceita casa personalizada se necessário.</div></div></div>
       <div class="faq-item"><button class="faq-btn">O que acontece se eu cancelar? Perco meu histórico?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Não. Seu histórico fica salvo. Se você voltar, tudo estará lá. Você pode exportar seus dados a qualquer momento, incluindo o relatório de IR, mesmo cancelando.</div></div></div>
-      <div class="faq-item"><button class="faq-btn">Por que só R$ 0,99 no começo?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">Porque queremos que você teste antes de decidir. Em 7 dias você vai registrar suas operações, ver o dashboard em tempo real e sentir a diferença. Apostamos que você vai querer continuar.</div></div></div>
+      <div class="faq-item"><button class="faq-btn">Por que tem plano mensal e trimestral?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">O plano trimestral existe para quem quer economizar. Ao pagar 3 meses de uma vez por R$ 89,90, você economiza R$ 24,07 comparado ao mensal. É a melhor opção para quem já sabe que vai usar o SureGreen regularmente.</div></div></div>
       <div class="faq-item"><button class="faq-btn">O SureGreen realmente declara o IR automaticamente?<div class="faq-ico">+</div></button><div class="faq-body"><div class="faq-txt">O SureGreen organiza e exporta todas as informações no formato compatível com o IRPF da Receita Federal. Você tem o relatório pronto — basta importar ou passar para o seu contador.</div></div></div>
     </div>
   </div>
