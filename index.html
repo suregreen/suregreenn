@@ -842,26 +842,35 @@ window.handleSignup=async function(){
     // 2. Cria o usuário no Firebase Auth
     const uc=await createUserWithEmailAndPassword(auth,email,pass);
 
-    // 3. Busca a data de expiração salva pelo webhook em usuarios/pendente_CODIGO
-    const pendenteRef=doc(db,'usuarios','pendente_'+code);
-    const pendenteSnap=await getDoc(pendenteRef);
-    const assinatura_expira=pendenteSnap.exists()?pendenteSnap.data().assinatura_expira:null;
+    try{
+      // 3. Busca a data de expiração salva pelo webhook em usuarios/pendente_CODIGO
+      const pendenteRef=doc(db,'usuarios','pendente_'+code);
+      const pendenteSnap=await getDoc(pendenteRef);
+      const assinatura_expira=pendenteSnap.exists()?pendenteSnap.data().assinatura_expira:null;
 
-    // 4. Cria o documento definitivo em usuarios/{uid} com a data de expiração
-    await setDoc(doc(db,'usuarios',uc.user.uid),{
-      email:email,
-      codigo:code,
-      uid:uc.user.uid,
-      assinatura_expira:assinatura_expira,
-      criadoEm:new Date(),
-      status:'ativo'
-    });
+      // 4. Cria o documento definitivo em usuarios/{uid} com a data de expiração
+      await setDoc(doc(db,'usuarios',uc.user.uid),{
+        email:email,
+        codigo:code,
+        uid:uc.user.uid,
+        assinatura_expira:assinatura_expira,
+        criadoEm:new Date(),
+        status:'ativo'
+      });
 
-    // 5. Marca o código como usado
-    await updateDoc(codeRef,{usado:true,uid:uc.user.uid,email:email});
+      // 5. Marca o código como usado
+      await updateDoc(codeRef,{usado:true,uid:uc.user.uid,email:email});
 
-    window.showModalScreen('success');
-    setTimeout(()=>{window.location.href='https://suregreen.com.br/dashboard/'},2000);
+      window.showModalScreen('success');
+      setTimeout(()=>{window.location.href='https://suregreen.com.br/dashboard/'},2000);
+
+    }catch(firestoreErr){
+      // Se der erro no Firestore, apaga a conta do Auth para o usuário poder tentar de novo
+      try{ await uc.user.delete(); }catch(e){}
+      btn.disabled=false;btn.textContent='Criar conta e acessar';
+      msg.className='modal-msg error';
+      msg.textContent='Erro ao salvar seus dados. Tente novamente.';
+    }
 
   }catch(err){
     btn.disabled=false;btn.textContent='Criar conta e acessar';
