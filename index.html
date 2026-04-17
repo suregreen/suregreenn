@@ -38,19 +38,8 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-
-/* NOISE */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.015;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:128px}
-
-/* ── NAV ── */
-nav{
-  position:sticky;top:0;z-index:999;
-  height:68px;padding:0 2.5rem;
-  display:flex;align-items:center;justify-content:space-between;gap:2rem;
-  background:rgba(6,9,13,.97);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--border)
-}
+nav{position:sticky;top:0;z-index:999;height:68px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;background:rgba(6,9,13,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;flex-shrink:0}
 .nav-logo-mark{width:38px;height:38px;border-radius:10px;background:var(--card2);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center}
 .nav-logo-text{font-size:1.3rem;font-weight:800;color:var(--text);letter-spacing:-.5px}
@@ -58,126 +47,39 @@ nav{
 .nav-mid{display:flex;align-items:center;gap:0;flex:1;justify-content:center}
 .nav-mid a{color:rgba(240,245,241,.5);text-decoration:none;font-size:.88rem;font-weight:500;padding:.4rem .95rem;border-radius:7px;transition:color .15s;white-space:nowrap}
 .nav-mid a:hover{color:var(--text)}
-/* BIG NAV BUTTONS */
 .nav-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
-.nav-login{
-  color:var(--text);
-  text-decoration:none;
-  font-size:.92rem;font-weight:600;
-  padding:.65rem 1.5rem;
-  border-radius:8px;
-  border:1px solid rgba(255,255,255,.15);
-  transition:all .18s;white-space:nowrap
-}
+.nav-login{color:var(--text);text-decoration:none;font-size:.92rem;font-weight:600;padding:.65rem 1.5rem;border-radius:8px;border:1px solid rgba(255,255,255,.15);transition:all .18s;white-space:nowrap}
 .nav-login:hover{border-color:var(--border-g);color:var(--g)}
-.nav-cta{
-  background:var(--g);color:#020d06;
-  border:none;
-  padding:.68rem 1.65rem;
-  border-radius:8px;
-  font-family:var(--font);font-size:.92rem;font-weight:700;
-  cursor:pointer;transition:all .2s;
-  white-space:nowrap;letter-spacing:-.1px;
-  box-shadow:0 0 22px rgba(29,240,120,.3)
-}
+.nav-cta{background:var(--g);color:#020d06;border:none;padding:.68rem 1.65rem;border-radius:8px;font-family:var(--font);font-size:.92rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:-.1px;box-shadow:0 0 22px rgba(29,240,120,.3)}
 .nav-cta:hover{background:#3dff90;box-shadow:0 0 36px rgba(29,240,120,.55);transform:translateY(-1px)}
-/* Mobile hamburger */
 .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--text2);border-radius:2px;transition:all .25s}
-
-/* ── HERO ── */
-.hero{
-  position:relative;overflow:hidden;
-  min-height:calc(100vh - 68px);
-  display:flex;align-items:center;
-  padding:5rem 2.5rem 6rem
-}
-.hero-ambient{
-  position:absolute;top:45%;left:65%;
-  transform:translate(-50%,-50%);
-  width:560px;height:560px;border-radius:50%;
-  background:radial-gradient(circle,rgba(29,240,120,.065) 0%,transparent 65%);
-  animation:ambientPulse 6s ease-in-out infinite;
-  pointer-events:none;z-index:0
-}
+.hero{position:relative;overflow:hidden;min-height:calc(100vh - 68px);display:flex;align-items:center;padding:5rem 2.5rem 6rem}
+.hero-ambient{position:absolute;top:45%;left:65%;transform:translate(-50%,-50%);width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(29,240,120,.065) 0%,transparent 65%);animation:ambientPulse 6s ease-in-out infinite;pointer-events:none;z-index:0}
 @keyframes ambientPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.1);opacity:1}}
-.hero-grid{
-  position:absolute;inset:0;
-  background-image:linear-gradient(rgba(29,240,120,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(29,240,120,.012) 1px,transparent 1px);
-  background-size:80px 80px;pointer-events:none;
-  mask-image:radial-gradient(ellipse 70% 70% at 68% 50%,black 0%,transparent 70%);
-  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 68% 50%,black 0%,transparent 70%)
-}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(29,240,120,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(29,240,120,.012) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;mask-image:radial-gradient(ellipse 70% 70% at 68% 50%,black 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 70% 70% at 68% 50%,black 0%,transparent 70%)}
 #particles{position:absolute;inset:0;pointer-events:none;z-index:0}
 .hero-line{position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(29,240,120,.1),transparent)}
-.hero-inner{
-  max-width:1240px;margin:0 auto;width:100%;
-  display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;
-  align-items:center;position:relative;z-index:1
-}
-
-/* hero left */
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:.45rem;
-  border:1px solid var(--border-g);
-  background:rgba(29,240,120,.05);
-  color:var(--g);font-size:.7rem;font-weight:600;
-  padding:.35rem .95rem;border-radius:6px;
-  margin-bottom:1.6rem;letter-spacing:.6px;text-transform:uppercase
-}
+.hero-inner{max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--border-g);background:rgba(29,240,120,.05);color:var(--g);font-size:.7rem;font-weight:600;padding:.35rem .95rem;border-radius:6px;margin-bottom:1.6rem;letter-spacing:.6px;text-transform:uppercase}
 .bdot{width:5px;height:5px;background:var(--g);border-radius:50%;animation:pulse 2.2s ease-in-out infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.6)}}
-
-/* TYPOGRAPHY SYSTEM — all Inter, no curves */
-h1{
-  font-family:var(--font);
-  font-size:clamp(2.6rem,5vw,4rem);
-  font-weight:800;
-  line-height:1.06;
-  letter-spacing:-1.5px;
-  margin-bottom:1.4rem;
-  color:var(--text)
-}
+h1{font-family:var(--font);font-size:clamp(2.6rem,5vw,4rem);font-weight:800;line-height:1.06;letter-spacing:-1.5px;margin-bottom:1.4rem;color:var(--text)}
 h1 .accent{color:var(--g)}
 h1 .light{font-weight:300;color:rgba(237,242,238,.55)}
-
 .hero-p{font-size:1.1rem;color:var(--text2);line-height:1.85;max-width:430px;margin-bottom:2.2rem;font-weight:400}
 .hero-p strong{color:rgba(240,245,241,.85);font-weight:600}
-
 .hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-bottom:2rem}
-.btn-main{
-  background:var(--g);color:#020d06;
-  border:none;padding:1.05rem 2.2rem;
-  border-radius:8px;
-  font-family:var(--font);font-size:1rem;font-weight:700;
-  cursor:pointer;transition:all .2s;
-  box-shadow:0 4px 24px rgba(29,240,120,.3);
-  letter-spacing:-.2px;white-space:nowrap
-}
+.btn-main{background:var(--g);color:#020d06;border:none;padding:1.05rem 2.2rem;border-radius:8px;font-family:var(--font);font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 24px rgba(29,240,120,.3);letter-spacing:-.2px;white-space:nowrap}
 .btn-main:hover{background:#3dff90;box-shadow:0 6px 36px rgba(29,240,120,.55);transform:translateY(-2px)}
-.btn-out{
-  background:transparent;color:rgba(240,245,241,.65);
-  border:1px solid rgba(255,255,255,.15);
-  padding:1.05rem 1.8rem;border-radius:8px;
-  font-family:var(--font);font-size:1rem;font-weight:500;
-  cursor:pointer;transition:all .2s;white-space:nowrap
-}
+.btn-out{background:transparent;color:rgba(240,245,241,.65);border:1px solid rgba(255,255,255,.15);padding:1.05rem 1.8rem;border-radius:8px;font-family:var(--font);font-size:1rem;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-out:hover{border-color:var(--border-g);color:var(--text)}
-
 .hero-trust{display:flex;flex-wrap:wrap;gap:1rem}
 .trust-i{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text3);font-weight:500}
 .trust-i svg{color:var(--g);flex-shrink:0}
-
-/* ── DASHBOARD MOCKUP ── */
 .dash-outer{position:relative;padding:1rem 0 1rem .5rem}
 .dash-glow{position:absolute;top:5%;right:-10%;width:80%;height:90%;background:radial-gradient(ellipse,rgba(29,240,120,.09) 0%,transparent 65%);pointer-events:none;z-index:0;filter:blur(36px)}
-.dash-browser{
-  position:relative;z-index:1;border-radius:12px;overflow:hidden;
-  border:1px solid rgba(29,240,120,.1);
-  box-shadow:-20px 36px 80px rgba(0,0,0,.9),0 0 70px rgba(29,240,120,.045);
-  transform:perspective(1100px) rotateY(-5deg) rotateX(2.5deg);
-  transform-origin:60% 50%;transition:transform .5s cubic-bezier(.4,0,.2,1)
-}
+.dash-browser{position:relative;z-index:1;border-radius:12px;overflow:hidden;border:1px solid rgba(29,240,120,.1);box-shadow:-20px 36px 80px rgba(0,0,0,.9),0 0 70px rgba(29,240,120,.045);transform:perspective(1100px) rotateY(-5deg) rotateX(2.5deg);transform-origin:60% 50%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
 .dash-outer:hover .dash-browser{transform:perspective(1100px) rotateY(-2deg) rotateX(1deg)}
 .dash-chrome{background:#08101a;border-bottom:1px solid rgba(255,255,255,.05);padding:.5rem .85rem;display:flex;align-items:center;gap:.6rem}
 .dash-chrome-dots{display:flex;gap:.3rem}
@@ -238,176 +140,53 @@ h1 .light{font-weight:300;color:rgba(237,242,238,.55)}
 .hl{font-size:.5rem;color:var(--text3);font-weight:500}
 .hp{background:var(--gdim);border:1px solid var(--border-g);color:var(--g);font-size:.5rem;font-weight:700;padding:.1rem .4rem;border-radius:999px}
 .dash-tag{background:rgba(255,255,255,.02);border:1px solid var(--border);color:var(--text2);font-size:.5rem;font-weight:600;padding:.1rem .4rem;border-radius:999px}
-
-/* ── STATS DIVIDER — premium ── */
 .divider{padding:0;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .divider-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
-.div-item{
-  padding:2.8rem 2rem;text-align:center;
-  position:relative
-}
-.div-item:not(:last-child)::after{
-  content:'';
-  position:absolute;right:0;top:25%;bottom:25%;
-  width:1px;background:var(--border)
-}
-.div-label{
-  font-size:.75rem;font-weight:600;
-  text-transform:uppercase;letter-spacing:2px;
-  color:var(--text3);margin-bottom:.7rem
-}
-.div-val{
-  font-size:3rem;font-weight:800;
-  color:var(--text);letter-spacing:-2px;
-  font-family:var(--mono);line-height:1;
-  margin-bottom:.45rem
-}
+.div-item{padding:2.8rem 2rem;text-align:center;position:relative}
+.div-item:not(:last-child)::after{content:'';position:absolute;right:0;top:25%;bottom:25%;width:1px;background:var(--border)}
+.div-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--text3);margin-bottom:.7rem}
+.div-val{font-size:3rem;font-weight:800;color:var(--text);letter-spacing:-2px;font-family:var(--mono);line-height:1;margin-bottom:.45rem}
 .div-val .unit{font-size:1.5rem;font-weight:600;color:var(--text2);vertical-align:super;margin-right:2px}
 .div-val .accent{color:var(--g)}
 .div-sub{font-size:.85rem;color:var(--text2);font-weight:400;line-height:1.5}
-
-/* ── SECTIONS SHARED ── */
 .sec{padding:6rem 2.5rem}
 .sec.dark{background:var(--bg)}.sec.mid{background:var(--bg2)}
 .sec-wrap{max-width:1200px;margin:0 auto}
-.sec-label{
-  font-size:.72rem;font-weight:600;letter-spacing:3px;
-  text-transform:uppercase;text-align:center;
-  color:var(--g);margin-bottom:.8rem;opacity:.8
-}
-h2{
-  font-family:var(--font);
-  font-size:clamp(2rem,3.5vw,2.8rem);
-  font-weight:800;
-  text-align:center;
-  letter-spacing:-1px;line-height:1.1;
-  margin-bottom:.8rem;color:var(--text)
-}
+.sec-label{font-size:.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;text-align:center;color:var(--g);margin-bottom:.8rem;opacity:.8}
+h2{font-family:var(--font);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:800;text-align:center;letter-spacing:-1px;line-height:1.1;margin-bottom:.8rem;color:var(--text)}
 h2 .accent{color:var(--g)}
-.sec-sub{
-  font-size:1rem;color:var(--text2);
-  text-align:center;max-width:480px;
-  margin:0 auto 3rem;line-height:1.8;font-weight:400
-}
-
-/* ── DOR DO CLIENTE ── */
-.dor-inner{
-  max-width:680px;margin:0 auto;
-  display:flex;flex-direction:column;gap:0
-}
+.sec-sub{font-size:1rem;color:var(--text2);text-align:center;max-width:480px;margin:0 auto 3rem;line-height:1.8;font-weight:400}
+.dor-inner{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:0}
 .dor-section-wrapper{padding:6rem 2.5rem 7rem;background:var(--bg)}
-.dor-label{
-  font-size:.72rem;font-weight:600;letter-spacing:3px;
-  text-transform:uppercase;color:var(--g);
-  margin-bottom:.8rem;opacity:.8;
-  display:flex;align-items:center;gap:.55rem
-}
+.dor-label{font-size:.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--g);margin-bottom:.8rem;opacity:.8;display:flex;align-items:center;gap:.55rem}
 .dor-label::before{content:'';width:20px;height:1px;background:var(--g);opacity:.6}
-h2.dor-h2{
-  text-align:left;margin-bottom:1.1rem;
-  font-size:clamp(1.9rem,3vw,2.6rem)
-}
+h2.dor-h2{text-align:left;margin-bottom:1.1rem;font-size:clamp(1.9rem,3vw,2.6rem)}
 .dor-p{font-size:1rem;color:var(--text2);line-height:1.85;margin-bottom:1.6rem}
 .pain-list{display:flex;flex-direction:column;gap:.55rem}
-.pain-item,.gain-item{
-  display:flex;align-items:flex-start;gap:.75rem;
-  font-size:.95rem;line-height:1.65;
-  opacity:0;transform:translateY(10px);
-  transition:opacity .55s ease, transform .55s ease
-}
+.pain-item,.gain-item{display:flex;align-items:flex-start;gap:.75rem;font-size:.95rem;line-height:1.65;opacity:0;transform:translateY(10px);transition:opacity .55s ease, transform .55s ease}
 .pain-item.anim-in,.gain-item.anim-in{opacity:1;transform:translateY(0)}
 .pain-item{color:var(--text2)}
 .gain-item{color:var(--text2);margin-top:.2rem}
-.pi-dot{
-  width:22px;height:22px;min-width:22px;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.65rem;font-weight:700;
-  margin-top:.15rem;flex-shrink:0
-}
+.pi-dot{width:22px;height:22px;min-width:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-top:.15rem;flex-shrink:0}
 .pi-dot.bad{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.18);color:#f87171}
 .pi-dot.good{background:var(--gdim);border:1px solid var(--border-g);color:var(--g)}
 .gain-item strong{color:var(--text);font-weight:600}
-
-/* ── TIMELINE — sequential number glow ── */
 .timeline-wrap{max-width:1080px;margin:0 auto;position:relative}
 .timeline-nodes{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;position:relative;z-index:2}
-
-/* connector line between numbers */
-.timeline-nodes::before{
-  content:'';position:absolute;
-  top:27px;left:calc(12.5% + 27px);right:calc(12.5% + 27px);
-  height:1px;background:var(--border);z-index:0
-}
-
+.timeline-nodes::before{content:'';position:absolute;top:27px;left:calc(12.5% + 27px);right:calc(12.5% + 27px);height:1px;background:var(--border);z-index:0}
 .tnode{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.2rem}
-
-/* THE NUMBER — starts gray, turns green */
-.tnode-num{
-  width:54px;height:54px;border-radius:50%;
-  background:var(--card2);
-  border:2px solid rgba(255,255,255,.1);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;font-weight:700;
-  color:rgba(255,255,255,.25);
-  font-family:var(--mono);flex-shrink:0;
-  position:relative;z-index:1;
-  transition:background .4s ease, border-color .4s ease, color .4s ease, box-shadow .4s ease
-}
-
-/* ACTIVE = verde */
-.tnode.step-active .tnode-num{
-  background:var(--g);
-  border-color:var(--g);
-  color:#020d06;
-  box-shadow:0 0 0 6px rgba(29,240,120,.15), 0 0 28px rgba(29,240,120,.35)
-}
-
-/* connector line that fills as steps activate */
-.tnode-line{
-  position:absolute;top:27px;
-  left:50%;right:calc(-50% + 0px);
-  height:1px;
-  background:var(--g);
-  transform-origin:left;transform:scaleX(0);
-  transition:transform .5s ease;
-  z-index:0
-}
+.tnode-num{width:54px;height:54px;border-radius:50%;background:var(--card2);border:2px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.25);font-family:var(--mono);flex-shrink:0;position:relative;z-index:1;transition:background .4s ease, border-color .4s ease, color .4s ease, box-shadow .4s ease}
+.tnode.step-active .tnode-num{background:var(--g);border-color:var(--g);color:#020d06;box-shadow:0 0 0 6px rgba(29,240,120,.15), 0 0 28px rgba(29,240,120,.35)}
+.tnode-line{position:absolute;top:27px;left:50%;right:calc(-50% + 0px);height:1px;background:var(--g);transform-origin:left;transform:scaleX(0);transition:transform .5s ease;z-index:0}
 .tnode.step-active .tnode-line{transform:scaleX(1)}
 .tnode:last-child .tnode-line{display:none}
-
-.tnode-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r2);padding:1.4rem 1.1rem;
-  transition:all .3s;width:100%
-}
-.tnode.step-active .tnode-card{
-  border-color:var(--border-g);
-  background:var(--card2)
-}
-.tnode-tag{
-  display:inline-block;font-size:.62rem;font-weight:700;
-  padding:.16rem .55rem;border-radius:4px;
-  background:var(--gdim);border:1px solid var(--border-g);
-  color:var(--g);font-family:var(--mono);
-  margin-bottom:.55rem;letter-spacing:.5px;text-transform:uppercase
-}
+.tnode-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1.4rem 1.1rem;transition:all .3s;width:100%}
+.tnode.step-active .tnode-card{border-color:var(--border-g);background:var(--card2)}
+.tnode-tag{display:inline-block;font-size:.62rem;font-weight:700;padding:.16rem .55rem;border-radius:4px;background:var(--gdim);border:1px solid var(--border-g);color:var(--g);font-family:var(--mono);margin-bottom:.55rem;letter-spacing:.5px;text-transform:uppercase}
 .tnode-title{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.45rem;line-height:1.35}
 .tnode-desc{font-size:.85rem;color:var(--text2);line-height:1.75;font-weight:400}
-
-/* ── PILLARS ── */
-.pillars{
-  max-width:1100px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1px;background:var(--border);
-  border-radius:var(--r2);overflow:hidden;
-  border:1px solid var(--border)
-}
-.pillar{
-  background:var(--card);padding:2rem;
-  display:flex;flex-direction:column;gap:.9rem;
-  position:relative;overflow:hidden;transition:background .2s
-}
+.pillars{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--r2);overflow:hidden;border:1px solid var(--border)}
+.pillar{background:var(--card);padding:2rem;display:flex;flex-direction:column;gap:.9rem;position:relative;overflow:hidden;transition:background .2s}
 .pillar:hover{background:var(--card2)}
 .pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
 .pillar.fin::before{background:linear-gradient(90deg,transparent,#63b3ff,transparent)}
@@ -428,15 +207,8 @@ h2.dor-h2{
 .pillar-item-dot.fin{background:rgba(99,179,255,.08);border:1px solid rgba(99,179,255,.14);color:#63b3ff}
 .pillar-item-dot.op{background:var(--gdim);border:1px solid var(--border-g);color:var(--g)}
 .pillar-item-dot.fiscal{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.14);color:#fbbf24}
-
-/* ── BENTO GRID ── */
 .bento-section{padding:6rem 2.5rem;background:var(--bg2)}
-.bento-grid{
-  max-width:1100px;margin:3rem auto 0;
-  display:grid;grid-template-columns:repeat(12,1fr);gap:1px;
-  background:var(--border-g);border-radius:var(--r2);
-  overflow:hidden;border:1px solid var(--border-g)
-}
+.bento-grid{max-width:1100px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--border-g);border-radius:var(--r2);overflow:hidden;border:1px solid var(--border-g)}
 .bento-cell{background:var(--card2);padding:1.5rem 1.7rem;transition:background .2s;position:relative;overflow:hidden}
 .bento-cell:hover{background:var(--card3)}
 .bento-cell::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .3s}
@@ -455,7 +227,6 @@ h2.dor-h2{
 .bento-title{font-size:1rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:.45rem}
 .bc-a .bento-title{font-size:1.2rem}
 .bento-desc{font-size:.9rem;color:var(--text2);line-height:1.78}
-/* ── LIVE CALCULATOR ── */
 .calc-live{margin-top:1.2rem;background:#03070f;border:1px solid rgba(29,240,120,.14);border-radius:10px;overflow:hidden}
 .calc-header{display:flex;align-items:center;justify-content:space-between;padding:.55rem .9rem;background:rgba(29,240,120,.04);border-bottom:1px solid rgba(29,240,120,.08)}
 .calc-header-label{font-size:.6rem;font-weight:700;color:var(--g);font-family:var(--mono);letter-spacing:1px;text-transform:uppercase}
@@ -478,8 +249,6 @@ h2.dor-h2{
 .calc-result-label{font-size:.7rem;font-weight:700;color:var(--text);font-family:var(--mono)}
 .calc-result-val{font-size:1rem;font-weight:800;color:var(--g);font-family:var(--mono);letter-spacing:-.5px}
 .calc-check{width:18px;height:18px;border-radius:50%;background:var(--g);color:#020d06;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;margin-left:.5rem;flex-shrink:0}
-
-/* ── DASHBOARD OPS TABLE (hero) ── */
 .ops-table{width:100%;border-collapse:collapse;font-size:.5rem;font-family:var(--mono)}
 .ops-table th{text-align:left;color:var(--text3);font-weight:600;padding:.28rem .5rem;border-bottom:1px solid rgba(255,255,255,.04);letter-spacing:.3px;text-transform:uppercase}
 .ops-table td{padding:.3rem .5rem;border-bottom:1px solid rgba(255,255,255,.025)}
@@ -496,35 +265,16 @@ h2.dor-h2{
 .ops-profit{font-weight:700}
 .ops-profit.pos{color:var(--g)}
 .ops-profit.neg{color:#f87171}
-
-/* ── TOP 1 BADGE ── */
-.top1-bar{
-  background:linear-gradient(90deg,rgba(29,240,120,.06),rgba(29,240,120,.12),rgba(29,240,120,.06));
-  border-bottom:1px solid rgba(29,240,120,.12);
-  padding:.6rem 2.5rem;
-  display:flex;align-items:center;justify-content:center;
-  gap:2.5rem;flex-wrap:wrap
-}
+.top1-bar{background:linear-gradient(90deg,rgba(29,240,120,.06),rgba(29,240,120,.12),rgba(29,240,120,.06));border-bottom:1px solid rgba(29,240,120,.12);padding:.6rem 2.5rem;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap}
 .top1-item{display:flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:600;color:var(--text2);white-space:nowrap}
 .top1-item svg{color:var(--g);flex-shrink:0}
 .top1-item strong{color:var(--text);font-weight:700}
-
-/* ── AUTHORITY SECTION ── */
-.authority{
-  background:var(--bg2);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  padding:3rem 2.5rem
-}
+.authority{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem 2.5rem}
 .authority-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
 .auth-item{text-align:center}
 .auth-num{font-size:2.2rem;font-weight:800;color:var(--text);font-family:var(--mono);letter-spacing:-1.5px;line-height:1}
 .auth-num .g{color:var(--g)}
 .auth-label{font-size:.8rem;color:var(--text2);margin-top:.4rem;line-height:1.4}
-@media(max-width:768px){
-  .authority-inner{grid-template-columns:1fr 1fr;gap:1.5rem}
-  .top1-bar{gap:1rem;padding:.5rem 1rem}
-}
 .ir-section{padding:6rem 2.5rem;background:var(--bg);position:relative;overflow:hidden}
 .ir-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 38% 55% at 55% 50%,rgba(29,240,120,.04) 0%,transparent 65%);pointer-events:none}
 .ir-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
@@ -554,8 +304,6 @@ h2.ir-h2 .accent-y{color:#fbbf24}
 .ir-tipo-n{color:var(--text2)}.ir-tipo-v{color:#fbbf24;font-weight:600;font-family:var(--mono)}
 .ir-export{width:100%;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);color:#fbbf24;border-radius:8px;padding:.75rem;font-family:var(--font);font-size:.8rem;font-weight:700;cursor:default;display:flex;align-items:center;justify-content:center;gap:.4rem}
 .ir-disc{font-size:.58rem;color:var(--text3);text-align:center;margin-top:.45rem}
-
-/* ── TESTIMONIALS ── */
 .testi-grid{max-width:1100px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--r2);overflow:hidden;border:1px solid var(--border)}
 .testi{background:var(--card);padding:1.8rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s}
 .testi:hover{background:var(--card2)}
@@ -565,16 +313,8 @@ h2.ir-h2 .accent-y{color:#fbbf24}
 .testi-av{width:34px;height:34px;min-width:34px;border-radius:50%;background:var(--card2);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;font-size:.95rem}
 .testi-name{font-size:.92rem;font-weight:700;color:var(--text)}
 .testi-role{font-size:.78rem;color:var(--text2)}
-
-/* ── PRICING ── */
 .price-wrap{max-width:460px;margin:0 auto;padding:0 1rem}
-.price-card{
-  background:var(--card);
-  border:1px solid var(--border-g2);
-  border-radius:20px;padding:2.5rem;
-  position:relative;overflow:hidden;
-  box-shadow:0 0 100px rgba(29,240,120,.08),0 32px 70px rgba(0,0,0,.55)
-}
+.price-card{background:var(--card);border:1px solid var(--border-g2);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;box-shadow:0 0 100px rgba(29,240,120,.08),0 32px 70px rgba(0,0,0,.55)}
 .price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:160px;background:radial-gradient(ellipse 100% 80% at 50% 0%,rgba(29,240,120,.06) 0%,transparent 70%);pointer-events:none}
 .price-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent)}
 .price-trial-badge{display:inline-flex;align-items:center;gap:.38rem;background:var(--g);color:#020d06;font-size:.68rem;font-weight:700;padding:.38rem 1rem;border-radius:6px;margin-bottom:1.4rem;letter-spacing:.5px;text-transform:uppercase}
@@ -587,17 +327,9 @@ h2.ir-h2 .accent-y{color:#fbbf24}
 .price-list{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.8rem}
 .price-list li{display:flex;align-items:flex-start;gap:.65rem;font-size:.92rem;color:var(--text2);line-height:1.5}
 .pck{width:17px;height:17px;min-width:17px;border-radius:5px;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
-.price-btn{
-  width:100%;background:var(--g);color:#020d06;border:none;
-  padding:1.1rem;border-radius:8px;
-  font-family:var(--font);font-size:.95rem;font-weight:700;
-  cursor:pointer;transition:all .2s;margin-bottom:.7rem;
-  box-shadow:0 4px 28px rgba(29,240,120,.35)
-}
+.price-btn{width:100%;background:var(--g);color:#020d06;border:none;padding:1.1rem;border-radius:8px;font-family:var(--font);font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;margin-bottom:.7rem;box-shadow:0 4px 28px rgba(29,240,120,.35)}
 .price-btn:hover{background:#3dff90;box-shadow:0 8px 44px rgba(29,240,120,.6);transform:translateY(-2px)}
 .price-fine{text-align:center;font-size:.7rem;color:var(--text3)}
-
-/* ── FAQ ── */
 .faq-list{max-width:720px;margin:3rem auto 0;display:flex;flex-direction:column;gap:.35rem}
 .faq-item{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s}
 .faq-item.open{border-color:var(--border-g)}
@@ -607,8 +339,6 @@ h2.ir-h2 .accent-y{color:#fbbf24}
 .faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
 .faq-item.open .faq-body{max-height:300px}
 .faq-txt{padding:0 1.25rem 1.1rem;font-size:.92rem;color:var(--text2);line-height:1.82}
-
-/* ── CTA BOTTOM ── */
 .cta-bottom{padding:7rem 2.5rem;background:var(--bg);position:relative;overflow:hidden;text-align:center}
 .cta-bottom::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 45% 55% at 50% 50%,rgba(29,240,120,.05) 0%,transparent 65%);pointer-events:none}
 .cta-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;pointer-events:none}
@@ -622,8 +352,6 @@ h2.ir-h2 .accent-y{color:#fbbf24}
 .cta-bottom p{font-size:1rem;color:var(--text2);line-height:1.75;margin-bottom:2.2rem}
 .cta-bottom p strong{color:var(--g)}
 .cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
-
-/* ── FOOTER ── */
 footer{background:#030508;border-top:1px solid var(--border);padding:4rem 2.5rem 2.5rem}
 .foot-wrap{max-width:1200px;margin:0 auto}
 .foot-cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.4fr;gap:3rem;margin-bottom:2.5rem}
@@ -645,12 +373,8 @@ footer{background:#030508;border-top:1px solid var(--border);padding:4rem 2.5rem
 .foot-nl-btn:hover{background:#3dff90}
 .foot-bottom{border-top:1px solid var(--border);padding-top:1.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
 .foot-copy{font-size:.7rem;color:var(--text3)}
-
-/* REVEAL */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
 .reveal.visible{opacity:1;transform:none}
-
-/* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .2s}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--card);border:1px solid var(--border-g);border-radius:18px;padding:2rem 1.9rem;width:100%;max-width:400px;position:relative;box-shadow:0 0 80px rgba(29,240,120,.09),0 28px 60px rgba(0,0,0,.7);transform:translateY(16px) scale(.97);transition:transform .22s cubic-bezier(.4,0,.2,1)}
@@ -689,197 +413,14 @@ footer{background:#030508;border-top:1px solid var(--border);padding:4rem 2.5rem
 .modal-code-hint{font-size:.66rem;color:var(--text3);margin-top:.28rem;text-align:center}
 .modal-back{background:none;border:none;color:var(--text2);font-size:.76rem;cursor:pointer;padding:0;margin-bottom:.9rem;display:flex;align-items:center;gap:.28rem;font-family:var(--font);transition:color .15s}
 .modal-back:hover{color:var(--g)}
-
-/* ── RESPONSIVE ── */
-
-/* TABLET — 1024px */
-@media(max-width:1024px){
-  nav{padding:0 1.5rem}
-  .nav-mid{display:none}
-  .hero{padding:3.5rem 1.5rem 4.5rem}
-  .hero-inner{grid-template-columns:1fr;gap:3rem}
-  h1{font-size:2.8rem;letter-spacing:-1.2px}
-  h2{font-size:2rem}
-  .pillars{grid-template-columns:1fr}
-  .ir-inner{grid-template-columns:1fr;gap:3rem}
-  .testi-grid{grid-template-columns:1fr 1fr}
-  .foot-cols{grid-template-columns:1fr 1fr;gap:2rem}
-  .bento-grid{grid-template-columns:1fr 1fr}
-  .bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 1}
-  .timeline-nodes{grid-template-columns:1fr 1fr}
-  .timeline-nodes::before{display:none}
-  .divider-inner{grid-template-columns:repeat(3,1fr)}
-  .dash-browser{transform:none;box-shadow:0 0 0 1px rgba(29,240,120,.07),0 16px 50px rgba(0,0,0,.85)}
-  .sec{padding:5rem 1.5rem}
-  .bento-section{padding:5rem 1.5rem}
-  .ir-section{padding:5rem 1.5rem}
-  .dor-inner{max-width:100%}
-  .hero-p{max-width:100%}
-}
-
-/* MOBILE — 768px */
-@media(max-width:768px){
-  /* NAV */
-  nav{padding:0 1.25rem;height:62px}
-  .nav-burger{display:flex}
-  .nav-mid{display:none!important}
-  .nav-login{display:none}
-  .nav-cta{padding:.6rem 1.25rem;font-size:.85rem}
-  .nav-logo-text{font-size:1.1rem}
-
-  /* HERO */
-  h1{font-size:2.1rem;letter-spacing:-1px;line-height:1.1}
-  h1 .light{font-size:2rem}
-  h2{font-size:1.75rem;letter-spacing:-.5px}
-  .hero{padding:2.5rem 1.25rem 3.5rem;min-height:auto}
-  .hero-inner{gap:2.5rem}
-  .hero-eyebrow{font-size:.65rem;padding:.3rem .8rem}
-  .hero-p{font-size:1rem;margin-bottom:1.8rem}
-  .hero-btns{flex-direction:column;width:100%;gap:.65rem}
-  .btn-main{width:100%;text-align:center;padding:1rem 1.2rem;font-size:.97rem}
-  .btn-out{width:100%;text-align:center;padding:1rem 1.2rem;font-size:.97rem}
-  .hero-trust{gap:.7rem}
-  .trust-i{font-size:.78rem}
-
-  /* DASHBOARD MOCKUP */
-  .dash-outer{padding:.5rem 0}
-  .kpis{grid-template-columns:repeat(2,1fr);gap:.35rem}
-  .auto-strip{flex-wrap:wrap}
-  .auto-item{min-width:calc(50% - .18rem)}
-  .dash-blocks{grid-template-columns:1fr}
-  .ops-table th:nth-child(3),.ops-table td:nth-child(3){display:none}
-
-  /* STATS DIVIDER */
-  .divider-inner{grid-template-columns:1fr}
-  .div-item:not(:last-child)::after{display:none}
-  .div-item{padding:2rem 1.25rem;border-bottom:1px solid var(--border)}
-  .div-item:last-child{border-bottom:none}
-  .div-val{font-size:2.4rem}
-  .div-label{font-size:.7rem}
-  .div-sub{font-size:.82rem}
-
-  /* SECTIONS */
-  .sec{padding:4rem 1.25rem}
-  .bento-section{padding:4rem 1.25rem}
-  .ir-section{padding:4rem 1.25rem}
-  .sec-label{font-size:.68rem}
-  .sec-sub{font-size:.95rem;max-width:100%}
-
-  /* DOR DO CLIENTE */
-  .dor-inner{max-width:100%}
-  h2.dor-h2{font-size:1.75rem;line-height:1.15}
-  .dor-p{font-size:.92rem}
-  .pain-item,.gain-item{font-size:.9rem;gap:.6rem}
-  .pi-dot{width:20px;height:20px;min-width:20px;font-size:.6rem}
-
-  /* TIMELINE — 1 coluna no mobile */
-  .timeline-nodes{grid-template-columns:1fr;gap:1rem}
-  .timeline-nodes::before{display:none}
-  .tnode{flex-direction:row;text-align:left;gap:1rem;align-items:flex-start}
-  .tnode-num{width:44px;height:44px;min-width:44px;font-size:.85rem;border-radius:50%}
-  .tnode-card{padding:1rem}
-  .tnode-tag{font-size:.55rem}
-  .tnode-title{font-size:.88rem}
-  .tnode-desc{font-size:.8rem}
-
-  /* PILARES */
-  .pillars{grid-template-columns:1fr;border-radius:12px}
-  .pillar{padding:1.5rem}
-  .pillar-title{font-size:.95rem}
-  .pillar-desc{font-size:.85rem}
-  .pillar-item{font-size:.83rem}
-
-  /* BENTO */
-  .bento-grid{grid-template-columns:1fr;border-radius:12px}
-  .bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 1;grid-row:span 1}
-  .bento-cell{padding:1.3rem 1.4rem}
-  .bento-title{font-size:.95rem}
-  .bc-a .bento-title{font-size:1rem}
-  .bento-desc{font-size:.85rem}
-  .calc-input-val{font-size:1.35rem}
-
-  /* IR SECTION */
-  .ir-inner{grid-template-columns:1fr;gap:2.5rem}
-  h2.ir-h2{font-size:1.75rem}
-  .ir-desc{font-size:.9rem}
-  .ir-text{font-size:.88rem}
-  .ir-kpis{grid-template-columns:1fr 1fr}
-  .ir-kpi-v{font-size:.95rem}
-
-  /* TESTIMONIALS */
-  .testi-grid{grid-template-columns:1fr;border-radius:12px}
-  .testi{padding:1.4rem}
-  .testi-txt{font-size:.9rem}
-
-  /* FOUNDER */
-  .founder-section{padding:4rem 1.25rem!important}
-  blockquote{padding-left:1.1rem!important}
-  blockquote p:first-child{font-size:1.05rem!important}
-  blockquote p{font-size:.9rem!important}
-
-  /* PRICING */
-  .price-wrap{padding:0}
-  .price-card{padding:1.8rem 1.4rem;border-radius:16px}
-  .price-big{font-size:3.5rem}
-  .price-list li{font-size:.88rem}
-  .price-btn{font-size:.95rem;padding:1rem}
-
-  /* CTA BOTTOM */
-  .cta-bottom{padding:5rem 1.25rem}
-  .cta-bottom h2{font-size:1.85rem}
-  .cta-bottom p{font-size:.92rem}
-  .cta-btns{flex-direction:column;align-items:stretch;gap:.65rem}
-  .cta-btns .btn-main,.cta-btns .btn-out{width:100%;text-align:center}
-  .cta-ring{display:none}
-
-  /* FAQ */
-  .faq-list{margin-top:2rem}
-  .faq-btn{font-size:.9rem;padding:.9rem 1rem}
-  .faq-txt{font-size:.88rem;padding:0 1rem 1rem}
-
-  /* FOOTER */
-  .foot-cols{grid-template-columns:1fr;gap:2rem}
-  .foot-bottom{flex-direction:column;gap:.5rem;text-align:center}
-  .foot-desc{font-size:.82rem}
-  footer{padding:3rem 1.25rem 2rem}
-
-  /* DOR SECTION */
-  .dor-section-main{padding:4rem 1.25rem 5rem!important}
-
-  /* FOUNDER SECTION */
-  .founder-section{padding:4rem 1.25rem!important}
-  .founder-section blockquote{padding-left:1rem!important}
-  .founder-section blockquote > p:first-child{font-size:1rem!important;line-height:1.65!important}
-  .founder-section blockquote p{font-size:.9rem!important;line-height:1.85!important}
-  .founder-section > div{padding:0!important}
-
-  /* MODAL */
-  .modal{padding:1.6rem 1.4rem;border-radius:14px}
-  .modal-title{font-size:1.15rem}
-
-  /* MOBILE MENU */
-  #mobileMenu{top:62px}
-}
-
-/* SMALL MOBILE — 400px */
-@media(max-width:400px){
-  h1{font-size:1.85rem}
-  h2{font-size:1.6rem}
-  .nav-logo-text{font-size:1rem}
-  .nav-cta{padding:.55rem 1rem;font-size:.8rem}
-  .price-big{font-size:3rem}
-  .div-val{font-size:2rem}
-  .hero-eyebrow{display:none}
-  .tnode-num{width:38px;height:38px;min-width:38px;font-size:.78rem}
-}
-
+@media(max-width:1024px){nav{padding:0 1.5rem}.nav-mid{display:none}.hero{padding:3.5rem 1.5rem 4.5rem}.hero-inner{grid-template-columns:1fr;gap:3rem}h1{font-size:2.8rem;letter-spacing:-1.2px}h2{font-size:2rem}.pillars{grid-template-columns:1fr}.ir-inner{grid-template-columns:1fr;gap:3rem}.testi-grid{grid-template-columns:1fr 1fr}.foot-cols{grid-template-columns:1fr 1fr;gap:2rem}.bento-grid{grid-template-columns:1fr 1fr}.bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 1}.timeline-nodes{grid-template-columns:1fr 1fr}.timeline-nodes::before{display:none}.divider-inner{grid-template-columns:repeat(3,1fr)}.dash-browser{transform:none;box-shadow:0 0 0 1px rgba(29,240,120,.07),0 16px 50px rgba(0,0,0,.85)}.sec{padding:5rem 1.5rem}.bento-section{padding:5rem 1.5rem}.ir-section{padding:5rem 1.5rem}.dor-inner{max-width:100%}.hero-p{max-width:100%}}
+@media(max-width:768px){nav{padding:0 1.25rem;height:62px}.nav-burger{display:flex}.nav-mid{display:none!important}.nav-login{display:none}.nav-cta{padding:.6rem 1.25rem;font-size:.85rem}.nav-logo-text{font-size:1.1rem}h1{font-size:2.1rem;letter-spacing:-1px;line-height:1.1}h2{font-size:1.75rem;letter-spacing:-.5px}.hero{padding:2.5rem 1.25rem 3.5rem;min-height:auto}.hero-inner{gap:2.5rem}.hero-eyebrow{font-size:.65rem;padding:.3rem .8rem}.hero-p{font-size:1rem;margin-bottom:1.8rem}.hero-btns{flex-direction:column;width:100%;gap:.65rem}.btn-main{width:100%;text-align:center;padding:1rem 1.2rem;font-size:.97rem}.btn-out{width:100%;text-align:center;padding:1rem 1.2rem;font-size:.97rem}.hero-trust{gap:.7rem}.trust-i{font-size:.78rem}.dash-outer{padding:.5rem 0}.kpis{grid-template-columns:repeat(2,1fr);gap:.35rem}.auto-strip{flex-wrap:wrap}.auto-item{min-width:calc(50% - .18rem)}.dash-blocks{grid-template-columns:1fr}.ops-table th:nth-child(3),.ops-table td:nth-child(3){display:none}.divider-inner{grid-template-columns:1fr}.div-item:not(:last-child)::after{display:none}.div-item{padding:2rem 1.25rem;border-bottom:1px solid var(--border)}.div-item:last-child{border-bottom:none}.div-val{font-size:2.4rem}.div-label{font-size:.7rem}.div-sub{font-size:.82rem}.sec{padding:4rem 1.25rem}.bento-section{padding:4rem 1.25rem}.ir-section{padding:4rem 1.25rem}.sec-label{font-size:.68rem}.sec-sub{font-size:.95rem;max-width:100%}.dor-inner{max-width:100%}h2.dor-h2{font-size:1.75rem;line-height:1.15}.dor-p{font-size:.92rem}.pain-item,.gain-item{font-size:.9rem;gap:.6rem}.pi-dot{width:20px;height:20px;min-width:20px;font-size:.6rem}.timeline-nodes{grid-template-columns:1fr;gap:1rem}.timeline-nodes::before{display:none}.tnode{flex-direction:row;text-align:left;gap:1rem;align-items:flex-start}.tnode-num{width:44px;height:44px;min-width:44px;font-size:.85rem;border-radius:50%}.tnode-card{padding:1rem}.tnode-tag{font-size:.55rem}.tnode-title{font-size:.88rem}.tnode-desc{font-size:.8rem}.pillars{grid-template-columns:1fr;border-radius:12px}.pillar{padding:1.5rem}.pillar-title{font-size:.95rem}.pillar-desc{font-size:.85rem}.pillar-item{font-size:.83rem}.bento-grid{grid-template-columns:1fr;border-radius:12px}.bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 1;grid-row:span 1}.bento-cell{padding:1.3rem 1.4rem}.bento-title{font-size:.95rem}.bc-a .bento-title{font-size:1rem}.bento-desc{font-size:.85rem}.calc-input-val{font-size:1.35rem}.ir-inner{grid-template-columns:1fr;gap:2.5rem}h2.ir-h2{font-size:1.75rem}.ir-desc{font-size:.9rem}.ir-text{font-size:.88rem}.ir-kpis{grid-template-columns:1fr 1fr}.ir-kpi-v{font-size:.95rem}.testi-grid{grid-template-columns:1fr;border-radius:12px}.testi{padding:1.4rem}.testi-txt{font-size:.9rem}.price-wrap{padding:0}.price-card{padding:1.8rem 1.4rem;border-radius:16px}.price-big{font-size:3.5rem}.price-list li{font-size:.88rem}.price-btn{font-size:.95rem;padding:1rem}.cta-bottom{padding:5rem 1.25rem}.cta-bottom h2{font-size:1.85rem}.cta-bottom p{font-size:.92rem}.cta-btns{flex-direction:column;align-items:stretch;gap:.65rem}.cta-btns .btn-main,.cta-btns .btn-out{width:100%;text-align:center}.cta-ring{display:none}.faq-list{margin-top:2rem}.faq-btn{font-size:.9rem;padding:.9rem 1rem}.faq-txt{font-size:.88rem;padding:0 1rem 1rem}.foot-cols{grid-template-columns:1fr;gap:2rem}.foot-bottom{flex-direction:column;gap:.5rem;text-align:center}.foot-desc{font-size:.82rem}footer{padding:3rem 1.25rem 2rem}.modal{padding:1.6rem 1.4rem;border-radius:14px}.modal-title{font-size:1.15rem}#mobileMenu{top:62px}}
+@media(max-width:400px){h1{font-size:1.85rem}h2{font-size:1.6rem}.nav-logo-text{font-size:1rem}.nav-cta{padding:.55rem 1rem;font-size:.8rem}.price-big{font-size:3rem}.div-val{font-size:2rem}.hero-eyebrow{display:none}.tnode-num{width:38px;height:38px;min-width:38px;font-size:.78rem}}
 *{box-sizing:border-box!important}
 html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!important}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
     <div class="nav-logo-mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
@@ -1052,28 +593,14 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   </div>
 </section>
 
-<!-- STATS DIVIDER — PREMIUM -->
 <div class="divider">
   <div class="divider-inner">
-    <div class="div-item reveal">
-      <div class="div-label">Lucro registrado hoje</div>
-      <div class="div-val"><span class="unit">R$</span><span id="stat1" data-target="284750" class="accent">0</span></div>
-      <div class="div-sub">pelos usuários da plataforma</div>
-    </div>
-    <div class="div-item reveal" style="transition-delay:.1s">
-      <div class="div-label">Apostadores ativos</div>
-      <div class="div-val"><span id="stat2" data-target="1240" class="accent">0</span></div>
-      <div class="div-sub">usando o SureGreen agora</div>
-    </div>
-    <div class="div-item reveal" style="transition-delay:.2s">
-      <div class="div-label">Taxa de satisfação</div>
-      <div class="div-val"><span id="stat3" data-target="99" class="accent">0</span><span class="unit" style="font-size:1.2rem;vertical-align:baseline;margin-left:2px">%</span></div>
-      <div class="div-sub">dos usuários recomendam</div>
-    </div>
+    <div class="div-item reveal"><div class="div-label">Lucro registrado hoje</div><div class="div-val"><span class="unit">R$</span><span id="stat1" data-target="284750" class="accent">0</span></div><div class="div-sub">pelos usuários da plataforma</div></div>
+    <div class="div-item reveal" style="transition-delay:.1s"><div class="div-label">Apostadores ativos</div><div class="div-val"><span id="stat2" data-target="1240" class="accent">0</span></div><div class="div-sub">usando o SureGreen agora</div></div>
+    <div class="div-item reveal" style="transition-delay:.2s"><div class="div-label">Taxa de satisfação</div><div class="div-val"><span id="stat3" data-target="99" class="accent">0</span><span class="unit" style="font-size:1.2rem;vertical-align:baseline;margin-left:2px">%</span></div><div class="div-sub">dos usuários recomendam</div></div>
   </div>
 </div>
 
-<!-- DOR DO CLIENTE -->
 <section class="dor-section-main" style="padding:7rem 2.5rem 8rem;background:var(--bg)">
   <div class="sec-wrap">
     <div class="dor-inner reveal">
@@ -1090,7 +617,6 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   </div>
 </section>
 
-<!-- COMO FUNCIONA -->
 <section class="sec mid" id="como-funciona">
   <div class="sec-wrap">
     <div class="sec-label">Passo a passo</div>
@@ -1098,186 +624,50 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
     <p class="sec-sub">Quatro passos. A IA cuida do resto.</p>
     <div class="timeline-wrap reveal">
       <div class="timeline-nodes">
-        <div class="tnode" data-step="1">
-          <div class="tnode-num">01</div>
-          <div class="tnode-card">
-            <div class="tnode-tag">Passo 1</div>
-            <div class="tnode-title">Você recebeu o sinal no grupo VIP</div>
-            <div class="tnode-desc">Abra o SureGreen, selecione o tipo: Surebet, Freebet, Super Odd ou Duplo Green. Leva menos de 5 segundos.</div>
-          </div>
-        </div>
-        <div class="tnode" data-step="2">
-          <div class="tnode-num">02</div>
-          <div class="tnode-card">
-            <div class="tnode-tag">Passo 2</div>
-            <div class="tnode-title">A IA calcula tudo automaticamente</div>
-            <div class="tnode-desc">Stakes por casa, margem de lucro garantida, rolamento de freebet — calculado em tempo real. Sem fórmula. Sem erro.</div>
-          </div>
-        </div>
-        <div class="tnode" data-step="3">
-          <div class="tnode-num">03</div>
-          <div class="tnode-card">
-            <div class="tnode-tag">Passo 3</div>
-            <div class="tnode-title">Registre o resultado em 1 clique</div>
-            <div class="tnode-desc">Deu green, red ou duplo green? Um toque e o dashboard atualiza na hora com o lucro ou perda do dia.</div>
-          </div>
-        </div>
-        <div class="tnode" data-step="4">
-          <div class="tnode-num">04</div>
-          <div class="tnode-card">
-            <div class="tnode-tag">Fim do dia</div>
-            <div class="tnode-title">Fechamento automático com resumo completo</div>
-            <div class="tnode-desc">Lucro líquido, freebets ativas, greens do dia, IR 2026 — tudo gerado sozinho. Você só lê o resultado.</div>
-          </div>
-        </div>
+        <div class="tnode" data-step="1"><div class="tnode-num">01</div><div class="tnode-card"><div class="tnode-tag">Passo 1</div><div class="tnode-title">Você recebeu o sinal no grupo VIP</div><div class="tnode-desc">Abra o SureGreen, selecione o tipo: Surebet, Freebet, Super Odd ou Duplo Green. Leva menos de 5 segundos.</div></div></div>
+        <div class="tnode" data-step="2"><div class="tnode-num">02</div><div class="tnode-card"><div class="tnode-tag">Passo 2</div><div class="tnode-title">A IA calcula tudo automaticamente</div><div class="tnode-desc">Stakes por casa, margem de lucro garantida, rolamento de freebet — calculado em tempo real. Sem fórmula. Sem erro.</div></div></div>
+        <div class="tnode" data-step="3"><div class="tnode-num">03</div><div class="tnode-card"><div class="tnode-tag">Passo 3</div><div class="tnode-title">Registre o resultado em 1 clique</div><div class="tnode-desc">Deu green, red ou duplo green? Um toque e o dashboard atualiza na hora com o lucro ou perda do dia.</div></div></div>
+        <div class="tnode" data-step="4"><div class="tnode-num">04</div><div class="tnode-card"><div class="tnode-tag">Fim do dia</div><div class="tnode-title">Fechamento automático com resumo completo</div><div class="tnode-desc">Lucro líquido, freebets ativas, greens do dia, IR 2026 — tudo gerado sozinho. Você só lê o resultado.</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PILARES -->
 <section class="sec dark" id="funcionalidades">
   <div class="sec-wrap">
     <div class="sec-label">O que o SureGreen faz</div>
     <h2>Três pilares que colocam<br>seu lucro no <span class="accent">controle</span></h2>
     <p class="sec-sub">Cada pilar resolve uma parte diferente da dor. Juntos, eliminam a planilha para sempre.</p>
     <div class="pillars reveal">
-      <div class="pillar fin">
-        <div class="pillar-header"><div class="pillar-ico fin"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="pillar-cat fin">Financeiro</div><div class="pillar-title">Controle de Bankroll</div></div></div>
-        <div class="pillar-desc">Dashboard financeiro em tempo real. Veja quanto você tem, apostou e lucrou — sem somar na mão.</div>
-        <div class="pillar-items">
-          <div class="pillar-item"><div class="pillar-item-dot fin"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>ROI por casa, período e tipo</div>
-          <div class="pillar-item"><div class="pillar-item-dot fin"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Gráfico de evolução do lucro</div>
-          <div class="pillar-item"><div class="pillar-item-dot fin"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Meta diária com alerta automático</div>
-        </div>
-      </div>
-      <div class="pillar op">
-        <div class="pillar-header"><div class="pillar-ico op"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="pillar-cat op">Operacional</div><div class="pillar-title">Registro Inteligente</div></div></div>
-        <div class="pillar-desc">Cada sinal do grupo VIP registrado em segundos. Surebet, Freebet, Super Odd, Duplo Green.</div>
-        <div class="pillar-items">
-          <div class="pillar-item"><div class="pillar-item-dot op"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Cálculo automático de stakes por casa</div>
-          <div class="pillar-item"><div class="pillar-item-dot op"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Controle total de freebets e rolamento</div>
-          <div class="pillar-item"><div class="pillar-item-dot op"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Duplo Green detectado e calculado</div>
-        </div>
-      </div>
-      <div class="pillar fiscal">
-        <div class="pillar-header"><div class="pillar-ico fiscal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div><div class="pillar-cat fiscal">Fiscal</div><div class="pillar-title">IR 2026 Automatico</div></div></div>
-        <div class="pillar-desc">Cada operação já vai sendo anotada para o IR. Na hora de declarar, tudo pronto.</div>
-        <div class="pillar-items">
-          <div class="pillar-item"><div class="pillar-item-dot fiscal"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Importação automática no padrão Receita</div>
-          <div class="pillar-item"><div class="pillar-item-dot fiscal"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Separação por tipo: surebet, freebet, etc</div>
-          <div class="pillar-item"><div class="pillar-item-dot fiscal"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Zero retrabalho na declaração</div>
-        </div>
-      </div>
+      <div class="pillar fin"><div class="pillar-header"><div class="pillar-ico fin"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="pillar-cat fin">Financeiro</div><div class="pillar-title">Controle de Bankroll</div></div></div><div class="pillar-desc">Dashboard financeiro em tempo real. Veja quanto você tem, apostou e lucrou — sem somar na mão.</div><div class="pillar-items"><div class="pillar-item"><div class="pillar-item-dot fin"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>ROI por casa, período e tipo</div><div class="pillar-item"><div class="pillar-item-dot fin"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Gráfico de evolução do lucro</div><div class="pillar-item"><div class="pillar-item-dot fin"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Meta diária com alerta automático</div></div></div>
+      <div class="pillar op"><div class="pillar-header"><div class="pillar-ico op"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="pillar-cat op">Operacional</div><div class="pillar-title">Registro Inteligente</div></div></div><div class="pillar-desc">Cada sinal do grupo VIP registrado em segundos. Surebet, Freebet, Super Odd, Duplo Green.</div><div class="pillar-items"><div class="pillar-item"><div class="pillar-item-dot op"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Cálculo automático de stakes por casa</div><div class="pillar-item"><div class="pillar-item-dot op"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Controle total de freebets e rolamento</div><div class="pillar-item"><div class="pillar-item-dot op"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Duplo Green detectado e calculado</div></div></div>
+      <div class="pillar fiscal"><div class="pillar-header"><div class="pillar-ico fiscal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div><div class="pillar-cat fiscal">Fiscal</div><div class="pillar-title">IR 2026 Automatico</div></div></div><div class="pillar-desc">Cada operação já vai sendo anotada para o IR. Na hora de declarar, tudo pronto.</div><div class="pillar-items"><div class="pillar-item"><div class="pillar-item-dot fiscal"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Importação automática no padrão Receita</div><div class="pillar-item"><div class="pillar-item-dot fiscal"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Separação por tipo: surebet, freebet, etc</div><div class="pillar-item"><div class="pillar-item-dot fiscal"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Zero retrabalho na declaração</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- BENTO GRID -->
 <section class="bento-section">
   <div style="max-width:1200px;margin:0 auto">
     <div class="sec-label">Automacoes</div>
     <h2>Cada clique seu dispara<br>uma <span class="accent">cadeia automática</span></h2>
     <p class="sec-sub">Enquanto você aposta, a IA registra, calcula, organiza e já prepara o IR. Ao mesmo tempo.</p>
     <div class="bento-grid reveal">
-      <div class="bento-cell bc-a">
-        <div class="bento-icon g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <span class="bento-tag g">Cálculo em tempo real</span>
-        <div class="bento-title">Você digita o stake. A IA distribui tudo.</div>
-        <div class="bento-desc">Ela calcula quanto apostar em cada casa para lucro garantido — em menos de 1 segundo.</div>
-        <div class="calc-live" id="calcLive">
-          <div class="calc-header">
-            <span class="calc-header-label">SureGreen · Calculadora</span>
-            <span class="calc-live-dot"></span>
-          </div>
-          <div class="calc-input-area">
-            <div class="calc-input-label">Stake total</div>
-            <div class="calc-input-val">
-              <span class="currency">R$</span>
-              <span id="calcStakeDisplay">0</span>
-              <span class="calc-input-cursor" id="calcCursor"></span>
-            </div>
-          </div>
-          <div class="calc-rows">
-            <div class="cr" id="cr1"><span class="cr-label">Bet365 &nbsp;@ 1.88</span><span class="cr-val" id="cv1">—</span></div>
-            <div class="cr" id="cr2"><span class="cr-label">Sportingbet @ 2.12</span><span class="cr-val" id="cv2">—</span></div>
-            <div class="cr" id="cr3"><span class="cr-label">Margem garantida</span><span class="cr-val amber" id="cv3">—</span></div>
-          </div>
-          <div class="calc-result" id="calcResult">
-            <span class="calc-result-label">Lucro garantido</span>
-            <div style="display:flex;align-items:center">
-              <span class="calc-result-val" id="calcProfit">+R$ 18,40</span>
-              <div class="calc-check">✓</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bento-cell bc-b">
-        <div class="bento-icon b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-        <span class="bento-tag b">Registro automatico</span>
-        <div class="bento-title">Operação registrada antes de você fechar a tela</div>
-        <div class="bento-desc">Tipo, casa, stake, odd, resultado, lucro. Nada se perde.</div>
-      </div>
-      <div class="bento-cell bc-c">
-        <div class="bento-icon y"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div>
-        <span class="bento-tag y">IR automatico</span>
-        <div class="bento-title">Cada entrada já vira dado fiscal</div>
-        <div class="bento-desc">A Receita pede. Você já tem.</div>
-      </div>
-      <div class="bento-cell bc-d">
-        <div class="bento-icon g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <span class="bento-tag g">Freebet inteligente</span>
-        <div class="bento-title">Nunca mais perca uma freebet por esquecimento</div>
-        <div class="bento-desc">Rastreia conquista, ativação e uso. Alerta automático.</div>
-      </div>
-      <div class="bento-cell bc-e">
-        <div class="bento-icon b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
-        <span class="bento-tag b">Fechamento diario</span>
-        <div class="bento-title">O resumo do dia aparece sozinho</div>
-        <div class="bento-desc">Lucro, greens, freebets, IR — gerado sem você fazer nada.</div>
-      </div>
+      <div class="bento-cell bc-a"><div class="bento-icon g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="bento-tag g">Cálculo em tempo real</span><div class="bento-title">Você digita o stake. A IA distribui tudo.</div><div class="bento-desc">Ela calcula quanto apostar em cada casa para lucro garantido — em menos de 1 segundo.</div><div class="calc-live" id="calcLive"><div class="calc-header"><span class="calc-header-label">SureGreen · Calculadora</span><span class="calc-live-dot"></span></div><div class="calc-input-area"><div class="calc-input-label">Stake total</div><div class="calc-input-val"><span class="currency">R$</span><span id="calcStakeDisplay">0</span><span class="calc-input-cursor" id="calcCursor"></span></div></div><div class="calc-rows"><div class="cr" id="cr1"><span class="cr-label">Bet365 &nbsp;@ 1.88</span><span class="cr-val" id="cv1">—</span></div><div class="cr" id="cr2"><span class="cr-label">Sportingbet @ 2.12</span><span class="cr-val" id="cv2">—</span></div><div class="cr" id="cr3"><span class="cr-label">Margem garantida</span><span class="cr-val amber" id="cv3">—</span></div></div><div class="calc-result" id="calcResult"><span class="calc-result-label">Lucro garantido</span><div style="display:flex;align-items:center"><span class="calc-result-val" id="calcProfit">+R$ 18,40</span><div class="calc-check">✓</div></div></div></div></div>
+      <div class="bento-cell bc-b"><div class="bento-icon b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><span class="bento-tag b">Registro automatico</span><div class="bento-title">Operação registrada antes de você fechar a tela</div><div class="bento-desc">Tipo, casa, stake, odd, resultado, lucro. Nada se perde.</div></div>
+      <div class="bento-cell bc-c"><div class="bento-icon y"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div><span class="bento-tag y">IR automatico</span><div class="bento-title">Cada entrada já vira dado fiscal</div><div class="bento-desc">A Receita pede. Você já tem.</div></div>
+      <div class="bento-cell bc-d"><div class="bento-icon g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="bento-tag g">Freebet inteligente</span><div class="bento-title">Nunca mais perca uma freebet por esquecimento</div><div class="bento-desc">Rastreia conquista, ativação e uso. Alerta automático.</div></div>
+      <div class="bento-cell bc-e"><div class="bento-icon b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div><span class="bento-tag b">Fechamento diario</span><div class="bento-title">O resumo do dia aparece sozinho</div><div class="bento-desc">Lucro, greens, freebets, IR — gerado sem você fazer nada.</div></div>
     </div>
   </div>
 </section>
 
-<!-- IR 2026 -->
 <section class="ir-section" id="ir2026">
   <div class="ir-inner">
-    <div class="reveal">
-      <div class="ir-label">Exclusivo</div>
-      <h2 class="ir-h2">A única plataforma que já prepara seu <span class="accent-y">IR 2026</span> enquanto voce aposta.</h2>
-      <p class="ir-desc">Apostadores que lucram mais de R$ 2.112 por mês precisam declarar. A maioria não sabe. Ou sabe e sofre para organizar tudo no ano seguinte.</p>
-      <div class="ir-list">
-        <div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Importação automática</strong> no padrão da Receita Federal — sem planilha separada</div></div>
-        <div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Separado por tipo</strong> — surebet, freebet, super odd, duplo green, cada um na categoria correta</div></div>
-        <div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Histórico mensal</strong> — toda a movimentação do ano organizada, pronta para o contador</div></div>
-        <div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Zero retrabalho</strong> — o que você registrou hoje já está sendo contado para o próximo ano</div></div>
-      </div>
-    </div>
-    <div class="reveal" style="transition-delay:.12s">
-      <div class="ir-card">
-        <div class="ir-card-header"><div class="ir-card-title">Declaracao IR — SureGreen Export</div><div class="ir-yr">2026</div></div>
-        <div class="ir-kpis">
-          <div class="ir-kpi"><div class="ir-kpi-l">Lucro tributavel</div><div class="ir-kpi-v y">R$ 8.240</div></div>
-          <div class="ir-kpi"><div class="ir-kpi-l">Operacoes</div><div class="ir-kpi-v w">347</div></div>
-          <div class="ir-kpi"><div class="ir-kpi-l">IR estimado</div><div class="ir-kpi-v r">R$ 2.472</div></div>
-          <div class="ir-kpi"><div class="ir-kpi-l">Lucro liquido</div><div class="ir-kpi-v">R$ 5.768</div></div>
-        </div>
-        <div class="ir-tipos">
-          <div class="ir-tipos-l">Breakdown por tipo</div>
-          <div class="ir-tipo"><span class="ir-tipo-n">Surebets</span><span class="ir-tipo-v">R$ 4.180</span></div>
-          <div class="ir-tipo"><span class="ir-tipo-n">Freebets</span><span class="ir-tipo-v">R$ 2.640</span></div>
-          <div class="ir-tipo"><span class="ir-tipo-n">Super Odds</span><span class="ir-tipo-v">R$ 960</span></div>
-          <div class="ir-tipo"><span class="ir-tipo-n">Duplo Green</span><span class="ir-tipo-v">R$ 460</span></div>
-        </div>
-        <div class="ir-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar para Receita Federal</div>
-        <div class="ir-disc">Formato compativel com IRPF 2026 · Atualizado anualmente</div>
-      </div>
-    </div>
+    <div class="reveal"><div class="ir-label">Exclusivo</div><h2 class="ir-h2">A única plataforma que já prepara seu <span class="accent-y">IR 2026</span> enquanto voce aposta.</h2><p class="ir-desc">Apostadores que lucram mais de R$ 2.112 por mês precisam declarar. A maioria não sabe. Ou sabe e sofre para organizar tudo no ano seguinte.</p><div class="ir-list"><div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Importação automática</strong> no padrão da Receita Federal — sem planilha separada</div></div><div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Separado por tipo</strong> — surebet, freebet, super odd, duplo green, cada um na categoria correta</div></div><div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Histórico mensal</strong> — toda a movimentação do ano organizada, pronta para o contador</div></div><div class="ir-item"><div class="ir-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="ir-text"><strong>Zero retrabalho</strong> — o que você registrou hoje já está sendo contado para o próximo ano</div></div></div></div>
+    <div class="reveal" style="transition-delay:.12s"><div class="ir-card"><div class="ir-card-header"><div class="ir-card-title">Declaracao IR — SureGreen Export</div><div class="ir-yr">2026</div></div><div class="ir-kpis"><div class="ir-kpi"><div class="ir-kpi-l">Lucro tributavel</div><div class="ir-kpi-v y">R$ 8.240</div></div><div class="ir-kpi"><div class="ir-kpi-l">Operacoes</div><div class="ir-kpi-v w">347</div></div><div class="ir-kpi"><div class="ir-kpi-l">IR estimado</div><div class="ir-kpi-v r">R$ 2.472</div></div><div class="ir-kpi"><div class="ir-kpi-l">Lucro liquido</div><div class="ir-kpi-v">R$ 5.768</div></div></div><div class="ir-tipos"><div class="ir-tipos-l">Breakdown por tipo</div><div class="ir-tipo"><span class="ir-tipo-n">Surebets</span><span class="ir-tipo-v">R$ 4.180</span></div><div class="ir-tipo"><span class="ir-tipo-n">Freebets</span><span class="ir-tipo-v">R$ 2.640</span></div><div class="ir-tipo"><span class="ir-tipo-n">Super Odds</span><span class="ir-tipo-v">R$ 960</span></div><div class="ir-tipo"><span class="ir-tipo-n">Duplo Green</span><span class="ir-tipo-v">R$ 460</span></div></div><div class="ir-export"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar para Receita Federal</div><div class="ir-disc">Formato compativel com IRPF 2026 · Atualizado anualmente</div></div></div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section class="sec mid">
   <div class="sec-wrap">
     <div class="sec-label">Depoimentos</div>
@@ -1290,56 +680,21 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   </div>
 </section>
 
-<!-- FOUNDER STORY -->
 <section class="founder-section" style="padding:7rem 2.5rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div style="max-width:720px;margin:0 auto" class="reveal">
-
-    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:2.5rem">
-      <div style="width:38px;height:38px;border-radius:50%;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:var(--g);flex-shrink:0">S</div>
-      <div>
-        <div style="font-size:.88rem;font-weight:700;color:var(--text)">Fundador do SureGreen</div>
-        <div style="font-size:.75rem;color:var(--text3)">Apostador profissional há mais de 5 anos</div>
-      </div>
-    </div>
-
+    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:2.5rem"><div style="width:38px;height:38px;border-radius:50%;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:var(--g);flex-shrink:0">S</div><div><div style="font-size:.88rem;font-weight:700;color:var(--text)">Fundador do SureGreen</div><div style="font-size:.75rem;color:var(--text3)">Apostador profissional há mais de 5 anos</div></div></div>
     <blockquote style="border-left:2px solid var(--g);padding-left:1.6rem;margin:0">
-
-      <p style="font-size:1.2rem;font-weight:600;color:var(--text);line-height:1.7;margin-bottom:1.4rem">
-        "Eu criei o SureGreen depois de anos lidando com um problema que quase todo apostador ignora."
-      </p>
-
-      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1rem">
-        Trabalho com surebets há mais de 5 anos. E quem realmente vive isso sabe: não é só fazer uma aposta. É lidar com freebets, conversões, super odds, duplo green, odds aumentadas — tudo ao mesmo tempo. Várias casas abertas. Vários CPFs operando. Entradas chegando o tempo inteiro.
-      </p>
-
-      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1rem">
-        E no meio de tudo isso, o menor erro custa caro.
-      </p>
-
-      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1.6rem">
-        Porque o problema nunca foi a estratégia — <strong style="color:var(--text)">foi a execução.</strong> Já perdi muito dinheiro em entradas simplesmente por calcular errado ou esquecer de registrar uma operação. São pequenos erros que, ao longo do tempo, <strong style="color:#f87171">viram um prejuízo grande.</strong>
-      </p>
-
-      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1.8rem">
-        Se eu quisesse continuar operando nesse nível, eu precisava de um sistema.
-      </p>
-
-      <div style="display:flex;align-items:flex-start;gap:.85rem;background:var(--gdim);border:1px solid var(--border-g);border-radius:10px;padding:1.1rem 1.4rem;margin-bottom:1.4rem">
-        <div style="width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--g);margin-top:.45rem;flex-shrink:0"></div>
-        <p style="font-size:1rem;font-weight:600;color:var(--text);line-height:1.65;margin:0">
-          "Foi por isso que eu criei o SureGreen — para automatizar tudo aquilo que, por anos, me fez perder dinheiro sem perceber."
-        </p>
-      </div>
-
-      <p style="font-size:.92rem;color:var(--text3);line-height:1.75;font-style:italic">
-        Hoje, cada entrada é calculada, registrada e organizada. Sem planilha. Sem erro. Com controle total.
-      </p>
-
+      <p style="font-size:1.2rem;font-weight:600;color:var(--text);line-height:1.7;margin-bottom:1.4rem">"Eu criei o SureGreen depois de anos lidando com um problema que quase todo apostador ignora."</p>
+      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1rem">Trabalho com surebets há mais de 5 anos. E quem realmente vive isso sabe: não é só fazer uma aposta. É lidar com freebets, conversões, super odds, duplo green, odds aumentadas — tudo ao mesmo tempo. Várias casas abertas. Vários CPFs operando. Entradas chegando o tempo inteiro.</p>
+      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1rem">E no meio de tudo isso, o menor erro custa caro.</p>
+      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1.6rem">Porque o problema nunca foi a estratégia — <strong style="color:var(--text)">foi a execução.</strong> Já perdi muito dinheiro em entradas simplesmente por calcular errado ou esquecer de registrar uma operação. São pequenos erros que, ao longo do tempo, <strong style="color:#f87171">viram um prejuízo grande.</strong></p>
+      <p style="font-size:.97rem;color:var(--text2);line-height:1.95;margin-bottom:1.8rem">Se eu quisesse continuar operando nesse nível, eu precisava de um sistema.</p>
+      <div style="display:flex;align-items:flex-start;gap:.85rem;background:var(--gdim);border:1px solid var(--border-g);border-radius:10px;padding:1.1rem 1.4rem;margin-bottom:1.4rem"><div style="width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--g);margin-top:.45rem;flex-shrink:0"></div><p style="font-size:1rem;font-weight:600;color:var(--text);line-height:1.65;margin:0">"Foi por isso que eu criei o SureGreen — para automatizar tudo aquilo que, por anos, me fez perder dinheiro sem perceber."</p></div>
+      <p style="font-size:.92rem;color:var(--text3);line-height:1.75;font-style:italic">Hoje, cada entrada é calculada, registrada e organizada. Sem planilha. Sem erro. Com controle total.</p>
     </blockquote>
   </div>
 </section>
 
-<!-- PRICING -->
 <section class="sec dark" id="preco">
   <div class="sec-wrap">
     <div class="sec-label">Preço</div>
@@ -1368,7 +723,6 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   </div>
 </section>
 
-<!-- CTA BOTTOM -->
 <section class="cta-bottom">
   <div class="cta-rings"><div class="cta-ring"></div><div class="cta-ring"></div><div class="cta-ring"></div></div>
   <div class="cta-bottom-inner reveal">
@@ -1383,7 +737,6 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="sec mid" id="faq">
   <div class="sec-wrap">
     <div class="sec-label">Duvidas</div>
@@ -1398,44 +751,19 @@ html,body{overflow-x:hidden!important;width:100%!important;max-width:100vw!impor
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="foot-wrap">
     <div class="foot-cols">
-      <div>
-        <a href="#" class="foot-logo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Sure<span class="g">Green</span></a>
-        <div class="foot-desc">A plataforma que transforma o caos de apostas em dados claros, lucro controlado e IR resolvido.</div>
-        <div class="foot-soc">
-          <a href="#" class="fsoc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
-          <a href="#" class="fsoc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 2H3v16c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V2z"/><line x1="7" y1="22" x2="7" y2="13"/><line x1="17" y1="22" x2="17" y2="13"/><line x1="3" y1="13" x2="21" y2="13"/></svg></a>
-        </div>
-      </div>
-      <div>
-        <div class="foot-h">Plataforma</div>
-        <ul class="foot-links"><li><a href="#como-funciona">Como Funciona</a></li><li><a href="#funcionalidades">Funcionalidades</a></li><li><a href="#ir2026">IR 2026</a></li><li><a href="#preco">Preço</a></li><li><a href="https://suregreen.com.br/dashboard/">Acessar Dashboard</a></li></ul>
-      </div>
-      <div>
-        <div class="foot-h">Suporte</div>
-        <ul class="foot-links"><li><a href="#faq">FAQ</a></li><li><a href="#">Central de Ajuda</a></li><li><a href="#">Contato</a></li><li><a href="#">Termos de Uso</a></li><li><a href="#">Privacidade</a></li></ul>
-      </div>
-      <div>
-        <div class="foot-h">Newsletter</div>
-        <div class="foot-nl-desc">Dicas de apostas esportivas e novidades do SureGreen.</div>
-        <div class="foot-nl-row">
-          <input class="foot-nl-in" type="email" placeholder="seu@email.com">
-          <button class="foot-nl-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-        </div>
-      </div>
+      <div><a href="#" class="foot-logo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Sure<span class="g">Green</span></a><div class="foot-desc">A plataforma que transforma o caos de apostas em dados claros, lucro controlado e IR resolvido.</div><div class="foot-soc"><a href="#" class="fsoc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a><a href="#" class="fsoc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 2H3v16c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V2z"/><line x1="7" y1="22" x2="7" y2="13"/><line x1="17" y1="22" x2="17" y2="13"/><line x1="3" y1="13" x2="21" y2="13"/></svg></a></div></div>
+      <div><div class="foot-h">Plataforma</div><ul class="foot-links"><li><a href="#como-funciona">Como Funciona</a></li><li><a href="#funcionalidades">Funcionalidades</a></li><li><a href="#ir2026">IR 2026</a></li><li><a href="#preco">Preço</a></li><li><a href="https://suregreen.com.br/dashboard/">Acessar Dashboard</a></li></ul></div>
+      <div><div class="foot-h">Suporte</div><ul class="foot-links"><li><a href="#faq">FAQ</a></li><li><a href="#">Central de Ajuda</a></li><li><a href="#">Contato</a></li><li><a href="#">Termos de Uso</a></li><li><a href="#">Privacidade</a></li></ul></div>
+      <div><div class="foot-h">Newsletter</div><div class="foot-nl-desc">Dicas de apostas esportivas e novidades do SureGreen.</div><div class="foot-nl-row"><input class="foot-nl-in" type="email" placeholder="seu@email.com"><button class="foot-nl-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div></div>
     </div>
-    <div class="foot-bottom">
-      <div class="foot-copy">© 2026 SureGreen. Todos os direitos reservados.</div>
-      <div class="foot-copy">Não somos uma casa de apostas. Somos uma ferramenta de gestão.</div>
-    </div>
+    <div class="foot-bottom"><div class="foot-copy">© 2026 SureGreen. Todos os direitos reservados.</div><div class="foot-copy">Não somos uma casa de apostas. Somos uma ferramenta de gestão.</div></div>
   </div>
 </footer>
 
 <script>
-/* PARTICLES */
 const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
 let W,H,parts=[];
 function rsz(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight}
@@ -1443,122 +771,34 @@ rsz();window.addEventListener('resize',rsz);
 function mkP(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:-Math.random()*.35-.08,sz:Math.random()*1.2+.3,op:Math.random()*.4+.08,life:0,max:Math.random()*280+180}}
 for(let i=0;i<55;i++)parts.push(mkP());
 (function tick(){ctx.clearRect(0,0,W,H);parts.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;p.life++;const f=p.life<25?p.life/25:p.life>p.max-25?(p.max-p.life)/25:1;ctx.beginPath();ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);ctx.fillStyle=`rgba(29,240,120,${p.op*f})`;ctx.fill();if(p.life>=p.max||p.y<0)parts[i]=mkP()});requestAnimationFrame(tick)})();
-
-/* DASH ANIMATION */
 function animN(el,t,pre,suf,dec){const d=1400,t0=performance.now();(function u(n){const p=Math.min((n-t0)/d,1),e=1-Math.pow(1-p,3),v=e*t;el.textContent=(pre||'')+(dec?v.toFixed(dec):Math.round(v))+(suf||'');if(p<1)requestAnimationFrame(u)})(performance.now())}
 let dA=false;
 function animDash(){if(dA)return;dA=true;animN(document.getElementById('kv1'),312.4,'R$ ','',1);animN(document.getElementById('kv2'),4.3,'','%',1);animN(document.getElementById('kv3'),78,'','%');animN(document.getElementById('kv4'),93.7,'R$ ','',1);document.getElementById('mbf').style.width='78%';document.getElementById('mbp').textContent='78%';document.getElementById('bbf').style.width='63%';document.getElementById('bbp').textContent='63%';}
-
-/* LIVE CALCULATOR ANIMATION */
 function runCalc(){
-  const stakeEl=document.getElementById('calcStakeDisplay');
-  const cursor=document.getElementById('calcCursor');
-  const cr1=document.getElementById('cr1'),cr2=document.getElementById('cr2'),cr3=document.getElementById('cr3');
-  const cv1=document.getElementById('cv1'),cv2=document.getElementById('cv2'),cv3=document.getElementById('cv3');
-  const result=document.getElementById('calcResult');
-
-  // reset
-  [cr1,cr2,cr3].forEach(r=>{r.classList.remove('vis')});
-  result.classList.remove('vis');
-  cv1.textContent='—';cv2.textContent='—';cv3.textContent='—';
-  stakeEl.textContent='0';cursor.style.display='inline-block';
-
-  // type stake value
+  const stakeEl=document.getElementById('calcStakeDisplay'),cursor=document.getElementById('calcCursor'),cr1=document.getElementById('cr1'),cr2=document.getElementById('cr2'),cr3=document.getElementById('cr3'),cv1=document.getElementById('cv1'),cv2=document.getElementById('cv2'),cv3=document.getElementById('cv3'),result=document.getElementById('calcResult');
+  [cr1,cr2,cr3].forEach(r=>{r.classList.remove('vis')});result.classList.remove('vis');cv1.textContent='—';cv2.textContent='—';cv3.textContent='—';stakeEl.textContent='0';cursor.style.display='inline-block';
   const target=500;let current=0;
-  const typeInterval=setInterval(()=>{
-    current=Math.min(current+Math.ceil(target/18),target);
-    stakeEl.textContent=current.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-    if(current>=target){
-      clearInterval(typeInterval);
-      cursor.style.display='none';
-      // show rows one by one
-      setTimeout(()=>{cr1.classList.add('vis');cv1.textContent='R$ 267,50';cv1.className='cr-val';},400);
-      setTimeout(()=>{cr2.classList.add('vis');cv2.textContent='R$ 232,50';cv2.className='cr-val';},800);
-      setTimeout(()=>{cr3.classList.add('vis');cv3.textContent='3.68%';cv3.className='cr-val amber';},1100);
-      setTimeout(()=>{result.classList.add('vis');},1500);
-      // loop after 3.5s
-      setTimeout(()=>runCalc(),4500);
-    }
-  },60);
+  const typeInterval=setInterval(()=>{current=Math.min(current+Math.ceil(target/18),target);stakeEl.textContent=current.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});if(current>=target){clearInterval(typeInterval);cursor.style.display='none';setTimeout(()=>{cr1.classList.add('vis');cv1.textContent='R$ 267,50';cv1.className='cr-val';},400);setTimeout(()=>{cr2.classList.add('vis');cv2.textContent='R$ 232,50';cv2.className='cr-val';},800);setTimeout(()=>{cr3.classList.add('vis');cv3.textContent='3.68%';cv3.className='cr-val amber';},1100);setTimeout(()=>{result.classList.add('vis');},1500);setTimeout(()=>runCalc(),4500);}},60);
 }
 const calcEl=document.getElementById('calcLive');
-if(calcEl){
-  const cObs=new IntersectionObserver(en=>{if(en[0].isIntersecting){setTimeout(runCalc,400);cObs.disconnect()}},{threshold:.4});
-  cObs.observe(calcEl);
-}
-
-/* STATS — premium animated */
+if(calcEl){const cObs=new IntersectionObserver(en=>{if(en[0].isIntersecting){setTimeout(runCalc,400);cObs.disconnect()}},{threshold:.4});cObs.observe(calcEl);}
 let stA=false;
-function animStats(){
-  if(stA)return;stA=true;
-  const s1=document.getElementById('stat1'),s2=document.getElementById('stat2'),s3=document.getElementById('stat3');
-  /* R$ 284.750 formatted */
-  const d=1600,t0=performance.now();
-  (function u(n){const p=Math.min((n-t0)/d,1),e=1-Math.pow(1-p,3);
-    s1.textContent=Math.round(e*284750).toLocaleString('pt-BR');
-    s2.textContent=Math.round(e*1240).toLocaleString('pt-BR');
-    s3.textContent=Math.round(e*99);
-    if(p<1)requestAnimationFrame(u)
-  })(performance.now())
-}
-
-/* TIMELINE — slow sequential, infinite loop */
-function runTimeline(){
-  const nodes=document.querySelectorAll('.tnode');
-  let i=0;
-  // reset all
-  nodes.forEach(n=>n.classList.remove('step-active'));
-  function step(){
-    if(i<nodes.length){
-      nodes[i].classList.add('step-active');
-      i++;
-      setTimeout(step,1800); // 1.8s entre cada passo
-    } else {
-      // pausa de 3s antes de reiniciar
-      setTimeout(()=>{
-        nodes.forEach(n=>n.classList.remove('step-active'));
-        setTimeout(runTimeline,800);
-      },3000);
-    }
-  }
-  setTimeout(step,600);
-}
+function animStats(){if(stA)return;stA=true;const s1=document.getElementById('stat1'),s2=document.getElementById('stat2'),s3=document.getElementById('stat3');const d=1600,t0=performance.now();(function u(n){const p=Math.min((n-t0)/d,1),e=1-Math.pow(1-p,3);s1.textContent=Math.round(e*284750).toLocaleString('pt-BR');s2.textContent=Math.round(e*1240).toLocaleString('pt-BR');s3.textContent=Math.round(e*99);if(p<1)requestAnimationFrame(u)})(performance.now())}
+function runTimeline(){const nodes=document.querySelectorAll('.tnode');let i=0;nodes.forEach(n=>n.classList.remove('step-active'));function step(){if(i<nodes.length){nodes[i].classList.add('step-active');i++;setTimeout(step,1800);}else{setTimeout(()=>{nodes.forEach(n=>n.classList.remove('step-active'));setTimeout(runTimeline,800);},3000);}}setTimeout(step,600);}
 let tlStarted=false;
-
-/* REVEAL OBSERVER */
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');io.unobserve(e.target)})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-/* specific triggers */
 const dObs=new IntersectionObserver(en=>{if(en[0].isIntersecting){animDash();dObs.disconnect()}},{threshold:.25});
 const dEl=document.querySelector('.dash-outer');if(dEl)dObs.observe(dEl);
-
 const sObs=new IntersectionObserver(en=>{if(en[0].isIntersecting){animStats();sObs.disconnect()}},{threshold:.4});
 const sEl=document.querySelector('.divider');if(sEl)sObs.observe(sEl);
-
 const tObs=new IntersectionObserver(en=>{if(en[0].isIntersecting&&!tlStarted){tlStarted=true;runTimeline();}},{threshold:.25});
 const tEl=document.getElementById('como-funciona');if(tEl)tObs.observe(tEl);
-
-/* PAIN LIST — staggered reveal */
-const painObs = new IntersectionObserver(entries => {
-  if(!entries[0].isIntersecting) return;
-  ['pi1','pi2','pi3','pi4'].forEach((id, idx) => {
-    const el = document.getElementById(id);
-    if(el) setTimeout(() => el.classList.add('anim-in'), idx * 320);
-  });
-  painObs.disconnect();
-}, {threshold: 0.3});
-const painList = document.getElementById('painList');
-if(painList) painObs.observe(painList);
-
-/* FAQ */
+const painObs=new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)return;['pi1','pi2','pi3','pi4'].forEach((id,idx)=>{const el=document.getElementById(id);if(el)setTimeout(()=>el.classList.add('anim-in'),idx*320);});painObs.disconnect();},{threshold:0.3});
+const painList=document.getElementById('painList');if(painList)painObs.observe(painList);
 document.querySelectorAll('.faq-btn').forEach(btn=>{btn.addEventListener('click',()=>{const it=btn.parentElement,op=it.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!op)it.classList.add('open')})});
-
-/* MOBILE MENU */
 window.toggleMenu=function(){const m=document.getElementById('mobileMenu'),b=document.getElementById('navBurger');const open=m.style.display==='block';m.style.display=open?'none':'block';b.style.opacity=open?'1':'.6'}
 window.closeMenu=function(){document.getElementById('mobileMenu').style.display='none';document.getElementById('navBurger').style.opacity='1'}
-
-/* MODAL */
 window.openModal=function(){document.getElementById('modalOverlay').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('mc-email').focus(),220)}
 window.closeModal=function(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow=''}
 window.closeModalOutside=function(e){if(e.target===document.getElementById('modalOverlay'))window.closeModal()}
@@ -1569,11 +809,82 @@ window.showModalScreen=function(s){['modalForm','modalSuccess','modalForgot','mo
 <script type="module">
 import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import{getAuth,createUserWithEmailAndPassword}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import{getFirestore,doc,getDoc,updateDoc}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import{getFirestore,doc,getDoc,updateDoc,setDoc}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
 const cfg={apiKey:"AIzaSyAwVfYGWzkJ74FaWpeF2LQhRTMlCEyJdFw",authDomain:"xuxa-bet.firebaseapp.com",projectId:"xuxa-bet",storageBucket:"xuxa-bet.firebasestorage.app",messagingSenderId:"825878560179",appId:"1:825878560179:web:9f838f06dc4c2894111fc6"};
 const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);
-window.handleSignup=async function(){const email=document.getElementById('mc-email').value.trim(),pass=document.getElementById('mc-pass').value,code=document.getElementById('mc-code').value.trim().toUpperCase(),msg=document.getElementById('modalMsg'),btn=document.getElementById('modalSubmitBtn');msg.className='modal-msg';if(!email||email.indexOf('@')<1){msg.className='modal-msg error';msg.textContent='Informe um e-mail valido.';return}if(pass.length<8){msg.className='modal-msg error';msg.textContent='A senha precisa ter no minimo 8 caracteres.';return}if(!code){msg.className='modal-msg error';msg.textContent='Informe o codigo de acesso.';return}btn.disabled=true;btn.textContent='Validando codigo...';try{const codeRef=doc(db,'codigos',code),codeSnap=await getDoc(codeRef);if(!codeSnap.exists()){msg.className='modal-msg error';msg.textContent='Codigo invalido.';btn.disabled=false;btn.textContent='Criar conta e acessar';return}const cd=codeSnap.data();if(cd.usado){msg.className='modal-msg error';msg.textContent='Este codigo ja foi utilizado.';btn.disabled=false;btn.textContent='Criar conta e acessar';return}btn.textContent='Criando conta...';const uc=await createUserWithEmailAndPassword(auth,email,pass);await updateDoc(codeRef,{usado:true,uid:uc.user.uid,email:email});window.showModalScreen('success');setTimeout(()=>{window.location.href='https://suregreen.com.br/dashboard/'},2000)}catch(err){btn.disabled=false;btn.textContent='Criar conta e acessar';if(err.code==='auth/email-already-in-use'){msg.className='modal-msg error';msg.textContent='Este e-mail ja possui uma conta.'}else{msg.className='modal-msg error';msg.textContent='Erro: '+err.message}}}
-window.handleForgotPassword=async function(){const email=document.getElementById('forgot-email').value.trim(),msg=document.getElementById('forgotMsg'),btn=document.getElementById('forgotBtn');msg.className='modal-msg';if(!email||email.indexOf('@')<1){msg.className='modal-msg error';msg.textContent='Informe um e-mail valido.';return}btn.disabled=true;btn.textContent='Enviando...';try{const res=await fetch('https://suregreenn.vercel.app/api/send-reset-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});const data=await res.json();if(!res.ok)throw new Error(data.error||'Erro');window.showModalScreen('forgotSuccess')}catch(err){btn.disabled=false;btn.textContent='Enviar link de recuperacao';msg.className='modal-msg error';msg.textContent='Erro ao enviar. Verifique o e-mail.'}}
+
+window.handleSignup=async function(){
+  const email=document.getElementById('mc-email').value.trim(),
+        pass=document.getElementById('mc-pass').value,
+        code=document.getElementById('mc-code').value.trim().toUpperCase(),
+        msg=document.getElementById('modalMsg'),
+        btn=document.getElementById('modalSubmitBtn');
+
+  msg.className='modal-msg';
+
+  if(!email||email.indexOf('@')<1){msg.className='modal-msg error';msg.textContent='Informe um e-mail valido.';return}
+  if(pass.length<8){msg.className='modal-msg error';msg.textContent='A senha precisa ter no minimo 8 caracteres.';return}
+  if(!code){msg.className='modal-msg error';msg.textContent='Informe o codigo de acesso.';return}
+
+  btn.disabled=true;btn.textContent='Validando codigo...';
+
+  try{
+    // 1. Verifica se o código existe e não foi usado
+    const codeRef=doc(db,'codigos',code);
+    const codeSnap=await getDoc(codeRef);
+    if(!codeSnap.exists()){msg.className='modal-msg error';msg.textContent='Codigo invalido.';btn.disabled=false;btn.textContent='Criar conta e acessar';return}
+    const cd=codeSnap.data();
+    if(cd.usado){msg.className='modal-msg error';msg.textContent='Este codigo ja foi utilizado.';btn.disabled=false;btn.textContent='Criar conta e acessar';return}
+
+    btn.textContent='Criando conta...';
+
+    // 2. Cria o usuário no Firebase Auth
+    const uc=await createUserWithEmailAndPassword(auth,email,pass);
+
+    // 3. Busca a data de expiração salva pelo webhook em usuarios/pendente_CODIGO
+    const pendenteRef=doc(db,'usuarios','pendente_'+code);
+    const pendenteSnap=await getDoc(pendenteRef);
+    const assinatura_expira=pendenteSnap.exists()?pendenteSnap.data().assinatura_expira:null;
+
+    // 4. Cria o documento definitivo em usuarios/{uid} com a data de expiração
+    await setDoc(doc(db,'usuarios',uc.user.uid),{
+      email:email,
+      codigo:code,
+      uid:uc.user.uid,
+      assinatura_expira:assinatura_expira,
+      criadoEm:new Date(),
+      status:'ativo'
+    });
+
+    // 5. Marca o código como usado
+    await updateDoc(codeRef,{usado:true,uid:uc.user.uid,email:email});
+
+    window.showModalScreen('success');
+    setTimeout(()=>{window.location.href='https://suregreen.com.br/dashboard/'},2000);
+
+  }catch(err){
+    btn.disabled=false;btn.textContent='Criar conta e acessar';
+    if(err.code==='auth/email-already-in-use'){msg.className='modal-msg error';msg.textContent='Este e-mail ja possui uma conta.';}
+    else{msg.className='modal-msg error';msg.textContent='Erro: '+err.message;}
+  }
+};
+
+window.handleForgotPassword=async function(){
+  const email=document.getElementById('forgot-email').value.trim(),msg=document.getElementById('forgotMsg'),btn=document.getElementById('forgotBtn');
+  msg.className='modal-msg';
+  if(!email||email.indexOf('@')<1){msg.className='modal-msg error';msg.textContent='Informe um e-mail valido.';return}
+  btn.disabled=true;btn.textContent='Enviando...';
+  try{
+    const res=await fetch('https://suregreenn.vercel.app/api/send-reset-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const data=await res.json();
+    if(!res.ok)throw new Error(data.error||'Erro');
+    window.showModalScreen('forgotSuccess');
+  }catch(err){
+    btn.disabled=false;btn.textContent='Enviar link de recuperacao';
+    msg.className='modal-msg error';msg.textContent='Erro ao enviar. Verifique o e-mail.';
+  }
+};
 </script>
 </body>
 </html>
