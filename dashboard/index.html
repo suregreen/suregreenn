@@ -9119,7 +9119,7 @@ html, body,
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword, sendPasswordResetEmail, setPersistence, browserLocalPersistence, browserSessionPersistence }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc, onSnapshot, query, orderBy }
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, deleteDoc, onSnapshot, query, orderBy }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -9414,10 +9414,38 @@ window.contaAlterarSenha = function() {
 };
 
 // ── Auth state ──
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth, async user => {
   const ls  = document.getElementById('login-screen');
   const ash = document.getElementById('app-shell');
   if (user) {
+    // ── Verifica expiração da assinatura em usuarios/{uid} ──
+    try {
+      const userDoc = await getDoc(doc(db, 'usuarios', user.uid));
+      if (userDoc.exists()) {
+        const dados = userDoc.data();
+        const expira = dados.assinatura_expira || dados.expira || dados.dataExpiracao || null;
+        if (expira) {
+          const agora = new Date();
+          const dataExpira = expira.toDate ? expira.toDate() : new Date(expira);
+          if (agora > dataExpira) {
+            // Assinatura expirada — desloga e mostra mensagem
+            await signOut(auth);
+            ls.style.display = 'flex';
+            ash.style.display = 'none';
+            const errEl = document.getElementById('login-err') || document.querySelector('.login-err');
+            if (errEl) {
+              errEl.textContent = '⚠ Sua assinatura expirou. Renove para continuar acessando.';
+              errEl.classList.add('show');
+              errEl.style.display = 'block';
+            }
+            return;
+          }
+        }
+      }
+    } catch(e) {
+      console.warn('SureGreen: erro ao verificar assinatura:', e);
+    }
+
     ls.style.display = 'none';
     ash.style.display = 'flex';
     ash.style.flexDirection = 'column';
