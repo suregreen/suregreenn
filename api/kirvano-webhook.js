@@ -39,10 +39,31 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ error: "Email nao encontrado" });
     }
 
-    // ── Calcula data de expiração (30 dias a partir de hoje) ──
+    // ── Detecta o plano comprado e calcula dias de acesso ──
     const agora = new Date();
     const expiracao = new Date(agora);
-    expiracao.setDate(expiracao.getDate() + 30);
+
+    const nomePlano = (
+      (body && body.plan && body.plan.name) ||
+      (body && body.product && body.product.name) ||
+      (body && body.offer && body.offer.name) ||
+      ""
+    ).toLowerCase();
+
+    console.log("Plano detectado:", nomePlano);
+
+    let diasAcesso = 30; // padrao: mensal
+    if (nomePlano.includes("trimestral") || nomePlano.includes("3 meses")) {
+      diasAcesso = 90;
+    } else if (nomePlano.includes("semestral") || nomePlano.includes("6 meses")) {
+      diasAcesso = 180;
+    } else if (nomePlano.includes("anual") || nomePlano.includes("12 meses")) {
+      diasAcesso = 365;
+    }
+
+    console.log("Dias de acesso:", diasAcesso);
+
+    expiracao.setDate(expiracao.getDate() + diasAcesso);
     const assinatura_expira = Timestamp.fromDate(expiracao);
 
     // ── Verifica se esse email já tem um usuário cadastrado ──
@@ -54,15 +75,29 @@ module.exports = async function handler(req, res) {
       .get();
 
     if (!usuariosSnap.empty) {
-      // Cliente já existe — só renova a data de expiração
+      // Cliente já existe — renova a partir da data atual ou do vencimento atual (o que for maior)
       const usuarioDoc = usuariosSnap.docs[0];
+      const dadosAtuais = usuarioDoc.data();
+
+      // Se ainda tem dias restantes, soma a partir do vencimento. Senão, soma a partir de hoje.
+      let baseRenovacao = new Date();
+      if (dadosAtuais.assinatura_expira) {
+        const vencimentoAtual = dadosAtuais.assinatura_expira.toDate();
+        if (vencimentoAtual > baseRenovacao) {
+          baseRenovacao = vencimentoAtual;
+        }
+      }
+      const novaExpiracao = new Date(baseRenovacao);
+      novaExpiracao.setDate(novaExpiracao.getDate() + diasAcesso);
+
       await usuarioDoc.ref.update({
-        assinatura_expira: assinatura_expira,
+        assinatura_expira: Timestamp.fromDate(novaExpiracao),
         renovadoEm: Timestamp.fromDate(agora),
+        plano: nomePlano || "mensal",
       });
 
-      console.log("Assinatura renovada para:", email);
-      return res.status(200).json({ success: true, renovacao: true, email });
+      console.log("Assinatura renovada para:", email, "| Dias:", diasAcesso, "| Expira:", novaExpiracao);
+      return res.status(200).json({ success: true, renovacao: true, email, diasAcesso });
     }
 
     // ── Cliente novo — busca um código disponível ──
