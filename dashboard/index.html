@@ -4972,117 +4972,6 @@ a:hover{color:var(--sg-green-txt)!important;}
   .main-content{margin-left:0!important;}
   .hkpi-row{grid-template-columns:1fr!important;}
 }
-<style id="sg-mobile-master">
-@media (max-width: 768px) {
-  /* ── Layout ── */
-  .shell { flex-direction: column !important; }
-  .sidebar-nav, nav.sidebar-nav {
-    display: none !important; width: 0 !important; min-width: 0 !important;
-  }
-  .main-content {
-    margin-left: 0 !important; width: 100% !important;
-    max-width: 100vw !important; overflow-x: hidden !important;
-  }
-  html, body { overflow-x: hidden !important; background: #04060c !important; }
-
-  /* ── Pages ── */
-  .page, #pg-org, #pg-calc, #pg-hist, #pg-ir, #pg-bk, #pg-conta, #pg-pend {
-    padding: 14px 12px 100px !important;
-    max-width: 100% !important;
-  }
-  #pg-org { gap: 16px !important; }
-
-  /* ── Dashboard KPIs ── */
-  .hkpi-row { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-  .hkpi { padding: 16px 14px !important; border-radius: 14px !important; }
-  .hkpi--lucro .hkpi__val { font-size: 26px !important; }
-  .hkpi__val { font-size: 22px !important; }
-
-  /* ── Dashboard body grid → column ── */
-  .sg-kpis {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-  }
-  .sg-body {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-    width: 100% !important;
-  }
-  .sg-right-col {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  .sg-mini-kpis {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .sg-mini-kpi { padding: 0 10px !important; }
-
-  /* ── Dashboard entries grid ── */
-  #dx-recent-list {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* ── Topbar ── */
-  .sg-topbar {
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-    padding: 12px !important;
-  }
-  .sg-topbar > * { flex-shrink: 0 !important; }
-
-  /* ── Diary ── */
-  .dp-kpis { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-  .dp-kv { font-size: 1.3rem !important; }
-  .dp-layout {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 14px !important;
-  }
-  .dp-side { width: 100% !important; }
-
-  /* ── Analysis KPI cards ── */
-  .hist-kpi-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-  .hk { padding: 16px 14px !important; }
-
-  /* ── Analysis: chart + calendar → column ── */
-  #hv-month > div[style*="display:grid"],
-  #hv-month > div[style*="grid-template-columns"] {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-  }
-  .cal-card { position: static !important; width: 100% !important; }
-
-  /* ── IR page ── */
-  .ir { max-width: 100% !important; }
-
-  /* ── Calculator ── */
-  .co-cards { display: flex !important; flex-direction: column !important; }
-  .co-card { width: 100% !important; min-width: 0 !important; }
-  .co-result.show { display: flex !important; flex-direction: column !important; }
-  .co-panel { width: 100% !important; min-width: 0 !important; }
-
-  /* ── Bankroll ── */
-  .bk-kpi-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-
-  /* ── Mobile nav ── */
-  .mobile-nav {
-    display: flex !important;
-    background: rgba(4,6,12,.98) !important;
-    border-top: 1px solid rgba(255,255,255,0.07) !important;
-  }
-  .mobile-nav-btn { color: rgba(255,255,255,.35) !important; }
-  .mobile-nav-btn.on { color: #4CAF82 !important; }
-  .mobile-nav-btn.on::after { background: #4CAF82 !important; }
-
-  /* ── Cards ── */
-  .card, .sg-card { border-radius: 12px !important; overflow: hidden !important; }
-
-  /* ── Charts ── */
-  canvas { max-width: 100% !important; }
-}
-</style>
 </style>
 <body>
 
@@ -18884,5 +18773,101 @@ html body .ld-modal {
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12) !important; }
 ::-webkit-scrollbar-track { background: transparent !important; }
+</style>
+<style id="sg-mobile-master">
+/* ═══ SUREGREEN MOBILE MASTER — LAST RULE, WINS ALL ═══ */
+@media screen and (max-width: 768px) {
+
+  /* 1. Layout shell */
+  .shell { flex-direction: column !important; }
+  .sidebar-nav { display: none !important; width: 0 !important; min-width: 0 !important; }
+  .main-content {
+    margin-left: 0 !important; padding-left: 0 !important;
+    width: 100% !important; max-width: 100vw !important;
+    overflow-x: hidden !important; box-sizing: border-box !important;
+  }
+  html, body { overflow-x: hidden !important; }
+
+  /* 2. Page padding */
+  .page { padding: 14px 12px 100px !important; }
+  #pg-org, #pg-calc, #pg-hist, #pg-ir, #pg-conta {
+    padding: 14px 12px 100px !important;
+  }
+  #pg-org { gap: 14px !important; }
+
+  /* 3. DASHBOARD — sg-body MUST be column */
+  .sg-body {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 14px !important;
+    grid-template-columns: none !important;
+  }
+  .sg-right-col {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .sg-kpis {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+  .sg-mini-kpis {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  #dx-recent-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 4. KPI hero cards */
+  .hkpi-row {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+  .hkpi { padding: 14px 12px !important; }
+  .hkpi--lucro .hkpi__val { font-size: 26px !important; }
+  .hkpi__val { font-size: 20px !important; }
+
+  /* 5. Topbar */
+  .sg-topbar { flex-wrap: wrap !important; gap: 6px !important; padding: 10px 12px !important; }
+
+  /* 6. Diary */
+  .dp-kpis { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .dp-kv { font-size: 1.3rem !important; }
+  .dp-layout { display: flex !important; flex-direction: column !important; gap: 14px !important; }
+  .dp-side { width: 100% !important; }
+
+  /* 7. Analysis */
+  .hist-kpi-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .hk { padding: 14px 12px !important; }
+
+  /* 8. Calculator */
+  .co-cards { display: flex !important; flex-direction: column !important; }
+  .co-card { width: 100% !important; min-width: 0 !important; }
+  .co-result.show { display: flex !important; flex-direction: column !important; }
+  .co-panel { width: 100% !important; min-width: 0 !important; }
+
+  /* 9. Mobile nav */
+  .mobile-nav {
+    display: flex !important;
+    background: rgba(4,6,12,.98) !important;
+    border-top: 1px solid rgba(255,255,255,0.07) !important;
+  }
+  .mobile-nav-btn { color: rgba(255,255,255,.35) !important; }
+  .mobile-nav-btn.on { color: #4CAF82 !important; }
+  .mobile-nav-btn.on::after { background: #4CAF82 !important; }
+
+  /* 10. Colors */
+  html body { color: #eef6ff !important; background: #04060c !important; }
+
+  /* 11. Bankroll */
+  .bk-kpi-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+
+  /* 12. General */
+  .sg-card { border-radius: 12px !important; }
+  canvas { max-width: 100% !important; }
+}
 </style>
 </html>
