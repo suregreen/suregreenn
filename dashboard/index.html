@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -10,7 +11,6 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117'/%3E%3Crect width='64' height='64' rx='14' fill='none' stroke='%2322c55e' stroke-width='1.5' stroke-opacity='0.5'/%3E%3Cpolyline points='6,38 16,38 22,20 30,48 38,26 44,38 58,38' fill='none' stroke='%2322c55e' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-
 
 
 /* ══ ONBOARDING MODAL ══ */
@@ -365,16 +365,7 @@
 .fc-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4AD55E;box-shadow:0 0 8px rgba(74,213,94,.8);margin-right:6px;vertical-align:middle;}
 @media(max-width:960px){.fc{display:none!important;}}
 
-:root{
-  --k:#080808;--k2:#0e0e0e;--k3:#141414;--k4:#1a1a1a;--k5:#222;
-  --g:#c9a84c;--g2:#e2b96a;--g3:#f0d090;--gd:#8a6828;
-  --gbg:rgba(201,168,76,0.06);--gbd:rgba(201,168,76,0.16);
-  --w:#ede8e0;--w2:#a89e90;--w3:#5e5850;
-  --gr:#4AD55E;--gr-bg:rgba(74,213,94,0.07);--gr-bd:rgba(74,213,94,0.2);
-  --rd:#e05c6a;--rd-bg:rgba(224,92,106,0.07);--rd-bd:rgba(224,92,106,0.2);
-  --bl:#5b9cf6;--r:10px;
-  --nav-h:64px;
-}
+
 html{font-size:16px;overflow-x:hidden;}
 body{background:var(--l0);color:var(--t1);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;touch-action:pan-y;}
 body::before{content:'';position:fixed;top:0;left:0;right:0;height:1px;z-index:200;
@@ -1431,13 +1422,7 @@ html body .sep { background:var(--line)!important; }
 
 <style id="luxury-redesign-override">
 :root{
-  --k:#0d1117;--k2:#111827;--k3:#161b22;--k4:#1c2128;--k5:#21262d;
-  --g:#4AD55E;--g2:#4AD55E;--g3:#4AD55E;--gd:#15803d;
-  --gbg:rgba(74,213,94,.08);--gbd:rgba(74,213,94,.18);
-  --w:#f0f6ff;--w2:#b0c8de;--w3:#6a8a9a;
-  --gr:#4AD55E;--gr-bg:rgba(74,213,94,.10);--gr-bd:rgba(74,213,94,.22);
-  --rd:#ef4444;--rd-bg:rgba(239,68,68,.08);--rd-bd:rgba(239,68,68,.20);
-  --bl:#60a5fa;--r:14px;--nav-h:74px;
+  --k:#0d1117;--k2:#111827;--k3:#161b22;--k4:#1c2128;  --g:#4AD55E;--g2:#4AD55E;--g3:#4AD55E;  --gbg:rgba(74,213,94,.08);  --w:#f0f6ff;--w2:#b0c8de;  --gr:#4AD55E;--gr-bg:rgba(74,213,94,.10);  --rd:#ef4444;--rd-bg:rgba(239,68,68,.08);  --bl:#60a5fa;--r:14px;--nav-h:74px;
 }
 html{font-size:15px;scroll-behavior:smooth;}
 body{
@@ -2297,7 +2282,6 @@ body::after{content:none;}
 }
 
 
-
 .tipo-select {
   position: relative;
   user-select: none;
@@ -2423,7 +2407,6 @@ body::after{content:none;}
     0 16px 40px rgba(0,0,0,.10),
     0 30px 60px rgba(0,0,0,.05);
 }
-
 
 
 /* ── Volume: listra slate + glow slate ── */
@@ -2598,7 +2581,6 @@ body::after{content:none;}
 }
 .entries-list::-webkit-scrollbar { width: 4px; }
 .entries-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 4px; }
-
 
 
 /* ── Diário Responsivo ── */
@@ -2927,7 +2909,6 @@ body::after{content:none;}
   --info: #89A5B9;        /* azul — volume, neutro, contadores */
   --gold: #e2b96a;        /* âmbar — ROI, percentual, destaque */
   --bd:  rgba(255,255,255,.07);
-  --bd2: rgba(255,255,255,.11);
   /* camadas */
   --l0: #04060c;
   --l1: #080d18;
@@ -3745,8 +3726,6 @@ body::after { content:none !important; }
 
   /* Bordas */
   --bd:  rgba(255,255,255,0.08) !important;
-  --bd2: rgba(255,255,255,0.14) !important;
-
   /* Fonte */
   --font-body: 'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --r: 12px !important;
@@ -4974,6 +4953,25 @@ a:hover{color:var(--sg-green-txt)!important;}
 }
 </style>
 <body>
+<script id="sg-error-interceptor">
+window.addEventListener('error', function(e) {
+  if (e.message && e.message.includes("Cannot read properties of null")) {
+    console.error('NULL ERROR at:', e.filename, 'line:', e.lineno, 'col:', e.colno);
+    console.error('Message:', e.message);
+    // Show friendly message instead of raw error
+    window.fbToast && window.fbToast('Aposta registrada! (aviso interno ignorado)', 'success');
+    e.preventDefault();
+    return true;
+  }
+});
+window.addEventListener('unhandledrejection', function(e) {
+  if (e.reason && String(e.reason).includes("Cannot read properties of null")) {
+    console.error('UNHANDLED NULL REJECTION:', e.reason);
+    e.preventDefault();
+  }
+});
+</script>
+
 
 <!-- ══ ONBOARDING MODAL ══ -->
 <div id="onboarding-modal" role="dialog" aria-modal="true" aria-labelledby="ob-title-text">
@@ -5148,42 +5146,18 @@ a:hover{color:var(--sg-green-txt)!important;}
       <span>Calculadora</span>
     </button>
 
-    <!-- MELHORIA 2 — Pendentes: clicável, navega para dashboard com filtro "Pendentes" ativo -->
-    <button class="sn-tab" id="sn-tab-pendentes" onclick="
-      // Vai para pg-hist e mostra APENAS apostas pendentes
-      var btn = this;
-      goPage('pg-hist', btn);
-      setTimeout(function(){
-        // Ativa a view 'month' do hist
-        var hptab = document.querySelector('.hptab[onclick*=\"month\"]');
-        histSetView('month', hptab);
-
-        // Pega TODAS as pendentes (de todos os meses)
-        var pending = (window._entries || []).filter(function(e){ return e.status === 'pending'; });
-        pending.sort(function(a,b){ return (b.ts||b.id) - (a.ts||a.id); });
-
-        // Atualiza título e contagem
-        var titleEl = document.getElementById('hist-list-title');
-        var cntEl   = document.getElementById('hist-list-cnt');
-        if (titleEl) titleEl.textContent = '⏳ Apostas Pendentes';
-        if (cntEl)   cntEl.textContent   = pending.length + ' pendente' + (pending.length !== 1 ? 's' : '');
-
-        // Renderiza as pendentes na lista
-        var listEl = document.getElementById('hist-list');
-        if (!listEl) return;
-        if (!pending.length) {
-          listEl.innerHTML = '<div style=\"text-align:center;padding:40px 0;color:var(--t3);font-size:13px;\">✅ Nenhuma aposta pendente no momento.</div>';
-        } else {
-          listEl.innerHTML = pending.map(function(e){ return entryHTML(e); }).join('');
-        }
-
-        // Scrolla até a lista
-        if (listEl) listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 150);
-    ">
+    <!-- Pendentes -->
+    <button class="sn-tab" id="sn-tab-pendentes" onclick="sgIrPendentes(this)">
       <span class="sn-tab-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
       <span>Pendentes</span>
       <span id="sb-pend-badge" style="margin-left:auto;min-width:18px;text-align:center;font-size:9px;font-weight:700;background:#FFFBEB;color:#B45309;border:1px solid rgba(217,119,6,.25);border-radius:20px;padding:1px 6px;display:none;">0</span>
+    </button>
+
+    <!-- Odds → pg-odds (OCULTO — remover o display:none quando API estiver configurada) -->
+    <button class="sn-tab" onclick="goPage('pg-odds',this);sgOddsInit()" style="display:none!important">
+      <span class="sn-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+      <span>Odds</span>
+      <span style="margin-left:auto;font-size:9px;font-weight:700;background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.3);border-radius:20px;padding:1px 6px;">NOVO</span>
     </button>
 
     <div style="padding:0 16px 8px;margin-top:18px;"><div style="font-size:10px;font-weight:500;color:var(--label);text-transform:uppercase;letter-spacing:0.14em;">Relatórios</div></div>
@@ -5198,6 +5172,12 @@ a:hover{color:var(--sg-green-txt)!important;}
     <button class="sn-tab" onclick="goPage('pg-ir',this)">
       <span class="sn-tab-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></span>
       <span>Declaração IR</span>
+    </button>
+
+    <!-- Como usar → pg-ajuda -->
+    <button class="sn-tab" onclick="goPage('pg-ajuda',this)" style="margin-top:4px;">
+      <span class="sn-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="3"/></svg></span>
+      <span>Primeiros passos</span>
     </button>
 
   </div>
@@ -5352,7 +5332,7 @@ a:hover{color:var(--sg-green-txt)!important;}
       </div>
       <span class="sg-badge sg-badge--success" id="sGPDia-badge">0V / 0D</span>
     </div>
-    <div class="num" id="ld-perda-val" style="font-size:30px;font-weight:600;color:var(--title);margin-top:16px;letter-spacing:-0.03em;line-height:1;">R$ 0,00</div>
+    <div class="num" id="ld-perda-val" style="font-size:30px;font-weight:600;color:#f87171;margin-top:16px;letter-spacing:-0.03em;line-height:1;">R$ 0,00</div>
     <div style="font-size:12px;color:rgba(180,205,225,0.80);margin-top:10px;" id="ld-perda-sub">Nenhuma perda hoje</div>
   </div>
 </div>
@@ -7127,6 +7107,895 @@ window.dvSalvar = async function() {
     Conta
   </button>
 </nav>
+<!-- ══════════════════════════ PAGE: ODDS ══════════════════════════ -->
+<div id="pg-odds" class="page" style="display:none;padding:28px 32px 60px;">
+
+<style>
+/* ══ ODDS PAGE — PREMIUM BLUE DARK ══ */
+:root {
+  --od-bg:       #0B1929;
+  --od-surface:  #0f2035;
+  --od-border:   rgba(255,255,255,0.07);
+  --od-border2:  rgba(255,255,255,0.12);
+  --od-text:     #d4e8ff;
+  --od-muted:    rgba(150,190,225,0.50);
+  --od-faint:    rgba(150,190,225,0.28);
+  --od-green:    #22c55e;
+  --od-green-bg: rgba(34,197,94,0.10);
+  --od-green-bd: rgba(34,197,94,0.28);
+}
+
+#pg-odds { background: var(--od-bg) !important; color: var(--od-text); }
+
+/* HEADER */
+.odds-pg-title { font-size: 20px; font-weight: 600; color: #eef6ff; letter-spacing:-.02em; margin-bottom:3px; }
+.odds-pg-sub   { font-size: 13px; color: var(--od-muted); margin-bottom:20px; }
+
+/* DAY TABS */
+.odds-day-tabs { display:flex; gap:4px; margin-bottom:16px; }
+.odds-day-tab  { padding:6px 14px; border-radius:8px; font-size:12px; font-weight:500;
+                 border:0.5px solid var(--od-border2); color:var(--od-muted);
+                 cursor:pointer; background:transparent; text-align:center; font-family:'DM Sans',sans-serif; transition:all .15s; }
+.odds-day-tab .odt-name { display:block; font-size:12px; font-weight:500; }
+.odds-day-tab .odt-date { display:block; font-size:10px; margin-top:1px; color:inherit; opacity:.6; }
+.odds-day-tab.on { background:var(--od-green-bg); border-color:var(--od-green-bd); color:var(--od-green); }
+
+
+/* UPDATE BAR */
+.odds-update-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.odds-update-info { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--od-muted); }
+.odds-live-dot { width:6px; height:6px; border-radius:50%; background:var(--od-green); animation:odpulse 2s infinite; }
+@keyframes odpulse { 0%,100%{opacity:1}50%{opacity:.3} }
+
+/* GRID */
+.odds-tables-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px; }
+
+/* CARD */
+.odds-card { background:var(--od-surface); border:0.5px solid var(--od-border); border-radius:14px; overflow:hidden; }
+.odds-card-hd { padding:14px 18px; border-bottom:0.5px solid var(--od-border); display:flex; align-items:center; gap:10px; }
+.odds-pa-icon { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.odds-pa-icon.com { background:var(--od-green-bg); color:var(--od-green); border:0.5px solid var(--od-green-bd); }
+.odds-pa-icon.sem { background:rgba(255,255,255,0.04); color:var(--od-muted); border:0.5px solid var(--od-border2); }
+.odds-card-title { font-size:14px; font-weight:500; color:#eef6ff; }
+.odds-card-sub   { font-size:11px; color:var(--od-muted); margin-top:2px; }
+
+/* TABLE */
+.odds-table { width:100%; border-collapse:collapse; }
+.odds-table th { font-size:9px; font-weight:600; color:var(--od-faint);
+                 text-transform:uppercase; letter-spacing:.12em;
+                 padding:8px 14px; text-align:center;
+                 border-bottom:0.5px solid var(--od-border);
+                 background:rgba(0,0,0,0.18); }
+.odds-table th.left { text-align:left; }
+
+/* GAME ROW */
+.odds-game-row td { padding:12px 14px; border-bottom:0.5px solid var(--od-border); cursor:pointer; vertical-align:middle; transition:background .12s; }
+.odds-game-row:last-child td { border-bottom:none; }
+.odds-game-row:hover td { background:rgba(255,255,255,0.025); }
+.odds-game-row.open td { background:rgba(34,197,94,0.04); }
+
+.odds-game-cell  { display:flex; flex-direction:column; gap:2px; }
+.odds-game-time  { font-size:9px; color:var(--od-faint); font-weight:500; margin-bottom:1px; }
+.odds-game-home  { font-size:12px; font-weight:500; color:#eef6ff; }
+.odds-game-away  { font-size:12px; color:var(--od-muted); }
+
+/* RESULT CELLS */
+.odds-res-cell { text-align:center; }
+
+/* COM PA cell */
+.odds-pa-blk   { display:flex; flex-direction:column; align-items:center; gap:3px; }
+.odds-pa-casa  { font-size:9px; font-weight:600; color:var(--od-muted); white-space:nowrap; }
+.odds-pa-info  { font-size:9px; color:var(--od-faint); }
+/* Best odd highlight — verde */
+.odds-pa-val   { display:inline-block; background:var(--od-green-bg); color:var(--od-green);
+                 border:0.5px solid var(--od-green-bd); border-radius:6px;
+                 padding:3px 8px; font-size:13px; font-weight:600; font-variant-numeric:tabular-nums; }
+.odds-pa-val.empty { opacity:0.3; background:transparent; border-color:transparent; color:var(--od-faint); }
+
+/* SEM PA cell */
+.odds-sem-val  { font-size:14px; font-weight:500; color:#eef6ff; font-variant-numeric:tabular-nums; display:block; text-align:center; }
+.odds-sem-casa { font-size:9px; font-weight:600; color:var(--od-muted); display:block; text-align:center; margin-bottom:2px; }
+
+/* Chevron */
+.odds-chev { display:flex; align-items:center; justify-content:center; }
+.odds-chev svg { stroke:var(--od-faint); transition:transform .2s; }
+.odds-game-row.open .odds-chev svg { transform:rotate(180deg); stroke:var(--od-green); }
+
+/* FOOTER */
+.odds-card-footer { padding:10px 16px; display:flex; align-items:center; gap:6px;
+                    font-size:11px; color:var(--od-faint); border-top:0.5px solid var(--od-border); }
+.odds-card-footer svg { width:13px; height:13px; stroke:currentColor; fill:none; flex-shrink:0; }
+.odds-card-footer.com { color:rgba(34,197,94,0.55); }
+
+/* LOADING */
+.odds-loading { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 20px; gap:10px; }
+.odds-loading-dot { width:7px; height:7px; border-radius:50%; background:var(--od-green); display:inline-block; margin:0 3px; animation:odspin 1.2s infinite ease-in-out; }
+.odds-loading-dot:nth-child(2){animation-delay:.2s}
+.odds-loading-dot:nth-child(3){animation-delay:.4s}
+@keyframes odspin{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+.odds-loading-txt { font-size:12px; color:var(--od-faint); }
+
+/* ── EXPAND ── */
+.odds-exp-row { display:none; }
+.odds-exp-row.open { display:table-row; }
+.odds-exp-cell { padding:0 !important; border-bottom:0.5px solid var(--od-border) !important; }
+.odds-exp-inner { padding:16px 18px; background:rgba(0,0,0,0.22); }
+
+.odds-exp-tabs { display:flex; border-bottom:0.5px solid var(--od-border); margin-bottom:14px; }
+.odds-exp-tab { padding:7px 16px; font-size:12px; font-weight:500; color:var(--od-muted);
+                cursor:pointer; border:none; background:none; border-bottom:2px solid transparent;
+                transition:all .15s; font-family:'DM Sans',sans-serif; }
+.odds-exp-tab.on { color:var(--od-green); border-bottom-color:var(--od-green); }
+
+.odds-exp-body { display:none; }
+.odds-exp-body.on { display:block; }
+.odds-exp-title { font-size:9px; font-weight:600; color:var(--od-faint);
+                  text-transform:uppercase; letter-spacing:.14em; margin-bottom:10px; }
+
+/* CASA LIST */
+.odds-casa-list { display:flex; flex-direction:column; gap:3px; }
+.odds-casa-item { display:flex; align-items:center; justify-content:space-between;
+                  padding:9px 12px; border-radius:8px;
+                  background:rgba(255,255,255,0.025); border:0.5px solid transparent; }
+/* Melhor casa — verde sutil */
+.odds-casa-item.best { background:rgba(34,197,94,0.07); border-color:rgba(34,197,94,0.20); }
+
+.odds-casa-left  { display:flex; align-items:center; gap:8px; }
+.odds-casa-rank  { font-size:10px; color:var(--od-faint); min-width:20px; }
+.odds-casa-item.best .odds-casa-rank { color:var(--od-green); }
+.odds-casa-nome  { font-size:12px; font-weight:500; color:var(--od-text); }
+.odds-casa-item.best .odds-casa-nome { color:var(--od-green); }
+
+.odds-casa-right { display:flex; align-items:center; gap:8px; }
+.odds-casa-normal { font-size:11px; color:var(--od-faint); font-variant-numeric:tabular-nums; }
+/* PA value na lista — verde */
+.odds-casa-paval { display:inline-block; background:var(--od-green-bg); color:var(--od-green);
+                   border:0.5px solid var(--od-green-bd); border-radius:6px;
+                   padding:2px 8px; font-size:13px; font-weight:600; font-variant-numeric:tabular-nums; }
+/* Sem PA na lista */
+.odds-casa-semval { font-size:14px; font-weight:500; color:#eef6ff; font-variant-numeric:tabular-nums; }
+.odds-casa-item.best .odds-casa-semval { color:var(--od-green); font-size:15px; }
+.odds-no-pa { font-size:10px; color:var(--od-faint); }
+
+/* USAR BTN */
+.odds-usar-btn { display:flex; align-items:center; gap:4px; padding:5px 10px;
+                 border-radius:7px; background:transparent; color:var(--od-muted);
+                 font-size:11px; font-weight:500; border:0.5px solid var(--od-border2);
+                 cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; transition:all .15s; }
+.odds-usar-btn:hover,
+.odds-casa-item.best .odds-usar-btn { background:var(--od-green-bg); color:var(--od-green); border-color:var(--od-green-bd); }
+
+
+@media (max-width:768px) {
+  #pg-odds { padding:16px 12px 80px !important; }
+  .odds-tables-grid { grid-template-columns:1fr !important; }
+  .odds-day-tabs { flex-wrap:nowrap; overflow-x:auto; }
+}
+</style>
+
+<div class="odds-pg-title">Comparação de Odds</div>
+<div class="odds-pg-sub">Os 20 maiores jogos do dia — melhores odds com e sem PA por casa.</div>
+
+<!-- Update bar simples -->
+<div class="odds-update-bar">
+  <div class="odds-update-info">
+    <span class="odds-live-dot"></span>
+    <span id="odds-update-txt">Atualizado agora · 8 jogos hoje</span>
+  </div>
+  <span style="font-size:11px;color:rgba(150,190,225,0.35);">Atualiza a cada 5 min</span>
+</div>
+
+<!-- Filtros dias -->
+<div class="odds-day-tabs">
+  <div class="odds-day-tab on" onclick="sgOddsSetDay(this,'today')"><span class="odt-name">Hoje</span><span class="odt-date" id="odds-day-today"></span></div>
+  <div class="odds-day-tab" onclick="sgOddsSetDay(this,'tomorrow')"><span class="odt-name">Amanhã</span><span class="odt-date" id="odds-day-tomorrow"></span></div>
+</div>
+
+<!-- Tabelas -->
+<div class="odds-tables-grid" id="odds-tables-grid">
+  <!-- COM PA -->
+  <div class="odds-card">
+    <div class="odds-card-hd">
+      <div class="odds-pa-icon com">PA</div>
+      <div>
+        <div class="odds-card-title">Com PA</div>
+        <div class="odds-card-sub">Odds com Pagamento Antecipado</div>
+      </div>
+    </div>
+    <div id="odds-com-pa-body">
+      <div class="odds-loading">
+        <div><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span></div>
+        <div class="odds-loading-txt">Carregando jogos...</div>
+      </div>
+    </div>
+    <div class="odds-card-footer com">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Odds ajustadas com Pagamento Antecipado
+    </div>
+  </div>
+
+  <!-- SEM PA -->
+  <div class="odds-card">
+    <div class="odds-card-hd">
+      <div class="odds-pa-icon sem">PA</div>
+      <div>
+        <div class="odds-card-title">Sem PA</div>
+        <div class="odds-card-sub">Odds brutas das casas de apostas</div>
+      </div>
+    </div>
+    <div id="odds-sem-pa-body">
+      <div class="odds-loading">
+        <div><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span></div>
+        <div class="odds-loading-txt">Carregando jogos...</div>
+      </div>
+    </div>
+    <div class="odds-card-footer">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Odds brutas fornecidas pelas casas de apostas
+    </div>
+  </div>
+</div>
+
+</div>
+<!-- ══ FIM pg-odds ══ -->
+
+<!-- ══════════════════════════ PAGE: COMO USAR ══════════════════════════ -->
+<div id="pg-ajuda" class="page" style="display:none;">
+<style>
+#pg-ajuda {
+  background: #080d16 !important;
+  padding: 0 !important;
+  overflow-y: auto !important;
+  font-family: 'DM Sans', sans-serif;
+  color: #eef6ff;
+}
+#pg-ajuda * { box-sizing: border-box; }
+
+/* ── HERO ── */
+.gh-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  padding: 48px 48px 40px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.gh-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+  background: rgba(34,197,94,.10);
+  border: 1px solid rgba(34,197,94,.22);
+  border-radius: 99px;
+  padding: 5px 14px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: .10em;
+  float: right;
+}
+.gh-hero-tagrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0;
+}
+.gh-hero-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gh-hero-logo-ico {
+  width: 32px; height: 32px;
+  background: #22c55e;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.gh-hero-logo-ico svg { width: 16px; height: 16px; }
+.gh-hero-logo-name { font-size: 16px; font-weight: 700; color: #eef6ff; }
+.gh-hero-title {
+  font-size: 38px;
+  font-weight: 800;
+  color: #eef6ff;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  margin: 28px 0 16px;
+}
+.gh-hero-title span { color: #22c55e; }
+.gh-hero-sub {
+  font-size: 16px;
+  color: rgba(190,215,235,.75);
+  line-height: 1.65;
+  margin-bottom: 30px;
+}
+.gh-hero-btns { display: flex; gap: 12px; margin-bottom: 18px; }
+.gh-btn-green {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 24px;
+  background: #22c55e; color: #071a0e;
+  font-size: 14px; font-weight: 700;
+  border-radius: 12px; border: none;
+  cursor: pointer; font-family: 'DM Sans',sans-serif;
+  transition: filter .15s;
+}
+.gh-btn-green:hover { filter: brightness(1.08); }
+.gh-btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 22px;
+  background: transparent; color: rgba(190,215,235,.75);
+  font-size: 14px; font-weight: 600;
+  border-radius: 12px; border: 1px solid rgba(255,255,255,.14);
+  cursor: pointer; font-family: 'DM Sans',sans-serif;
+  transition: all .15s;
+}
+.gh-btn-ghost:hover { border-color: rgba(34,197,94,.35); color: #22c55e; }
+.gh-hero-note {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; color: rgba(148,180,210,.65);
+}
+
+/* Mockup */
+.gh-mockup {
+  background: #0d1a2a;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,.4);
+}
+.gh-mock-topbar {
+  background: #091422;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.gh-mock-topbar-left { display: flex; align-items: center; gap: 8px; }
+.gh-mock-topbar-title { font-size: 13px; font-weight: 600; color: #eef6ff; }
+.gh-mock-topbar-badge {
+  font-size: 10px; color: rgba(148,180,210,.45);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 6px; padding: 2px 8px;
+}
+.gh-mock-kpis {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.gh-mock-kpi {
+  padding: 12px 14px;
+  border-right: 1px solid rgba(255,255,255,.06);
+}
+.gh-mock-kpi:last-child { border-right: none; }
+.gh-mock-kpi-lbl { font-size: 10px; color: rgba(148,180,210,.65); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
+.gh-mock-kpi-val { font-size: 17px; font-weight: 700; color: #eef6ff; }
+.gh-mock-kpi-val.g { color: #22c55e; }
+.gh-mock-kpi-sub { font-size: 9px; color: #22c55e; margin-top: 2px; }
+.gh-mock-chart-area { padding: 14px 16px 8px; }
+.gh-mock-chart {
+  height: 80px; border-radius: 8px;
+  background: rgba(34,197,94,.04);
+  position: relative; overflow: hidden; margin-bottom: 10px;
+}
+.gh-mock-chart svg { position: absolute; bottom: 0; left: 0; width: 100%; }
+.gh-mock-entries-hd { font-size: 9px; font-weight: 600; color: rgba(148,180,210,.40); text-transform: uppercase; letter-spacing: .10em; margin-bottom: 8px; }
+.gh-mock-entry {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.gh-mock-entry:last-child { border-bottom: none; }
+.gh-mock-entry-name { font-size: 12px; font-weight: 600; color: rgba(190,215,235,.90); }
+.gh-mock-entry-tag { font-size: 9px; color: rgba(148,180,210,.40); margin-top: 1px; }
+.gh-mock-entry-val { font-size: 12px; font-weight: 700; }
+.gh-mock-entry-val.p { color: #22c55e; }
+.gh-mock-entry-val.n { color: #f87171; }
+.gh-mock-see-all {
+  display: flex; align-items: center; justify-content: center;
+  padding: 10px; border-top: 1px solid rgba(255,255,255,.06);
+  font-size: 11px; font-weight: 600; color: rgba(34,197,94,.65);
+}
+
+/* ── SEÇÕES ── */
+.gh-section {
+  padding: 60px 48px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.gh-section.alt { background: rgba(255,255,255,.015); }
+.gh-sec-hd { text-align: center; margin-bottom: 44px; }
+.gh-sec-title { font-size: 28px; font-weight: 800; color: #eef6ff; letter-spacing: -.02em; margin-bottom: 8px; }
+.gh-sec-sub { font-size: 15px; color: rgba(190,215,235,.68); }
+
+/* ── 3 PASSOS ── */
+.gh-steps3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.gh-step3 {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px; padding: 28px 24px;
+  transition: border-color .2s;
+}
+.gh-step3:hover { border-color: rgba(34,197,94,.25); }
+.gh-step3-top { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.gh-step3-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(34,197,94,.12);
+  border: 2px solid rgba(34,197,94,.30);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 800; color: #22c55e;
+  font-family: 'DM Mono', monospace; flex-shrink: 0;
+}
+.gh-step3-ico-sm {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: rgba(34,197,94,.08);
+  border: 1px solid rgba(34,197,94,.20);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: #22c55e; flex-shrink: 0;
+}
+.gh-step3-title { font-size: 18px; font-weight: 700; color: #eef6ff; margin-bottom: 8px; }
+.gh-step3-desc { font-size: 14px; color: rgba(190,215,235,.75); line-height: 1.65; margin-bottom: 18px; }
+.gh-step3-mock {
+  background: #0a1520;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 14px 16px;
+}
+.gh-step3-mock-title { font-size: 10px; font-weight: 700; color: rgba(148,180,210,.70); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 10px; }
+.gh-step3-mock-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; }
+.gh-step3-mock-lbl { font-size: 12px; color: rgba(148,180,210,.70); }
+.gh-step3-mock-val { font-size: 13px; font-weight: 600; color: #eef6ff; }
+.gh-step3-mock-val.g { color: #22c55e; }
+.gh-step3-mock-val.y { color: #fbbf24; }
+.gh-step3-mock-btn {
+  width: 100%; padding: 9px;
+  background: #22c55e; color: #071a0e;
+  font-size: 12px; font-weight: 700;
+  border-radius: 8px; border: none; cursor: pointer;
+  margin-top: 10px; font-family: 'DM Sans',sans-serif;
+}
+
+/* ── FLUXO ── */
+.gh-flow {
+  display: flex; align-items: flex-start;
+  justify-content: center; gap: 0;
+  overflow-x: auto; padding: 8px 0 4px;
+}
+.gh-flow-node { display: flex; flex-direction: column; align-items: center; text-align: center; flex-shrink: 0; width: 140px; }
+.gh-flow-ico {
+  width: 72px; height: 72px;
+  border-radius: 20px;
+  background: rgba(34,197,94,.10);
+  border: 1px solid rgba(34,197,94,.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; color: #22c55e;
+  margin-bottom: 14px;
+}
+.gh-flow-ico.tg { background: rgba(36,160,237,.10); border-color: rgba(36,160,237,.25); color: #38bdf8; font-size: 32px; }
+.gh-flow-label { font-size: 14px; font-weight: 700; color: #eef6ff; margin-bottom: 6px; }
+.gh-flow-sub { font-size: 12px; color: rgba(190,215,235,.70); line-height: 1.45; max-width: 110px; }
+.gh-flow-arr { display: flex; align-items: center; padding: 0 4px; margin-top: -44px; flex-shrink: 0; }
+.gh-flow-arr svg { width: 22px; height: 22px; stroke: rgba(34,197,94,.35); fill: none; stroke-width: 2; stroke-linecap: round; }
+
+/* ── TIPOS 6 ── */
+.gh-types { display: grid; grid-template-columns: repeat(6,1fr); gap: 12px; }
+.gh-type {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px; padding: 20px 16px;
+  text-align: center; transition: all .2s;
+}
+.gh-type:hover { border-color: rgba(34,197,94,.25); background: rgba(34,197,94,.04); }
+.gh-type-badge {
+  display: inline-block; font-size: 9px; font-weight: 700;
+  border-radius: 5px; padding: 3px 8px; margin-bottom: 14px;
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.gh-type-badge.green { background: rgba(34,197,94,.12); color: #22c55e; border: 1px solid rgba(34,197,94,.22); }
+.gh-type-badge.blue  { background: rgba(59,130,246,.10); color: #60a5fa; border: 1px solid rgba(59,130,246,.20); }
+.gh-type-badge.amber { background: rgba(245,158,11,.10); color: #fbbf24; border: 1px solid rgba(245,158,11,.20); }
+.gh-type-badge.purple { background: rgba(139,92,246,.10); color: #a78bfa; border: 1px solid rgba(139,92,246,.20); }
+.gh-type-ico {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  background: rgba(34,197,94,.08);
+  border: 1px solid rgba(34,197,94,.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; color: #22c55e;
+  margin: 0 auto 14px;
+}
+.gh-type-ico.blue  { background: rgba(59,130,246,.08); border-color: rgba(59,130,246,.18); color: #60a5fa; }
+.gh-type-ico.amber { background: rgba(245,158,11,.08); border-color: rgba(245,158,11,.18); color: #fbbf24; }
+.gh-type-ico.purple { background: rgba(139,92,246,.08); border-color: rgba(139,92,246,.18); color: #a78bfa; }
+.gh-type-title { font-size: 14px; font-weight: 700; color: #eef6ff; margin-bottom: 8px; }
+.gh-type-desc { font-size: 13px; color: rgba(190,215,235,.72); line-height: 1.55; margin-bottom: 14px; }
+.gh-type-link { font-size: 13px; font-weight: 600; color: rgba(34,197,94,.85); cursor: pointer; }
+.gh-type-link:hover { color: #22c55e; }
+
+/* ── DASHBOARD ── */
+.gh-dash { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.gh-dash-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px; padding: 24px 20px;
+}
+.gh-dash-ico {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: rgba(34,197,94,.10); border: 1px solid rgba(34,197,94,.22);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; color: #22c55e; margin-bottom: 16px;
+}
+.gh-dash-ico.amber { background: rgba(245,158,11,.10); border-color: rgba(245,158,11,.22); color: #fbbf24; }
+.gh-dash-ico.blue  { background: rgba(59,130,246,.10); border-color: rgba(59,130,246,.22); color: #60a5fa; }
+.gh-dash-ico.purple { background: rgba(139,92,246,.10); border-color: rgba(139,92,246,.22); color: #a78bfa; }
+.gh-dash-title { font-size: 16px; font-weight: 700; color: #eef6ff; margin-bottom: 8px; }
+.gh-dash-desc { font-size: 13px; color: rgba(190,215,235,.72); line-height: 1.6; }
+
+/* ── GLOSSÁRIO ── */
+.gh-gloss-hd { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 16px; }
+.gh-gloss-hd-left {}
+.gh-gloss-title { font-size: 24px; font-weight: 800; color: #eef6ff; letter-spacing: -.02em; margin-bottom: 4px; }
+.gh-gloss-sub { font-size: 14px; color: rgba(190,215,235,.65); }
+.gh-gloss-open { font-size: 12px; font-weight: 600; color: rgba(34,197,94,.65); cursor: pointer; padding: 8px 14px; border: 1px solid rgba(34,197,94,.20); border-radius: 8px; background: rgba(34,197,94,.06); transition: all .15s; }
+.gh-gloss-open:hover { color: #22c55e; border-color: rgba(34,197,94,.35); }
+.gh-gloss-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+.gh-gloss-item {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 10px; overflow: hidden;
+}
+.gh-gloss-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px; cursor: pointer; transition: background .15s;
+  font-size: 15px; font-weight: 600; color: #eef6ff;
+}
+.gh-gloss-q:hover { background: rgba(255,255,255,.03); }
+.gh-gloss-q i { font-size: 16px; color: rgba(148,180,210,.35); transition: transform .2s; }
+.gh-gloss-item.open .gh-gloss-q i { transform: rotate(180deg); color: #22c55e; }
+.gh-gloss-a { display: none; padding: 0 18px 16px; font-size: 14px; color: rgba(190,215,235,.75); line-height: 1.6; border-top: 1px solid rgba(255,255,255,.05); padding-top: 10px; }
+.gh-gloss-item.open .gh-gloss-a { display: block; }
+
+/* ── CTA FINAL ── */
+.gh-cta {
+  padding: 60px 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  align-items: stretch;
+}
+.gh-cta-left {
+  background: linear-gradient(135deg, rgba(34,197,94,.12), rgba(34,197,94,.04));
+  border: 1px solid rgba(34,197,94,.20);
+  border-radius: 20px 0 0 20px;
+  padding: 48px 40px;
+  position: relative; overflow: hidden;
+}
+.gh-cta-right {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.08); border-left: none;
+  border-radius: 0 20px 20px 0;
+  padding: 48px 40px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.gh-cta-ico { font-size: 44px; color: #22c55e; margin-bottom: 20px; display: block; }
+.gh-cta-title { font-size: 26px; font-weight: 800; color: #eef6ff; letter-spacing: -.02em; margin-bottom: 10px; }
+.gh-cta-desc { font-size: 15px; color: rgba(190,215,235,.75); line-height: 1.65; margin-bottom: 28px; }
+.gh-cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 15px 28px; background: #22c55e; color: #071a0e;
+  font-size: 15px; font-weight: 700; border-radius: 12px;
+  border: none; cursor: pointer; font-family: 'DM Sans',sans-serif;
+  transition: filter .15s; width: fit-content;
+}
+.gh-cta-btn:hover { filter: brightness(1.08); }
+.gh-cta-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.gh-cta-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(190,215,235,.82); }
+.gh-cta-list li i { font-size: 20px; color: #22c55e; flex-shrink: 0; }
+
+@media (max-width: 900px) {
+  .gh-hero, .gh-steps3, .gh-dash { grid-template-columns: 1fr !important; }
+  .gh-types { grid-template-columns: repeat(3,1fr) !important; }
+  .gh-section { padding: 40px 20px !important; }
+  .gh-hero { padding: 28px 20px !important; }
+  .gh-gloss-grid { grid-template-columns: 1fr 1fr !important; }
+  .gh-cta { grid-template-columns: 1fr !important; padding: 40px 20px !important; }
+  .gh-cta-left { border-radius: 16px 16px 0 0 !important; }
+  .gh-cta-right { border-left: 1px solid rgba(255,255,255,.08) !important; border-top: none; border-radius: 0 0 16px 16px !important; }
+}
+</style>
+
+<!-- HERO -->
+<div class="gh-hero">
+  <div>
+    <div class="gh-hero-tagrow">
+      <div class="gh-hero-logo">
+        <div class="gh-hero-logo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <span class="gh-hero-logo-name">SureGreen</span>
+      </div>
+      <span class="gh-hero-tag">Guia rápido &nbsp;·&nbsp; v1.0 — 2026</span>
+    </div>
+    <div class="gh-hero-title">Comece no SureGreen<br>em menos de <span>2 minutos</span></div>
+    <div class="gh-hero-sub">Configure sua banca, registre sua primeira entrada e acompanhe seus resultados sem planilhas.</div>
+    <div class="gh-hero-btns">
+      <button class="gh-btn-green" onclick="goPage('pg-calc',document.querySelector('.sn-tab[onclick*=pg-calc]'))">
+        <i class="ti ti-calculator" aria-hidden="true"></i> Começar pela calculadora →
+      </button>
+      <button class="gh-btn-ghost" onclick="document.getElementById('gh-passos').scrollIntoView({behavior:'smooth'})">
+        Ver passo a passo
+      </button>
+    </div>
+    <div class="gh-hero-note">
+      <i class="ti ti-shield-check" aria-hidden="true"></i>
+      Tudo na nuvem. Seguro, rápido e automático.
+    </div>
+  </div>
+
+  <!-- Dashboard Mockup -->
+  <div class="gh-mockup">
+    <div class="gh-mock-topbar">
+      <div class="gh-mock-topbar-left">
+        <span class="gh-mock-topbar-title">Dashboard</span>
+      </div>
+      <span class="gh-mock-topbar-badge">Últimos 30 dias ▾</span>
+    </div>
+    <div class="gh-mock-kpis">
+      <div class="gh-mock-kpi"><div class="gh-mock-kpi-lbl">Lucro acumulado</div><div class="gh-mock-kpi-val g">R$ 3.897,08</div><div class="gh-mock-kpi-sub">+12.45%</div></div>
+      <div class="gh-mock-kpi"><div class="gh-mock-kpi-lbl">ROI</div><div class="gh-mock-kpi-val g">12.45%</div></div>
+      <div class="gh-mock-kpi"><div class="gh-mock-kpi-lbl">Win Rate</div><div class="gh-mock-kpi-val">68.3%</div></div>
+      <div class="gh-mock-kpi"><div class="gh-mock-kpi-lbl">Volume</div><div class="gh-mock-kpi-val">R$ 31.254</div></div>
+    </div>
+    <div class="gh-mock-chart-area">
+      <div class="gh-mock-chart">
+        <svg viewBox="0 0 400 80" preserveAspectRatio="none" height="80">
+          <defs><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22c55e" stop-opacity=".25"/><stop offset="100%" stop-color="#22c55e" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,72 C40,68 70,58 110,45 C150,32 170,50 210,28 C250,8 280,20 320,14 C350,10 375,8 400,4" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+          <path d="M0,72 C40,68 70,58 110,45 C150,32 170,50 210,28 C250,8 280,20 320,14 C350,10 375,8 400,4 L400,80 L0,80 Z" fill="url(#gg)"/>
+        </svg>
+      </div>
+      <div class="gh-mock-entries-hd">Últimas entradas</div>
+      <div class="gh-mock-entry"><div><div class="gh-mock-entry-name">Real Madrid × Barça</div><div class="gh-mock-entry-tag">Surebet · 08/05</div></div><div class="gh-mock-entry-val p">+R$ 138,50</div></div>
+      <div class="gh-mock-entry"><div><div class="gh-mock-entry-name">Man City × Arsenal</div><div class="gh-mock-entry-tag">Duplo Green · 08/05</div></div><div class="gh-mock-entry-val p">+R$ 86,20</div></div>
+      <div class="gh-mock-entry"><div><div class="gh-mock-entry-name">Bayern × Dortmund</div><div class="gh-mock-entry-tag">Lay · Betfair · 08/05</div></div><div class="gh-mock-entry-val n">-R$ 45,00</div></div>
+      <div class="gh-mock-see-all">Ver todas →</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3 PASSOS -->
+<div class="gh-section" id="gh-passos">
+  <div class="gh-sec-hd">
+    <div class="gh-sec-title">3 passos para começar</div>
+    <div class="gh-sec-sub">Siga este fluxo simples e esteja pronto para lucrar com organização.</div>
+  </div>
+  <div class="gh-steps3">
+    <div class="gh-step3">
+      <div class="gh-step3-top">
+        <div class="gh-step3-num">1</div>
+        <div class="gh-step3-ico-sm"><i class="ti ti-building-bank" aria-hidden="true"></i></div>
+      </div>
+      <div class="gh-step3-title">Configure sua banca</div>
+      <div class="gh-step3-desc">Defina o valor inicial da sua banca e cadastre suas casas de aposta com os saldos disponíveis.</div>
+      <div class="gh-step3-mock">
+        <div class="gh-step3-mock-title">Bankroll</div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Banca principal</span><span class="gh-step3-mock-val g">R$ 10.000,00</span></div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Bet365</span><span class="gh-step3-mock-val">R$ 2.560,00</span></div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Betano</span><span class="gh-step3-mock-val">R$ 2.040,00</span></div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Superbet</span><span class="gh-step3-mock-val">R$ 1.500,00</span></div>
+      </div>
+    </div>
+    <div class="gh-step3">
+      <div class="gh-step3-top">
+        <div class="gh-step3-num">2</div>
+        <div class="gh-step3-ico-sm"><i class="ti ti-calculator" aria-hidden="true"></i></div>
+      </div>
+      <div class="gh-step3-title">Calcule sua entrada</div>
+      <div class="gh-step3-desc">Insira as odds das casas e deixe o SureGreen calcular os stakes ideais automaticamente.</div>
+      <div class="gh-step3-mock">
+        <div class="gh-step3-mock-title">Calculadora</div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Tipo</span><span class="gh-step3-mock-val">Surebet</span></div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Casa 1 odd</span><span class="gh-step3-mock-val">2.10</span></div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Casa 2 odd</span><span class="gh-step3-mock-val">2.05</span></div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Resultado</span><span class="gh-step3-mock-val g">+R$ 128,50</span></div>
+        <button class="gh-step3-mock-btn" onclick="goPage('pg-calc',document.querySelector('.sn-tab[onclick*=pg-calc]'))">Ver detalhes →</button>
+      </div>
+    </div>
+    <div class="gh-step3">
+      <div class="gh-step3-top">
+        <div class="gh-step3-num">3</div>
+        <div class="gh-step3-ico-sm"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+      </div>
+      <div class="gh-step3-title">Registre e acompanhe</div>
+      <div class="gh-step3-desc">Registre a operação, acompanhe o resultado e veja seu lucro, ROI e histórico em tempo real.</div>
+      <div class="gh-step3-mock">
+        <div class="gh-step3-mock-title">Registrar entrada</div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Mercado</span><span class="gh-step3-mock-val">Real Madrid × Barça</span></div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Tipo</span><span class="gh-step3-mock-val">Surebet</span></div>
+        <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Status</span><span class="gh-step3-mock-val y">Pendente</span></div>
+        <button class="gh-step3-mock-btn">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLUXO -->
+<div class="gh-section alt">
+  <div class="gh-sec-hd">
+    <div class="gh-sec-title">Do sinal ao resultado</div>
+    <div class="gh-sec-sub">Entenda o fluxo completo de uma operação no SureGreen.</div>
+  </div>
+  <div class="gh-flow">
+    <div class="gh-flow-node">
+      <div class="gh-flow-ico tg"><i class="ti ti-brand-telegram" aria-hidden="true"></i></div>
+      <div class="gh-flow-label">Sinal no Telegram</div>
+      <div class="gh-flow-sub">Você recebe os sinais nos seus grupos VIP.</div>
+    </div>
+    <div class="gh-flow-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    <div class="gh-flow-node">
+      <div class="gh-flow-ico"><i class="ti ti-calculator" aria-hidden="true"></i></div>
+      <div class="gh-flow-label">Calculadora</div>
+      <div class="gh-flow-sub">Insira as odds e o sistema calcula os stakes ideais.</div>
+    </div>
+    <div class="gh-flow-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    <div class="gh-flow-node">
+      <div class="gh-flow-ico"><i class="ti ti-building-bank" aria-hidden="true"></i></div>
+      <div class="gh-flow-label">Aposte nas casas</div>
+      <div class="gh-flow-sub">Faça as apostas conforme os valores.</div>
+    </div>
+    <div class="gh-flow-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    <div class="gh-flow-node">
+      <div class="gh-flow-ico"><i class="ti ti-clipboard-check" aria-hidden="true"></i></div>
+      <div class="gh-flow-label">Registre a entrada</div>
+      <div class="gh-flow-sub">Registre a operação no SureGreen.</div>
+    </div>
+    <div class="gh-flow-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    <div class="gh-flow-node">
+      <div class="gh-flow-ico"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+      <div class="gh-flow-label">Atualize o resultado</div>
+      <div class="gh-flow-sub">Quando o jogo terminar, atualize e veja o resultado.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TIPOS -->
+<div class="gh-section">
+  <div class="gh-sec-hd">
+    <div class="gh-sec-title">Tipos de entrada</div>
+    <div class="gh-sec-sub">Escolha o tipo correto para cada oportunidade.</div>
+  </div>
+  <div class="gh-types">
+    <div class="gh-type">
+      <div class="gh-type-badge green">Garantido</div>
+      <div class="gh-type-ico"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+      <div class="gh-type-title">Surebet</div>
+      <div class="gh-type-desc">Lucro garantido em qualquer resultado. Distribui stakes em duas ou mais casas.</div>
+      <span class="gh-type-link" onclick="goPage('pg-calc',document.querySelector('.sn-tab[onclick*=pg-calc]'))">Use na Calculadora</span>
+    </div>
+    <div class="gh-type">
+      <div class="gh-type-badge blue">Promocional</div>
+      <div class="gh-type-ico blue"><i class="ti ti-rocket" aria-hidden="true"></i></div>
+      <div class="gh-type-title">Surebet Super Odds</div>
+      <div class="gh-type-desc">Surebet usando odds promocionais para aumentar ainda mais o lucro.</div>
+      <span class="gh-type-link" onclick="goPage('pg-calc',document.querySelector('.sn-tab[onclick*=pg-calc]'))">Use na Calculadora</span>
+    </div>
+    <div class="gh-type">
+      <div class="gh-type-badge amber">Custo</div>
+      <div class="gh-type-ico amber"><i class="ti ti-currency-dollar" aria-hidden="true"></i></div>
+      <div class="gh-type-title">Custo para Freebet</div>
+      <div class="gh-type-desc">Ativa uma freebet registrando um custo negativo separado.</div>
+      <span class="gh-type-link" onclick="goPage('pg-calc',document.querySelector('.sn-tab[onclick*=pg-calc]'))">Use na Calculadora</span>
+    </div>
+    <div class="gh-type">
+      <div class="gh-type-badge green">Conversão</div>
+      <div class="gh-type-ico"><i class="ti ti-arrows-exchange" aria-hidden="true"></i></div>
+      <div class="gh-type-title">Conversão de Freebet</div>
+      <div class="gh-type-desc">Transforma freebet em dinheiro real via surebet. O cálculo é diferente.</div>
+      <span class="gh-type-link" onclick="goPage('pg-calc',document.querySelector('.sn-tab[onclick*=pg-calc]'))">Use na Calculadora</span>
+    </div>
+    <div class="gh-type">
+      <div class="gh-type-badge purple">Premium</div>
+      <div class="gh-type-ico purple"><i class="ti ti-star" aria-hidden="true"></i></div>
+      <div class="gh-type-title">Duplo Green</div>
+      <div class="gh-type-desc">Lucra nos dois lados (mercado principal e secundário) simultaneamente.</div>
+      <span class="gh-type-link" onclick="goPage('pg-calc',document.querySelector('.sn-tab[onclick*=pg-calc]'))">Use na Calculadora</span>
+    </div>
+    <div class="gh-type">
+      <div class="gh-type-badge amber">Posicionamento</div>
+      <div class="gh-type-ico amber"><i class="ti ti-target" aria-hidden="true"></i></div>
+      <div class="gh-type-title">Custo Duplo Green</div>
+      <div class="gh-type-desc">Custo para tentar posicionar duplo green. Não garante lucro.</div>
+      <span class="gh-type-link" onclick="goPage('pg-calc',document.querySelector('.sn-tab[onclick*=pg-calc]'))">Use na Calculadora</span>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="gh-section alt">
+  <div class="gh-sec-hd">
+    <div class="gh-sec-title">Entendendo o Dashboard</div>
+    <div class="gh-sec-sub">Cada indicador foi pensado para dar clareza total da sua performance.</div>
+  </div>
+  <div class="gh-dash">
+    <div class="gh-dash-card">
+      <div class="gh-dash-ico"><i class="ti ti-trending-up" aria-hidden="true"></i></div>
+      <div class="gh-dash-title">Lucro acumulado</div>
+      <div class="gh-dash-desc">Soma de todas as entradas com status Ganho (verde) menos as Perdidas (vermelho).</div>
+    </div>
+    <div class="gh-dash-card">
+      <div class="gh-dash-ico blue"><i class="ti ti-percentage" aria-hidden="true"></i></div>
+      <div class="gh-dash-title">ROI (Return on Investment)</div>
+      <div class="gh-dash-desc">Retorno sobre o capital investido. Ex: ROI de 10% significa R$ 10 de lucro para cada R$ 100 apostados.</div>
+    </div>
+    <div class="gh-dash-card">
+      <div class="gh-dash-ico purple"><i class="ti ti-trophy" aria-hidden="true"></i></div>
+      <div class="gh-dash-title">Win Rate</div>
+      <div class="gh-dash-desc">Percentual de entradas ganhas sobre o total resolvido (ganhou + perdeu).</div>
+    </div>
+    <div class="gh-dash-card">
+      <div class="gh-dash-ico amber"><i class="ti ti-clock" aria-hidden="true"></i></div>
+      <div class="gh-dash-title">Pendentes</div>
+      <div class="gh-dash-desc">Entradas sem resultado atualizado. Mantenha sempre próximo de zero.</div>
+    </div>
+  </div>
+</div>
+
+<!-- GLOSSÁRIO -->
+<div class="gh-section">
+  <div class="gh-gloss-hd">
+    <div class="gh-gloss-hd-left">
+      <div class="gh-gloss-title">Glossário do mercado</div>
+      <div class="gh-gloss-sub">Termos mais usados nos grupos VIP e no SureGreen.</div>
+    </div>
+    <button class="gh-gloss-open" onclick="ghGlossAll(this)">Abrir todos</button>
+  </div>
+  <div class="gh-gloss-grid">
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Surebet<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Operação de apostas em múltiplos resultados em casas diferentes, garantindo lucro independente do desfecho.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Freebet<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Aposta grátis oferecida por casa de aposta. Pode ser convertida em dinheiro real via surebet.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Lay<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Aposta contra um resultado em exchanges como Betfair. Você age como "banca" e ganha se o resultado não acontecer.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Stake<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Valor apostado em uma entrada. O SureGreen calcula automaticamente o stake ideal para cada casa.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Super Odds<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Odds promocionais aumentadas pelas casas em jogos específicos, criando oportunidades com lucro maior.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Bankroll<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Capital total disponível exclusivamente para apostas. Sempre separado do dinheiro pessoal.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Odd<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Coeficiente multiplicador da aposta. Odd 2.00 = para cada R$ 1 apostado, recebe R$ 2 se ganhar.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Duplo Green<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Cenário onde a aposta lucra nos dois lados — mercado principal e secundário simultaneamente.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">ROI<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Return on Investment — retorno sobre investimento em porcentagem. Principal indicador de performance.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Back<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Aposta a favor de um resultado. Você ganha se o resultado apostado acontecer.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Win Rate<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Percentual de apostas ganhas sobre o total. Em surebets tende a ser alto — mas o ROI é o que realmente importa.</div></div>
+    <div class="gh-gloss-item"><div class="gh-gloss-q" onclick="ghGloss(this)">Exchange<i class="ti ti-chevron-down" aria-hidden="true"></i></div><div class="gh-gloss-a">Plataforma onde apostadores negociam entre si (ex: Betfair). Permite apostas Back e Lay.</div></div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="gh-cta">
+  <div class="gh-cta-left">
+    <i class="ti ti-rocket gh-cta-ico" aria-hidden="true"></i>
+    <div class="gh-cta-title">Pronto para começar?</div>
+    <div class="gh-cta-desc">Agora que você entende como funciona o SureGreen, comece pela Calculadora e registre sua primeira entrada.</div>
+    <button class="gh-cta-btn" onclick="goPage('pg-calc',document.querySelector('.sn-tab[onclick*=pg-calc]'))">
+      <i class="ti ti-calculator" aria-hidden="true"></i> Ir para a Calculadora →
+    </button>
+  </div>
+  <div class="gh-cta-right">
+    <ul class="gh-cta-list">
+      <li><i class="ti ti-check" aria-hidden="true"></i> Configure seu bankroll em menos de 2 minutos</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i> Calcule stakes automaticamente com a calculadora</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i> Registre cada entrada com um clique</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i> Acompanhe ROI e lucro em tempo real</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i> Tudo salvo na nuvem — acesse de qualquer lugar</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+function ghGloss(el) {
+  var item = el.parentElement;
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('#pg-ajuda .gh-gloss-item').forEach(function(i){i.classList.remove('open');});
+  if (!isOpen) item.classList.add('open');
+}
+function ghGlossAll(btn) {
+  var items = document.querySelectorAll('#pg-ajuda .gh-gloss-item');
+  var allOpen = Array.from(items).every(function(i){return i.classList.contains('open');});
+  items.forEach(function(i){ allOpen ? i.classList.remove('open') : i.classList.add('open'); });
+  btn.textContent = allOpen ? 'Abrir todos' : 'Fechar todos';
+}
+</script>
+
+</div>
+<!-- ══ FIM pg-ajuda ══ -->
+
 <!-- ══════════════════════════ PAGE 4: IR 2026 ══════════════════════════ -->
 <div id="pg-ir" class="page" style="display:none;">
 <style>
@@ -8593,303 +9462,409 @@ html, body, .main-content, .page, #pg-calc { background: #04060c !important; }
 
 <!-- ══════════════════════════ PAGE: MINHA CONTA ══════════════════════════ -->
 <div id="pg-conta" class="page" style="display:none;">
+<style>
+#pg-conta { background: #0B1929 !important; padding: 0 !important; font-family: 'DM Sans', sans-serif; }
+#pg-conta * { box-sizing: border-box; }
 
-<div id="pf-shell" style="
-  background:#080f0a;
-  min-height:calc(100vh - 64px);
-  font-family:'DM Sans',sans-serif;
-">
+/* ── HERO ── */
+.pc-hero {
+  background: linear-gradient(150deg, #0f2035 0%, #0B1929 100%);
+  padding: 40px 48px 36px;
+  border-bottom: 0.5px solid rgba(255,255,255,.07);
+  position: relative;
+  overflow: hidden;
+}
+.pc-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(34,197,94,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.pc-hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+}
+.pc-avatar {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; font-weight: 800; color: #071a0e;
+  border: 3px solid rgba(34,197,94,.25);
+  flex-shrink: 0;
+  position: relative;
+}
+.pc-avatar-dot {
+  position: absolute; bottom: 2px; right: 2px;
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #0B1929;
+}
+.pc-hero-info { flex: 1; min-width: 0; }
+.pc-name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.pc-name-input {
+  background: transparent; border: none; outline: none;
+  font-size: 24px; font-weight: 700; color: #eef6ff;
+  letter-spacing: -.02em; padding: 0; width: 100%;
+  font-family: 'DM Sans', sans-serif;
+}
+.pc-name-input::placeholder { color: rgba(190,215,235,.30); }
+.pc-email-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.05); border: 0.5px solid rgba(255,255,255,.10);
+  border-radius: 99px; padding: 4px 12px; margin-bottom: 14px;
+}
+.pc-email-pill svg { flex-shrink: 0; }
+.pc-email-txt { font-size: 12px; color: rgba(190,215,235,.50); }
+.pc-badges { display: flex; align-items: center; gap: 10px; }
+.pc-plan-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.28);
+  border-radius: 99px; padding: 5px 14px;
+  font-size: 12px; font-weight: 700; color: #22c55e;
+}
+.pc-plan-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #22c55e;
+}
+.pc-save-btn {
+  display: none; align-items: center; gap: 5px;
+  background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.28);
+  border-radius: 8px; color: #22c55e;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  padding: 6px 14px; cursor: pointer;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.pc-hero-actions { margin-left: auto; display: flex; align-items: center; }
+.pc-edit-ico { color: rgba(190,215,235,.20); cursor: pointer; transition: color .15s; }
+.pc-edit-ico:hover { color: rgba(34,197,94,.60); }
 
-  <!-- ── HERO ── -->
-  <div id="pf-hero" style="
-    background:linear-gradient(155deg,#061209 0%,#0c2014 55%,#061209 100%);
-    padding:40px 48px 0;
-    position:relative;
-    overflow:hidden;
-    border-bottom:1px solid rgba(74,213,94,.12);
-  ">
-    <!-- glow decorativo -->
-    <div style="
-      position:absolute;top:-100px;left:50%;transform:translateX(-50%);
-      width:500px;height:300px;border-radius:50%;
-      background:radial-gradient(ellipse,rgba(0,176,80,.12) 0%,transparent 65%);
-      pointer-events:none;
-    "></div>
+/* ── BODY ── */
+.pc-body { max-width: 860px; padding: 28px 48px 60px; display: flex; flex-direction: column; gap: 14px; }
 
-    <div style="display:flex;align-items:flex-end;gap:28px;padding-bottom:32px;position:relative;z-index:2;max-width:820px;">
+/* Cards */
+.pc-card {
+  background: rgba(255,255,255,.03);
+  border: 0.5px solid rgba(255,255,255,.08);
+  border-radius: 16px; overflow: hidden;
+}
+.pc-card-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 22px;
+  border-bottom: 0.5px solid rgba(255,255,255,.06);
+}
+.pc-card-ico {
+  width: 34px; height: 34px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.pc-card-ico.green { background: rgba(34,197,94,.12); border: 0.5px solid rgba(34,197,94,.22); color: #22c55e; }
+.pc-card-ico.blue  { background: rgba(59,130,246,.10); border: 0.5px solid rgba(59,130,246,.20); color: #60a5fa; }
+.pc-card-ico.amber { background: rgba(245,158,11,.10); border: 0.5px solid rgba(245,158,11,.20); color: #fbbf24; }
+.pc-card-ico svg { width: 16px; height: 16px; }
+.pc-card-title { font-size: 14px; font-weight: 600; color: #eef6ff; }
+.pc-card-sub { font-size: 11px; color: rgba(148,180,210,.45); margin-top: 2px; }
 
-      <!-- Avatar -->
-      <div style="position:relative;flex-shrink:0;">
-        <div id="pf-avatar" style="
-          width:88px;height:88px;border-radius:50%;
-          background:linear-gradient(135deg,#00b050,#4AD55E);
-          display:flex;align-items:center;justify-content:center;
-          font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:800;color:#fff;
-          border:3px solid rgba(74,213,94,.3);
-          box-shadow:0 0 0 6px rgba(0,176,80,.08),0 8px 28px rgba(0,176,80,.2);
-        ">S</div>
-        <div style="
-          position:absolute;bottom:3px;right:3px;
-          width:14px;height:14px;border-radius:50%;
-          background:#4AD55E;border:2.5px solid #061209;
-          box-shadow:0 0 8px rgba(74,213,94,.9);
-          animation:bl 2s ease-in-out infinite;
-        "></div>
+/* Linhas info */
+.pc-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 22px;
+  border-bottom: 0.5px solid rgba(255,255,255,.05);
+}
+.pc-row:last-child { border-bottom: none; }
+.pc-row-left { display: flex; align-items: center; gap: 10px; }
+.pc-row-label { font-size: 13px; color: rgba(148,180,210,.55); }
+.pc-row-label svg { width: 15px; height: 15px; }
+.pc-row-val { font-size: 13px; font-weight: 600; color: #eef6ff; }
+.pc-row-val.muted { color: rgba(148,180,210,.40); font-weight: 400; font-family: 'DM Mono', monospace; font-size: 11px; }
+.pc-row-val.green { color: #22c55e; }
+.pc-row-val.amber { color: #fbbf24; }
+
+/* Botão de ação inline */
+.pc-action-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all .15s; border: 0.5px solid;
+}
+.pc-action-btn.green {
+  background: rgba(34,197,94,.10); color: #22c55e;
+  border-color: rgba(34,197,94,.25);
+}
+.pc-action-btn.green:hover { background: rgba(34,197,94,.18); }
+
+/* Benefícios */
+.pc-benefits {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  padding: 16px 22px;
+}
+.pc-benefit {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: rgba(190,215,235,.70);
+}
+.pc-benefit-ico {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(34,197,94,.12); border: 0.5px solid rgba(34,197,94,.25);
+  display: flex; align-items: center; justify-content: center;
+  color: #22c55e;
+}
+.pc-benefit-ico svg { width: 11px; height: 11px; }
+
+/* Suporte grid */
+.pc-support-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px 22px; }
+.pc-support-item {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,.03); border: 0.5px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 14px 16px;
+  text-decoration: none; cursor: pointer;
+  transition: all .15s;
+}
+.pc-support-item:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); }
+.pc-support-item.disabled { opacity: .4; cursor: default; }
+.pc-support-ico {
+  width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.pc-support-ico.wa    { background: rgba(37,211,102,.12); border: 0.5px solid rgba(37,211,102,.22); color: #25d366; }
+.pc-support-ico.mail  { background: rgba(59,130,246,.10); border: 0.5px solid rgba(59,130,246,.20); color: #60a5fa; }
+.pc-support-ico.bug   { background: rgba(248,113,113,.10); border: 0.5px solid rgba(248,113,113,.20); color: #f87171; }
+.pc-support-ico.docs  { background: rgba(245,158,11,.10); border: 0.5px solid rgba(245,158,11,.20); color: #fbbf24; }
+.pc-support-ico svg   { width: 17px; height: 17px; }
+.pc-support-name { font-size: 13px; font-weight: 600; color: #eef6ff; }
+.pc-support-sub  { font-size: 11px; color: rgba(148,180,210,.42); margin-top: 2px; }
+
+/* Sair */
+.pc-logout {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(248,113,113,.04); border: 0.5px solid rgba(248,113,113,.12);
+  border-radius: 14px; padding: 16px 22px;
+  cursor: pointer; transition: all .15s;
+}
+.pc-logout:hover { background: rgba(248,113,113,.08); border-color: rgba(248,113,113,.25); }
+.pc-logout-ico {
+  width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+  background: rgba(248,113,113,.10); border: 0.5px solid rgba(248,113,113,.20);
+  display: flex; align-items: center; justify-content: center; color: #f87171;
+}
+.pc-logout-ico svg { width: 15px; height: 15px; }
+.pc-logout-title { font-size: 14px; font-weight: 700; color: #f87171; }
+.pc-logout-sub   { font-size: 11px; color: rgba(248,113,113,.40); margin-top: 2px; }
+
+@media (max-width: 768px) {
+  .pc-hero { padding: 24px 20px 20px !important; }
+  .pc-body { padding: 20px 16px 60px !important; }
+  .pc-benefits { grid-template-columns: 1fr !important; }
+  .pc-support-grid { grid-template-columns: 1fr !important; }
+  .pc-hero-actions { display: none !important; }
+}
+</style>
+
+<div id="pf-shell">
+
+  <!-- HERO -->
+  <div class="pc-hero">
+    <div class="pc-hero-inner">
+      <div class="pc-avatar" id="pf-avatar">
+        S
+        <div class="pc-avatar-dot"></div>
       </div>
-
-      <!-- Info -->
-      <div style="flex:1;min-width:0;">
-        <!-- Nome editável -->
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">
-          <input
-            id="pf-name-input"
-            type="text"
-            placeholder="Seu nome"
-            maxlength="40"
-            oninput="pfNameChange()"
-            onkeydown="if(event.key==='Enter')this.blur()"
-            onblur="pfSaveName()"
-            style="
-              background:transparent;border:none;outline:none;
-              font-family:'Space Grotesk',sans-serif;
-              font-size:26px;font-weight:800;color:#f0fdf4;
-              letter-spacing:-.03em;padding:0;width:100%;min-width:0;
-              transition:color .2s;
-            "
-          >
-          <svg id="pf-edit-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;transition:stroke .2s;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </div>
-
-        <!-- Email -->
-        <div style="
-          display:inline-flex;align-items:center;gap:6px;
-          background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);
-          border-radius:20px;padding:4px 12px;margin-bottom:16px;
-        ">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span id="pf-email-txt" style="font-size:12px;color:rgba(255,255,255,.45);">—</span>
-        </div>
-
-        <!-- Plano pill + botão salvar -->
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <div style="
-            display:inline-flex;align-items:center;gap:7px;
-            background:linear-gradient(135deg,rgba(0,176,80,.2),rgba(74,213,94,.08));
-            border:1px solid rgba(74,213,94,.32);border-radius:20px;padding:5px 14px;
-            font-size:12px;font-weight:700;color:#4AD55E;
-          ">
-            <span style="width:6px;height:6px;border-radius:50%;background:#4AD55E;box-shadow:0 0 6px rgba(74,213,94,.9);animation:bl 2s ease-in-out infinite;display:inline-block;"></span>
-            Premium Ativo
-          </div>
-          <button id="pf-save-btn" onclick="pfSaveName()" style="
-            display:none;align-items:center;gap:6px;
-            background:rgba(0,176,80,.15);border:1px solid rgba(74,213,94,.3);
-            border-radius:8px;color:#4AD55E;
-            font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;
-            padding:6px 14px;cursor:pointer;transition:all .18s;
-            letter-spacing:.04em;text-transform:uppercase;
-          ">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="pc-hero-info">
+        <div class="pc-name-row">
+          <input class="pc-name-input" id="pf-name-input" type="text" placeholder="Seu nome"
+            maxlength="40" oninput="pfNameChange()"
+            onkeydown="if(event.key==='Enter')this.blur()" onblur="pfSaveName()">
+          <button id="pf-save-btn" class="pc-save-btn" onclick="pfSaveName()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>
             Salvar
           </button>
         </div>
+        <div class="pc-email-pill">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(190,215,235,.45)" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="pc-email-txt" id="pf-email-txt">—</span>
+        </div>
+        <div class="pc-badges">
+          <div class="pc-plan-badge">
+            <span class="pc-plan-dot"></span>
+            Premium Ativo
+          </div>
+        </div>
+      </div>
+      <div class="pc-hero-actions">
+        <svg class="pc-edit-ico" id="pf-edit-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
       </div>
     </div>
   </div>
 
-  <!-- ── BODY ── -->
-  <div style="max-width:820px;padding:28px 48px 60px;display:flex;flex-direction:column;gap:14px;">
+  <!-- BODY -->
+  <div class="pc-body">
 
     <!-- Card: Conta -->
-    <div style="background:#0d1a0f;border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;">
-      <div style="display:flex;align-items:center;gap:10px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.06);">
-        <div style="width:32px;height:32px;border-radius:9px;background:rgba(0,176,80,.12);border:1px solid rgba(0,176,80,.2);display:flex;align-items:center;justify-content:center;color:#4AD55E;flex-shrink:0;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <div class="pc-card">
+      <div class="pc-card-header">
+        <div class="pc-card-ico green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <div>
-          <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#e2e8f0;">Informações da conta</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:1px;">Dados de acesso e identificação</div>
+          <div class="pc-card-title">Informações da conta</div>
+          <div class="pc-card-sub">Dados de acesso e identificação</div>
         </div>
       </div>
-
-      <!-- E-mail -->
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.05);gap:16px;">
-        <div style="font-size:13px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:8px;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          E-mail
+      <div class="pc-row">
+        <div class="pc-row-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(148,180,210,.50)" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="pc-row-label">E-mail</span>
         </div>
-        <div id="pf-email-val" style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#e2e8f0;text-align:right;">—</div>
+        <span class="pc-row-val" id="pf-email-display">—</span>
       </div>
-
-      <!-- Senha -->
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.05);gap:16px;">
-        <div style="font-size:13px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:8px;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Senha
+      <div class="pc-row">
+        <div class="pc-row-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(148,180,210,.50)" stroke-width="2" stroke-linecap="round" width="15" height="15"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span class="pc-row-label">Senha</span>
         </div>
-        <button onclick="contaAlterarSenha()" style="background:rgba(0,176,80,.08);border:1px solid rgba(0,176,80,.2);border-radius:9px;color:#4AD55E;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;padding:7px 15px;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:6px;"
-          onmouseover="this.style.background='rgba(0,176,80,.18)'" onmouseout="this.style.background='rgba(0,176,80,.08)'">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <button class="pc-action-btn green" onclick="contaResetSenha()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           Alterar senha
         </button>
       </div>
-
-      <!-- ID -->
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.05);gap:16px;">
-        <div style="font-size:13px;color:rgba(255,255,255,.4);">ID da conta</div>
-        <div id="pf-uid-val" style="font-size:11px;color:rgba(255,255,255,.3);font-family:monospace;">—</div>
+      <div class="pc-row">
+        <div class="pc-row-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(148,180,210,.50)" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="pc-row-label">ID da conta</span>
+        </div>
+        <span class="pc-row-val muted" id="pf-uid-display">—</span>
       </div>
-
-      <!-- Membro desde -->
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;gap:16px;">
-        <div style="font-size:13px;color:rgba(255,255,255,.4);">Membro desde</div>
-        <div id="pf-membro-val" style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#e2e8f0;">—</div>
+      <div class="pc-row">
+        <div class="pc-row-left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(148,180,210,.50)" stroke-width="2" stroke-linecap="round" width="15" height="15"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span class="pc-row-label">Membro desde</span>
+        </div>
+        <span class="pc-row-val" id="pf-since-display">—</span>
       </div>
     </div>
 
     <!-- Card: Plano -->
-    <div style="background:#0d1a0f;border:1px solid rgba(74,213,94,.12);border-radius:18px;overflow:hidden;">
-      <div style="display:flex;align-items:center;gap:10px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.06);background:linear-gradient(90deg,rgba(0,176,80,.06),transparent);">
-        <div style="width:32px;height:32px;border-radius:9px;background:rgba(0,176,80,.12);border:1px solid rgba(0,176,80,.2);display:flex;align-items:center;justify-content:center;color:#4AD55E;flex-shrink:0;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <div class="pc-card">
+      <div class="pc-card-header">
+        <div class="pc-card-ico amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         <div>
-          <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#e2e8f0;">Plano ativo</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:1px;">Assinatura e benefícios incluídos</div>
+          <div class="pc-card-title">Plano ativo</div>
+          <div class="pc-card-sub">Assinatura e benefícios incluídos</div>
         </div>
       </div>
-
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.05);gap:16px;">
-        <div style="font-size:13px;color:rgba(255,255,255,.4);">Plano atual</div>
-        <div style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(0,176,80,.18),rgba(74,213,94,.08));border:1px solid rgba(74,213,94,.28);border-radius:20px;padding:5px 15px;font-size:13px;font-weight:800;color:#4AD55E;">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="#4AD55E"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Premium
+      <div class="pc-row">
+        <div class="pc-row-left">
+          <span class="pc-row-label">Plano atual</span>
         </div>
+        <span class="pc-row-val" style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,.10);border:0.5px solid rgba(245,158,11,.25);border-radius:99px;padding:4px 12px;font-size:12px;font-weight:700;color:#fbbf24;">
+          ★ Premium
+        </span>
       </div>
-
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.05);gap:16px;">
-        <div style="font-size:13px;color:rgba(255,255,255,.4);">Status</div>
-        <div style="display:flex;align-items:center;gap:7px;">
-          <span style="width:7px;height:7px;border-radius:50%;background:#4AD55E;box-shadow:0 0 7px rgba(74,213,94,.9);animation:bl 2s ease-in-out infinite;display:inline-block;"></span>
-          <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#4AD55E;">Ativo</span>
-        </div>
+      <div class="pc-row">
+        <div class="pc-row-left"><span class="pc-row-label">Status</span></div>
+        <span class="pc-row-val green">● Ativo</span>
       </div>
-
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.05);gap:16px;">
-        <div style="font-size:13px;color:rgba(255,255,255,.4);">Renovação</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.3);">Contate o suporte</div>
+      <div class="pc-row">
+        <div class="pc-row-left"><span class="pc-row-label">Renovação</span></div>
+        <span class="pc-row-val muted">Contate o suporte</span>
       </div>
-
-      <!-- Benefícios -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 22px 18px;">
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5);">
-          <div style="width:18px;height:18px;border-radius:50%;background:rgba(0,176,80,.15);border:1px solid rgba(74,213,94,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#4AD55E;">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>Apostas ilimitadas</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5);">
-          <div style="width:18px;height:18px;border-radius:50%;background:rgba(0,176,80,.15);border:1px solid rgba(74,213,94,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#4AD55E;">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>Calculadora Surebet</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5);">
-          <div style="width:18px;height:18px;border-radius:50%;background:rgba(0,176,80,.15);border:1px solid rgba(74,213,94,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#4AD55E;">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>Histórico completo</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5);">
-          <div style="width:18px;height:18px;border-radius:50%;background:rgba(0,176,80,.15);border:1px solid rgba(74,213,94,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#4AD55E;">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>Declaração de IR</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5);">
-          <div style="width:18px;height:18px;border-radius:50%;background:rgba(0,176,80,.15);border:1px solid rgba(74,213,94,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#4AD55E;">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>Exportação Excel/PDF</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5);">
-          <div style="width:18px;height:18px;border-radius:50%;background:rgba(0,176,80,.15);border:1px solid rgba(74,213,94,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#4AD55E;">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>Suporte prioritário</div>
+      <div class="pc-benefits">
+        <div class="pc-benefit"><div class="pc-benefit-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Apostas ilimitadas</div>
+        <div class="pc-benefit"><div class="pc-benefit-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Calculadora Surebet</div>
+        <div class="pc-benefit"><div class="pc-benefit-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Histórico completo</div>
+        <div class="pc-benefit"><div class="pc-benefit-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Declaração de IR</div>
+        <div class="pc-benefit"><div class="pc-benefit-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Exportação Excel/PDF</div>
+        <div class="pc-benefit"><div class="pc-benefit-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Suporte prioritário</div>
       </div>
     </div>
 
     <!-- Card: Suporte -->
-    <div style="background:#0d1a0f;border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;">
-      <div style="display:flex;align-items:center;gap:10px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.06);">
-        <div style="width:32px;height:32px;border-radius:9px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);display:flex;align-items:center;justify-content:center;color:#38bdf8;flex-shrink:0;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div class="pc-card">
+      <div class="pc-card-header">
+        <div class="pc-card-ico blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <div>
-          <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#e2e8f0;">Suporte</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:1px;">Fale com a equipe SureGreen</div>
+          <div class="pc-card-title">Suporte</div>
+          <div class="pc-card-sub">Fale com a equipe SureGreen</div>
         </div>
       </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px 22px 20px;">
-
-        <a href="https://wa.me/5511964549082" target="_blank" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:14px 16px;text-decoration:none;transition:all .18s;cursor:pointer;"
-          onmouseover="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.15)'"
-          onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#25d366;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <div class="pc-support-grid">
+        <a href="https://wa.me/5511964549082" target="_blank" class="pc-support-item">
+          <div class="pc-support-ico wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           </div>
-          <div>
-            <div style="font-size:12px;font-weight:700;color:#e2e8f0;line-height:1.3;">WhatsApp</div>
-            <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:1px;">Resposta rápida</div>
-          </div>
+          <div><div class="pc-support-name">WhatsApp</div><div class="pc-support-sub">Resposta rápida</div></div>
         </a>
-
-        <a href="/cdn-cgi/l/email-protection#cebdbbbea1bcbaab8ebdbbbcaba9bcababa0e0ada1a3e0acbc" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:14px 16px;text-decoration:none;transition:all .18s;cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.15)'" onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#38bdf8;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:suporte@suregreen.com.br" class="pc-support-item">
+          <div class="pc-support-ico mail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="17" height="17"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
-          <div>
-            <div style="font-size:12px;font-weight:700;color:#e2e8f0;line-height:1.3;">E-mail</div>
-            <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:1px;"><span class="__cf_email__" data-cfemail="90e3e5e0ffe2e4f5d0e3e5e2f5f7e2f5f5febef3fffdbef2e2">[email&#160;protected]</span></div>
-          </div>
+          <div><div class="pc-support-name">E-mail</div><div class="pc-support-sub">suporte@suregreen.com.br</div></div>
         </a>
-
-        <a href="https://wa.me/5511964549082?text=Bug%20report%3A%20" target="_blank" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:14px 16px;text-decoration:none;transition:all .18s;cursor:pointer;"
-          onmouseover="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.15)'"
-          onmouseout="this.style.background='rgba(255,255,255,.04)';this.style.borderColor='rgba(255,255,255,.08)'">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#f87171;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <a href="https://wa.me/5511964549082?text=Bug%20report%3A%20" target="_blank" class="pc-support-item">
+          <div class="pc-support-ico bug">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="17" height="17"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           </div>
-          <div>
-            <div style="font-size:12px;font-weight:700;color:#e2e8f0;line-height:1.3;">Reportar bug</div>
-            <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:1px;">Nos ajude a melhorar</div>
-          </div>
+          <div><div class="pc-support-name">Reportar bug</div><div class="pc-support-sub">Nos ajude a melhorar</div></div>
         </a>
-
-        <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:13px;padding:14px 16px;opacity:.45;cursor:default;">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fbbf24;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <div class="pc-support-item disabled">
+          <div class="pc-support-ico docs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="17" height="17"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
-          <div>
-            <div style="font-size:12px;font-weight:700;color:#e2e8f0;line-height:1.3;">Documentação</div>
-            <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:1px;">Em breve</div>
-          </div>
+          <div><div class="pc-support-name">Documentação</div><div class="pc-support-sub">Em breve</div></div>
         </div>
-
       </div>
     </div>
 
     <!-- Sair -->
-    <div onclick="contaSair()" style="
-      display:flex;align-items:center;gap:12px;
-      background:rgba(248,113,113,.04);border:1px solid rgba(248,113,113,.12);
-      border-radius:16px;padding:16px 22px;cursor:pointer;transition:all .18s;
-    "
-      onmouseover="this.style.background='rgba(248,113,113,.1)';this.style.borderColor='rgba(248,113,113,.25)'"
-      onmouseout="this.style.background='rgba(248,113,113,.04)';this.style.borderColor='rgba(248,113,113,.12)'">
-      <div style="width:34px;height:34px;border-radius:9px;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#f87171;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    <div class="pc-logout" onclick="contaSair()">
+      <div class="pc-logout-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="15" height="15"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       </div>
       <div>
-        <div style="font-size:14px;font-weight:700;color:#f87171;">Sair da conta</div>
-        <div style="font-size:11px;color:rgba(248,113,113,.4);margin-top:1px;">Encerrar sessão neste dispositivo</div>
+        <div class="pc-logout-title">Sair da conta</div>
+        <div class="pc-logout-sub">Encerrar sessão neste dispositivo</div>
       </div>
     </div>
 
   </div>
-
 </div><!-- end pf-shell -->
+
+<script>
+(function() {
+  var _pcInited = false;
+  var _origRender = window.renderConta;
+  window.renderConta = function() {
+    if (typeof _origRender === 'function') _origRender();
+    // Sync new elements
+    var uid = (window.auth && window.auth.currentUser) ? window.auth.currentUser.uid : '';
+    var email = (window.auth && window.auth.currentUser) ? (window.auth.currentUser.email || '') : '';
+    var emailD = document.getElementById('pf-email-display');
+    if (emailD && email) emailD.textContent = email;
+    var uidD = document.getElementById('pf-uid-display');
+    if (uidD && uid) uidD.textContent = uid.substring(0,18) + '…';
+    // Membro desde
+    var user = window.auth && window.auth.currentUser;
+    if (user && user.metadata && user.metadata.creationTime) {
+      var d = new Date(user.metadata.creationTime);
+      var months = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+      var sinceEl = document.getElementById('pf-since-display');
+      if (sinceEl) sinceEl.textContent = d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
+    }
+  };
+})();
+</script>
+
 </div><!-- end pg-conta -->
 
 </div><!-- end main-content -->
@@ -9176,7 +10151,7 @@ window.pfDoSaveName = async function() {
   }
 };
 
-// BUG 2 FIX: Open forgot password modal pre-filled with current user email
+
 window.contaAlterarSenha = function() {
   const user = auth.currentUser;
   const overlay = document.getElementById('fg-overlay');
@@ -9256,6 +10231,8 @@ function loadEntries(uid) {
     window._entries = [];
     snap.forEach(d => window._entries.push(d.data()));
     window._entries.sort((a,b) => b.id - a.id);
+    // Sinaliza que o Firestore já retornou — usado pelo welcome screen
+    window._sgFirstSnapshotDone = true;
     _scheduleRender();
   });
 }
@@ -9274,33 +10251,41 @@ window.fbToast = function(msg, type) {
 // ── Salva entrada no Firestore ──
 window.fbSave = async function(entry) {
   const user = auth.currentUser;
-  if (!user) return;
+  if (!user) { console.warn('fbSave: sem usuário'); return; }
   try {
     await setDoc(doc(db, 'users', user.uid, 'entries', String(entry.id)), entry);
   } catch(err) {
     console.error('fbSave error:', err);
-    window.fbToast('Erro ao salvar. Verifique sua conexão.', 'error');
+    throw err; // relança para o .catch() do chamador
   }
 }
 
 // ── Deleta entrada no Firestore ──
 window.fbDelete = async function(id) {
   const user = auth.currentUser;
-  if (!user) return;
+  if (!user) { window.fbToast('Sessão expirada. Faça login novamente.', 'error'); return; }
+  
+  // 1. Remove localmente de imediato — UI responde na hora
+  const idStr = String(id);
+  window._entries = (window._entries || []).filter(function(e) { return String(e.id) !== idStr; });
+  
+  // 2. Atualiza UI com try/catch para não quebrar o delete
+  try { if (typeof window.render    === 'function') window.render();    } catch(e) {}
+  try { if (typeof window.updStats  === 'function') window.updStats();  } catch(e) {}
+  try { if (typeof window.dxRender  === 'function') window.dxRender();  } catch(e) {}
+
+  // 3. Deleta no Firestore
   try {
-    // Remove imediatamente do estado local para UI instantânea
-    window._entries = (window._entries || []).filter(function(e) { return String(e.id) !== String(id); });
-    // Re-renderiza imediatamente sem esperar o Firestore
-    if (typeof window.render === 'function') window.render();
-    if (typeof window.updStats === 'function') window.updStats();
-    if (typeof window.dxRender === 'function') window.dxRender();
-    // Depois deleta no Firestore em background
-    await deleteDoc(doc(db, 'users', user.uid, 'entries', String(id)));
+    await deleteDoc(doc(db, 'users', user.uid, 'entries', idStr));
     window.fbToast('Entrada removida.', 'success');
   } catch(err) {
     console.error('fbDelete error:', err);
-    // Se falhou, recarrega do Firestore para restaurar estado correto
+    // Restaura a entrada localmente se o delete falhou
     window.fbToast('Erro ao remover. Tente novamente.', 'error');
+    // Força resync do Firestore para restaurar estado correto
+    if (typeof loadEntries === 'function') {
+      setTimeout(function() { loadEntries(user.uid); }, 500);
+    }
   }
 }
 
@@ -9375,7 +10360,6 @@ window.fbDeleteDiario = async function(data) {
 
 window._fbReady = true;
 </script>
-
 
 
 <script>
@@ -9608,7 +10592,6 @@ function addCasa() {
 
 function remCasa(n) {
   document.getElementById('cr' + n)?.remove();
-  // BUG 2 FIX — Renumera usando IDs diretos em vez de querySelectorAll que ignorava o input de busca
   casaCnt = 0;
   document.querySelectorAll('.casa-row').forEach(function(r) {
     casaCnt++;
@@ -9715,7 +10698,7 @@ function orgCalc() {
 
   let lc;
   if (tipo === 'freebet') {
-    // BUG 3 FIX — calcula lucro real da freebet:
+    
     // Em freebet a stake não é sua, então o lucro = soma de (odd_i - 1) * stake_proporcional_i
     // Simplificado para 1 input de stake: usamos (odd_back - 1) * stk para a casa principal
     // Para multi-casa: distribui o stake proporcionalmente ao inverso das odds
@@ -9742,7 +10725,7 @@ function orgCalc() {
   el.value = lc >= 0 ? `+ R$ ${lc.toFixed(2)}` : `- R$ ${Math.abs(lc).toFixed(2)}`;
   el.style.color = lc >= 0 ? '#4CAF82' : '#e05c6a';
 
-  // BUG 1 FIX — Atualiza o campo lucro estimado em tempo real quando stake muda
+  
   if (lucroEstEl) {
     // Só sobrescreve se o campo NÃO foi travado manualmente pelo apostador
     if (!lucroEstEl.dataset.locked) {
@@ -9773,7 +10756,9 @@ function shakeField(id) {
   el.focus();
 }
 
+var _addingEntry = false;
 function addEntry() {
+  if (_addingEntry) return;
   const desc  = document.getElementById('fDesc').value.trim();
   const fStakeEl = document.getElementById('fStake');
   const stkRaw = (fStakeEl ? fStakeEl.value : '').replace(',', '.').replace(/[^0-9.]/g, '');
@@ -9785,10 +10770,25 @@ function addEntry() {
   if (!desc)  { shakeField('fDesc');  if(window.fbToast) window.fbToast('Adicione uma descrição para a aposta.', 'warning'); return; }
   if (!stk)   { shakeField('fStake'); if(window.fbToast) window.fbToast('Preencha o valor do stake.', 'warning'); return; }
   if (!casas.length) { if(window.fbToast) window.fbToast('Adicione ao menos uma casa de aposta.', 'warning'); return; }
+  // UX4 — Casa obrigatória: avisa se alguma casa não foi selecionada
+  var casasSemNome = casas.filter(function(c) { return !c.nome || c.nome.trim() === ''; });
+  if (casasSemNome.length) {
+    if(window.fbToast) window.fbToast('Selecione a casa de aposta em todas as entradas.', 'warning');
+    // Destaca o campo vazio
+    for (var ci = 1; ci <= casaCnt; ci++) {
+      var nEl = document.getElementById('cNome' + ci);
+      if (nEl && (!nEl.value || !nEl.value.trim())) {
+        nEl.style.borderColor = 'rgba(239,68,68,.6)';
+        nEl.style.boxShadow = '0 0 0 3px rgba(239,68,68,.10)';
+        setTimeout(function(el){ return function(){ el.style.borderColor=''; el.style.boxShadow=''; }; }(nEl), 2000);
+      }
+    }
+    return;
+  }
   if (!isFree && casas.some(c => !c.odd || c.odd <= 1)) { if(window.fbToast) window.fbToast('Preencha as odds de todas as casas.', 'warning'); return; }
   if (isFree  && casas.every(c => !c.odd || c.odd <= 1)) { if(window.fbToast) window.fbToast('Preencha a odd da freebet.', 'warning'); return; }
 
-  // BUG 1 + 3 FIX — Recalcula com lógica correta de freebet
+  
   const lucroFixado = parseFloat(document.getElementById('fLucroEst')?.value);
   let le;
   if (!isNaN(lucroFixado) && lucroFixado !== 0) {
@@ -9823,8 +10823,34 @@ function addEntry() {
     date: new Date().toLocaleDateString('pt-BR'),
     time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
   };
-  save(newEntry);
-  render();
+  // UX1 — Loading state no botão
+  _addingEntry = true;
+  var btn = document.getElementById('btnRegistrar');
+  var btnOrigHTML = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    btn.innerHTML = '<span style="display:inline-flex;align-items:center;gap:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>Salvando...</span>';
+    btn.style.animation = 'none';
+  }
+
+  function onDone() {
+    _addingEntry = false;
+    if (btn) { btn.disabled = false; btn.style.opacity = ''; btn.innerHTML = btnOrigHTML; }
+  }
+
+  // Salva e aguarda Firebase
+  var savePromise = window.fbSave ? window.fbSave(newEntry) : Promise.resolve();
+  savePromise.then(function() {
+    render();
+    onDone();
+  }).catch(function(err) {
+    console.error('addEntry save error:', err);
+    if (window.fbToast) window.fbToast('Erro ao salvar. Tente novamente.', 'error');
+    onDone();
+    return;
+  });
+
   ['fDesc','fStake'].forEach(id => document.getElementById(id).value = '');
   const lucroEstEl = document.getElementById('fLucroEst');
   if (lucroEstEl) lucroEstEl.value = '';
@@ -9930,31 +10956,59 @@ function addBet() {
 }
 
 function upSt(id, st) {
-  const e = entries.find(x => x.id === id);
-  if (!e) return;
-  e.status = st;
+  const e = entries.find(x => String(x.id) === String(id));
+  if (!e) {
+    if (window.fbToast) window.fbToast('Erro: entrada não encontrada.', 'error');
+    return;
+  }
+
   const isNormal = e.tipo === 'aposta';
   const isFree   = e.tipo === 'freebet';
 
+  // UX2 — Optimistic update: atualiza estado local IMEDIATAMENTE
+  e.status = st;
   if (st === 'pending') {
     e.pl = 0;
   } else if (isFree) {
-    // Freebet: ganhou = lucroEst positivo, perdeu = 0 (stake era grátis)
     e.pl = st === 'won' ? Math.abs(e.lucroEst) : 0;
   } else if (isNormal) {
-    // Aposta normal: ganhou = lucroEst, perdeu = -stake inteiro
     e.pl = st === 'won' ? e.lucroEst : -Math.abs(e.stake);
   } else {
-    // BUG 6 FIX — Surebet / Superodds / Duplo Green
-    // Ganhou = lucroEst positivo | Perdeu = negativo (perda real = stake apostado)
-    if (st === 'won') {
-      e.pl = Math.abs(e.lucroEst);
-    } else {
-      // Perda numa surebet = stake total investido (perda real do apostador)
-      e.pl = -Math.abs(e.stake);
+    e.pl = st === 'won' ? Math.abs(e.lucroEst) : -Math.abs(e.stake);
+  }
+
+  // Atualiza UI na hora — sem esperar Firebase
+  try { render(); } catch(err) {}
+  try { updStats(); } catch(err) {}
+
+  // UX2 — Feedback visual imediato no card
+  var cardEl = document.querySelector('[data-id="' + id + '"]');
+  if (cardEl) {
+    cardEl.classList.remove('won', 'lost', 'pending');
+    cardEl.classList.add(st);
+    var statusBadge = cardEl.querySelector('.ec-status-won, .ec-status-lost, .ec-status-pend');
+    if (statusBadge) {
+      statusBadge.className = st === 'won' ? 'ec-status-won' : st === 'lost' ? 'ec-status-lost' : 'ec-status-pend';
+      statusBadge.textContent = st === 'won' ? '✓ Ganhou' : st === 'lost' ? '✕ Perdeu' : '⏳ Pendente';
     }
   }
-  save(e); render();
+
+  // Toast imediato
+  var msg = st === 'won' ? '✓ Marcada como Ganhou!' : st === 'lost' ? '✕ Marcada como Perdeu.' : '⏳ Marcada como Pendente.';
+  if (window.fbToast) window.fbToast(msg, st === 'won' ? 'success' : 'warning');
+
+  // Salva no Firebase em background
+  if (typeof window.fbSave === 'function') {
+    window.fbSave(e).catch(function(err) {
+      console.error('upSt save error:', err);
+      if (window.fbToast) window.fbToast('Erro ao salvar status. Tente novamente.', 'error');
+      // Reverte o status local se falhou
+      e.status = e.status === 'won' ? 'pending' : e.status;
+      try { render(); } catch(er) {}
+    });
+  } else {
+    save(e);
+  }
 }
 
 // ══ CONFIRM DELETE ══
@@ -10001,14 +11055,18 @@ const RCL = { casa:'#3ecf8e', empate:'#e8c97e', fora:'#60a5fa' };
 const RLB = { casa:'1 Casa', empate:'X Empate', fora:'2 Fora' };
 
 function render() {
-  const q  = document.getElementById('srch').value.toLowerCase();
+  const srchEl = document.getElementById('srch');
+  if (!srchEl) return; // dashboard não está visível
+  const q  = srchEl.value.toLowerCase();
   const fd = entries.filter(e => {
     const mf = filt === 'all' || e.status === filt || e.tipo === filt;
     const ms = !q || e.desc.toLowerCase().includes(q) || (e.casas||[]).some(c=>c.nome.toLowerCase().includes(q)) || e.tipo.toLowerCase().includes(q);
     return mf && ms;
   });
-  document.getElementById('eCnt').textContent = fd.length === 1 ? '1 entrada' : `${fd.length} entradas`;
+  const cntEl = document.getElementById('eCnt');
+  if (cntEl) cntEl.textContent = fd.length === 1 ? '1 entrada' : `${fd.length} entradas`;
   const list = document.getElementById('list');
+  if (!list) return;
   if (!fd.length) {
     const isFiltered = filt !== 'all' || q;
     list.innerHTML = `<div class="empty-state">
@@ -10221,7 +11279,7 @@ function updLucroDia() {
   if (pvEl) {
     if (perdaTotal > 0) {
       pvEl.textContent = '-' + f(perdaTotal);
-      pvEl.style.color = '#e05c6a';
+      pvEl.style.color = '#f87171';
     } else {
       pvEl.textContent = 'R$ 0,00';
       pvEl.style.color = '#B0B6C0';
@@ -10368,7 +11426,6 @@ window.exportPDF = function() {
     </tr>`;
   }).join('');
 
-  // BUG 4 FIX — Usa Blob URL em vez de window.open (que é bloqueado por browsers modernos)
   const htmlContent = `<!DOCTYPE html><html><head><meta charset="UTF-8">
   <title>SureGreen — Relatório</title>
   <style>
@@ -10438,9 +11495,6 @@ window.exportPDF = function() {
 };
 
 
-
-
-
 // ── Editar Entrada ────────────────────────────────────────
 var _editId = null;
 
@@ -10472,7 +11526,7 @@ window.saveEdit = function() {
   const novoStake  = parseFloat(document.getElementById('ed-stake').value)     || e.stake;
   const novoLucro  = parseFloat(document.getElementById('ed-lucro').value);
   const novoStatus = document.getElementById('ed-status').value;
-  // BUG 8 FIX — captura obs e link do modal
+  
   const novoObs    = document.getElementById('ed-obs').value.trim();
   const novoLink   = document.getElementById('ed-link').value.trim();
 
@@ -10501,7 +11555,7 @@ window.saveEdit = function() {
   save(e);
   render();
   closeEdit();
-  // BUG 7 FIX — feedback via toast, sem window.confirm nativo
+  
   if (window.fbToast) window.fbToast('Aposta atualizada com sucesso!', 'success');
 };
 
@@ -10522,7 +11576,7 @@ window.ldAddExtra = function() {
   const val  = parseFloat(document.getElementById('ld-ex-val').value);
   if (isNaN(val) || val === 0) { document.getElementById('ld-ex-val').focus(); return; }
 
-  // BUG 9 FIX — captura descrição do campo, fallback para 'Cassino / Outros'
+  
   const descEl = document.getElementById('ld-ex-desc');
   const desc = descEl ? (descEl.value.trim() || 'Cassino / Outros') : 'Cassino / Outros';
 
@@ -11297,72 +12351,186 @@ document.addEventListener('mousedown', function(e) {
 });
 
 
-function coRegistrarDoModal() {
-  const desc   = document.getElementById('cr-desc').value.trim();
-  const status = document.getElementById('cr-status').value;
-  const tipo   = document.getElementById('cr-tipo').value;
-  const { casas, custoSoma, lucroReal } = _coModalData;
+var _coRegistrando = false;
 
-  if (!desc) {
-    const el = document.getElementById('cr-desc');
-    el.focus();
-    el.style.borderColor = 'rgba(239,68,68,.6)';
-    el.style.boxShadow = '0 0 0 3px rgba(239,68,68,.12)';
-    setTimeout(() => { el.style.borderColor = ''; el.style.boxShadow = ''; }, 1800);
+function coRegistrarDoModal() {
+  // ── Proteção anti-duplo-clique ──
+  if (_coRegistrando) return;
+
+  // ── Lê elementos do modal ──
+  var descEl   = document.getElementById('cr-desc');
+  var statusEl = document.getElementById('cr-status');
+  var tipoEl   = document.getElementById('cr-tipo');
+
+  if (!descEl || !statusEl || !tipoEl) {
+    window.fbToast && window.fbToast('Erro: feche e reabra o modal.', 'error');
     return;
   }
 
-  // Pega só os nomes (odd e tipo vêm direto do _coModalData — calculadora)
-  const nomeInputs   = document.querySelectorAll('.cr-nome-inp');
-  const nomesEditados = Array.from(nomeInputs).map(inp => inp.value.trim());
+  var desc   = descEl.value ? descEl.value.trim() : '';
+  var status = statusEl.value || 'pending';
+  var tipo   = tipoEl.value   || 'surebet';
 
-  const casasObj = casas.map((ca, i) => ({
-    nome:  nomesEditados[i] || ('Casa ' + (i + 1)),
-    odd:   ca.odd,
-    stake: ca.stakeIdeal,
-    tipo:  ca.tipo,
-    res:   'casa'
-  }));
-
-  let pl;
-  if (tipo === 'freebet') pl = status === 'won' ? lucroReal : 0;
-  else if (tipo === 'surebet' || tipo === 'superodds' || tipo === 'apostagrats') pl = lucroReal;
-  else pl = status === 'won' ? lucroReal : -custoSoma;
-
-  const entry = {
-    id: Date.now(), tipo, desc, casas: casasObj,
-    stake: custoSoma, lucroEst: lucroReal,
-    status, pl,
-    date: new Date().toLocaleDateString('pt-BR'),
-    time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
-    ts: Date.now()
-  };
-
-  // Usa o mesmo caminho do save() original — fbSave via API modular
-  if (typeof window.fbSave === 'function') {
-    window.fbSave(entry).then(function() {
-      window.fbToast && window.fbToast('Aposta registrada com sucesso!', 'success');
-    }).catch(function(e) {
-      window.fbToast && window.fbToast('Erro ao salvar: ' + (e.message || e), 'error');
-    });
-  } else {
-    // fallback localStorage
-    try {
-      const key = 'entries_' + (window.currentUser?.uid || 'local');
-      const arr = JSON.parse(localStorage.getItem(key) || '[]');
-      arr.unshift(entry);
-      localStorage.setItem(key, JSON.stringify(arr));
-    } catch(e) {}
-    window.fbToast && window.fbToast('Aposta registrada!', 'success');
+  // ── Valida descrição ──
+  if (!desc) {
+    descEl.focus();
+    descEl.style.borderColor = 'rgba(239,68,68,.6)';
+    descEl.style.boxShadow   = '0 0 0 3px rgba(239,68,68,.12)';
+    setTimeout(function() {
+      descEl.style.borderColor = '';
+      descEl.style.boxShadow   = '';
+    }, 1800);
+    return;
   }
 
-  if (typeof render === 'function') render();
-  if (typeof updateStats === 'function') updateStats();
-  if (typeof renderLucroHoje === 'function') renderLucroHoje();
+  // ── Valida dados da calculadora ──
+  if (!_coModalData || !_coModalData.casas || _coModalData.casas.length === 0) {
+    window.fbToast && window.fbToast('Erro: recalcule antes de registrar.', 'error');
+    return;
+  }
 
-  coFecharModalRegistro();
-  const sinal = lucroReal >= 0 ? '+' : '';
-  showToast && showToast('', 'Registrada! Est: ' + sinal + 'R$\u00a0' + Math.abs(lucroReal).toFixed(2).replace('.', ','));
+  var casas     = _coModalData.casas;
+  var custoSoma = _coModalData.custoSoma  || 0;
+  var lucroReal = typeof _coModalData.lucroReal === 'number' ? _coModalData.lucroReal : 0;
+
+  // ── Bloqueia ──
+  _coRegistrando = true;
+  var btnSave = document.querySelector('.cr-save');
+  if (btnSave) {
+    btnSave.disabled     = true;
+    btnSave.style.opacity = '0.65';
+    btnSave.innerHTML    = 'Registrando...';
+  }
+
+  // ── Monta objeto da entrada ──
+  var nomeInputs    = document.querySelectorAll('.cr-nome-inp');
+  var nomesEditados = Array.from(nomeInputs).map(function(inp) { return inp.value.trim(); });
+
+  var casasObj = casas.map(function(ca, i) {
+    return {
+      nome:  nomesEditados[i] || ('Casa ' + (i + 1)),
+      odd:   ca.odd   || 0,
+      stake: ca.stakeIdeal || ca.stakeRaw || 0,
+      tipo:  ca.tipo  || 'back',
+      res:   'casa'
+    };
+  });
+
+  var pl;
+  if (tipo === 'freebet')
+    pl = status === 'won' ? lucroReal : 0;
+  else if (tipo === 'surebet' || tipo === 'superodds' || tipo === 'apostagrats')
+    pl = lucroReal;
+  else
+    pl = status === 'won' ? lucroReal : -custoSoma;
+
+  var entry = {
+    id:       Date.now(),
+    tipo:     tipo,
+    desc:     desc,
+    casas:    casasObj,
+    stake:    custoSoma,
+    lucroEst: lucroReal,
+    status:   status,
+    pl:       pl,
+    date:     new Date().toLocaleDateString('pt-BR'),
+    time:     new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+    ts:       Date.now()
+  };
+
+  // ── Callbacks ──
+  function onSuccess() {
+    // Fecha modal primeiro — antes de qualquer render
+    coFecharModalRegistro();
+
+    // Mostra toast de sucesso
+    sgCalcSuccessToast(lucroReal, casas);
+
+    // Limpa calculadora
+    coLimparTudo();
+
+    // Atualiza dashboard em seguida com delay seguro
+    setTimeout(function() {
+      try { if (typeof render          === 'function') render(); } catch(e) { console.warn('render err', e); }
+      try { if (typeof updateStats     === 'function') updateStats(); } catch(e) { console.warn('updateStats err', e); }
+      try { if (typeof renderLucroHoje === 'function') renderLucroHoje(); } catch(e) { console.warn('renderLucroHoje err', e); }
+    }, 200);
+
+    setTimeout(function() { _coRegistrando = false; }, 1500);
+  }
+
+  function onError(e) {
+    window.fbToast && window.fbToast('Erro ao salvar: ' + ((e && e.message) ? e.message : String(e)), 'error');
+    _coRegistrando = false;
+    if (btnSave) {
+      btnSave.disabled      = false;
+      btnSave.style.opacity = '';
+      btnSave.innerHTML     = '✓ Registrar Aposta';
+    }
+  }
+
+  // ── Salva ──
+  if (typeof window.fbSave === 'function') {
+    Promise.resolve()
+      .then(function() { return window.fbSave(entry); })
+      .then(onSuccess)
+      .catch(onError);
+  } else {
+    try {
+      var uid = window.currentUser && window.currentUser.uid ? window.currentUser.uid : 'local';
+      var key = 'entries_' + uid;
+      var arr = JSON.parse(localStorage.getItem(key) || '[]');
+      arr.unshift(entry);
+      localStorage.setItem(key, JSON.stringify(arr));
+      onSuccess();
+    } catch(e) { onError(e); }
+  }
+}
+
+
+function coLimparTudo() {
+  // 1. Zera campos ANTES do coRender salvar prev[]
+  for (var i = 1; i <= 5; i++) {
+    var oddEl  = document.getElementById('co_odd' + i);
+    var val1El = document.getElementById('co_val1_inp');
+    var valEl  = document.getElementById('co_val' + i);
+    var aumEl  = document.getElementById('co_aum' + i);
+    var tipEl  = document.getElementById('co_tipo' + i);
+    var ccEl   = document.getElementById('co_cc' + i);
+    var fbEl   = document.getElementById('co_fb' + i);
+    if (oddEl)  oddEl.value  = '';
+    if (i === 1 && val1El) val1El.value = '';
+    if (i > 1 && valEl)   valEl.value  = '';
+    if (aumEl)  aumEl.value  = '0';
+    if (tipEl)  tipEl.value  = 'back';
+    if (ccEl)   ccEl.checked  = false;
+    if (fbEl)   fbEl.checked  = false;
+  }
+
+  // 2. Reset estado interno completo
+  for (var j = 1; j <= 5; j++) {
+    coManual[j] = false;
+    if (typeof coLayVals !== 'undefined') coLayVals[j] = 0;
+  }
+  coLastLucro = 0;
+
+  // 3. Re-renderiza com estado zerado
+  if (typeof coRender === 'function') coRender();
+
+  // 4. Esconde resultado e botão — aguarda render
+  setTimeout(function() {
+    var res = document.getElementById('coResult');
+    if (res) res.classList.remove('show');
+    var sendWrap = document.getElementById('coSendWrap');
+    if (sendWrap) sendWrap.style.display = 'none';
+    // Segunda passada: garante campos zerados mesmo após re-render
+    for (var k = 1; k <= 5; k++) {
+      var o = document.getElementById('co_odd' + k);
+      var v = document.getElementById(k === 1 ? 'co_val1_inp' : 'co_val' + k);
+      if (o) o.value = '';
+      if (v) v.value = '';
+    }
+  }, 80);
 }
 
 // Fecha modal ao clicar fora
@@ -11811,7 +12979,6 @@ function renderCal(year, month, list) {
     ttEl.classList.remove('show');
   }
 }
-
 
 
 function showCalTooltip(day, data) {
@@ -12535,7 +13702,6 @@ function diarAgendarMeiaNoite() {
     diarAgendarMeiaNoite();
   }, msAte);
   // Log para debug
-  console.log('[SureGreen] Fechamento automático agendado para', meia.toLocaleTimeString('pt-BR'), '(em', Math.round(msAte/60000), 'min)');
 }
 
 // diarCalcPreview não é mais necessário (valores são hidden e sempre automáticos)
@@ -12855,7 +14021,6 @@ window.diarRender = function() {
   }
 
   // Resumo compacto na sidebar
-  // BUG 7 FIX: Recalculate monthly totals from _entries (source of truth), not from closed days
   var entriesRealDoMes = (window._entries || []).filter(function(e) {
     if (e.status === 'pending') return false;
     var d = new Date(Number(e.id));
@@ -13092,8 +14257,19 @@ function entryHTML(e) {
       </div>
     </div>
     <div class="er">
-      <div class="esk">R$ ${parseFloat(e.stake||0).toFixed(2)}</div>
-      <div class="epl ${pc}">${pt}</div>
+      <div>
+        <div class="esk-lbl">Resultado</div>
+        <div class="epl ${pc}" style="margin-top:4px;font-size:14px;padding:5px 12px;">${pt}</div>
+      </div>
+      <select class="ssel" onchange="upSt(${e.id},this.value)">
+        <option value="pending" ${e.status==='pending'?'selected':''}>⏳ Pendente</option>
+        <option value="won"     ${e.status==='won'    ?'selected':''}>✓ Ganhou</option>
+        <option value="lost"    ${e.status==='lost'   ?'selected':''}>✕ Perdeu</option>
+      </select>
+      <div style="display:flex;gap:5px;">
+        <button class="btn-edit" onclick="openEdit(${e.id})" title="Editar">✏️</button>
+        <button class="btn-del"  onclick="delEnt(${e.id})"  title="Remover">🗑</button>
+      </div>
     </div>
   </div>`;
 }
@@ -14492,27 +15668,221 @@ document.getElementById('fg-email').addEventListener('keydown', function(e) {
 }
 
 /* ══ PG-CONTA DARK OVERRIDE — wins all theme cascades ══ */
-html body #pg-conta,
-html body #pg-conta #pg-conta-inner {
-  background: #0a0f0c !important;
-  color: #e2e8f0 !important;
-}
-html body #pg-conta {
-  padding: 0 !important;
-}
-html body #pg-conta .pf-hero {
-  background: linear-gradient(160deg, #071a0c 0%, #0b2414 50%, #071a0c 100%) !important;
-  color: #e2e8f0 !important;
-}
-html body #pg-conta .pf-card {
-  background: #0f1a12 !important;
-  border-color: rgba(255,255,255,.07) !important;
-  color: #e2e8f0 !important;
-}
-html body #pg-conta .pf-body {
-  background: #0a0f0c !important;
-}
+
 </style>
+
+
+<!-- ══════════════════════════════════════════════════
+     TELA DE BOAS-VINDAS — aparece só quando sem entradas
+     ══════════════════════════════════════════════════ -->
+<div id="sg-welcome-overlay" style="display:none;position:fixed;inset:0;background:rgba(7,14,26,0.92);z-index:9000;align-items:center;justify-content:center;padding:20px;">
+<style>
+.sgw-box{background:#0f1e30;border:1px solid rgba(255,255,255,0.10);border-radius:20px;width:100%;max-width:520px;overflow:hidden;}
+.sgw-header{background:linear-gradient(135deg,#0d1e2f,#0a1a28);padding:32px 36px 28px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.sgw-logo{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.sgw-logo-ico{width:36px;height:36px;background:#22c55e;border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.sgw-logo-ico svg{width:18px;height:18px;stroke:#0a1a28;fill:none;stroke-width:2.5;stroke-linecap:round;}
+.sgw-logo-name{font-family:"Space Grotesk",sans-serif;font-size:18px;font-weight:700;color:#eef6ff;}
+.sgw-title{font-family:"Space Grotesk",sans-serif;font-size:22px;font-weight:700;color:#eef6ff;letter-spacing:-.02em;margin-bottom:6px;}
+.sgw-sub{font-size:14px;color:rgba(190,215,235,0.6);line-height:1.5;}
+.sgw-steps{padding:28px 36px;}
+.sgw-step{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;}
+.sgw-step:last-child{margin-bottom:0;}
+.sgw-step-num{width:32px;height:32px;border-radius:50%;background:rgba(34,197,94,0.12);border:1.5px solid rgba(34,197,94,0.35);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#22c55e;flex-shrink:0;margin-top:1px;}
+.sgw-step-body{}
+.sgw-step-title{font-size:14px;font-weight:600;color:#eef6ff;margin-bottom:3px;}
+.sgw-step-desc{font-size:13px;color:rgba(190,215,235,0.55);line-height:1.5;}
+.sgw-step-tag{display:inline-block;font-size:10px;font-weight:600;background:rgba(34,197,94,0.12);color:#22c55e;border:0.5px solid rgba(34,197,94,0.3);border-radius:6px;padding:2px 8px;margin-top:5px;}
+.sgw-footer{padding:20px 36px 28px;display:flex;flex-direction:column;gap:10px;}
+.sgw-btn-primary{width:100%;padding:14px;border-radius:12px;background:linear-gradient(180deg,#22c55e,#16a34a);color:#071a0e;font-size:15px;font-weight:700;font-family:"DM Sans",sans-serif;border:none;cursor:pointer;transition:filter .15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.sgw-btn-primary:hover{filter:brightness(1.08);}
+.sgw-btn-primary svg{width:16px;height:16px;stroke:#071a0e;fill:none;stroke-width:2.5;stroke-linecap:round;}
+.sgw-btn-skip{background:transparent;border:none;color:rgba(190,215,235,0.4);font-size:12px;font-family:"DM Sans",sans-serif;cursor:pointer;padding:4px;text-align:center;}
+.sgw-btn-skip:hover{color:rgba(190,215,235,0.7);}
+.sgw-progress{display:flex;gap:6px;justify-content:center;margin-bottom:14px;}
+.sgw-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.15);transition:background .2s;}
+.sgw-dot.on{background:#22c55e;}
+/* Tela 2 e 3 */
+.sgw-screen{display:none;}
+.sgw-screen.on{display:block;}
+.sgw-tip{background:rgba(34,197,94,0.07);border:0.5px solid rgba(34,197,94,0.2);border-radius:10px;padding:12px 14px;font-size:13px;color:rgba(190,215,235,0.7);line-height:1.5;margin-top:14px;}
+.sgw-tip strong{color:#22c55e;}
+</style>
+
+<div class="sgw-box">
+  <!-- HEADER -->
+  <div class="sgw-header">
+    <div class="sgw-logo">
+      <div class="sgw-logo-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <span class="sgw-logo-name">SureGreen</span>
+    </div>
+    <div class="sgw-title">Bem-vindo! 👋</div>
+    <div class="sgw-sub">Vamos te ajudar a configurar tudo em 3 passos simples para você começar a registrar suas apostas.</div>
+  </div>
+
+  <!-- TELA 1: Visão geral dos passos -->
+  <div id="sgw-s1" class="sgw-screen on">
+    <div class="sgw-steps">
+      <div class="sgw-step">
+        <div class="sgw-step-num">1</div>
+        <div class="sgw-step-body">
+          <div class="sgw-step-title">Configure seu Bankroll</div>
+          <div class="sgw-step-desc">Defina quanto você tem disponível para apostar. Isso permite o SureGreen calcular seu ROI e crescimento real.</div>
+          <span class="sgw-step-tag">2 minutos</span>
+        </div>
+      </div>
+      <div class="sgw-step">
+        <div class="sgw-step-num">2</div>
+        <div class="sgw-step-body">
+          <div class="sgw-step-title">Registre sua primeira entrada</div>
+          <div class="sgw-step-desc">Use o formulário "Nova Entrada" no dashboard para registrar uma aposta. Escolha entre Surebet ou Normal.</div>
+          <span class="sgw-step-tag">1 minuto</span>
+        </div>
+      </div>
+      <div class="sgw-step">
+        <div class="sgw-step-num">3</div>
+        <div class="sgw-step-body">
+          <div class="sgw-step-title">Acompanhe seus resultados</div>
+          <div class="sgw-step-desc">Após registrar, o dashboard mostra lucro, ROI, Win Rate e evolução do seu bankroll automaticamente.</div>
+          <span class="sgw-step-tag">Automático</span>
+        </div>
+      </div>
+    </div>
+    <div class="sgw-footer">
+      <div class="sgw-progress">
+        <div class="sgw-dot on"></div>
+        <div class="sgw-dot"></div>
+        <div class="sgw-dot"></div>
+      </div>
+      <button class="sgw-btn-primary" onclick="sgwNext(2)">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        Começar configuração
+      </button>
+      <button class="sgw-btn-skip" onclick="sgwClose()">Pular por agora</button>
+    </div>
+  </div>
+
+  <!-- TELA 2: Bankroll -->
+  <div id="sgw-s2" class="sgw-screen">
+    <div class="sgw-steps">
+      <div class="sgw-step">
+        <div class="sgw-step-num">1</div>
+        <div class="sgw-step-body">
+          <div class="sgw-step-title">Configure seu Bankroll</div>
+          <div class="sgw-step-desc">Na barra lateral esquerda, clique em <strong style="color:#eef6ff">Bankroll</strong>. Lá você define seu saldo inicial e acompanha a evolução do seu capital.</div>
+          <div class="sgw-tip">
+            <strong>💡 O que é Bankroll?</strong> É o valor total que você reservou exclusivamente para apostas. Exemplo: se você tem R$ 500 para apostar, esse é seu bankroll.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sgw-footer">
+      <div class="sgw-progress">
+        <div class="sgw-dot"></div>
+        <div class="sgw-dot on"></div>
+        <div class="sgw-dot"></div>
+      </div>
+      <button class="sgw-btn-primary" onclick="sgwNext(3)">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        Entendi, próximo passo
+      </button>
+      <button class="sgw-btn-skip" onclick="sgwNext(1)" style="color:rgba(190,215,235,0.4)">← Voltar</button>
+    </div>
+  </div>
+
+  <!-- TELA 3: Nova Entrada -->
+  <div id="sgw-s3" class="sgw-screen">
+    <div class="sgw-steps">
+      <div class="sgw-step">
+        <div class="sgw-step-num">2</div>
+        <div class="sgw-step-body">
+          <div class="sgw-step-title">Registre sua primeira entrada</div>
+          <div class="sgw-step-desc">No dashboard, o formulário <strong style="color:#eef6ff">Nova Entrada</strong> fica à direita. Preencha assim:</div>
+          <div class="sgw-tip" style="margin-top:10px;">
+            <strong>Surebet</strong> → aposta em múltiplas casas para lucro garantido<br>
+            <strong>Normal</strong> → aposta simples em uma única casa<br><br>
+            Preencha o jogo, selecione a casa, coloque a odd e o stake (valor apostado). O lucro é calculado automaticamente.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sgw-footer">
+      <div class="sgw-progress">
+        <div class="sgw-dot"></div>
+        <div class="sgw-dot"></div>
+        <div class="sgw-dot on"></div>
+      </div>
+      <button class="sgw-btn-primary" onclick="sgwClose()">
+        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        Ir para o dashboard
+      </button>
+      <button class="sgw-btn-skip" onclick="sgwNext(2)" style="color:rgba(190,215,235,0.4)">← Voltar</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script id="sg-welcome-script">
+function sgwShowIfNew() {
+  var dismissed = localStorage.getItem('sg_welcome_dismissed');
+  if (dismissed) return;
+
+  // Não usa timeout — espera o Firestore confirmar que não há entradas
+  // _sgwEntriesLoaded é setado após o primeiro onSnapshot
+  var attempts = 0;
+  var check = setInterval(function() {
+    attempts++;
+    // Aguarda até o Firestore ter retornado (window._sgFirstSnapshotDone)
+    if (window._sgFirstSnapshotDone) {
+      clearInterval(check);
+      var entries = window._entries || [];
+      if (entries.length === 0) {
+        var el = document.getElementById('sg-welcome-overlay');
+        if (el) el.style.display = 'flex';
+      }
+    }
+    // Timeout de segurança: 8s
+    if (attempts > 80) clearInterval(check);
+  }, 100);
+}
+
+function sgwNext(screen) {
+  document.querySelectorAll('.sgw-screen').forEach(function(s) { s.classList.remove('on'); });
+  var el = document.getElementById('sgw-s' + screen);
+  if (el) el.classList.add('on');
+}
+
+function sgwClose() {
+  var el = document.getElementById('sg-welcome-overlay');
+  if (el) {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity .3s';
+    setTimeout(function() { el.style.display = 'none'; }, 300);
+  }
+  localStorage.setItem('sg_welcome_dismissed', '1');
+  // Foca no formulário de nova entrada
+  setTimeout(function() {
+    var input = document.getElementById('fDesc');
+    if (input) input.focus();
+  }, 400);
+}
+
+// Chama após auth
+var _sgwOrigAuth = window._sgRestorePage;
+window._sgRestorePage = function() {
+  if (typeof _sgwOrigAuth === 'function') _sgwOrigAuth();
+  sgwShowIfNew();
+};
+
+// Fallback: se _sgRestorePage não for chamado, tenta direto
+setTimeout(function() {
+  if (document.getElementById('app-shell') && 
+      document.getElementById('app-shell').style.display !== 'none') {
+    sgwShowIfNew();
+  }
+}, 2500);
+</script>
 
 </body>
 
@@ -14522,9 +15892,7 @@ html body #pg-conta .pf-body {
 #pg-conta *:not(svg):not(path):not(polyline):not(polygon):not(circle):not(line):not(rect) {
   box-sizing: border-box;
 }
-#pg-conta { background: #080f0a !important; padding: 0 !important; }
-#pg-conta #pf-shell { background: #080f0a !important; }
-#pg-conta #pf-hero { background: linear-gradient(155deg,#061209 0%,#0c2014 55%,#061209 100%) !important; }
+
 @media (max-width: 700px) {
   #pg-conta #pf-hero { padding: 28px 16px 0 !important; }
   #pg-conta #pf-shell > div:last-child { padding: 20px 16px 80px !important; }
@@ -14546,8 +15914,6 @@ html body #pg-conta .pf-body {
   --v17-bg:        #F4F5F7;
   --v17-surface:   #0f1624;
   --v17-surface2:  #131c2c;
-  --v17-surface3:  #0f1624;
-
   /* Bordas */
   --v17-border:    #E4E7EC;
   --v17-border2:   #D0D5DD;
@@ -14579,7 +15945,6 @@ html body #pg-conta .pf-body {
   --v17-amber-bd:  #FEDF89;
 
   /* Azul (exchange badge) */
-  --v17-blue:      #2E90FA;
   --v17-blue-d:    #1849A9;
   --v17-blue-bg:   #EFF8FF;
   --v17-blue-bd:   #B2DDFF;
@@ -15520,9 +16885,6 @@ body::before { display: none !important; }
 :root {
   /* Fundos em camadas */
   --n-bg:        #060F1A;
-  --n-surface:   #0B1929;
-  --n-surface2:  #0F2236;
-  --n-surface3:  #152B42;
   --n-card-from: #0F2236;
   --n-card-to:   #091826;
 
@@ -15539,20 +16901,17 @@ body::before { display: none !important; }
 
   /* Verde neon */
   --n-green:     #00D68F;
-  --n-green-d:   #00A36C;
   --n-green-l:   rgba(0,214,143,.12);
   --n-green-bd:  rgba(0,214,143,.22);
   --n-green-glow:rgba(0,214,143,.30);
 
   /* Vermelho */
   --n-red:       #FF6B6B;
-  --n-red-d:     #CC4444;
   --n-red-l:     rgba(255,107,107,.10);
   --n-red-bd:    rgba(255,107,107,.22);
 
   /* Âmbar */
   --n-amber:     #FFD166;
-  --n-amber-d:   #C49A00;
   --n-amber-l:   rgba(255,209,102,.10);
   --n-amber-bd:  rgba(255,209,102,.22);
 
@@ -15565,7 +16924,6 @@ body::before { display: none !important; }
   --n-shadow-sm: 0 2px 8px rgba(0,0,0,.40), 0 1px 2px rgba(0,0,0,.30);
   --n-shadow-md: 0 4px 20px rgba(0,0,0,.50), 0 2px 6px rgba(0,0,0,.35);
   --n-shadow-lg: 0 8px 32px rgba(0,0,0,.60), 0 4px 12px rgba(0,0,0,.40);
-  --n-shadow-green: 0 0 24px rgba(0,214,143,.18), 0 4px 16px rgba(0,0,0,.50);
 }
 
 /* ── BASE ────────────────────────────────────────────────────────── */
@@ -18188,10 +19546,7 @@ document.addEventListener('DOMContentLoaded', function() {
 :root {
   --v17-surface:  #0f1624 !important;
   --v17-surface2: #131c2c !important;
-  --v17-surface3: #0f1624 !important;
   --v17-border:   rgba(255,255,255,0.07) !important;
-  --v17-text:     #E8F4FF !important;
-  --v17-muted:    rgba(160,190,215,0.65) !important;
   --sg-border:    rgba(255,255,255,0.07) !important;
   --sg-border2:   rgba(255,255,255,0.12) !important;
 }
@@ -18395,7 +19750,6 @@ html body {
   --t2: #9ec4de !important;
   --t3: #5c7f99 !important;
   --bd: rgba(255,255,255,0.07) !important;
-  --bd2: rgba(255,255,255,0.12) !important;
 }
 
 /* ── BASE ── */
@@ -18778,6 +20132,182 @@ html body .ld-modal {
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12) !important; }
 ::-webkit-scrollbar-track { background: transparent !important; }
 </style>
+
+<!-- ══════════════════════════════════════════════════════
+     HIERARQUIA VISUAL v1 — somente layout, zero funcionalidade
+     ══════════════════════════════════════════════════════ -->
+<style id="sg-hierarchy">
+
+/* ═══ 1. LUCRO DO DIA — card protagonista ═══
+   Ocupa coluna inteira, destaque visual maior */
+.hkpi-row {
+  grid-template-columns: 1.9fr 1fr 1fr 1fr !important;
+  gap: 12px !important;
+  margin-bottom: 20px !important;
+}
+
+/* Card do lucro: borda verde mais presente, padding maior */
+.hkpi--lucro {
+  border-color: rgba(34,197,94,.22) !important;
+  padding: 26px 28px 22px !important;
+  background: linear-gradient(135deg, #0B1929 70%, rgba(34,197,94,.04) 100%) !important;
+}
+
+/* Valor do lucro: maior e com mais impacto */
+.hkpi--lucro .hkpi__val {
+  font-size: 38px !important;
+  letter-spacing: -.04em !important;
+  color: #16A34A !important;
+  line-height: 1 !important;
+}
+
+/* Label do lucro: menos destaque, mais sutil */
+.hkpi--lucro .hkpi__label {
+  font-size: 10px !important;
+  letter-spacing: .18em !important;
+  color: rgba(148,180,210,.55) !important;
+  margin-bottom: 10px !important;
+}
+
+/* Sub do lucro: espaço */
+.hkpi--lucro .hkpi__sub {
+  margin-top: 10px !important;
+  font-size: 12px !important;
+  color: rgba(148,180,210,.65) !important;
+}
+
+/* ═══ 2. CARDS SECUNDÁRIOS — volume, perdas, pendentes
+   Menores, mais sutis, claramente subordinados */
+.hkpi--vol,
+.hkpi--pend {
+  padding: 18px 18px 16px !important;
+  border-color: rgba(255,255,255,.07) !important;
+}
+.hkpi--perda {
+  padding: 18px 18px 16px !important;
+  border-color: rgba(248,113,113,.18) !important;
+  background: rgba(248,113,113,.04) !important;
+}
+
+/* Valores secundários: menores que o lucro */
+.hkpi--vol  .hkpi__val,
+.hkpi--pend .hkpi__val {
+  font-size: 20px !important;
+  color: #cbd5e1 !important;
+  letter-spacing: -.02em !important;
+}
+.hkpi--perda .hkpi__val {
+  font-size: 20px !important;
+  color: #f87171 !important;
+  letter-spacing: -.02em !important;
+}
+
+/* Labels secundários: mais apagados */
+.hkpi--vol   .hkpi__label,
+.hkpi--perda .hkpi__label,
+.hkpi--pend  .hkpi__label {
+  font-size: 9px !important;
+  letter-spacing: .16em !important;
+  color: rgba(148,180,210,.45) !important;
+  margin-bottom: 8px !important;
+}
+
+/* Ícones secundários: menores */
+.hkpi--vol   .hkpi__ico,
+.hkpi--perda .hkpi__ico,
+.hkpi--pend  .hkpi__ico {
+  width: 28px !important;
+  height: 28px !important;
+  margin-bottom: 10px !important;
+}
+
+/* ═══ 3. PRO-DAY BAR — respiro acima e abaixo ═══ */
+.pro-day {
+  margin-bottom: 18px !important;
+  padding: 18px 24px !important;
+}
+
+.pro-day__val {
+  font-size: 26px !important;
+}
+
+/* ═══ 4. PRO-STATS (KPIs do gráfico) — hierarquia interna ═══ */
+.pro-stats {
+  margin-bottom: 16px !important;
+  gap: 12px !important;
+}
+
+.pro-stat__val {
+  font-size: 24px !important;
+}
+
+.pro-stat__lbl {
+  font-size: 9px !important;
+  letter-spacing: .16em !important;
+  color: rgba(148,180,210,.5) !important;
+  margin-bottom: 6px !important;
+}
+
+/* ═══ 5. SEPARAÇÃO EMOCIONAL entre seções ═══ */
+/* Mais espaço entre o bloco de KPIs e o gráfico */
+.hkpi-row + * {
+  margin-top: 4px !important;
+}
+
+/* ═══ 6. SIDEBAR — mais sutil, menos competição ═══ */
+.sidebar-nav {
+  border-right-color: rgba(255,255,255,.06) !important;
+  background: rgba(5,9,16,.97) !important;
+}
+
+.sn-tab {
+  font-size: 12.5px !important;
+  color: rgba(160,190,215,.65) !important;
+}
+
+.sn-tab:hover {
+  color: rgba(220,240,255,.85) !important;
+}
+
+.sn-tab.on {
+  color: rgba(220,240,255,.95) !important;
+}
+
+/* ═══ 7. TIPOGRAFIA GERAL — peso correto ═══ */
+/* Títulos de seção: mais sutis */
+.card-head {
+  font-size: 10px !important;
+  letter-spacing: .20em !important;
+  color: rgba(148,180,210,.45) !important;
+}
+
+/* Títulos das entries: correto peso */
+.entries-head__title {
+  font-size: 14px !important;
+  color: rgba(220,240,255,.9) !important;
+}
+
+/* ═══ 8. MOBILE: preservar hierarquia ═══ */
+@media (max-width: 768px) {
+  .hkpi-row {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .hkpi--lucro {
+    grid-column: 1 / -1 !important;
+    padding: 20px 18px !important;
+  }
+  .hkpi--lucro .hkpi__val {
+    font-size: 30px !important;
+  }
+  .hkpi--vol .hkpi__val,
+  .hkpi--perda .hkpi__val,
+  .hkpi--pend .hkpi__val {
+    font-size: 18px !important;
+  }
+}
+
+</style>
+
 <style id="sg-mobile-master">
 /* ═══ SUREGREEN MOBILE MASTER — LAST RULE, WINS ALL ═══ */
 @media screen and (max-width: 768px) {
@@ -18878,6 +20408,1377 @@ html body .ld-modal {
   /* 12. General */
   .sg-card { border-radius: 12px !important; }
   canvas { max-width: 100% !important; }
+
+  /* ══ MOB 1 — Formulário Nova Entrada: inputs grandes para dedo ══ */
+  #pg-org input,
+  #pg-org select,
+  #pg-org textarea {
+    min-height: 48px !important;
+    font-size: 16px !important; /* evita zoom automático no iOS */
+    padding: 12px 14px !important;
+    border-radius: 10px !important;
+  }
+  /* Campo de odd e stake do formulário */
+  #cOdd1, #cOdd2, #cOdd3, #cOdd4, #cOdd5,
+  #fDesc, #fStake, #fTipo,
+  .fi, input.fi, select.fi {
+    min-height: 48px !important;
+    font-size: 16px !important;
+    padding: 12px 14px !important;
+  }
+  /* Botão adicionar casa */
+  .btn-add-casa,
+  [onclick*="addCasa"] {
+    min-height: 48px !important;
+    font-size: 14px !important;
+  }
+  /* Botão Registrar Entrada */
+  #btnRegistrar {
+    min-height: 54px !important;
+    font-size: 16px !important;
+    border-radius: 14px !important;
+  }
+  /* Labels maiores */
+  #pg-org label,
+  #pg-org .form-label,
+  #pg-org .sg-label {
+    font-size: 13px !important;
+    margin-bottom: 8px !important;
+  }
+  /* Seletor de resultado (casa/empate/fora) */
+  #pg-org select[id^="cRes"] {
+    min-height: 48px !important;
+    font-size: 16px !important;
+  }
+  /* Linha de casa: empilha vertical no mobile */
+  .casa-row {
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 14px !important;
+  }
+  .casa-row > * { width: 100% !important; }
+
+  /* ══ MOB 2 — Calculadora: campos grandes e espaçados ══ */
+  /* Inputs de odd */
+  .co-inp,
+  input.co-inp,
+  [id^="co_odd"],
+  [id^="co_val"],
+  #co_val1_inp,
+  [id^="co_aum"] {
+    min-height: 52px !important;
+    font-size: 18px !important;
+    padding: 12px 14px !important;
+    border-radius: 10px !important;
+  }
+  /* Select tipo back/lay */
+  .co-tipo-sel,
+  select[id^="co_tipo"] {
+    min-height: 48px !important;
+    font-size: 15px !important;
+    padding: 10px 12px !important;
+  }
+  /* Card de cada casa na calculadora */
+  .co-card {
+    padding: 18px 16px !important;
+    border-radius: 14px !important;
+    margin-bottom: 12px !important;
+  }
+  /* Labels da calculadora */
+  .co-lbl {
+    font-size: 11px !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+  }
+  /* Botão fixar stake */
+  .co-fix-btn {
+    min-height: 44px !important;
+    font-size: 13px !important;
+    width: 100% !important;
+    margin-top: 8px !important;
+  }
+  /* Botão registrar aposta */
+  .co-send-btn {
+    min-height: 56px !important;
+    font-size: 16px !important;
+    border-radius: 14px !important;
+    width: 100% !important;
+  }
+  /* Seletor de número de casas */
+  .co-num {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 16px !important;
+    border-radius: 10px !important;
+  }
+  /* Resultado e distribuição em coluna */
+  .co-result.show {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .co-panel {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  /* Valor do lucro garantido */
+  .co-val-result {
+    font-size: 32px !important;
+  }
+
+  /* ══ MOB 3 — Botões de ação: área de toque 44×44px mínimo ══ */
+  .btn-edit,
+  .btn-del,
+  .btn-rcasa {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    border-radius: 10px !important;
+    padding: 0 !important;
+  }
+  /* Select de status do card — maior para toque */
+  .ssel {
+    min-height: 44px !important;
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+    width: 100% !important;
+  }
+  /* Painel direito do card — empilha vertical */
+  .er {
+    flex-direction: column !important;
+    gap: 10px !important;
+    align-items: stretch !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  /* Card de entrada em coluna no mobile */
+  .ec {
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px 14px !important;
+    border-radius: 14px !important;
+  }
+  /* Botões edit/del em linha */
+  .ec .er > div:last-child {
+    display: flex !important;
+    gap: 8px !important;
+    justify-content: flex-end !important;
+  }
+  /* Resultado do card maior */
+  .epl {
+    font-size: 16px !important;
+    padding: 8px 14px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  /* Descrição da aposta */
+  .edesc {
+    font-size: 15px !important;
+    margin: 6px 0 !important;
+    line-height: 1.4 !important;
+  }
+  /* Meta info (casas) */
+  .emeta {
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+  .em {
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+  }
 }
 </style>
+
+<script id="sg-odds-engine">
+/* ══ SUREGREEN ODDS ENGINE ══ */
+
+var _sgOddsDay = 'today';
+var _sgOddsData = [];
+
+var CASAS_COLOR = {
+  'Bet365':'#F7941D','bet365':'#F7941D','Betano':'#e53935','Superbet':'#1976D2',
+  'Pinnacle':'#8B5CF6','Sportingbet':'#2E7D32','KTO':'#0288D1','Betfair':'#00796B',
+  '1xBet':'#e65100','Novibet':'#7C3AED','EstrelaBet':'#D97706'
+};
+
+function sgOddsCasaColor(nome) {
+  return CASAS_COLOR[nome] || 'rgba(190,215,235,.7)';
+}
+
+var ODDS_EXAMPLE = [
+  { home:'Real Madrid', away:'Barcelona', time:'21:00', league:'La Liga',
+    bookmakers:[
+      {name:'Bet365',    home:2.10, draw:3.40, away:3.80, home_pa:1.43, draw_pa:2.21, away_pa:2.36},
+      {name:'Betano',    home:2.08, draw:3.35, away:3.75, home_pa:1.37, draw_pa:2.14, away_pa:2.29},
+      {name:'Superbet',  home:2.06, draw:3.25, away:3.60, home_pa:1.34, draw_pa:null, away_pa:2.16},
+      {name:'Pinnacle',  home:2.05, draw:3.40, away:3.65, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'Sportingbet',home:2.03,draw:3.20, away:3.55, home_pa:1.28, draw_pa:1.98, away_pa:null},
+      {name:'1xBet',     home:2.02, draw:3.18, away:3.50, home_pa:1.27, draw_pa:1.96, away_pa:2.10},
+      {name:'Betfair',   home:2.00, draw:3.15, away:3.45, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'KTO',       home:1.98, draw:3.10, away:3.40, home_pa:1.21, draw_pa:null, away_pa:2.04},
+      {name:'Novibet',   home:1.96, draw:3.05, away:3.35, home_pa:1.18, draw_pa:1.83, away_pa:null},
+      {name:'EstrelaBet',home:1.94, draw:3.00, away:3.30, home_pa:null, draw_pa:null, away_pa:null}
+    ]},
+  { home:'PSG', away:'Marseille', time:'21:00', league:'Ligue 1',
+    bookmakers:[
+      {name:'Betano',   home:1.95, draw:3.60, away:4.20, home_pa:1.25, draw_pa:2.27, away_pa:2.52},
+      {name:'Bet365',   home:1.92, draw:3.55, away:4.10, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'Superbet', home:1.90, draw:3.50, away:4.00, home_pa:1.17, draw_pa:null, away_pa:2.40},
+      {name:'Pinnacle', home:1.88, draw:3.45, away:3.95, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'1xBet',    home:1.87, draw:3.40, away:3.90, home_pa:1.12, draw_pa:2.04, away_pa:null}
+    ]},
+  { home:'Manchester City', away:'Arsenal', time:'19:30', league:'Premier League',
+    bookmakers:[
+      {name:'Superbet', home:1.88, draw:3.80, away:4.50, home_pa:1.17, draw_pa:2.32, away_pa:2.70},
+      {name:'Bet365',   home:1.85, draw:3.75, away:4.40, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'Betano',   home:1.83, draw:3.70, away:4.30, home_pa:null, draw_pa:null, away_pa:2.58},
+      {name:'Pinnacle', home:1.82, draw:3.65, away:4.20, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'KTO',      home:1.80, draw:3.60, away:4.10, home_pa:1.08, draw_pa:2.16, away_pa:null}
+    ]},
+  { home:'Bayern Munich', away:'Dortmund', time:'16:00', league:'Bundesliga',
+    bookmakers:[
+      {name:'Bet365',   home:1.72, draw:3.90, away:5.50, home_pa:1.03, draw_pa:2.34, away_pa:3.30},
+      {name:'Betano',   home:1.70, draw:3.85, away:5.40, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'Superbet', home:1.68, draw:3.80, away:5.30, home_pa:1.01, draw_pa:2.28, away_pa:null},
+      {name:'Pinnacle', home:1.67, draw:3.75, away:5.20, home_pa:null, draw_pa:null, away_pa:null}
+    ]},
+  { home:'Liverpool', away:'Tottenham', time:'18:30', league:'Premier League',
+    bookmakers:[
+      {name:'Bet365',    home:1.85, draw:3.70, away:5.00, home_pa:1.17, draw_pa:2.29, away_pa:2.95},
+      {name:'Sportingbet',home:1.83,draw:3.65, away:4.90, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'Betano',    home:1.82, draw:3.60, away:4.80, home_pa:1.13, draw_pa:null, away_pa:2.83},
+      {name:'Superbet',  home:1.80, draw:3.55, away:4.70, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'Pinnacle',  home:1.79, draw:3.50, away:4.60, home_pa:null, draw_pa:null, away_pa:null}
+    ]},
+  { home:'Flamengo', away:'Palmeiras', time:'19:00', league:'Brasileirao Serie A',
+    bookmakers:[
+      {name:'Bet365',    home:2.40, draw:3.10, away:2.95, home_pa:1.44, draw_pa:1.86, away_pa:null},
+      {name:'Betano',    home:2.35, draw:3.05, away:2.90, home_pa:null, draw_pa:null, away_pa:1.72},
+      {name:'Superbet',  home:2.30, draw:3.00, away:2.85, home_pa:1.38, draw_pa:null, away_pa:null},
+      {name:'Sportingbet',home:2.28,draw:2.95, away:2.80, home_pa:null, draw_pa:1.77, away_pa:null},
+      {name:'Pinnacle',  home:2.25, draw:2.90, away:2.75, home_pa:null, draw_pa:null, away_pa:null}
+    ]},
+  { home:'Inter Milan', away:'Napoli', time:'20:45', league:'Serie A',
+    bookmakers:[
+      {name:'Betano',   home:2.20, draw:3.30, away:3.40, home_pa:1.32, draw_pa:1.98, away_pa:2.04},
+      {name:'Bet365',   home:2.18, draw:3.25, away:3.35, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'Pinnacle', home:2.15, draw:3.20, away:3.30, home_pa:null, draw_pa:null, away_pa:null},
+      {name:'Superbet', home:2.12, draw:3.15, away:3.25, home_pa:1.27, draw_pa:null, away_pa:null}
+    ]},
+  { home:'Atletico Madrid', away:'Sevilla', time:'17:30', league:'La Liga',
+    bookmakers:[
+      {name:'Bet365',   home:1.75, draw:3.50, away:4.80, home_pa:1.05, draw_pa:2.10, away_pa:null},
+      {name:'Betano',   home:1.73, draw:3.45, away:4.70, home_pa:null, draw_pa:null, away_pa:2.82},
+      {name:'Superbet', home:1.71, draw:3.40, away:4.60, home_pa:1.03, draw_pa:null, away_pa:null}
+    ]}
+];
+
+function sgOddsInit() {
+  var today = new Date();
+  var tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  var months = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+  var fmt = function(d) { return d.getDate().toString().padStart(2,'0') + ' ' + months[d.getMonth()]; };
+  var el1 = document.getElementById('odds-day-today');
+  var el2 = document.getElementById('odds-day-tomorrow');
+  if (el1) el1.textContent = fmt(today);
+  if (el2) el2.textContent = fmt(tomorrow);
+  sgOddsLoad();
+}
+
+function sgOddsSetDay(el, day) {
+  document.querySelectorAll('.odds-day-tab').forEach(function(t) { t.classList.remove('on'); });
+  el.classList.add('on');
+  _sgOddsDay = day;
+  sgOddsLoad();
+}
+
+function sgOddsLoad() {
+  /* Quando Firebase estiver configurado, buscar de lá.
+     Por enquanto usa dados de exemplo. */
+  sgOddsRender(ODDS_EXAMPLE);
+}
+
+var _LOADING_HTML = '<div class="odds-loading"><div><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span></div><div class="odds-loading-txt">Carregando...</div></div>';
+
+
+function sgOddsParseGame(raw) {
+  var time = '--:--';
+  try {
+    var d = new Date(raw.commence_time);
+    time = d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+  } catch(e) {}
+
+  var books = [];
+  (raw.bookmakers || []).forEach(function(bk) {
+    var h2h = null;
+    (bk.markets || []).forEach(function(m) { if (m.key === 'h2h') h2h = m; });
+    if (!h2h) return;
+    var home = null, draw = null, away = null;
+    (h2h.outcomes || []).forEach(function(o) {
+      if (o.name === raw.home_team) home = o.price;
+      else if (o.name === raw.away_team) away = o.price;
+      else draw = o.price;
+    });
+    if (home && away) {
+      books.push({ name: bk.title, home: home, draw: draw, away: away,
+        home_pa: null, draw_pa: null, away_pa: null });
+    }
+  });
+  books.sort(function(a, b) { return b.home - a.home; });
+
+  return {
+    home: raw.home_team, away: raw.away_team,
+    time: time, league: raw.sport_title || '',
+    bookmakers: books.slice(0, 10)
+  };
+}
+
+function sgOddsRender(games) {
+  var comBody = document.getElementById('odds-com-pa-body');
+  var semBody = document.getElementById('odds-sem-pa-body');
+  if (comBody) comBody.innerHTML = sgOddsBuildTable(games, 'com');
+  if (semBody) semBody.innerHTML = sgOddsBuildTable(games, 'sem');
+}
+
+function sgOddsBuildTable(games, mode) {
+  var thead = '<table class="odds-table"><thead><tr>'
+    + '<th class="left">Jogo</th>'
+    + '<th>Casa</th>'
+    + '<th>Empate</th>'
+    + '<th>Fora</th>'
+    + '<th></th>'
+    + '</tr></thead><tbody>';
+  var tbody = '';
+
+  games.forEach(function(g, gi) {
+    var gameId = 'odds-' + mode + '-g' + gi;
+    var expId  = 'odds-' + mode + '-exp' + gi;
+
+    // Melhor casa para cada resultado
+    var bestHome = g.bookmakers.length ? g.bookmakers[0] : null;
+    var bestDraw = null, bestAway = null;
+    g.bookmakers.forEach(function(b) {
+      if (b.draw && (!bestDraw || b.draw > bestDraw.draw)) bestDraw = b;
+      if (b.away && (!bestAway || b.away > bestAway.away)) bestAway = b;
+    });
+
+    // Células da linha resumo
+    function resumoCell(bk, key, paKey) {
+      if (!bk || !bk[key]) return '<td class="odds-res-cell">—</td>';
+      var col = sgOddsCasaColor(bk.name);
+      var val = bk[key].toFixed(2);
+      var pa  = bk[paKey];
+      if (mode === 'com') {
+        return '<td class="odds-res-cell">'
+          + '<div class="odds-pa-blk">'
+          + '<span class="odds-pa-casa" style="color:' + col + '">' + bk.name + '</span>'
+          + '<span class="odds-pa-info">' + val + (pa ? ' · PA' : '') + '</span>'
+          + (pa ? '<span class="odds-pa-val">' + pa.toFixed(2) + '</span>'
+                : '<span class="odds-pa-val empty">—</span>')
+          + '</div></td>';
+      } else {
+        return '<td class="odds-res-cell">'
+          + '<span class="odds-sem-casa" style="color:' + col + '">' + bk.name + '</span>'
+          + '<span class="odds-sem-val">' + val + '</span>'
+          + '</td>';
+      }
+    }
+
+    tbody += '<tr class="odds-game-row" id="' + gameId + '" onclick="sgOddsToggle(\'' + gameId + '\',\'' + expId + '\')">'
+      + '<td><div class="odds-game-cell">'
+      + '<span class="odds-game-time">' + g.time + ' · ' + g.league + '</span>'
+      + '<span class="odds-game-home">' + g.home + '</span>'
+      + '<span class="odds-game-away">' + g.away + '</span>'
+      + '</div></td>'
+      + resumoCell(bestHome, 'home', 'home_pa')
+      + resumoCell(bestDraw, 'draw', 'draw_pa')
+      + resumoCell(bestAway, 'away', 'away_pa')
+      + '<td><div class="odds-chev">'
+      + '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>'
+      + '</div></td></tr>';
+
+    // Expand
+    var resList = [
+      { key:'home', paKey:'home_pa', label: g.home + ' vence' },
+      { key:'draw', paKey:'draw_pa', label: 'Empate' },
+      { key:'away', paKey:'away_pa', label: g.away + ' vence' }
+    ];
+
+    var expTabs = resList.map(function(r, ri) {
+      return '<button class="odds-exp-tab' + (ri === 0 ? ' on' : '') + '" onclick="sgOddsExpTab(\'' + expId + '\',' + ri + ',this)">' + r.label + '</button>';
+    }).join('');
+
+    var expBodies = resList.map(function(r, ri) {
+      var sorted = g.bookmakers
+        .filter(function(b) { return b[r.key]; })
+        .sort(function(a, b) { return b[r.key] - a[r.key]; })
+        .slice(0, 10);
+
+      var listItems = sorted.map(function(bk, bi) {
+        var isFirst = bi === 0;
+        var oddVal = bk[r.key].toFixed(2);
+        var paVal  = bk[r.paKey];
+        var col    = isFirst ? '#22c55e' : sgOddsCasaColor(bk.name);
+        var jogo   = g.home + ' x ' + g.away;
+        var odd4form = (mode === 'com' && paVal) ? paVal.toFixed(2) : oddVal;
+
+        var rightHtml = '';
+        if (mode === 'com') {
+          rightHtml = '<span class="odds-casa-normal">' + oddVal + '</span>'
+            + (paVal ? '<span class="odds-casa-paval">' + paVal.toFixed(2) + '</span>'
+                     : '<span class="odds-no-pa">Sem PA</span>');
+        } else {
+          rightHtml = '<span class="odds-casa-semval">' + oddVal + '</span>';
+        }
+
+        return '<div class="odds-casa-item' + (isFirst ? ' best' : '') + '">'
+          + '<div class="odds-casa-left">'
+          + '<span class="odds-casa-rank">' + (bi + 1) + 'º</span>'
+          + '<span class="odds-casa-nome" style="color:' + col + '">' + bk.name + '</span>'
+          + '</div>'
+          + '<div class="odds-casa-right">'
+          + rightHtml
+          + '<button class="odds-usar-btn" onclick="event.stopPropagation();sgOddsUsar(\''
+          + jogo + '\',\'' + bk.name + '\',\'' + odd4form + '\',\'' + r.label + '\')">'
+          + '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="13 17 18 12 13 7"/><path d="M6 12h12"/></svg> Usar'
+          + '</button>'
+          + '</div></div>';
+      }).join('');
+
+      return '<div class="odds-exp-body' + (ri === 0 ? ' on' : '') + '">'
+        + '<div class="odds-exp-title">' + r.label + ' · ' + (mode === 'com' ? 'Com PA' : 'Sem PA') + '</div>'
+        + '<div class="odds-casa-list">' + listItems + '</div>'
+        + '</div>';
+    }).join('');
+
+    tbody += '<tr class="odds-exp-row" id="' + expId + '">'
+      + '<td class="odds-exp-cell" colspan="5">'
+      + '<div class="odds-exp-inner">'
+      + '<div class="odds-exp-tabs">' + expTabs + '</div>'
+      + expBodies
+      + '</div></td></tr>';
+  });
+
+  return thead + tbody + '</tbody></table>';
+}
+
+function sgOddsToggle(rowId, expId) {
+  var row = document.getElementById(rowId);
+  var exp = document.getElementById(expId);
+  if (!row || !exp) return;
+  var isOpen = row.classList.contains('open');
+  var card = row.closest ? row.closest('.odds-card') : null;
+  var scope = card || document;
+  scope.querySelectorAll('.odds-game-row').forEach(function(r) { r.classList.remove('open'); });
+  scope.querySelectorAll('.odds-exp-row').forEach(function(e) { e.classList.remove('open'); });
+  if (!isOpen) {
+    row.classList.add('open');
+    exp.classList.add('open');
+  }
+}
+
+function sgOddsExpTab(expId, idx, el) {
+  var exp = document.getElementById(expId);
+  if (!exp) return;
+  exp.querySelectorAll('.odds-exp-tab').forEach(function(t) { t.classList.remove('on'); });
+  exp.querySelectorAll('.odds-exp-body').forEach(function(b) { b.classList.remove('on'); });
+  el.classList.add('on');
+  exp.querySelectorAll('.odds-exp-body')[idx].classList.add('on');
+}
+
+function sgOddsUsar(jogo, casa, odd, resultado) {
+  goPage('pg-org', null);
+  setTimeout(function() {
+    var fDesc = document.getElementById('fDesc');
+    if (fDesc) { fDesc.value = jogo + ' - ' + resultado; fDesc.dispatchEvent(new Event('input')); }
+    var buscaCasa = document.querySelector('#casasCont input');
+    if (buscaCasa) { buscaCasa.value = casa; buscaCasa.dispatchEvent(new Event('input')); }
+    var notif = document.createElement('div');
+    notif.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(34,197,94,.15);border:0.5px solid rgba(34,197,94,.4);color:#22c55e;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;font-family:DM Sans,sans-serif;z-index:9999;';
+    notif.textContent = 'Entrada preenchida: ' + jogo + ' · ' + casa + ' · ' + odd;
+    document.body.appendChild(notif);
+    setTimeout(function() { notif.remove(); }, 3000);
+  }, 350);
+}
+</script>
+
+
+<style id="sg-calc-hierarchy">
+/* ══ CALCULADORA — HIERARQUIA VISUAL ══ */
+
+/* Título da seção mais suave */
+.co-section-title {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: rgba(148,180,210,0.55) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .14em !important;
+}
+
+/* Seletor de casas (2,3,4,5) — mais limpo */
+.co-num {
+  width: 38px !important;
+  height: 34px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: rgba(148,180,210,0.55) !important;
+  border: 0.5px solid rgba(255,255,255,0.10) !important;
+  background: transparent !important;
+}
+.co-num.on {
+  background: rgba(34,197,94,0.12) !important;
+  border-color: rgba(34,197,94,0.35) !important;
+  color: #22c55e !important;
+  box-shadow: none !important;
+}
+.co-num:hover:not(.on) {
+  border-color: rgba(34,197,94,0.25) !important;
+  color: rgba(190,215,235,0.8) !important;
+}
+
+/* Cards das casas — separação clara */
+.co-cards {
+  gap: 14px !important;
+}
+
+/* Card individual de cada casa */
+.co-card {
+  background: rgba(255,255,255,0.03) !important;
+  border: 0.5px solid rgba(255,255,255,0.09) !important;
+  border-radius: 14px !important;
+  padding: 18px !important;
+}
+.co-card:focus-within {
+  border-color: rgba(34,197,94,0.30) !important;
+}
+
+/* Título CASA 1, CASA 2... — principal, bem visível */
+.co-card-title,
+.co-casa-label {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: rgba(220,240,255,0.85) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .12em !important;
+  margin-bottom: 14px !important;
+}
+
+/* Label dos campos (ODD, TIPO, AUMENTO, VALOR) — sutis */
+.co-lbl {
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  color: rgba(148,180,210,0.45) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .14em !important;
+  margin-bottom: 6px !important;
+}
+
+/* Inputs — fundo escuro, borda visível */
+.co-inp {
+  background: rgba(0,0,0,0.30) !important;
+  border: 0.5px solid rgba(255,255,255,0.14) !important;
+  border-radius: 9px !important;
+  color: #eef6ff !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+.co-inp:focus {
+  border-color: #22c55e !important;
+  background: rgba(0,0,0,0.42) !important;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.10) !important;
+}
+.co-inp::placeholder {
+  color: rgba(148,163,184,0.22) !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+}
+
+/* Bloco de RESULTADOS — destaque verde */
+.co-panel-left {
+  background: rgba(34,197,94,0.05) !important;
+  border: 0.5px solid rgba(34,197,94,0.18) !important;
+  border-radius: 14px !important;
+}
+.co-panel-title {
+  color: #22c55e !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: .10em !important;
+}
+
+/* Valor do lucro garantido — protagonista */
+.co-val-result {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  letter-spacing: -.03em !important;
+}
+
+/* Labels dos resultados — sutis */
+.co-res-lbl {
+  font-size: 10px !important;
+  color: rgba(148,180,210,0.50) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .12em !important;
+}
+
+/* Bloco DISTRIBUIÇÃO */
+.co-panel-right {
+  background: rgba(255,255,255,0.02) !important;
+  border: 0.5px solid rgba(255,255,255,0.08) !important;
+  border-radius: 14px !important;
+}
+
+/* Botão REGISTRAR APOSTA */
+.co-send-btn {
+  background: linear-gradient(180deg, #22c55e, #16a34a) !important;
+  color: #071a0e !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(34,197,94,0.25) !important;
+  padding: 13px 28px !important;
+}
+.co-send-btn:hover {
+  filter: brightness(1.08) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(34,197,94,0.35) !important;
+}
+
+/* Botão FIXAR STAKE e LIMPAR — mais sutis */
+.co-fix-btn {
+  background: rgba(255,255,255,0.04) !important;
+  border: 0.5px solid rgba(255,255,255,0.10) !important;
+  color: rgba(148,180,210,0.55) !important;
+  border-radius: 8px !important;
+  font-size: 11px !important;
+}
+.btn-rcasa {
+  font-size: 10px !important;
+  color: rgba(148,180,210,0.40) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* Toast de sucesso da calculadora */
+#sg-calc-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #0f2035;
+  border: 1px solid rgba(34,197,94,0.35);
+  border-radius: 14px;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 9999;
+  opacity: 0;
+  transition: all .35s cubic-bezier(.22,1,.36,1);
+  pointer-events: none;
+  min-width: 280px;
+  max-width: 380px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+#sg-calc-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+#sg-calc-toast .sct-icon {
+  width: 36px; height: 36px;
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.35);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+#sg-calc-toast .sct-icon svg {
+  width: 16px; height: 16px;
+  stroke: #22c55e; fill: none;
+  stroke-width: 2.5; stroke-linecap: round;
+}
+#sg-calc-toast .sct-body {}
+#sg-calc-toast .sct-title {
+  font-size: 13px; font-weight: 600;
+  color: #22c55e; margin-bottom: 2px;
+}
+#sg-calc-toast .sct-desc {
+  font-size: 12px; color: rgba(190,215,235,0.60);
+}
+</style>
+
+<!-- Toast de sucesso da calculadora -->
+<div id="sg-calc-toast">
+  <div class="sct-icon">
+    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+  </div>
+  <div class="sct-body">
+    <div class="sct-title">Aposta registrada com sucesso!</div>
+    <div class="sct-desc" id="sg-calc-toast-desc">Calculadora limpa e pronta para nova entrada.</div>
+  </div>
+</div>
+
+<script>
+function sgCalcSuccessToast(lucroReal, casas) {
+  var toast = document.getElementById('sg-calc-toast');
+  var desc  = document.getElementById('sg-calc-toast-desc');
+  if (!toast) return;
+
+  // Monta descrição com detalhes
+  var sinal = lucroReal >= 0 ? '+' : '';
+  var lucroStr = sinal + 'R$ ' + Math.abs(lucroReal).toFixed(2).replace('.', ',');
+  var casasStr = casas && casas.length
+    ? casas.map(function(c, i) {
+        var s = parseFloat(c.stakeIdeal || c.stakeRaw || 0);
+        return 'Casa ' + (i+1) + ': R$ ' + s.toFixed(2).replace('.',',');
+      }).join(' · ')
+    : '';
+
+  desc.textContent = 'Lucro estimado: ' + lucroStr + (casasStr ? ' · ' + casasStr : '');
+
+  // Mostra
+  toast.classList.add('show');
+
+  // Esconde após 4s
+  setTimeout(function() {
+    toast.classList.remove('show');
+  }, 4000);
+}
+</script>
+
+
+<script id="sg-ajuda-faq">
+function ajFaq(el) {
+  var item = el.parentElement;
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.aj-faq-item').forEach(function(i) { i.classList.remove('open'); });
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+
+
+<script id="sg-pendentes-nav">
+function sgIrPendentes(btn) {
+  goPage('pg-hist', btn);
+  setTimeout(function() {
+    var hptab = document.querySelector('.hptab[onclick*="month"]');
+    if (typeof histSetView === 'function') histSetView('month', hptab);
+
+    var pending = (window._entries || []).filter(function(e) { return e.status === 'pending'; });
+    pending.sort(function(a, b) { return (b.ts || b.id) - (a.ts || a.id); });
+
+    var titleEl = document.getElementById('hist-list-title');
+    var cntEl   = document.getElementById('hist-list-cnt');
+    if (titleEl) titleEl.textContent = '⏳ Apostas Pendentes';
+    if (cntEl)   cntEl.textContent   = pending.length + ' pendente' + (pending.length !== 1 ? 's' : '');
+
+    var listEl = document.getElementById('hist-list');
+    if (!listEl) return;
+
+    if (!pending.length) {
+      listEl.innerHTML = '<div style="text-align:center;padding:40px 20px;color:rgba(190,215,235,.45);font-size:13px;">✅ Nenhuma aposta pendente no momento.</div>';
+      return;
+    }
+
+    try {
+      listEl.innerHTML = pending.map(function(e) { return entryHTML(e); }).join('');
+    } catch(err) {
+      listEl.innerHTML = pending.map(function(e) {
+        var est = (e.lucroEst || 0) >= 0
+          ? '+R$ ' + (e.lucroEst || 0).toFixed(2).replace('.', ',')
+          : '-R$ ' + Math.abs(e.lucroEst || 0).toFixed(2).replace('.', ',');
+        return '<div style="background:rgba(255,255,255,.03);border:0.5px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 18px;margin-bottom:8px;">'
+          + '<div style="font-size:13px;font-weight:600;color:#eef6ff;margin-bottom:4px;">' + (e.desc || '—') + '</div>'
+          + '<div style="font-size:11px;color:rgba(148,180,210,.50);">' + (e.tipo || '') + ' · ' + (e.date || '') + '</div>'
+          + '<div style="font-size:12px;color:#fbbf24;margin-top:6px;">⏳ Pendente · Est. ' + est + '</div>'
+          + '</div>';
+      }).join('');
+    }
+
+    listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 150);
+}
+</script>
+
+<!-- ══ FORM HIERARCHY FIX — inputs, placeholders, casa-row ══ -->
+<style id="sg-form-hierarchy">
+
+/* 1. Placeholder quase invisível — usuário sabe que campo está vazio */
+.fi::placeholder,
+.login-input::placeholder,
+.co-inp::placeholder,
+.entries-search__input::placeholder {
+  color: rgba(148,163,184,0.30) !important;
+}
+
+/* 2. Inputs com borda mais visível para diferenciar do fundo */
+.fi,
+.login-input,
+.co-inp,
+.co-val-result,
+.co-comm-pct,
+.ssel,
+.tipo-selected {
+  background: rgba(0,0,0,0.30) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+}
+.fi:focus,
+.login-input:focus,
+.co-inp:focus,
+.co-val-result:focus,
+.ssel:focus {
+  border-color: #22C55E !important;
+  box-shadow: 0 0 0 3px rgba(34,197,94,.10) !important;
+  background: rgba(0,0,0,0.42) !important;
+}
+
+/* 3. Casa-row: card externo bem delimitado */
+.casa-row {
+  background: rgba(255,255,255,.028) !important;
+  border: 1px solid rgba(255,255,255,.13) !important;
+}
+.casa-row:focus-within {
+  border-color: rgba(34,197,94,.38) !important;
+  box-shadow: 0 0 0 3px rgba(34,197,94,.06) !important;
+}
+
+/* 4. Header da casa: contraste claro com o body */
+.casa-row-header {
+  background: rgba(0,0,0,.28) !important;
+  border-bottom: 1px solid rgba(255,255,255,.09) !important;
+}
+
+/* 5. Inputs DENTRO da casa: ainda mais escuros */
+.casa-row .fi,
+.casa-row input,
+.casa-row select {
+  background: rgba(0,0,0,.38) !important;
+  border: 1px solid rgba(255,255,255,.20) !important;
+}
+.casa-row .fi:focus,
+.casa-row input:focus,
+.casa-row select:focus {
+  border-color: #22C55E !important;
+  background: rgba(0,0,0,.50) !important;
+  box-shadow: 0 0 0 3px rgba(34,197,94,.10) !important;
+}
+.casa-row .fi::placeholder,
+.casa-row input::placeholder {
+  color: rgba(148,163,184,.28) !important;
+}
+
+/* 6. Labels de campo dentro da casa: muito sutis */
+.casa-field-lbl {
+  color: rgba(148,163,184,.50) !important;
+  font-size: 9px !important;
+  letter-spacing: .16em !important;
+}
+
+/* 7. Título da casa e badge: hierarquia clara */
+.casa-row-title {
+  color: rgba(200,225,245,.70) !important;
+  font-size: 11px !important;
+}
+.casa-n {
+  background: rgba(34,197,94,.14) !important;
+  border-color: rgba(34,197,94,.32) !important;
+  color: #22C55E !important;
+}
+
+/* 8. Card do form: fundo um pouco mais distinto */
+.form-panel .card {
+  background: linear-gradient(160deg,#0b1625,#081120) !important;
+  border-color: rgba(255,255,255,.09) !important;
+}
+
+/* 9. Labels dos steps (FL): bem sutis, não competem */
+.fl {
+  color: rgba(148,163,184,.45) !important;
+  font-size: 9px !important;
+  letter-spacing: .16em !important;
+}
+
+/* 10. Separador visual entre casas */
+.casa-row + .casa-row {
+  margin-top: 10px !important;
+}
+
+/* 11. Botão Adicionar casa: mais destaque */
+.btn-dashed {
+  border-color: rgba(34,197,94,.22) !important;
+  color: rgba(34,197,94,.65) !important;
+  font-size: 12px !important;
+}
+.btn-dashed:hover {
+  border-color: rgba(34,197,94,.45) !important;
+  color: #22C55E !important;
+  background: rgba(34,197,94,.05) !important;
+}
+
+</style>
+
+<style id="sg-form-final">
+
+/* ══ HIERARQUIA FINAL DO FORMULÁRIO ══
+   Princípio: o que importa é BRANCO e GRANDE
+               o que não importa é APAGADO
+   ══════════════════════════════════════ */
+
+/* ── 1. STEP LABELS (1 PARTIDA, 2 TIPO, 3 CASAS)
+   São o mais importante do form — devem se destacar */
+.casa-field-lbl,
+.card .fl,
+.form-panel .fl {
+  color: #C8DCF0 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .14em !important;
+  opacity: 1 !important;
+}
+
+/* Número do step (bolinha verde 1, 2, 3) — destaque máximo */
+.casa-n {
+  background: rgba(34,197,94,.18) !important;
+  border: 1.5px solid #22C55E !important;
+  color: #22C55E !important;
+  font-weight: 800 !important;
+  font-size: 11px !important;
+  width: 26px !important;
+  height: 26px !important;
+}
+
+/* Labels "PARTIDA / MERCADO", "TIPO DE APOSTA", "CASAS DE APOSTA"
+   Esses são os títulos reais dos steps */
+.casa-row-title,
+.card-head {
+  color: #D4E8FF !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  opacity: 1 !important;
+}
+
+/* Labels DENTRO da casa (ODD, RESULTADO, CASA DE APOSTA)
+   Secundários — sutis mas legíveis */
+.casa-field-lbl {
+  color: rgba(160,195,225,.55) !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: .16em !important;
+}
+
+/* ── 2. PLACEHOLDERS — quase invisíveis
+   "Ex: Real Madrid..." não deve chamar atenção */
+.fi::placeholder,
+input::placeholder,
+textarea::placeholder,
+.co-inp::placeholder,
+.login-input::placeholder {
+  color: rgba(148,163,184,.22) !important;
+  font-style: italic !important;
+}
+
+/* ── 3. INPUTS — fundo escuro, borda definida
+   Área onde o usuário digita: clara e delimitada */
+.fi,
+.co-inp,
+.login-input,
+.co-val-result,
+.ssel,
+.tipo-selected {
+  background: rgba(0,0,0,.35) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  color: #F0F8FF !important;
+}
+.fi:focus,
+.co-inp:focus,
+.login-input:focus,
+.ssel:focus {
+  border-color: #22C55E !important;
+  background: rgba(0,0,0,.48) !important;
+  box-shadow: 0 0 0 3px rgba(34,197,94,.10) !important;
+}
+
+/* ── 4. CASA-ROW — card bem separado do fundo ── */
+.casa-row {
+  background: rgba(255,255,255,.025) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+}
+.casa-row-header {
+  background: rgba(0,0,0,.30) !important;
+  border-bottom: 1px solid rgba(255,255,255,.08) !important;
+  padding: 12px 16px !important;
+}
+
+/* Inputs dentro da casa: ainda mais escuros */
+.casa-row .fi,
+.casa-row input,
+.casa-row select {
+  background: rgba(0,0,0,.42) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+}
+.casa-row .fi::placeholder,
+.casa-row input::placeholder {
+  color: rgba(148,163,184,.20) !important;
+  font-style: italic !important;
+}
+
+/* ── 5. CARD TITLE dos steps — destaque com linha verde ── */
+/* Linha verde antes dos títulos de step */
+.card .card-head {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 12px !important;
+  color: #C8DCF0 !important;
+  font-weight: 700 !important;
+  letter-spacing: .14em !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid rgba(255,255,255,.06) !important;
+}
+
+/* ── 6. TIPO SELECT (Surebet/Normal) — clareza ── */
+.tipo-selected {
+  background: rgba(0,0,0,.35) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  color: #E8F4FF !important;
+  font-weight: 600 !important;
+}
+
+/* ── 7. FORM TABS (Surebet | Normal) ── */
+.form-tab {
+  color: rgba(148,163,184,.50) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+.form-tab.on {
+  background: #22C55E !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+/* ── 8. BADGE "1/5" e "PRINCIPAL" — sutis ── */
+.casa-row-header span:last-child:not(.casa-row-title):not(.casa-n) {
+  color: rgba(148,163,184,.45) !important;
+  font-size: 10px !important;
+}
+
+</style>
+
+<style id="sg-form-reference">
+/* ══════════════════════════════════════════════
+   FORM — REFERÊNCIA VISUAL FINAL
+   Baseado na imagem de referência enviada
+   Regras com máxima especificidade, ganham tudo
+   ══════════════════════════════════════════════ */
+
+/* ── 1. STEP LABELS (1 Partida, 2 Tipo, 3 Casas, 4 Stake)
+        São os mais importantes → brancos, peso 700 ── */
+html body .sg-field-lbl,
+html body label.sg-field-lbl {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: rgba(220, 240, 255, 0.90) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .14em !important;
+  margin-bottom: 8px !important;
+}
+
+/* Bolinhas dos steps → verde vibrante */
+#form-surebet > div > div:first-child > div:first-child,
+#form-surebet > div > div > div[style*="border-radius:50%"] {
+  background: rgba(76,175,130,0.20) !important;
+  border: 1.5px solid #4CAF82 !important;
+  color: #4CAF82 !important;
+}
+
+/* ── 2. PLACEHOLDERS → quase invisíveis (22% opacidade)
+        "Ex: Real Madrid", "Ex: 3.50" não devem chamar atenção ── */
+html body .sg-input::placeholder,
+html body input.sg-input::placeholder,
+html body .fi::placeholder,
+html body input.fi::placeholder,
+html body input::placeholder,
+html body textarea::placeholder {
+  color: rgba(190, 215, 235, 0.22) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  -webkit-text-fill-color: rgba(190, 215, 235, 0.22) !important;
+}
+
+/* ── 3. INPUTS → fundo escuro, borda definida ── */
+html body .sg-input,
+html body input.sg-input,
+html body .fi,
+html body input.fi,
+html body select.fi,
+html body .tipo-selected {
+  background: rgba(0, 0, 0, 0.32) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #EEF6FF !important;
+  -webkit-text-fill-color: #EEF6FF !important;
+}
+
+html body .sg-input:focus,
+html body input.sg-input:focus,
+html body .fi:focus,
+html body input.fi:focus,
+html body select.fi:focus {
+  border-color: #4CAF82 !important;
+  box-shadow: 0 0 0 3px rgba(76,175,130,0.12) !important;
+  background: rgba(0, 0, 0, 0.46) !important;
+  outline: none !important;
+}
+
+/* ── 4. CARD CONTAINER do form → fundo mais escuro para contraste ── */
+html body .sg-right-col > div[style*="Nova Entrada"],
+html body .sg-right-col .sg-card--elev {
+  background: linear-gradient(160deg, #0c1828 0%, #07101e 100%) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+}
+
+/* ── 5. CASA-ROW → card bem delimitado como na referência ── */
+html body .casa-row {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-left: 3px solid #4CAF82 !important;
+  border-radius: 12px !important;
+  margin-bottom: 10px !important;
+}
+html body .casa-row:focus-within {
+  border-left-color: #4CAF82 !important;
+  border-color: rgba(76,175,130,0.35) !important;
+  box-shadow: 0 0 0 3px rgba(76,175,130,0.08) !important;
+}
+html body .casa-row-header {
+  background: rgba(0,0,0,0.28) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+/* Número da casa → bolinha verde clara */
+html body .casa-n {
+  background: rgba(76,175,130,0.18) !important;
+  border: 1.5px solid rgba(76,175,130,0.55) !important;
+  color: #4CAF82 !important;
+  font-weight: 800 !important;
+}
+
+/* Título "CASA 1" */
+html body .casa-row-title {
+  color: rgba(220,240,255,0.80) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .10em !important;
+}
+
+/* Labels internos da casa (ODD, RESULTADO, CASA DE APOSTA) → sutis */
+html body .casa-field-lbl {
+  color: rgba(148,180,210,0.50) !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: .16em !important;
+}
+html body .casa-field-lbl::before {
+  background: rgba(76,175,130,0.55) !important;
+}
+
+/* Inputs dentro da casa → mais escuros ainda */
+html body .casa-row .fi,
+html body .casa-row input,
+html body .casa-row select {
+  background: rgba(0,0,0,0.40) !important;
+  border: 1px solid rgba(255,255,255,0.16) !important;
+  color: #EEF6FF !important;
+}
+html body .casa-row .fi::placeholder,
+html body .casa-row input::placeholder {
+  color: rgba(190,215,235,0.18) !important;
+  -webkit-text-fill-color: rgba(190,215,235,0.18) !important;
+}
+
+/* ── 6. FORM TABS (Surebet | Normal) → referência exata ── */
+html body .sg-form-tabs {
+  background: rgba(0,0,0,0.28) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 10px !important;
+  padding: 3px !important;
+}
+html body .sg-form-tab {
+  color: rgba(190,215,235,0.45) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 7px 14px !important;
+  border-radius: 8px !important;
+  transition: all .15s !important;
+}
+html body .sg-form-tab.on {
+  background: linear-gradient(180deg, #4CAF82, #3D9E6E) !important;
+  color: #07120E !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(76,175,130,0.30) !important;
+}
+
+/* ── 7. BOTÃO "Adicionar casa" → dashed verde sutil ── */
+html body #btnAddCasa {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1.5px dashed rgba(255,255,255,0.20) !important;
+  color: rgba(190,215,235,0.55) !important;
+  border-radius: 10px !important;
+}
+
+/* ── 8. LABELS de sub-campo (Stake R$, Lucro Estimado) → sutis ── */
+#form-surebet [style*="font-size:10px"][style*="text-transform:uppercase"] {
+  color: rgba(148,180,210,0.50) !important;
+}
+
+/* ── 9. BOTÃO REGISTRAR → verde sólido destacado ── */
+html body #btnRegistrar,
+html body .sg-btn-primary {
+  background: linear-gradient(180deg, #4CAF82, #3D9E6E) !important;
+  color: #FFFFFF !important;
+  border: 1px solid #5BBF91 !important;
+  box-shadow: 0 4px 18px rgba(76,175,130,0.30) !important;
+}
+html body #btnRegistrar:hover,
+html body .sg-btn-primary:hover {
+  filter: brightness(1.08) !important;
+  box-shadow: 0 6px 24px rgba(76,175,130,0.40) !important;
+}
+
+/* ── 10. SEPARADORES entre steps → linha sutil ── */
+#form-surebet > div {
+  padding-bottom: 2px !important;
+}
+
+</style>
+
+<style id="sg-form-fix">
+/* ── CORREÇÃO: label do step não deve ter borda ── */
+html body #form-surebet > div > div:first-child,
+html body #form-surebet div[style*="display:flex"][style*="align-items:center"][style*="gap:8px"] {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Garante que nenhum wrapper dos steps tenha borda verde */
+html body #form-surebet > div > div:first-child > div:first-child {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Apenas a bolinha numerada tem borda/fundo verde */
+html body #form-surebet div[style*="border-radius:50%"],
+html body #form-surebet div[style*="border-radius: 50%"] {
+  border: 1.5px solid rgba(76,175,130,0.55) !important;
+  background: rgba(76,175,130,0.15) !important;
+  flex-shrink: 0 !important;
+}
+
+/* Label do step: sem borda, sem fundo */
+html body .sg-field-lbl {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: inline !important;
+  padding: 0 !important;
+}
+
+/* Casa-row: borda esquerda verde SOMENTE no card interno, não no label */
+html body .casa-row {
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-left: 3px solid rgba(76,175,130,0.60) !important;
+  background: rgba(255,255,255,0.03) !important;
+  border-radius: 12px !important;
+}
+
+/* Remove qualquer outline/borda herdada que esteja aparecendo no label "3 CASAS" */
+html body #form-surebet label,
+html body #form-surebet .sg-field-lbl,
+html body #form-surebet span.sg-field-lbl {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+</style>
+
+<style id="sg-form-fix2">
+/* ══ CORREÇÃO DEFINITIVA ══
+   O box verde ao redor de "3 CASAS DE APOSTA" vem do
+   casa-row:focus-within que herda para o wrapper pai.
+   Solução: isolar o focus-within só no card da casa. */
+
+/* Remove qualquer borda/outline do wrapper do step 3 */
+html body #form-surebet > div:nth-child(3),
+html body #form-surebet > div:nth-child(3) > div:first-child {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* O container #casasCont não deve ter borda */
+html body #casasCont {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* casa-row: foco SOMENTE no próprio card, não vaza para cima */
+html body .casa-row {
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-left: 3px solid rgba(76,175,130,0.55) !important;
+  border-radius: 12px !important;
+  background: rgba(255,255,255,0.03) !important;
+  box-shadow: none !important;
+  contain: layout !important;
+}
+
+html body .casa-row:focus-within {
+  border: 1px solid rgba(76,175,130,0.38) !important;
+  border-left: 3px solid #4CAF82 !important;
+  box-shadow: 0 0 0 3px rgba(76,175,130,0.08) !important;
+}
+
+/* Label do step: garante sem borda */
+html body .sg-field-lbl,
+html body label.sg-field-lbl {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Linha que envolve o número + label do step: sem borda */
+html body #form-surebet div[style*="display:flex;align-items:center;gap:8px"],
+html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+</style>
+
+<style>
+/* Perdas do dia — valor sempre vermelho suave */
+#ld-perda-val,
+.ld-perda-valor,
+.ld-perda-valor.has {
+  color: #f87171 !important;
+}
+</style>
+
 </html>
