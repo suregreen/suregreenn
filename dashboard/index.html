@@ -21039,22 +21039,34 @@ function sgOddsLoad() {
   if (comBody) comBody.innerHTML = _LOADING_HTML;
   if (semBody) semBody.innerHTML = _LOADING_HTML;
 
-  // Cancela listener anterior se existir
   if (_sgOddsUnsubscribe) { _sgOddsUnsubscribe(); _sgOddsUnsubscribe = null; }
 
-  try {
-    var db = window._sgFirestore || (window.firebase && window.firebase.firestore ? window.firebase.firestore() : null);
-    if (!db) { sgOddsRender(ODDS_EXAMPLE); return; }
+  var firebaseConfig = {
+    apiKey: "AIzaSyAwVfYGWzkJ74FaWpeF2LQhRTMlCEyJdFw",
+    authDomain: "xuxa-bet.firebaseapp.com",
+    projectId: "xuxa-bet",
+    storageBucket: "xuxa-bet.firebasestorage.app",
+    messagingSenderId: "825878560179",
+    appId: "1:825878560179:web:9f838f06dc4c2894111fc6"
+  };
 
-    // Importa onSnapshot dinamicamente do SDK já carregado
-    import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js').then(function(fs) {
+  Promise.all([
+    import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js'),
+    import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js')
+  ]).then(function(mods) {
+    var appMod = mods[0];
+    var fs = mods[1];
+    try {
+      var app;
+      try { app = appMod.getApp('suregreen-odds'); }
+      catch(e) { app = appMod.initializeApp(firebaseConfig, 'suregreen-odds'); }
+      var db = fs.getFirestore(app);
       var docRef = fs.doc(db, 'odds', 'latest');
       _sgOddsUnsubscribe = fs.onSnapshot(docRef, function(snap) {
         if (!snap.exists()) { sgOddsRender(ODDS_EXAMPLE); return; }
         var data = snap.data();
         var games = data.games || [];
 
-        // Converte formato da API para formato esperado pelo sgOddsRender
         var converted = games.map(function(g) {
           var books = (g.bookmakers || []).map(function(bk) {
             var h2h = (bk.markets || []).find(function(m) { return m.key === 'h2h'; });
@@ -21075,20 +21087,14 @@ function sgOddsLoad() {
             time = d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
           } catch(e) {}
 
-          return {
-            home: g.home_team, away: g.away_team,
-            time: time, league: g.sport_title || '',
-            bookmakers: books
-          };
+          return { home: g.home_team, away: g.away_team,
+                   time: time, league: g.sport_title || '', bookmakers: books };
         });
 
-        // Atualiza timestamp
         var updEl = document.getElementById('odds-update-txt');
         if (updEl && data.updatedAt) {
           var d = new Date(data.updatedAt);
-          var h = d.getHours().toString().padStart(2,'0');
-          var m = d.getMinutes().toString().padStart(2,'0');
-          updEl.textContent = 'Atualizado às ' + h + ':' + m + ' · ' + converted.length + ' jogos';
+          updEl.textContent = 'Atualizado às ' + d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0') + ' · ' + converted.length + ' jogos';
         }
 
         sgOddsRender(converted.length > 0 ? converted : ODDS_EXAMPLE);
@@ -21096,10 +21102,14 @@ function sgOddsLoad() {
         console.error('Firestore odds error:', err);
         sgOddsRender(ODDS_EXAMPLE);
       });
-    }).catch(function() { sgOddsRender(ODDS_EXAMPLE); });
-  } catch(e) {
+    } catch(e) {
+      console.error('sgOddsLoad error:', e);
+      sgOddsRender(ODDS_EXAMPLE);
+    }
+  }).catch(function(e) {
+    console.error('sgOddsLoad import error:', e);
     sgOddsRender(ODDS_EXAMPLE);
-  }
+  });
 }
 
 var _LOADING_HTML = '<div class="odds-loading"><div><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span></div><div class="odds-loading-txt">Carregando...</div></div>';
