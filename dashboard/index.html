@@ -21068,24 +21068,18 @@ function sgOddsLoad() {
         var games = data.games || [];
 
         var converted = games.map(function(g) {
-          // oddspedia_br: bookmakers é objeto { slug: { name, home, draw, away } }
-          var booksObj = g.bookmakers || {};
-          var books = Object.keys(booksObj).map(function(slug) {
-            var bk = booksObj[slug];
-            return {
-              name: bk.name || slug,
-              home: bk.home || null,
-              draw: bk.draw || null,
-              away: bk.away || null,
-              home_pa: null, draw_pa: null, away_pa: null
-            };
-          }).filter(function(b) { return b.home && b.away; });
+          // oddspedia_br nova estrutura: g.odds = { home: {bookie,slug,odd}, draw: {...}, away: {...} }
+          var o = g.odds || {};
+          var books = [];
+          if (o.home && o.home.odd) books.push({ name: o.home.bookie || 'Casa', home: o.home.odd, draw: null, away: null, home_pa: null, draw_pa: null, away_pa: null });
+          if (o.draw && o.draw.odd) books.push({ name: o.draw.bookie || 'Empate', home: null, draw: o.draw.odd, away: null, home_pa: null, draw_pa: null, away_pa: null });
+          if (o.away && o.away.odd) books.push({ name: o.away.bookie || 'Fora', home: null, draw: null, away: o.away.odd, home_pa: null, draw_pa: null, away_pa: null });
 
           var time = '--:--';
           try {
             var ts = g.startTime;
             if (ts) {
-              var d = new Date(typeof ts === 'number' && ts < 9999999999 ? ts * 1000 : ts);
+              var d = new Date(typeof ts === 'string' ? ts : (ts < 9999999999 ? ts * 1000 : ts));
               time = d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
             }
           } catch(e) {}
