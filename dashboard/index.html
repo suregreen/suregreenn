@@ -5247,7 +5247,7 @@ window.addEventListener('unhandledrejection', function(e) {
     </button>
 
     <!-- Odds → pg-odds -->
-    <button class="sn-tab" style="display:none" onclick="goPage('pg-odds',this);sgOddsInit()">
+    <button class="sn-tab" onclick="goPage('pg-odds',this);sgOddsInit()">
       <span class="sn-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
       <span>Odds</span>
       <span style="margin-left:auto;font-size:9px;font-weight:700;background:rgba(137,165,185,.15);color:#89A5B9;border:1px solid rgba(137,165,185,.3);border-radius:20px;padding:1px 6px;">BETA</span>
@@ -21061,34 +21061,42 @@ function sgOddsLoad() {
       try { app = appMod.getApp('suregreen-odds'); }
       catch(e) { app = appMod.initializeApp(firebaseConfig, 'suregreen-odds'); }
       var db = fs.getFirestore(app);
-      var docRef = fs.doc(db, 'odds', 'latest');
+      var docRef = fs.doc(db, 'odds', 'oddspedia_br');
       _sgOddsUnsubscribe = fs.onSnapshot(docRef, function(snap) {
         if (!snap.exists()) { sgOddsRender(ODDS_EXAMPLE); return; }
         var data = snap.data();
         var games = data.games || [];
 
         var converted = games.map(function(g) {
-          var books = (g.bookmakers || []).map(function(bk) {
-            var h2h = (bk.markets || []).find(function(m) { return m.key === 'h2h'; });
-            var outcomes = h2h ? (h2h.outcomes || []) : [];
-            var home = null, draw = null, away = null;
-            outcomes.forEach(function(o) {
-              if (o.name === g.home_team) home = o.price;
-              else if (o.name === g.away_team) away = o.price;
-              else draw = o.price;
-            });
-            return { name: bk.title, home: home, draw: draw, away: away,
-                     home_pa: null, draw_pa: null, away_pa: null };
+          // oddspedia_br: bookmakers é objeto { slug: { name, home, draw, away } }
+          var booksObj = g.bookmakers || {};
+          var books = Object.keys(booksObj).map(function(slug) {
+            var bk = booksObj[slug];
+            return {
+              name: bk.name || slug,
+              home: bk.home || null,
+              draw: bk.draw || null,
+              away: bk.away || null,
+              home_pa: null, draw_pa: null, away_pa: null
+            };
           }).filter(function(b) { return b.home && b.away; });
 
           var time = '--:--';
           try {
-            var d = new Date(g.commence_time);
-            time = d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+            var ts = g.startTime;
+            if (ts) {
+              var d = new Date(typeof ts === 'number' && ts < 9999999999 ? ts * 1000 : ts);
+              time = d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+            }
           } catch(e) {}
 
-          return { home: g.home_team, away: g.away_team,
-                   time: time, league: g.sport_title || '', bookmakers: books };
+          return {
+            home: g.home || '',
+            away: g.away || '',
+            time: time,
+            league: g.tournament || '',
+            bookmakers: books
+          };
         });
 
         var updEl = document.getElementById('odds-update-txt');
