@@ -7201,235 +7201,232 @@ window.dvSalvar = async function() {
   </button>
 </nav>
 <!-- ══════════════════════════ PAGE: ODDS ══════════════════════════ -->
-<div id="pg-odds" class="page" style="padding:28px 32px 60px;">
-
+<div id="pg-odds" class="page" style="padding:0;">
 <style>
-/* ══ ODDS PAGE — PREMIUM BLUE DARK ══ */
-:root {
-  --od-bg:       #0B1929;
-  --od-surface:  #0f2035;
-  --od-border:   rgba(255,255,255,0.07);
-  --od-border2:  rgba(255,255,255,0.12);
-  --od-text:     #d4e8ff;
-  --od-muted:    rgba(150,190,225,0.50);
-  --od-faint:    rgba(150,190,225,0.28);
-  --od-green:    #22c55e;
-  --od-green-bg: rgba(34,197,94,0.10);
-  --od-green-bd: rgba(34,197,94,0.28);
+/* ══ ODDS PREMIUM — Bloomberg Dark ══ */
+#pg-odds {
+  background: var(--l0) !important;
+  color: #d4e8ff;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0 !important;
+  min-height: 100vh;
 }
 
-#pg-odds { background: var(--od-bg) !important; color: var(--od-text); padding: 32px 36px 80px !important; }
+/* PAGE HEADER */
+.opx-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 28px 0; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
+}
+.opx-title-row { display: flex; align-items: center; gap: 10px; }
+.opx-title { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -.03em; margin: 0; }
+.opx-beta { font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; background: rgba(34,197,94,.1); color: #22c55e; border: 1px solid rgba(34,197,94,.22); border-radius: 5px; padding: 2px 7px; }
+.opx-live-pill { display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #22c55e; background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2); border-radius: 20px; padding: 4px 10px; }
+.opx-live-dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; animation: xPulse 1.5s infinite; }
+@keyframes xPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{opacity:.7;box-shadow:0 0 0 4px rgba(34,197,94,0)}}
+.opx-update { font-size: 11px; color: rgba(255,255,255,.3); display: flex; align-items: center; gap: 6px; }
+.opx-refresh { cursor: pointer; opacity: .5; transition: opacity .15s; font-size: 13px; }
+.opx-refresh:hover { opacity: 1; }
 
-/* HEADER */
-.odds-pg-title { font-size: 20px; font-weight: 600; color: #eef6ff; letter-spacing:-.02em; margin-bottom:3px; }
-.odds-pg-sub   { font-size: 13px; color: var(--od-muted); margin-bottom:20px; }
+/* FILTER BAR */
+.opx-filters {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 28px 14px; flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.opx-filter-btn {
+  padding: 6px 14px; border-radius: 7px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: var(--l2); color: rgba(255,255,255,.5);
+  font-size: 11px; font-weight: 600;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all .15s; display: flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+}
+.opx-filter-btn.active { background: rgba(34,197,94,.1); border-color: rgba(34,197,94,.3); color: #22c55e; }
+.opx-filter-btn select {
+  background: transparent; border: none; color: inherit;
+  font-size: 11px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; outline: none; max-width: 130px;
+}
+.opx-search {
+  flex: 1; min-width: 160px; max-width: 280px;
+  display: flex; align-items: center; gap: 7px;
+  background: var(--l2); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 7px; padding: 6px 12px;
+}
+.opx-search input {
+  background: transparent; border: none; color: #c8d8cc;
+  font-size: 11px; font-family: 'DM Sans', sans-serif; outline: none; width: 100%;
+}
+.opx-search input::placeholder { color: rgba(255,255,255,.25); }
+.opx-spacer { flex: 1; }
+.opx-action-btn {
+  padding: 6px 14px; border-radius: 7px; font-size: 11px; font-weight: 700;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s;
+  display: flex; align-items: center; gap: 5px;
+}
+.opx-action-btn.green { background: rgba(34,197,94,.15); border: 1px solid rgba(34,197,94,.3); color: #22c55e; }
+.opx-action-btn.outline { background: transparent; border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.4); }
 
-/* DAY TABS */
-.odds-day-tabs { display:flex; gap:4px; margin-bottom:16px; }
-.odds-day-tab  { padding:6px 14px; border-radius:8px; font-size:12px; font-weight:500;
-                 border:0.5px solid var(--od-border2); color:var(--od-muted);
-                 cursor:pointer; background:transparent; text-align:center; font-family:'DM Sans',sans-serif; transition:all .15s; }
-.odds-day-tab .odt-name { display:block; font-size:12px; font-weight:500; }
-.odds-day-tab .odt-date { display:block; font-size:10px; margin-top:1px; color:inherit; opacity:.6; }
-.odds-day-tab.on { background:var(--od-green-bg); border-color:var(--od-green-bd); color:var(--od-green); }
-
-
-/* UPDATE BAR */
-.odds-update-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
-.odds-update-info { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--od-muted); }
-.odds-live-dot { width:6px; height:6px; border-radius:50%; background:var(--od-green); animation:odpulse 2s infinite; }
-@keyframes odpulse { 0%,100%{opacity:1}50%{opacity:.3} }
-
-/* GRID */
-.odds-tables-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px; max-width:1400px; }
-
-/* CARD */
-.odds-card { background:var(--od-surface); border:0.5px solid var(--od-border); border-radius:14px; overflow:hidden; }
-.odds-card-hd { padding:14px 18px; border-bottom:0.5px solid var(--od-border); display:flex; align-items:center; gap:10px; }
-.odds-pa-icon { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
-.odds-pa-icon.com { background:var(--od-green-bg); color:var(--od-green); border:0.5px solid var(--od-green-bd); }
-.odds-pa-icon.sem { background:rgba(255,255,255,0.04); color:var(--od-muted); border:0.5px solid var(--od-border2); }
-.odds-card-title { font-size:14px; font-weight:500; color:#eef6ff; }
-.odds-card-sub   { font-size:11px; color:var(--od-muted); margin-top:2px; }
+/* TABLE HEADER */
+.opx-thead { background: var(--l1); border-bottom: 1px solid rgba(255,255,255,.06); }
+.opx-thead td { padding: 8px 16px; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.2); white-space: nowrap; }
+.opx-thead td.right { text-align: right; }
 
 /* TABLE */
-.odds-table { width:100%; border-collapse:collapse; }
-.odds-table th { font-size:9px; font-weight:600; color:var(--od-faint);
-                 text-transform:uppercase; letter-spacing:.12em;
-                 padding:8px 14px; text-align:center;
-                 border-bottom:0.5px solid var(--od-border);
-                 background:rgba(0,0,0,0.18); }
-.odds-table th.left { text-align:left; }
+.opx-table { width: 100%; border-collapse: collapse; }
 
-/* GAME ROW */
-.odds-game-row td { padding:12px 14px; border-bottom:0.5px solid var(--od-border); cursor:pointer; vertical-align:middle; transition:background .12s; }
-.odds-game-row:last-child td { border-bottom:none; }
-.odds-game-row:hover td { background:rgba(255,255,255,0.025); }
-.odds-game-row.open td { background:rgba(34,197,94,0.04); }
+/* ROW */
+.opx-row { border-bottom: 1px solid rgba(255,255,255,.04); cursor: pointer; transition: background .1s; }
+.opx-row:hover { background: rgba(255,255,255,.025); }
+.opx-row.open { background: rgba(34,197,94,.04); }
 
-.odds-game-cell  { display:flex; flex-direction:column; gap:2px; }
-.odds-game-time  { font-size:9px; color:var(--od-faint); font-weight:500; margin-bottom:1px; }
-.odds-game-home  { font-size:12px; font-weight:500; color:#eef6ff; }
-.odds-game-away  { font-size:12px; color:var(--od-muted); }
+/* GAME CELL */
+.opx-td-game { padding: 13px 16px; min-width: 180px; }
+.opx-row-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+.opx-live-tag { font-size: 8px; font-weight: 800; letter-spacing: .08em; color: #ef4444; display: flex; align-items: center; gap: 3px; }
+.opx-live-tag .d { width: 4px; height: 4px; border-radius: 50%; background: #ef4444; animation: xPulse 1.5s infinite; }
+.opx-row-time { font-size: 9px; color: rgba(255,255,255,.3); font-weight: 600; }
+.opx-row-home { font-size: 14px; font-weight: 700; color: #fff; display: block; line-height: 1.35; }
+.opx-row-away { font-size: 12px; color: rgba(255,255,255,.45); display: block; line-height: 1.35; }
 
-/* RESULT CELLS */
-.odds-res-cell { text-align:center; }
+/* LIGA */
+.opx-td-liga { padding: 13px 16px; white-space: nowrap; }
+.opx-liga { display: flex; align-items: center; gap: 7px; font-size: 12px; color: rgba(255,255,255,.4); font-weight: 500; }
+.opx-liga-badge { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
 
-/* COM PA cell */
-.odds-pa-blk   { display:flex; flex-direction:column; align-items:center; gap:3px; }
-.odds-pa-casa  { font-size:9px; font-weight:600; color:var(--od-muted); white-space:nowrap; }
-.odds-pa-info  { font-size:9px; color:var(--od-faint); }
-/* Best odd highlight — verde */
-.odds-pa-val   { display:inline-block; background:var(--od-green-bg); color:var(--od-green);
-                 border:0.5px solid var(--od-green-bd); border-radius:6px;
-                 padding:3px 8px; font-size:13px; font-weight:600; font-variant-numeric:tabular-nums; }
-.odds-pa-val.empty { opacity:0.3; background:transparent; border-color:transparent; color:var(--od-faint); }
+/* CASAS ODDS */
+.opx-td-casas { padding: 13px 16px; }
+.opx-casas { display: flex; align-items: center; gap: 24px; }
+.opx-casa { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; min-width: 56px; }
+.opx-casa-name { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.4); letter-spacing: .02em; }
+.opx-casa-name.betano { color: #ff5722; }
+.opx-casa-name.bet365 { color: #22c55e; }
+.opx-casa-name.superbet { color: #f87171; }
+.opx-casa-name.betway { color: #00c853; }
+.opx-casa-odd { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: -.02em; font-family: 'Space Grotesk', sans-serif; }
+.opx-casa-odd.best { color: #22c55e; }
+.opx-casa-lbl { font-size: 8px; color: rgba(255,255,255,.2); text-transform: uppercase; letter-spacing: .06em; }
 
-/* SEM PA cell */
-.odds-sem-val  { font-size:14px; font-weight:500; color:#eef6ff; font-variant-numeric:tabular-nums; display:block; text-align:center; }
-.odds-sem-casa { font-size:9px; font-weight:600; color:var(--od-muted); display:block; text-align:center; margin-bottom:2px; }
-
-/* Chevron */
-.odds-chev { display:flex; align-items:center; justify-content:center; }
-.odds-chev svg { stroke:var(--od-faint); transition:transform .2s; }
-.odds-game-row.open .odds-chev svg { transform:rotate(180deg); stroke:var(--od-green); }
-
-/* FOOTER */
-.odds-card-footer { padding:10px 16px; display:flex; align-items:center; gap:6px;
-                    font-size:11px; color:var(--od-faint); border-top:0.5px solid var(--od-border); }
-.odds-card-footer svg { width:13px; height:13px; stroke:currentColor; fill:none; flex-shrink:0; }
-.odds-card-footer.com { color:rgba(34,197,94,0.55); }
-
-/* LOADING */
-.odds-loading { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 20px; gap:10px; }
-.odds-loading-dot { width:7px; height:7px; border-radius:50%; background:var(--od-green); display:inline-block; margin:0 3px; animation:odspin 1.2s infinite ease-in-out; }
-.odds-loading-dot:nth-child(2){animation-delay:.2s}
-.odds-loading-dot:nth-child(3){animation-delay:.4s}
-@keyframes odspin{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
-.odds-loading-txt { font-size:12px; color:var(--od-faint); }
-
-/* ── EXPAND ── */
-.odds-exp-row { display:none; }
-.odds-exp-row.open { display:table-row; }
-.odds-exp-cell { padding:0 !important; border-bottom:0.5px solid var(--od-border) !important; }
-.odds-exp-inner { padding:16px 18px; background:rgba(0,0,0,0.22); }
-
-.odds-exp-tabs { display:flex; border-bottom:0.5px solid var(--od-border); margin-bottom:14px; }
-.odds-exp-tab { padding:7px 16px; font-size:12px; font-weight:500; color:var(--od-muted);
-                cursor:pointer; border:none; background:none; border-bottom:2px solid transparent;
-                transition:all .15s; font-family:'DM Sans',sans-serif; }
-.odds-exp-tab.on { color:var(--od-green); border-bottom-color:var(--od-green); }
-
-.odds-exp-body { display:none; }
-.odds-exp-body.on { display:block; }
-.odds-exp-title { font-size:9px; font-weight:600; color:var(--od-faint);
-                  text-transform:uppercase; letter-spacing:.14em; margin-bottom:10px; }
-
-/* CASA LIST */
-.odds-casa-list { display:flex; flex-direction:column; gap:3px; }
-.odds-casa-item { display:flex; align-items:center; justify-content:space-between;
-                  padding:9px 12px; border-radius:8px;
-                  background:rgba(255,255,255,0.025); border:0.5px solid transparent; }
-/* Melhor casa — verde sutil */
-.odds-casa-item.best { background:rgba(34,197,94,0.07); border-color:rgba(34,197,94,0.20); }
-
-.odds-casa-left  { display:flex; align-items:center; gap:8px; }
-.odds-casa-rank  { font-size:10px; color:var(--od-faint); min-width:20px; }
-.odds-casa-item.best .odds-casa-rank { color:var(--od-green); }
-.odds-casa-nome  { font-size:12px; font-weight:500; color:var(--od-text); }
-.odds-casa-item.best .odds-casa-nome { color:var(--od-green); }
-
-.odds-casa-right { display:flex; align-items:center; gap:8px; }
-.odds-casa-normal { font-size:11px; color:var(--od-faint); font-variant-numeric:tabular-nums; }
-/* PA value na lista — verde */
-.odds-casa-paval { display:inline-block; background:var(--od-green-bg); color:var(--od-green);
-                   border:0.5px solid var(--od-green-bd); border-radius:6px;
-                   padding:2px 8px; font-size:13px; font-weight:600; font-variant-numeric:tabular-nums; }
-/* Sem PA na lista */
-.odds-casa-semval { font-size:14px; font-weight:500; color:#eef6ff; font-variant-numeric:tabular-nums; }
-.odds-casa-item.best .odds-casa-semval { color:var(--od-green); font-size:15px; }
-.odds-no-pa { font-size:10px; color:var(--od-faint); }
+/* LUCRO */
+.opx-td-lucro { padding: 13px 16px; text-align: right; white-space: nowrap; }
+.opx-lucro-pos { font-size: 13px; font-weight: 800; color: #22c55e; font-family: 'Space Grotesk', sans-serif; }
+.opx-lucro-neg { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.2); font-family: 'Space Grotesk', sans-serif; }
 
 /* USAR BTN */
-.odds-usar-btn { display:flex; align-items:center; gap:4px; padding:5px 10px;
-                 border-radius:7px; background:transparent; color:var(--od-muted);
-                 font-size:11px; font-weight:500; border:0.5px solid var(--od-border2);
-                 cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; transition:all .15s; }
-.odds-usar-btn:hover,
-.odds-casa-item.best .odds-usar-btn { background:var(--od-green-bg); color:var(--od-green); border-color:var(--od-green-bd); }
+.opx-td-usar { padding: 13px 16px; white-space: nowrap; }
+.opx-usar { padding: 7px 18px; border-radius: 7px; background: #22c55e; color: #000; font-size: 11px; font-weight: 800; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; letter-spacing: .02em; }
+.opx-usar:hover { background: #16a34a; transform: scale(1.02); }
 
+/* CHEV */
+.opx-td-chev { padding: 13px 10px; color: rgba(255,255,255,.2); }
 
-@media (max-width:768px) {
-  #pg-odds { padding:16px 12px 80px !important; }
-  .odds-tables-grid { grid-template-columns:1fr !important; }
-  .odds-day-tabs { flex-wrap:nowrap; overflow-x:auto; }
+/* EXPAND */
+.opx-exp { display: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+.opx-exp.open { display: table-row; }
+.opx-exp-inner { padding: 14px 20px 18px; background: var(--l0); }
+.opx-exp-tabs { display: flex; gap: 5px; margin-bottom: 12px; }
+.opx-exp-tab { padding: 5px 14px; border-radius: 7px; font-size: 11px; font-weight: 700; border: 1px solid rgba(255,255,255,.07); background: transparent; color: rgba(255,255,255,.3); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+.opx-exp-tab.on { background: rgba(34,197,94,.1); border-color: rgba(34,197,94,.25); color: #22c55e; }
+.opx-exp-body { display: none; }
+.opx-exp-body.on { display: flex; flex-direction: column; gap: 4px; }
+.opx-bk { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 8px; background: var(--l2); border: 1px solid rgba(255,255,255,.04); transition: background .1s; }
+.opx-bk:hover { background: rgba(255,255,255,.04); }
+.opx-bk.best { background: rgba(34,197,94,.05); border-color: rgba(34,197,94,.15); }
+.opx-bk-l { display: flex; align-items: center; gap: 10px; }
+.opx-bk-rank { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.2); width: 16px; }
+.opx-bk-rank.f { color: #22c55e; }
+.opx-bk-name { font-size: 13px; font-weight: 600; color: #d4e8ff; }
+.opx-bk-r { display: flex; align-items: center; gap: 10px; }
+.opx-bk-odd { font-size: 17px; font-weight: 800; color: #fff; font-family: 'Space Grotesk', sans-serif; }
+.opx-bk-odd.best { color: #22c55e; }
+.opx-bk-btn { padding: 4px 11px; border-radius: 6px; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.2); color: #22c55e; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+.opx-bk-btn:hover { background: rgba(34,197,94,.18); }
+
+/* EMPTY / LOADING */
+.opx-loading { display: flex; flex-direction: column; align-items: center; padding: 60px; gap: 12px; }
+.opx-ldots { display: flex; gap: 5px; }
+.opx-ld { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: xLd 1.2s infinite; }
+.opx-ld:nth-child(2){animation-delay:.2s}.opx-ld:nth-child(3){animation-delay:.4s}
+@keyframes xLd{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+
+@media(max-width:860px){
+  .opx-td-liga,.opx-td-lucro{display:none;}
+  .opx-casas{gap:14px;}
+  .opx-casa-odd{font-size:15px;}
 }
 </style>
 
-<div class="odds-pg-title">Comparação de Odds <span style="font-size:11px;font-weight:700;background:rgba(137,165,185,.15);color:#89A5B9;border:1px solid rgba(137,165,185,.3);border-radius:20px;padding:2px 10px;vertical-align:middle;letter-spacing:.08em;">BETA</span></div>
-<div class="odds-pg-sub">Os 20 maiores jogos do dia — melhores odds com e sem PA por casa.</div>
-
-<!-- Update bar simples -->
-<div class="odds-update-bar">
-  <div class="odds-update-info">
-    <span class="odds-live-dot"></span>
-    <span id="odds-update-txt">Atualizado agora · 8 jogos hoje</span>
+<!-- HEADER -->
+<div class="opx-hdr">
+  <div class="opx-title-row">
+    <h1 class="opx-title">Comparador de Odds</h1>
+    <span class="opx-beta">BETA</span>
   </div>
-  <span style="font-size:11px;color:rgba(150,190,225,0.35);">Atualiza a cada 1 min</span>
-</div>
-
-<!-- Filtros dias -->
-<div class="odds-day-tabs">
-  <div class="odds-day-tab on" onclick="sgOddsSetDay(this,'today')"><span class="odt-name">Hoje</span><span class="odt-date" id="odds-day-today"></span></div>
-  <div class="odds-day-tab" onclick="sgOddsSetDay(this,'tomorrow')"><span class="odt-name">Amanhã</span><span class="odt-date" id="odds-day-tomorrow"></span></div>
-</div>
-
-<!-- Tabelas -->
-<div class="odds-tables-grid" id="odds-tables-grid">
-  <!-- COM PA -->
-  <div class="odds-card">
-    <div class="odds-card-hd">
-      <div class="odds-pa-icon com">PA</div>
-      <div>
-        <div class="odds-card-title">Com PA</div>
-        <div class="odds-card-sub">Odds com Pagamento Antecipado</div>
-      </div>
-    </div>
-    <div id="odds-com-pa-body">
-      <div class="odds-loading">
-        <div><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span></div>
-        <div class="odds-loading-txt">Carregando jogos...</div>
-      </div>
-    </div>
-    <div class="odds-card-footer com">
-      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      Odds ajustadas com Pagamento Antecipado
-    </div>
-  </div>
-
-  <!-- SEM PA -->
-  <div class="odds-card">
-    <div class="odds-card-hd">
-      <div class="odds-pa-icon sem">PA</div>
-      <div>
-        <div class="odds-card-title">Sem PA</div>
-        <div class="odds-card-sub">Odds brutas das casas de apostas</div>
-      </div>
-    </div>
-    <div id="odds-sem-pa-body">
-      <div class="odds-loading">
-        <div><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span></div>
-        <div class="odds-loading-txt">Carregando jogos...</div>
-      </div>
-    </div>
-    <div class="odds-card-footer">
-      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Odds brutas fornecidas pelas casas de apostas
-    </div>
+  <div class="opx-update">
+    <span id="odds-update-txt">Carregando...</span>
+    <span class="opx-refresh" onclick="sgOddsLoad()">↻</span>
   </div>
 </div>
 
+<!-- FILTERS -->
+<div class="opx-filters">
+  <button class="opx-filter-btn active">Pré-jogo</button>
+  <div class="opx-filter-btn">
+    <span>🏆</span>
+    <select id="opx-liga-sel" onchange="opxFilter()">
+      <option value="">Todas as ligas</option>
+      <option value="Copa do Brasil">Copa do Brasil</option>
+      <option value="Premier League">Premier League</option>
+      <option value="La Liga">La Liga</option>
+      <option value="Brasileirão Série A">Brasileirão Série A</option>
+      <option value="Libertadores">Libertadores</option>
+      <option value="Ligue 1">Ligue 1</option>
+      <option value="Serie A">Serie A</option>
+      <option value="Bundesliga">Bundesliga</option>
+    </select>
+  </div>
+  <div class="opx-filter-btn">
+    <span>🏠</span>
+    <select id="opx-casa-sel" onchange="opxFilter()">
+      <option value="">Todas as casas</option>
+      <option value="Betano">Betano</option>
+      <option value="bet365">bet365</option>
+      <option value="Stake.com">Stake.com</option>
+      <option value="1xBet">1xBet</option>
+      <option value="Casumo Sport">Casumo Sport</option>
+    </select>
+  </div>
+  <div class="opx-search">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="opx-search" placeholder="Buscar jogo ou liga..." oninput="opxFilter()">
+  </div>
+  <div class="opx-spacer"></div>
+  <button class="opx-action-btn green">⚡ Rápidas</button>
+  <button class="opx-action-btn outline">⚙ Filtros</button>
 </div>
+
+<!-- TABLE -->
+<div style="overflow-x:auto;">
+  <table class="opx-table">
+    <thead class="opx-thead">
+      <tr>
+        <td style="width:210px;">Jogo</td>
+        <td>Liga</td>
+        <td>Casas de Aposta</td>
+        <td class="right">Lucro</td>
+        <td class="right">Ação</td>
+        <td style="width:28px;"></td>
+      </tr>
+    </thead>
+    <tbody id="odds-com-pa-body">
+      <tr><td colspan="6"><div class="opx-loading"><div class="opx-ldots"><span class="opx-ld"></span><span class="opx-ld"></span><span class="opx-ld"></span></div><div style="font-size:12px;color:rgba(255,255,255,.3);">Carregando odds em tempo real...</div></div></td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+
 <!-- ══ FIM pg-odds ══ -->
 
 <!-- ══════════════════════════ PAGE: COMO USAR ══════════════════════════ -->
@@ -21145,157 +21142,170 @@ function sgOddsParseGame(raw) {
 }
 
 function sgOddsRender(games) {
-  var comBody = document.getElementById('odds-com-pa-body');
-  var semBody = document.getElementById('odds-sem-pa-body');
-  if (comBody) comBody.innerHTML = sgOddsBuildTable(games, 'com');
-  if (semBody) semBody.innerHTML = sgOddsBuildTable(games, 'sem');
+  window._opxGames = games;
+  opxRender(games);
 }
 
-function sgOddsBuildTable(games, mode) {
-  var thead = '<table class="odds-table"><thead><tr>'
-    + '<th class="left">Jogo</th>'
-    + '<th>Casa</th>'
-    + '<th>Empate</th>'
-    + '<th>Fora</th>'
-    + '<th></th>'
-    + '</tr></thead><tbody>';
-  var tbody = '';
+var _opxLigaIcons = {
+  'Copa do Brasil':'🏆','Brasileirão Série A':'🇧🇷','Brasileirão Série B':'🇧🇷',
+  'Premier League':'⚽','La Liga':'🇪🇸','Bundesliga':'🇩🇪',
+  'Serie A':'🇮🇹','Ligue 1':'🇫🇷','Champions League':'⭐',
+  'Libertadores':'🌎','Sul-Americana':'🌎'
+};
 
+function opxBookieClass(n) {
+  var l = n.toLowerCase();
+  if (l.includes('betano')) return 'betano';
+  if (l.includes('bet365')) return 'bet365';
+  if (l.includes('superbet')) return 'superbet';
+  if (l.includes('betway')) return 'betway';
+  return '';
+}
+
+function opxFilter() {
+  var games = window._opxGames || [];
+  var liga = (document.getElementById('opx-liga-sel') || {}).value || '';
+  var casa = (document.getElementById('opx-casa-sel') || {}).value || '';
+  var srch = ((document.getElementById('opx-search') || {}).value || '').toLowerCase();
+  var f = games.filter(function(g) {
+    if (liga && g.league !== liga) return false;
+    if (srch && (g.home+' '+g.away+' '+g.league).toLowerCase().indexOf(srch) === -1) return false;
+    if (casa) {
+      var has = (g.bookmakers||[]).some(function(b){return b.name===casa;});
+      if (!has) return false;
+    }
+    return true;
+  });
+  opxRender(f);
+}
+
+function opxRender(games) {
+  var tbody = document.getElementById('odds-com-pa-body');
+  if (!tbody) return;
+
+  var countEl = document.getElementById('odp-count');
+  if (countEl) countEl.textContent = games.length;
+
+  if (!games.length) {
+    tbody.innerHTML = '<tr><td colspan="6"><div class="opx-loading"><div style="font-size:12px;color:rgba(255,255,255,.3);">📭 Nenhum jogo encontrado</div></div></td></tr>';
+    return;
+  }
+
+  var html = '';
   games.forEach(function(g, gi) {
-    var gameId = 'odds-' + mode + '-g' + gi;
-    var expId  = 'odds-' + mode + '-exp' + gi;
+    var rid = 'opxr'+gi, eid = 'opxe'+gi;
+    var bk = g.bookmakers || [];
 
-    // Melhor casa para cada resultado
-    var bestHome = g.bookmakers.length ? g.bookmakers[0] : null;
-    var bestDraw = null, bestAway = null;
-    g.bookmakers.forEach(function(b) {
-      if (b.draw && (!bestDraw || b.draw > bestDraw.draw)) bestDraw = b;
-      if (b.away && (!bestAway || b.away > bestAway.away)) bestAway = b;
+    var bHome=null, bDraw=null, bAway=null;
+    bk.forEach(function(b) {
+      if (b.home && (!bHome || b.home > bHome.home)) bHome = b;
+      if (b.draw && (!bDraw || b.draw > bDraw.draw)) bDraw = b;
+      if (b.away && (!bAway || b.away > bAway.away)) bAway = b;
     });
 
-    // Células da linha resumo
-    function resumoCell(bk, key, paKey) {
-      if (!bk || !bk[key]) return '<td class="odds-res-cell">—</td>';
-      var col = sgOddsCasaColor(bk.name);
-      var val = bk[key].toFixed(2);
-      var pa  = bk[paKey];
-      if (mode === 'com') {
-        return '<td class="odds-res-cell">'
-          + '<div class="odds-pa-blk">'
-          + '<span class="odds-pa-casa" style="color:' + col + '">' + bk.name + '</span>'
-          + '<span class="odds-pa-info">' + val + (pa ? ' · PA' : '') + '</span>'
-          + (pa ? '<span class="odds-pa-val">' + pa.toFixed(2) + '</span>'
-                : '<span class="odds-pa-val empty">—</span>')
-          + '</div></td>';
-      } else {
-        return '<td class="odds-res-cell">'
-          + '<span class="odds-sem-casa" style="color:' + col + '">' + bk.name + '</span>'
-          + '<span class="odds-sem-val">' + val + '</span>'
-          + '</td>';
-      }
+    // Lucro surebet
+    var lucroHtml = '<span class="opx-lucro-neg">—</span>';
+    if (bHome && bAway) {
+      var h = bHome.home, d = bDraw ? bDraw.draw : 0, a = bAway.away;
+      var inv = 1/h + (d ? 1/d : 0) + 1/a;
+      var pct = (1 - inv) * 100;
+      if (pct > 0) lucroHtml = '<span class="opx-lucro-pos">+'+pct.toFixed(2)+'%</span>';
+      else lucroHtml = '<span class="opx-lucro-neg">'+pct.toFixed(2)+'%</span>';
     }
 
-    tbody += '<tr class="odds-game-row" id="' + gameId + '" onclick="sgOddsToggle(\'' + gameId + '\',\'' + expId + '\')">'
-      + '<td><div class="odds-game-cell">'
-      + '<span class="odds-game-time">' + g.time + ' · ' + g.league + '</span>'
-      + '<span class="odds-game-home">' + g.home + '</span>'
-      + '<span class="odds-game-away">' + g.away + '</span>'
-      + '</div></td>'
-      + resumoCell(bestHome, 'home', 'home_pa')
-      + resumoCell(bestDraw, 'draw', 'draw_pa')
-      + resumoCell(bestAway, 'away', 'away_pa')
-      + '<td><div class="odds-chev">'
-      + '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>'
-      + '</div></td></tr>';
+    // 3 casas top
+    var casas = [];
+    if (bHome) casas.push({b:bHome, key:'home', lbl:'CASA', best:true});
+    if (bDraw)  casas.push({b:bDraw,  key:'draw', lbl:'X', best:true});
+    if (bAway)  casas.push({b:bAway,  key:'away', lbl:'FORA', best:true});
 
-    // Expand
-    var resList = [
-      { key:'home', paKey:'home_pa', label: g.home + ' vence' },
-      { key:'draw', paKey:'draw_pa', label: 'Empate' },
-      { key:'away', paKey:'away_pa', label: g.away + ' vence' }
-    ];
+    // Find overall highest odd to highlight
+    var maxOdd = 0;
+    casas.forEach(function(c){if(c.b[c.key]>maxOdd)maxOdd=c.b[c.key];});
 
-    var expTabs = resList.map(function(r, ri) {
-      return '<button class="odds-exp-tab' + (ri === 0 ? ' on' : '') + '" onclick="sgOddsExpTab(\'' + expId + '\',' + ri + ',this)">' + r.label + '</button>';
-    }).join('');
-
-    var expBodies = resList.map(function(r, ri) {
-      var sorted = g.bookmakers
-        .filter(function(b) { return b[r.key]; })
-        .sort(function(a, b) { return b[r.key] - a[r.key]; })
-        .slice(0, 10);
-
-      var listItems = sorted.map(function(bk, bi) {
-        var isFirst = bi === 0;
-        var oddVal = bk[r.key].toFixed(2);
-        var paVal  = bk[r.paKey];
-        var col    = isFirst ? '#22c55e' : sgOddsCasaColor(bk.name);
-        var jogo   = g.home + ' x ' + g.away;
-        var odd4form = (mode === 'com' && paVal) ? paVal.toFixed(2) : oddVal;
-
-        var rightHtml = '';
-        if (mode === 'com') {
-          rightHtml = '<span class="odds-casa-normal">' + oddVal + '</span>'
-            + (paVal ? '<span class="odds-casa-paval">' + paVal.toFixed(2) + '</span>'
-                     : '<span class="odds-no-pa">Sem PA</span>');
-        } else {
-          rightHtml = '<span class="odds-casa-semval">' + oddVal + '</span>';
-        }
-
-        return '<div class="odds-casa-item' + (isFirst ? ' best' : '') + '">'
-          + '<div class="odds-casa-left">'
-          + '<span class="odds-casa-rank">' + (bi + 1) + 'º</span>'
-          + '<span class="odds-casa-nome" style="color:' + col + '">' + bk.name + '</span>'
-          + '</div>'
-          + '<div class="odds-casa-right">'
-          + rightHtml
-          + '<button class="odds-usar-btn" onclick="event.stopPropagation();sgOddsUsar(\''
-          + jogo + '\',\'' + bk.name + '\',\'' + odd4form + '\',\'' + r.key + '\')">'
-          + '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="13 17 18 12 13 7"/><path d="M6 12h12"/></svg> Usar'
-          + '</button>'
-          + '</div></div>';
-      }).join('');
-
-      return '<div class="odds-exp-body' + (ri === 0 ? ' on' : '') + '">'
-        + '<div class="odds-exp-title">' + r.label + ' · ' + (mode === 'com' ? 'Com PA' : 'Sem PA') + '</div>'
-        + '<div class="odds-casa-list">' + listItems + '</div>'
+    var casasHtml = casas.map(function(c) {
+      var cls = opxBookieClass(c.b.name);
+      var isMax = c.b[c.key] === maxOdd;
+      return '<div class="opx-casa">'
+        + '<div class="opx-casa-name '+cls+'">'+c.b.name+'</div>'
+        + '<div class="opx-casa-odd'+(isMax?' best':'')+'">'+c.b[c.key].toFixed(2)+'</div>'
+        + '<div class="opx-casa-lbl">'+c.lbl+'</div>'
         + '</div>';
     }).join('');
 
-    tbody += '<tr class="odds-exp-row" id="' + expId + '">'
-      + '<td class="odds-exp-cell" colspan="5">'
-      + '<div class="odds-exp-inner">'
-      + '<div class="odds-exp-tabs">' + expTabs + '</div>'
-      + expBodies
-      + '</div></td></tr>';
+    var icon = _opxLigaIcons[g.league] || '⚽';
+
+    html += '<tr class="opx-row" id="'+rid+'" onclick="opxTog(\''+rid+'\',\''+eid+'\')"> '
+      +'<td class="opx-td-game">'
+        +'<div class="opx-row-meta"><span class="opx-row-time">'+g.time+'</span><span style="font-size:9px;color:rgba(255,255,255,.25);margin-left:4px;">'+( g.league||'')+'</span></div>'
+        +'<span class="opx-row-home">'+g.home+'</span>'
+        +'<span class="opx-row-away">'+g.away+'</span>'
+      +'</td>'
+      +'<td class="opx-td-liga"><div class="opx-liga"><span class="opx-liga-badge">'+icon+'</span>'+( g.league||'')+'</div></td>'
+      +'<td class="opx-td-casas"><div class="opx-casas">'+casasHtml+'</div></td>'
+      +'<td class="opx-td-lucro">'+lucroHtml+'</td>'
+      +'<td class="opx-td-usar"><button class="opx-usar" onclick="event.stopPropagation();opxUsarTop('+gi+')">Usar</button></td>'
+      +'<td class="opx-td-chev"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></td>'
+      +'</tr>';
+
+    // EXPAND
+    var res = [{key:'home',lbl:g.home+' vence'},{key:'draw',lbl:'Empate'},{key:'away',lbl:g.away+' vence'}];
+
+    var tabs = res.map(function(r,i){
+      return '<button class="opx-exp-tab'+(i===0?' on':'')+'" onclick="event.stopPropagation();opxTab(\''+eid+'\','+i+',this)">'+r.lbl+'</button>';
+    }).join('');
+
+    var bodies = res.map(function(r,i){
+      var sorted = bk.filter(function(b){return b[r.key];}).sort(function(a,b){return b[r.key]-a[r.key];}).slice(0,15);
+      if (!sorted.length) return '<div class="opx-exp-body'+(i===0?' on':'')+'"><div style="padding:10px;color:rgba(255,255,255,.3);font-size:12px;">Sem dados</div></div>';
+      var items = sorted.map(function(b,bi){
+        var jg = g.home+' x '+g.away;
+        var jgSafe = jg.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        var nameSafe = b.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        return '<div class="opx-bk'+(bi===0?' best':'')+'">'
+          +'<div class="opx-bk-l"><span class="opx-bk-rank'+(bi===0?' f':'')+'">'+( bi+1)+'º</span><span class="opx-bk-name">'+b.name+'</span></div>'
+          +'<div class="opx-bk-r"><span class="opx-bk-odd'+(bi===0?' best':'')+'">'+ b[r.key].toFixed(2)+'</span>'
+          +'<button class="opx-bk-btn" onclick="event.stopPropagation();sgOddsUsar(\''+jgSafe+'\',\''+nameSafe+'\',\''+b[r.key].toFixed(2)+'\',\''+r.key+'\')">→ Usar</button>'
+          +'</div></div>';
+      }).join('');
+      return '<div class="opx-exp-body'+(i===0?' on':'')+'">'+items+'</div>';
+    }).join('');
+
+    html += '<tr class="opx-exp" id="'+eid+'"><td colspan="6"><div class="opx-exp-inner"><div class="opx-exp-tabs">'+tabs+'</div>'+bodies+'</div></td></tr>';
   });
 
-  return thead + tbody + '</tbody></table>';
+  tbody.innerHTML = html;
 }
 
-function sgOddsToggle(rowId, expId) {
-  var row = document.getElementById(rowId);
-  var exp = document.getElementById(expId);
-  if (!row || !exp) return;
-  var isOpen = row.classList.contains('open');
-  var card = row.closest ? row.closest('.odds-card') : null;
-  var scope = card || document;
-  scope.querySelectorAll('.odds-game-row').forEach(function(r) { r.classList.remove('open'); });
-  scope.querySelectorAll('.odds-exp-row').forEach(function(e) { e.classList.remove('open'); });
-  if (!isOpen) {
-    row.classList.add('open');
-    exp.classList.add('open');
-  }
+function opxTog(rid,eid){
+  var r=document.getElementById(rid),e=document.getElementById(eid);
+  if(!r||!e)return;
+  var open=r.classList.contains('open');
+  document.querySelectorAll('.opx-row').forEach(function(x){x.classList.remove('open');});
+  document.querySelectorAll('.opx-exp').forEach(function(x){x.classList.remove('open');});
+  if(!open){r.classList.add('open');e.classList.add('open');}
 }
 
-function sgOddsExpTab(expId, idx, el) {
-  var exp = document.getElementById(expId);
-  if (!exp) return;
-  exp.querySelectorAll('.odds-exp-tab').forEach(function(t) { t.classList.remove('on'); });
-  exp.querySelectorAll('.odds-exp-body').forEach(function(b) { b.classList.remove('on'); });
+function opxTab(eid,idx,el){
+  var e=document.getElementById(eid);if(!e)return;
+  e.querySelectorAll('.opx-exp-tab').forEach(function(t){t.classList.remove('on');});
+  e.querySelectorAll('.opx-exp-body').forEach(function(b){b.classList.remove('on');});
   el.classList.add('on');
-  exp.querySelectorAll('.odds-exp-body')[idx].classList.add('on');
+  var bs=e.querySelectorAll('.opx-exp-body');
+  if(bs[idx])bs[idx].classList.add('on');
 }
+
+function opxUsarTop(gi){
+  var games=window._opxGames||[];
+  var g=games[parseInt(gi)];if(!g)return;
+  var bk=g.bookmakers||[];
+  var bHome=null;
+  bk.forEach(function(b){if(b.home&&(!bHome||b.home>bHome.home))bHome=b;});
+  if(bHome)sgOddsUsar(g.home+' x '+g.away,bHome.name,bHome.home.toFixed(2),'home');
+}
+
+function sgOddsToggle(a,b){opxTog(a,b);}
+function sgOddsExpTab(a,b,c){opxTab(a,b,c);}
 
 function sgOddsUsar(jogo, casa, oddStr, resultado) {
   var oddVal = parseFloat(oddStr);
