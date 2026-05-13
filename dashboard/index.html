@@ -7321,6 +7321,9 @@ window.dvSalvar = async function() {
 .opx-bk-rank { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.2); width: 16px; }
 .opx-bk-rank.f { color: #22c55e; }
 .opx-bk-name { font-size: 13px; font-weight: 600; color: #d4e8ff; }
+.opx-bk-logo { width: 22px; height: 22px; border-radius: 4px; object-fit: contain; background: #fff; padding: 2px; flex-shrink: 0; }
+.opx-bk-logo-err { display: none; }
+.opx-casa-logo { width: 18px; height: 18px; border-radius: 3px; object-fit: contain; background: #fff; padding: 1px; flex-shrink: 0; vertical-align: middle; margin-right: 3px; }
 .opx-bk-r { display: flex; align-items: center; gap: 10px; }
 .opx-bk-odd { font-size: 17px; font-weight: 800; color: #fff; font-family: 'Space Grotesk', sans-serif; }
 .opx-bk-odd.best { color: #22c55e; }
@@ -21146,6 +21149,20 @@ function opxBookieClass(n) {
   return '';
 }
 
+function opxBookieLogo(slug, name) {
+  var s = (slug || name || '').toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  var url = 'https://oddspedia.com/images/bookmakers/' + s + '.png';
+  return '<img class="opx-bk-logo" src="' + url + '" alt="' + name + '" onerror="this.style.display='none';this.nextSibling.style.display='inline-block'">'
+    + '<span class="opx-bk-logo-err" style="display:none;width:22px;height:22px;border-radius:4px;background:rgba(255,255,255,.1);display:none;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;">'
+    + (name||'?').charAt(0).toUpperCase() + '</span>';
+}
+
+function opxCasaLogo(slug, name) {
+  var s = (slug || name || '').toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  var url = 'https://oddspedia.com/images/bookmakers/' + s + '.png';
+  return '<img class="opx-casa-logo" src="' + url + '" alt="' + name + '" onerror="this.style.display='none'">';
+}
+
 function opxFilter() {
   var games = window._opxGames || [];
   var liga = (document.getElementById('opx-liga-sel') || {}).value || '';
@@ -21184,8 +21201,9 @@ function opxRender(games) {
     var BR_MAIN = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet'];
 
     function isPrio(b) {
-      var s = (b.slug||b.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
-      return BR_MAIN.some(function(p){ return s.includes(p.replace(/[^a-z0-9]/g,'')); });
+      var name = (b.name||'').toLowerCase();
+      var slug = (b.slug||'').toLowerCase();
+      return BR_MAIN.some(function(p){ return name.includes(p) || slug.includes(p); });
     }
 
     var bkFiltered = bk.filter(isPrio);
@@ -21222,7 +21240,7 @@ function opxRender(games) {
       var cls = opxBookieClass(c.b.name);
       var isMax = c.b[c.key] === maxOdd;
       return '<div class="opx-casa">'
-        + '<div class="opx-casa-name '+cls+'">'+c.b.name+'</div>'
+        + '<div class="opx-casa-name '+cls+'" style="display:flex;align-items:center;gap:4px;">'+opxCasaLogo(c.b.slug,c.b.name)+c.b.name+'</div>'
         + '<div class="opx-casa-odd'+(isMax?' best':'')+'">'+c.b[c.key].toFixed(2)+'</div>'
         + '<div class="opx-casa-lbl">'+c.lbl+'</div>'
         + '</div>';
@@ -21257,9 +21275,15 @@ function opxRender(games) {
       var allSorted = bk.filter(function(b){return b[r.key];}).sort(function(a,b){return b[r.key]-a[r.key];});
 
       var filtered = allSorted.filter(function(b){
-        var s = (b.slug||b.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
-        return BR_WHITELIST.some(function(p){ return s.includes(p.replace(/[^a-z0-9]/g,'')); });
+        var name = (b.name||'').toLowerCase();
+        var slug = (b.slug||'').toLowerCase();
+        return BR_WHITELIST.some(function(p){
+          return name.includes(p) || slug.includes(p);
+        });
       });
+
+      // Debug: log quais casas foram encontradas
+      if (filtered.length === 0) console.log('Whitelist vazia, usando todas. Casas disponíveis:', allSorted.map(function(b){return b.name;}).join(', '));
 
       // Se tiver menos de 2, mostra as melhores disponíveis
       var sorted = (filtered.length >= 2 ? filtered : allSorted).slice(0,8);
@@ -21269,7 +21293,7 @@ function opxRender(games) {
         var jgSafe = jg.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
         var nameSafe = b.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
         return '<div class="opx-bk'+(bi===0?' best':'')+'">'
-          +'<div class="opx-bk-l"><span class="opx-bk-rank'+(bi===0?' f':'')+'">'+( bi+1)+'º</span><span class="opx-bk-name">'+b.name+'</span></div>'
+          +'<div class="opx-bk-l"><span class="opx-bk-rank'+(bi===0?' f':'')+'">'+(bi+1)+'º</span>'+opxBookieLogo(b.slug,b.name)+'<span class="opx-bk-name">'+b.name+'</span></div>'
           +'<div class="opx-bk-r"><span class="opx-bk-odd'+(bi===0?' best':'')+'">'+ b[r.key].toFixed(2)+'</span>'
           +'<button class="opx-bk-btn" onclick="event.stopPropagation();sgOddsUsar(\''+jgSafe+'\',\''+nameSafe+'\',\''+b[r.key].toFixed(2)+'\',\''+r.key+'\')">→ Usar</button>'
           +'</div></div>';
