@@ -21150,19 +21150,14 @@ function opxBookieClass(n) {
 }
 
 function opxBookieLogo(slug, name) {
-  var s = (slug || name || '').toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
-  var url = 'https://oddspedia.com/images/bookmakers/' + s + '.png';
-  return '<img class="opx-bk-logo" src="' + url + '" alt="' + name + '" onerror="this.style.display='none';this.nextSibling.style.display='inline-block'">'
-    + '<span class="opx-bk-logo-err" style="display:none;width:22px;height:22px;border-radius:4px;background:rgba(255,255,255,.1);display:none;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;">'
-    + (name||'?').charAt(0).toUpperCase() + '</span>';
+  var s = (slug||name||'').toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+  return '<img class="opx-bk-logo" src="https://oddspedia.com/images/bookmakers/'+s+'.png" alt="'+name+'" style="width:22px;height:22px;border-radius:4px;object-fit:contain;background:#fff;padding:2px;flex-shrink:0;" onerror="this.remove()">';
 }
 
 function opxCasaLogo(slug, name) {
-  var s = (slug || name || '').toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
-  var url = 'https://oddspedia.com/images/bookmakers/' + s + '.png';
-  return '<img class="opx-casa-logo" src="' + url + '" alt="' + name + '" onerror="this.style.display='none'">';
+  var s = (slug||name||'').toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+  return '<img class="opx-casa-logo" src="https://oddspedia.com/images/bookmakers/'+s+'.png" alt="'+name+'" style="width:18px;height:18px;border-radius:3px;object-fit:contain;background:#fff;padding:1px;flex-shrink:0;vertical-align:middle;margin-right:3px;" onerror="this.remove()">';
 }
-
 function opxFilter() {
   var games = window._opxGames || [];
   var liga = (document.getElementById('opx-liga-sel') || {}).value || '';
@@ -21197,17 +21192,16 @@ function opxRender(games) {
     var rid = 'opxr'+gi, eid = 'opxe'+gi;
     var bk = g.bookmakers || [];
 
-    // Whitelist exata para linha resumo
-    var BR_MAIN = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet'];
+    // Preferred bookies para linha resumo
+    var BR_PREF = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet','sportingbet','superbet'];
 
     function isPrio(b) {
-      var name = (b.name||'').toLowerCase();
-      var slug = (b.slug||'').toLowerCase();
-      return BR_MAIN.some(function(p){ return name.includes(p) || slug.includes(p); });
+      var n = (b.name||'').toLowerCase();
+      return BR_PREF.some(function(p){ return n.includes(p); });
     }
 
-    var bkFiltered = bk.filter(isPrio);
-    var bkUse = bkFiltered.length >= 2 ? bkFiltered : bk;
+    var bkPref = bk.filter(isPrio);
+    var bkUse = bkPref.length >= 2 ? bkPref : bk;
 
     var bHome=null, bDraw=null, bAway=null;
     bkUse.forEach(function(b) {
@@ -21269,24 +21263,21 @@ function opxRender(games) {
     }).join('');
 
     var bodies = res.map(function(r,i){
-      // Whitelist exata — só essas casas
-      var BR_WHITELIST = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet'];
+      // Preferred bookies — mostra primeiro, resto depois
+      var PREFER = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet','sportingbet','superbet'];
 
       var allSorted = bk.filter(function(b){return b[r.key];}).sort(function(a,b){return b[r.key]-a[r.key];});
 
-      var filtered = allSorted.filter(function(b){
-        var name = (b.name||'').toLowerCase();
-        var slug = (b.slug||'').toLowerCase();
-        return BR_WHITELIST.some(function(p){
-          return name.includes(p) || slug.includes(p);
-        });
+      var preferred = allSorted.filter(function(b){
+        var n = (b.name||'').toLowerCase();
+        return PREFER.some(function(p){ return n.includes(p); });
+      });
+      var others = allSorted.filter(function(b){
+        var n = (b.name||'').toLowerCase();
+        return !PREFER.some(function(p){ return n.includes(p); });
       });
 
-      // Debug: log quais casas foram encontradas
-      if (filtered.length === 0) console.log('Whitelist vazia, usando todas. Casas disponíveis:', allSorted.map(function(b){return b.name;}).join(', '));
-
-      // Se tiver menos de 2, mostra as melhores disponíveis
-      var sorted = (filtered.length >= 2 ? filtered : allSorted).slice(0,8);
+      var sorted = preferred.concat(others).slice(0,8);
       if (!sorted.length) return '<div class="opx-exp-body'+(i===0?' on':'')+'"><div style="padding:10px;color:rgba(255,255,255,.3);font-size:12px;">Sem dados</div></div>';
       var items = sorted.map(function(b,bi){
         var jg = g.home+' x '+g.away;
