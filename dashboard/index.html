@@ -21180,17 +21180,14 @@ function opxRender(games) {
     var rid = 'opxr'+gi, eid = 'opxe'+gi;
     var bk = g.bookmakers || [];
 
-    // Filtra casas prioritárias para o resumo da linha
-    var PRIO = ['betano','bet365','sportingbet','betnacional','novibet','fezbet','gg-bet','gg.bet',
-      'casumo','leovegas','1xbet','stake','betway','lsbet','superbet','pinnacle',
-      'marathonbet','unibet','william-hill','bwin','22bet','1bet','20bet','mostbet','betsson'];
+    // Whitelist exata para linha resumo
+    var BR_MAIN = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet'];
 
     function isPrio(b) {
       var s = (b.slug||b.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
-      return PRIO.some(function(p){ return s.includes(p.replace(/[^a-z0-9]/g,'')); });
+      return BR_MAIN.some(function(p){ return s.includes(p.replace(/[^a-z0-9]/g,'')); });
     }
 
-    // Use priority bookies if available, fallback to all
     var bkFiltered = bk.filter(isPrio);
     var bkUse = bkFiltered.length >= 2 ? bkFiltered : bk;
 
@@ -21254,26 +21251,18 @@ function opxRender(games) {
     }).join('');
 
     var bodies = res.map(function(r,i){
-      // Casas prioritárias para o Brasil
-      var PRIORITY = ['betano','bet365','sportingbet','betnacional','novibet','fezbet','gg-bet','gg.bet',
-        'casumo','casumo-sport','leovegas','leovegas-sport','1xbet','stake','stake.com',
-        'betway','lsbet','superbet','pinnacle','marathonbet','unibet','william-hill',
-        'bwin','22bet','1bet','20bet','mostbet','betsson','goldenbet'];
+      // Whitelist exata — só essas casas
+      var BR_WHITELIST = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet'];
 
       var allSorted = bk.filter(function(b){return b[r.key];}).sort(function(a,b){return b[r.key]-a[r.key];});
 
-      // Separate priority from others
-      var priority = allSorted.filter(function(b){
-        var slug = (b.slug||b.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
-        return PRIORITY.some(function(p){ return slug.includes(p.replace(/[^a-z0-9]/g,'')); });
-      });
-      var others = allSorted.filter(function(b){
-        var slug = (b.slug||b.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
-        return !PRIORITY.some(function(p){ return slug.includes(p.replace(/[^a-z0-9]/g,'')); });
+      var filtered = allSorted.filter(function(b){
+        var s = (b.slug||b.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+        return BR_WHITELIST.some(function(p){ return s.includes(p.replace(/[^a-z0-9]/g,'')); });
       });
 
-      // Show priority first, then fill up to 15 with others
-      var sorted = priority.concat(others).slice(0,15);
+      // Se tiver menos de 2, mostra as melhores disponíveis
+      var sorted = (filtered.length >= 2 ? filtered : allSorted).slice(0,8);
       if (!sorted.length) return '<div class="opx-exp-body'+(i===0?' on':'')+'"><div style="padding:10px;color:rgba(255,255,255,.3);font-size:12px;">Sem dados</div></div>';
       var items = sorted.map(function(b,bi){
         var jg = g.home+' x '+g.away;
