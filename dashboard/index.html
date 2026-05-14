@@ -23013,7 +23013,7 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
 
   /* ════ ANÁLISE: grids em coluna única ════ */
   #pg-hist {
-    padding: 14px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important;
+    padding: 10px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important;
     overflow-x: hidden !important;
   }
   /* Grid principal gráficos + calendário */
@@ -23028,19 +23028,46 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
     gap: 12px !important;
     width: 100% !important;
   }
-  /* Containers dos canvas — altura mobile aumentada */
+
+  /* ── KPI cards (APOSTAS/WIN RATE + ROI/VOLUME) ── */
+  .hist-kpi-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin-bottom: 14px !important;
+  }
+  .hk {
+    padding: 18px 16px !important;
+    border-radius: 16px !important;
+    min-height: 110px !important;
+  }
+  .hk__label {
+    font-size: 10px !important;
+    letter-spacing: .10em !important;
+    margin-bottom: 6px !important;
+  }
+  .hk__val {
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+  }
+  .hk--lucro .hk__val { font-size: 26px !important; }
+  .hk__sub { font-size: 11px !important; margin-top: 4px !important; }
+  .hk__ico { width: 34px !important; height: 34px !important; border-radius: 9px !important; }
+
+  /* ── Gráfico principal ── */
   #pg-hist div[style*="height:240px"] {
-    height: 280px !important;
+    height: 320px !important;
   }
+  /* Gráficos menores */
   #pg-hist div[style*="height:180px"] {
-    height: 200px !important;
+    height: 210px !important;
   }
-  /* Reduzir padding lateral do card wrapper do gráfico principal */
+  /* Padding do card wrapper */
   #pg-hist .card {
-    padding: 12px 10px !important;
+    padding: 14px 10px !important;
   }
   #pg-hist canvas { max-width: 100% !important; }
-  .dp-chart-w { height: 180px !important; }
+  .dp-chart-w { height: 200px !important; }
 
   /* ════ DECLARAÇÃO IR ════ */
   #pg-ir {
