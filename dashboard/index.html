@@ -7203,6 +7203,9 @@ window.dvSalvar = async function() {
   box-shadow:0 -8px 40px rgba(0,0,0,.7);
   transform:translateY(100%);
   transition:transform .32s cubic-bezier(.22,1,.36,1);
+  max-height:82vh;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
 ">
   <!-- Handle -->
   <div style="display:flex;justify-content:center;padding:12px 0 4px;">
@@ -7363,7 +7366,6 @@ function maisGo(pageId, cb) {
   font-family: 'DM Sans', sans-serif;
   padding: 0 !important;
   min-height: 100vh;
-  padding-top: env(safe-area-inset-top, 0px) !important;
 }
 
 /* PAGE HEADER */
@@ -22815,6 +22817,26 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
    ══════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
 
+  /* CRÍTICO: remover max-width e margin:auto que centralizam a page */
+  .page {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+  /* main-content sempre 100% da tela */
+  .main-content {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    overflow-x: hidden !important;
+  }
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
   /* ════ ODDS: esconder tabela, mostrar cards ════ */
   #pg-odds .opx-table-wrap { display: none !important; }
   #pg-odds table.opx-table  { display: none !important; }
@@ -22843,19 +22865,19 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
     gap: 12px !important;
     width: 100% !important;
   }
-  /* Containers dos canvas — altura mobile */
+  /* Containers dos canvas — altura mobile aumentada */
   #pg-hist div[style*="height:240px"] {
-    height: 220px !important;
+    height: 280px !important;
   }
   #pg-hist div[style*="height:180px"] {
-    height: 175px !important;
+    height: 200px !important;
   }
   /* Reduzir padding lateral do card wrapper do gráfico principal */
   #pg-hist .card {
-    padding: 14px 12px !important;
+    padding: 12px 10px !important;
   }
   #pg-hist canvas { max-width: 100% !important; }
-  .dp-chart-w { height: 160px !important; }
+  .dp-chart-w { height: 180px !important; }
 
   /* ════ DECLARAÇÃO IR ════ */
   #pg-ir {
