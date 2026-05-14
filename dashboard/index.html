@@ -7342,6 +7342,50 @@ window.dvSalvar = async function() {
   .opx-casas{gap:14px;}
   .opx-casa-odd{font-size:15px;}
 }
+
+/* ══ MOBILE ODDS — CARD LAYOUT ══ */
+@media(max-width:600px){
+  /* Wrap */
+  .op-wrap { padding:12px 12px 80px !important; }
+
+  /* Header compacto */
+  .opx-hdr { padding:0 0 10px; margin-bottom:10px; flex-wrap:nowrap; }
+  .opx-title { font-size:16px !important; }
+  .opx-beta { display:none; }
+  .opx-update { font-size:10px; }
+
+  /* Filtros em grid compacto */
+  .opx-filters {
+    padding:0 0 10px !important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:6px !important;
+  }
+  .opx-filter-btn {
+    padding:8px 10px !important;
+    font-size:11px !important;
+    justify-content:center;
+    border-radius:8px !important;
+  }
+  .opx-search {
+    grid-column:1/-1 !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+  .opx-spacer { display:none !important; }
+  .opx-action-btn.outline { display:none !important; }
+  .opx-action-btn.green { grid-column:1/-1; justify-content:center; }
+
+  /* ESCONDE TABELA DESKTOP */
+  .opx-table-wrap { display:none !important; }
+
+  /* CARDS MOBILE */
+  #opx-mobile-cards { display:flex !important; flex-direction:column; gap:8px; }
+}
+
+@media(min-width:601px){
+  #opx-mobile-cards { display:none !important; }
+}
 </style>
 
 <!-- HEADER -->
@@ -7413,6 +7457,10 @@ window.dvSalvar = async function() {
 </div>
 
 </div>
+
+<!-- MOBILE CARDS -->
+<div id="opx-mobile-cards" style="display:none;"></div>
+
 
 <!-- ══ FIM pg-odds ══ -->
 
@@ -7860,7 +7908,7 @@ window.dvSalvar = async function() {
         <div class="gh-step3-ico-sm"><i class="ti ti-calculator" aria-hidden="true"></i></div>
       </div>
       <div class="gh-step3-title">Calcule sua entrada</div>
-      <div class="gh-step3-desc">Insira as odds das casas e deixe o SureGreen calcular os stakes ideais automaticamente.</div>
+      <div class="gh-step3-desc">Veja as melhores odds no Comparador e clique "Usar" — a calculadora preenche automaticamente. Só confirmar.</div>
       <div class="gh-step3-mock">
         <div class="gh-step3-mock-title">Calculadora</div>
         <div class="gh-step3-mock-row"><span class="gh-step3-mock-lbl">Tipo</span><span class="gh-step3-mock-val">Surebet</span></div>
@@ -8009,6 +8057,37 @@ window.dvSalvar = async function() {
   </div>
 </div>
 
+<!-- COMPARADOR DE ODDS -->
+<div class="gh-section alt">
+  <div class="gh-sec-hd">
+    <div class="gh-sec-title">Comparador de Odds <span style="font-size:14px;background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.25);border-radius:6px;padding:3px 10px;vertical-align:middle;font-weight:700;letter-spacing:.06em;">NOVO</span></div>
+    <div class="gh-sec-sub">Encontre as melhores odds do mercado em tempo real e preencha a calculadora com 1 clique.</div>
+  </div>
+  <div class="gh-dash" style="grid-template-columns:repeat(3,1fr);">
+    <div class="gh-dash-card">
+      <div class="gh-dash-ico"><i class="ti ti-chart-bar" aria-hidden="true"></i></div>
+      <div class="gh-dash-title">Odds em tempo real</div>
+      <div class="gh-dash-desc">Atualizamos as odds a cada 2 minutos com dados de bet365, Betano, Novibet, Stake, 1xBet e mais.</div>
+    </div>
+    <div class="gh-dash-card">
+      <div class="gh-dash-ico blue"><i class="ti ti-bolt" aria-hidden="true"></i></div>
+      <div class="gh-dash-title">Preenchimento automático</div>
+      <div class="gh-dash-desc">Clique em "Usar" ao lado de qualquer odd — a calculadora é preenchida automaticamente. Zero digitação.</div>
+    </div>
+    <div class="gh-dash-card">
+      <div class="gh-dash-ico purple"><i class="ti ti-trophy" aria-hidden="true"></i></div>
+      <div class="gh-dash-title">% de lucro estimado</div>
+      <div class="gh-dash-desc">Cada jogo mostra o percentual de lucro potencial da surebet calculado automaticamente em tempo real.</div>
+    </div>
+  </div>
+  <div style="background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.15);border-radius:12px;padding:16px 20px;margin-top:20px;display:flex;align-items:center;gap:12px;">
+    <i class="ti ti-info-circle" style="font-size:20px;color:#22c55e;flex-shrink:0;" aria-hidden="true"></i>
+    <div style="font-size:13px;color:rgba(190,215,235,.8);line-height:1.6;">
+      <strong style="color:#22c55e;">Como usar:</strong> Vá em <strong style="color:#eef6ff;">Odds</strong> no menu → escolha um jogo → clique em qualquer resultado (Casa vence, Empate, Fora) → clique <strong style="color:#eef6ff;">"→ Usar"</strong> → a calculadora abre já preenchida com a odd selecionada.
+    </div>
+  </div>
+</div>
+
 <!-- GLOSSÁRIO -->
 <div class="gh-section">
   <div class="gh-gloss-hd">
@@ -8047,9 +8126,9 @@ window.dvSalvar = async function() {
   <div class="gh-cta-right">
     <ul class="gh-cta-list">
       <li><i class="ti ti-check" aria-hidden="true"></i> Configure seu bankroll em menos de 2 minutos</li>
-      <li><i class="ti ti-check" aria-hidden="true"></i> Calcule stakes automaticamente com a calculadora</li>
-      <li><i class="ti ti-check" aria-hidden="true"></i> Registre cada entrada com um clique</li>
-      <li><i class="ti ti-check" aria-hidden="true"></i> Acompanhe ROI e lucro em tempo real</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i> Veja as melhores odds em tempo real no Comparador</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i> Preencha a calculadora com 1 clique — sem digitar nada</li>
+      <li><i class="ti ti-check" aria-hidden="true"></i> Registre cada entrada e acompanhe ROI em tempo real</li>
       <li><i class="ti ti-check" aria-hidden="true"></i> Tudo salvo na nuvem — acesse de qualquer lugar</li>
     </ul>
   </div>
@@ -21131,6 +21210,90 @@ function sgOddsParseGame(raw) {
 function sgOddsRender(games) {
   window._opxGames = games;
   opxRender(games);
+  opxMobileRender(games);
+}
+
+function opxMobileRender(games) {
+  var el = document.getElementById('opx-mobile-cards');
+  if (!el) return;
+
+  var countEl = document.getElementById('odp-count');
+  if (countEl) countEl.textContent = games.length;
+
+  if (!games || !games.length) {
+    el.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:13px;">Nenhum jogo disponível</div>';
+    return;
+  }
+
+  var PREFER = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet','sportingbet','superbet'];
+  function isPref(b) {
+    var n = (b.name||'').toLowerCase();
+    return PREFER.some(function(p){return n.includes(p);});
+  }
+
+  var html = '';
+  games.forEach(function(g, gi) {
+    var bk = g.bookmakers || [];
+    var bkUse = bk.filter(isPref);
+    if (bkUse.length < 2) bkUse = bk;
+
+    var bHome=null, bDraw=null, bAway=null;
+    bkUse.forEach(function(b){
+      if(b.home&&(!bHome||b.home>bHome.home))bHome=b;
+      if(b.draw&&(!bDraw||b.draw>bDraw.draw))bDraw=b;
+      if(b.away&&(!bAway||b.away>bAway.away))bAway=b;
+    });
+
+    // Lucro
+    var lucroHtml = '';
+    if (bHome && bAway) {
+      var h=bHome.home, d=bDraw?bDraw.draw:0, a=bAway.away;
+      var inv=1/h+(d?1/d:0)+1/a;
+      var pct=(1-inv)*100;
+      if (pct > 0) lucroHtml = '<span style="font-size:11px;font-weight:700;color:#22c55e;">+'+pct.toFixed(2)+'%</span>';
+    }
+
+    function oddCol(b, key, lbl) {
+      if (!b||!b[key]) return '<div style="flex:1;text-align:center;"><div style="font-size:10px;color:rgba(255,255,255,.35);font-weight:600;margin-bottom:2px;">'+lbl+'</div><div style="font-size:10px;color:rgba(255,255,255,.3);">—</div></div>';
+      var isOrange = (b.name||'').toLowerCase().includes('betano');
+      var color = isOrange ? '#ff6b35' : '#22c55e';
+      return '<div style="flex:1;text-align:center;">'
+        +'<div style="font-size:9px;color:rgba(255,255,255,.4);font-weight:700;margin-bottom:1px;">'+b.name+'</div>'
+        +'<div style="font-size:20px;font-weight:800;color:'+color+';letter-spacing:-.02em;font-family:Space Grotesk,sans-serif;line-height:1.1;">'+b[key].toFixed(2)+'</div>'
+        +'<div style="font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.06em;">'+lbl+'</div>'
+        +'</div>';
+    }
+
+    var jg = g.home + ' x ' + g.away;
+
+    html += '<div style="background:#0f1923;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 14px;">'
+      // Header do card
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
+        +'<div style="display:flex;align-items:center;gap:6px;">'
+          +'<span style="font-size:11px;">⚽</span>'
+          +'<span style="font-size:10px;color:rgba(255,255,255,.35);">'+g.time+' · '+(g.league||'')+'</span>'
+        +'</div>'
+        +lucroHtml
+      +'</div>'
+      // Times
+      +'<div style="margin-bottom:10px;">'
+        +'<div style="font-size:15px;font-weight:700;color:#fff;">'+g.home+'</div>'
+        +'<div style="font-size:12px;color:rgba(255,255,255,.45);">vs '+g.away+'</div>'
+      +'</div>'
+      // Odds row
+      +'<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);">'
+        +oddCol(bHome,'home','CASA')
+        +'<div style="width:1px;background:rgba(255,255,255,.06);align-self:stretch;"></div>'
+        +oddCol(bDraw,'draw','EMPATE')
+        +'<div style="width:1px;background:rgba(255,255,255,.06);align-self:stretch;"></div>'
+        +oddCol(bAway,'away','FORA')
+      +'</div>'
+      // Botão Usar
+      +'<button onclick="opxUsarTop('+gi+')" style="width:100%;padding:10px;background:#22c55e;color:#000;border:none;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;font-family:DM Sans,sans-serif;letter-spacing:.02em;">Usar →</button>'
+      +'</div>';
+  });
+
+  el.innerHTML = html;
 }
 
 var _opxLigaIcons = {
