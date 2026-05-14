@@ -7363,6 +7363,7 @@ function maisGo(pageId, cb) {
   font-family: 'DM Sans', sans-serif;
   padding: 0 !important;
   min-height: 100vh;
+  padding-top: env(safe-area-inset-top, 0px) !important;
 }
 
 /* PAGE HEADER */
@@ -7664,6 +7665,7 @@ function maisGo(pageId, cb) {
   background: #080d16 !important;
   padding: 0 !important;
   overflow-y: auto !important;
+  min-height: 100vh !important;
   font-family: 'DM Sans', sans-serif;
   color: #eef6ff;
 }
@@ -8013,6 +8015,23 @@ function maisGo(pageId, cb) {
   .gh-cta { grid-template-columns: 1fr !important; padding: 40px 20px !important; }
   .gh-cta-left { border-radius: 16px 16px 0 0 !important; }
   .gh-cta-right { border-left: 1px solid rgba(255,255,255,.08) !important; border-top: none; border-radius: 0 0 16px 16px !important; }
+}
+
+@media (max-width: 600px) {
+  #pg-ajuda .gh-hero    { grid-template-columns: 1fr !important; padding: 20px 14px 16px !important; gap: 16px !important; }
+  #pg-ajuda .gh-steps3  { grid-template-columns: 1fr !important; gap: 12px !important; }
+  #pg-ajuda .gh-types   { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  #pg-ajuda .gh-dash    { grid-template-columns: 1fr !important; gap: 10px !important; }
+  #pg-ajuda .gh-gloss-grid { grid-template-columns: 1fr !important; gap: 6px !important; }
+  #pg-ajuda .gh-section { padding: 24px 14px !important; }
+  #pg-ajuda .gh-cta     { grid-template-columns: 1fr !important; padding: 20px 14px !important; }
+  #pg-ajuda .gh-cta-left  { border-radius: 14px 14px 0 0 !important; padding: 22px 14px !important; }
+  #pg-ajuda .gh-cta-right { border-left: 1px solid rgba(255,255,255,.08) !important; border-top: none !important; border-radius: 0 0 14px 14px !important; padding: 18px 14px !important; }
+  #pg-ajuda .gh-step3   { padding: 18px 14px !important; }
+  #pg-ajuda .gh-sec-title { font-size: 20px !important; }
+  #pg-ajuda .gh-hero-title { font-size: 26px !important; }
+  #pg-ajuda .gh-mockup  { display: none !important; }
+  #pg-ajuda              { padding-bottom: calc(90px + env(safe-area-inset-bottom,0px)) !important; }
 }
 </style>
 
@@ -22752,13 +22771,17 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
   }
   /* Containers dos canvas — altura mobile */
   #pg-hist div[style*="height:240px"] {
-    height: 190px !important;
+    height: 220px !important;
   }
   #pg-hist div[style*="height:180px"] {
-    height: 150px !important;
+    height: 175px !important;
+  }
+  /* Reduzir padding lateral do card wrapper do gráfico principal */
+  #pg-hist .card {
+    padding: 14px 12px !important;
   }
   #pg-hist canvas { max-width: 100% !important; }
-  .dp-chart-w { height: 150px !important; }
+  .dp-chart-w { height: 160px !important; }
 
   /* ════ DECLARAÇÃO IR ════ */
   #pg-ir {
