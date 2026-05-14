@@ -8175,8 +8175,43 @@ function maisGo(pageId, cb) {
   }
   #pg-ajuda .gh-cta-title { font-size: 20px !important; }
   #pg-ajuda .gh-cta-btn { width: 100% !important; justify-content: center !important; }
-  /* Fluxo — scroll horizontal */
-  #pg-ajuda .gh-flow { overflow-x: auto !important; padding: 8px 14px 16px !important; }
+  /* Fluxo — empilha em coluna no mobile */
+  #pg-ajuda .gh-flow {
+    flex-direction: column !important;
+    align-items: center !important;
+    overflow-x: visible !important;
+    padding: 0 14px 16px !important;
+    gap: 0 !important;
+  }
+  #pg-ajuda .gh-flow-node {
+    width: 100% !important;
+    flex-direction: row !important;
+    text-align: left !important;
+    gap: 16px !important;
+    align-items: flex-start !important;
+  }
+  #pg-ajuda .gh-flow-ico {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 14px !important;
+    font-size: 22px !important;
+    flex-shrink: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  #pg-ajuda .gh-flow-arr {
+    transform: rotate(90deg) !important;
+    margin: 4px auto !important;
+    padding: 0 !important;
+  }
+  #pg-ajuda .gh-flow-label {
+    font-size: 14px !important;
+    margin-bottom: 4px !important;
+  }
+  #pg-ajuda .gh-flow-sub {
+    font-size: 12px !important;
+    max-width: 100% !important;
+    line-height: 1.4 !important;
+  }
   /* Mock kpis — 2 colunas */
   #pg-ajuda .gh-mock-kpis { grid-template-columns: 1fr 1fr !important; }
 }
@@ -23056,18 +23091,18 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
 
   /* ── Gráfico principal ── */
   #pg-hist div[style*="height:240px"] {
-    height: 320px !important;
+    height: 380px !important;
   }
   /* Gráficos menores */
   #pg-hist div[style*="height:180px"] {
-    height: 210px !important;
+    height: 220px !important;
   }
   /* Padding do card wrapper */
   #pg-hist .card {
     padding: 14px 10px !important;
   }
   #pg-hist canvas { max-width: 100% !important; }
-  .dp-chart-w { height: 200px !important; }
+  .dp-chart-w { height: 220px !important; }
 
   /* ════ DECLARAÇÃO IR ════ */
   #pg-ir {
