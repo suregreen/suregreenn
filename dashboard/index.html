@@ -7352,8 +7352,7 @@ function maisGo(pageId, cb) {
     if (cb) try { cb(); } catch(e) {}
     syncMobileNav(null);
   }, 120);
-}
-</script>
+}</script>
 <!-- ══════════════════════════ PAGE: ODDS ══════════════════════════ -->
 <div id="pg-odds" class="page" style="padding:0;">
 <style>
@@ -7515,42 +7514,68 @@ function maisGo(pageId, cb) {
 
 /* ══ MOBILE ODDS — CARD LAYOUT ══ */
 @media(max-width:600px){
-  /* Wrap */
-  .op-wrap { padding:12px 12px 80px !important; }
+  /* Wrapper geral */
+  .op-wrap { padding:0 0 80px !important; }
 
-  /* Header compacto */
-  .opx-hdr { padding:0 0 10px; margin-bottom:10px; flex-wrap:nowrap; }
-  .opx-title { font-size:16px !important; }
-  .opx-beta { display:none; }
-  .opx-update { font-size:10px; }
+  /* Header */
+  .opx-hdr {
+    padding: 14px 14px 8px !important;
+    margin-bottom: 8px !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+  .opx-title { font-size:17px !important; }
+  .opx-beta  { display:none !important; }
+  .opx-update { font-size:10px !important; white-space:nowrap; }
 
-  /* Filtros em grid compacto */
+  /* Filtros — grid 2 colunas */
   .opx-filters {
-    padding:0 0 10px !important;
-    display:grid !important;
-    grid-template-columns:1fr 1fr !important;
-    gap:6px !important;
+    padding: 0 14px 10px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+    border-bottom: 1px solid rgba(255,255,255,.05) !important;
   }
   .opx-filter-btn {
-    padding:8px 10px !important;
-    font-size:11px !important;
-    justify-content:center;
-    border-radius:8px !important;
+    padding: 9px 10px !important;
+    font-size: 12px !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .opx-filter-btn select {
+    max-width: 100% !important;
+    font-size: 12px !important;
   }
   .opx-search {
-    grid-column:1/-1 !important;
-    max-width:100% !important;
-    min-width:0 !important;
+    grid-column: 1 / -1 !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 9px 12px !important;
   }
+  .opx-search input { font-size: 14px !important; }
   .opx-spacer { display:none !important; }
   .opx-action-btn.outline { display:none !important; }
-  .opx-action-btn.green { grid-column:1/-1; justify-content:center; }
+  .opx-action-btn.green {
+    grid-column: 1 / -1 !important;
+    justify-content: center !important;
+    padding: 10px !important;
+    font-size: 13px !important;
+    border-radius: 10px !important;
+    min-height: 44px !important;
+  }
 
   /* ESCONDE TABELA DESKTOP */
   .opx-table-wrap { display:none !important; }
 
-  /* CARDS MOBILE */
-  #opx-mobile-cards { display:flex !important; flex-direction:column; gap:8px; }
+  /* MOBILE CARDS */
+  #opx-mobile-cards {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 10px 12px 12px !important;
+  }
 }
 
 @media(min-width:601px){
@@ -7607,8 +7632,8 @@ function maisGo(pageId, cb) {
   <button class="opx-action-btn outline">⚙ Filtros</button>
 </div>
 
-<!-- TABLE -->
-<div style="overflow-x:auto;">
+<!-- TABLE DESKTOP -->
+<div class="opx-table-wrap" style="overflow-x:auto;">
   <table class="opx-table">
     <thead class="opx-thead">
       <tr>
@@ -7626,12 +7651,10 @@ function maisGo(pageId, cb) {
   </table>
 </div>
 
+<!-- MOBILE CARDS — dentro do pg-odds -->
+<div id="opx-mobile-cards"></div>
+
 </div>
-
-<!-- MOBILE CARDS -->
-<div id="opx-mobile-cards" style="display:none;"></div>
-
-
 <!-- ══ FIM pg-odds ══ -->
 
 <!-- ══════════════════════════ PAGE: COMO USAR ══════════════════════════ -->
@@ -10765,6 +10788,12 @@ function goPage(id, btn) {
   }
 
   if (id === 'pg-calc') { try { coRender(); } catch(e){} }
+  // Re-renderiza charts quando pg-hist é exibido (chart.js precisa de resize após display:none)
+  if (id === 'pg-hist') {
+    setTimeout(function() {
+      try { if (typeof window.renderHist === 'function') window.renderHist(); } catch(e){}
+    }, 80);
+  }
   // Re-renderiza chart e KPIs quando volta para o dashboard
   if (id === 'pg-org') {
     setTimeout(function() {
@@ -21507,6 +21536,7 @@ function opxFilter() {
     return true;
   });
   opxRender(f);
+  opxMobileRender(f);
 }
 
 function opxRender(games) {
@@ -22687,152 +22717,127 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
 
 <style id="mobile-pages-fix">
 /* ══════════════════════════════════════════════════════
-   MOBILE PAGES FIX — pg-conta, pg-ir, pg-ajuda, pg-hist, pg-odds
-   REGRA: só afeta mobile (max-width: 600px). Desktop INTOCADO.
+   MOBILE PAGES FIX — definitivo
+   Regra absoluta: apenas max-width:600px. Desktop INTOCADO.
    ══════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
 
-  /* ════════════════════════════════════
-     FIX 1: ODDS — esconde tabela desktop, mostra cards
-     O div de overflow não tem classe, então escondemos
-     a table diretamente
-     ════════════════════════════════════ */
-  #pg-odds .opx-table,
-  #pg-odds .opx-thead,
-  #pg-odds div[style*="overflow-x:auto"],
-  #pg-odds div[style*="overflow-x: auto"] {
-    display: none !important;
-  }
-  #opx-mobile-cards {
+  /* ════ ODDS: esconder tabela, mostrar cards ════ */
+  #pg-odds .opx-table-wrap { display: none !important; }
+  #pg-odds table.opx-table  { display: none !important; }
+  #pg-odds #opx-mobile-cards {
     display: flex !important;
     flex-direction: column !important;
-    gap: 8px !important;
-    padding: 0 12px 12px !important;
+    gap: 10px !important;
+    padding: 10px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important;
   }
+  #pg-odds { overflow-x: hidden !important; }
 
-  /* ════════════════════════════════════
-     FIX 2: ANÁLISE — gráficos em coluna única, tamanho real
-     ════════════════════════════════════ */
-  #pg-hist .hist-grid > div:first-child > div:first-child {
-    margin-bottom: 12px !important;
+  /* ════ ANÁLISE: grids em coluna única ════ */
+  #pg-hist {
+    padding: 14px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important;
+    overflow-x: hidden !important;
   }
-  /* Gráfico principal (Lucro Acumulado) — altura maior */
-  #pg-hist div[style*="height:240px"],
-  #pg-hist div[style*="height: 240px"] {
-    height: 200px !important;
-  }
-  /* Grid dos 2 gráficos menores (Tipo + GP) — empilha em coluna */
-  #pg-hist div[style*="grid-template-columns:1fr 1fr"],
-  #pg-hist div[style*="grid-template-columns: 1fr 1fr"] {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-  }
-  /* Cada gráfico menor fica com altura proporcional */
-  #pg-hist div[style*="height:180px"],
-  #pg-hist div[style*="height: 180px"] {
-    height: 160px !important;
-  }
-  /* Grid principal do hist (gráficos + calendário) — coluna única */
+  /* Grid principal gráficos + calendário */
   .hist-grid {
     grid-template-columns: 1fr !important;
     gap: 14px !important;
   }
-  /* dp-chart-w (curva acumulada do diário) */
-  .dp-chart-w { height: 160px !important; }
+  /* Grid 2 gráficos menores — seletor attr no pg-hist */
+  #pg-hist div[style*="grid-template-columns:1fr 1fr;gap:14px"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+  /* Containers dos canvas — altura mobile */
+  #pg-hist div[style*="height:240px"] {
+    height: 190px !important;
+  }
+  #pg-hist div[style*="height:180px"] {
+    height: 150px !important;
+  }
+  #pg-hist canvas { max-width: 100% !important; }
+  .dp-chart-w { height: 150px !important; }
 
-  /* ════════════════════════════════════
-     FIX 3: DECLARAÇÃO IR — cards 3 colunas → 1 coluna
-     e grid principal → 1 coluna
-     ════════════════════════════════════ */
-  /* 3 cards informativos do topo do IR */
-  #pg-ir div[style*="grid-template-columns:repeat(3,1fr)"],
-  #pg-ir div[style*="grid-template-columns: repeat(3, 1fr)"],
-  #pg-ir div[style*="grid-template-columns:repeat(3, 1fr)"] {
+  /* ════ DECLARAÇÃO IR ════ */
+  #pg-ir {
+    padding: 14px 14px calc(90px + env(safe-area-inset-bottom,0px)) !important;
+    overflow-x: hidden !important;
+  }
+  /* 3 cards informativos topo */
+  #pg-ir div[style*="grid-template-columns:repeat(3,1fr)"] {
     display: flex !important;
     flex-direction: column !important;
     gap: 10px !important;
+    width: 100% !important;
   }
-  /* Grid principal do IR (form + painel lateral) */
-  #pg-ir div[style*="grid-template-columns:1fr 360px"],
-  #pg-ir div[style*="grid-template-columns: 1fr 360px"],
-  #pg-ir div[style*="grid-template-columns:1fr 340px"],
-  #pg-ir div[style*="grid-template-columns: 1fr 340px"] {
+  /* Grid principal 1fr 360px */
+  #pg-ir div[style*="grid-template-columns:1fr 360px"] {
     display: flex !important;
     flex-direction: column !important;
     gap: 14px !important;
+    width: 100% !important;
   }
   .ir-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
-  .ir-stepper {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
-    padding: 12px 14px !important;
-  }
+  .ir-stepper { flex-direction: column !important; padding: 12px 14px !important; gap: 6px !important; }
   .ir-step + .ir-step {
     border-left: none !important;
     border-top: 1px solid rgba(255,255,255,.06) !important;
-    padding-left: 0 !important;
-    margin-left: 0 !important;
-    padding-top: 10px !important;
-    margin-top: 4px !important;
+    padding-left: 0 !important; margin-left: 0 !important;
+    padding-top: 8px !important; margin-top: 2px !important;
     width: 100% !important;
   }
-  .ir-toprow { flex-direction: column !important; gap: 10px !important; margin-bottom: 16px !important; }
+  .ir-toprow { flex-direction: column !important; gap: 10px !important; margin-bottom: 14px !important; }
   .ir-auto-banner { flex-wrap: wrap !important; }
   .ir-auto-btn { width: 100% !important; justify-content: center !important; }
 
-  /* ════════════════════════════════════
-     FIX 4: pg-conta — padding desktop de 48px
-     ════════════════════════════════════ */
-  .pc-hero { padding: 24px 16px 20px !important; }
-  .pc-hero-inner { gap: 14px !important; }
-  .pc-avatar { width: 56px !important; height: 56px !important; font-size: 20px !important; }
-  .pc-name-input { font-size: 18px !important; }
-  .pc-body { padding: 16px 14px calc(90px + env(safe-area-inset-bottom,0px)) 14px !important; gap: 10px !important; }
-  .pc-benefits { grid-template-columns: 1fr !important; padding: 14px 16px !important; gap: 8px !important; }
-  .pc-support-grid { grid-template-columns: 1fr 1fr !important; padding: 12px 14px !important; gap: 8px !important; }
-  .pc-support-item { padding: 12px !important; }
-  .pc-support-ico { width: 30px !important; height: 30px !important; }
-  .pc-support-name { font-size: 12px !important; }
+  /* ════ CONTA ════ */
+  .pc-hero { padding: 20px 14px 16px !important; }
+  .pc-hero-inner { gap: 12px !important; }
+  .pc-avatar { width: 52px !important; height: 52px !important; font-size: 18px !important; }
+  .pc-name-input { font-size: 17px !important; }
+  .pc-body { padding: 14px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important; gap: 10px !important; }
+  .pc-benefits { grid-template-columns: 1fr !important; padding: 12px 14px !important; gap: 8px !important; }
+  .pc-support-grid { grid-template-columns: 1fr 1fr !important; padding: 10px 12px !important; gap: 8px !important; }
+  .pc-support-item { padding: 10px !important; }
+  .pc-support-ico { width: 28px !important; height: 28px !important; }
+  .pc-support-name { font-size: 11px !important; }
   .pc-support-sub  { font-size: 10px !important; }
-  .pc-card-header  { padding: 12px 16px !important; }
-  .pc-row          { padding: 12px 16px !important; }
+  .pc-card-header  { padding: 11px 14px !important; }
+  .pc-row          { padding: 11px 14px !important; }
   .pc-badges       { flex-wrap: wrap !important; gap: 6px !important; }
   .pc-hero-actions { display: none !important; }
 
-  /* ════════════════════════════════════
-     FIX 5: pg-ajuda — hero 2 colunas → coluna única
-     ════════════════════════════════════ */
-  #pg-ajuda { padding: 14px 14px calc(90px + env(safe-area-inset-bottom,0px)) !important; }
+  /* ════ PRIMEIROS PASSOS ════ */
+  #pg-ajuda {
+    padding: 0 0 calc(90px + env(safe-area-inset-bottom,0px)) !important;
+    overflow-x: hidden !important;
+  }
   .gh-hero {
     grid-template-columns: 1fr !important;
-    padding: 24px 16px 20px !important;
-    gap: 16px !important;
+    padding: 20px 14px 16px !important;
+    gap: 14px !important;
   }
   .gh-cta {
     grid-template-columns: 1fr !important;
-    padding: 24px 16px !important;
+    padding: 20px 14px !important;
+    gap: 0 !important;
   }
-  .gh-cta-left  { border-radius: 16px 16px 0 0 !important; padding: 28px 20px !important; }
-  .gh-cta-right { border-left: 1px solid rgba(255,255,255,.08) !important; border-top: none !important; border-radius: 0 0 16px 16px !important; padding: 24px 20px !important; }
+  .gh-cta-left  { border-radius: 14px 14px 0 0 !important; padding: 24px 16px !important; }
+  .gh-cta-right {
+    border-left: 1px solid rgba(255,255,255,.08) !important;
+    border-top: none !important;
+    border-radius: 0 0 14px 14px !important;
+    padding: 20px 16px !important;
+  }
   .gh-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
-  .gh-card { padding: 16px 14px !important; border-radius: 14px !important; }
+  .gh-card { padding: 14px !important; border-radius: 12px !important; }
   .gh-steps { gap: 10px !important; }
-  .gh-step  { padding: 14px !important; border-radius: 12px !important; }
+  .gh-step  { padding: 12px !important; border-radius: 10px !important; }
 
-  /* ════════════════════════════════════
-     FIX 6: pg-ir — padding geral
-     ════════════════════════════════════ */
-  #pg-ir { padding: 14px 14px calc(90px + env(safe-area-inset-bottom,0px)) !important; }
-
-  /* ── pg-hist no mobile ── */
-  #pg-hist { padding: 14px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important; }
-
-  /* ── Garantir drawer acima de tudo ── */
+  /* ════ DRAWER ════ */
   #mais-drawer { padding-bottom: calc(16px + env(safe-area-inset-bottom,0px)) !important; }
-
-  /* ── Botão Mais ativo ── */
   #mnav-mais.drawer-open { color: #4AD55E !important; }
   #mnav-mais.drawer-open::after {
     content: '';
