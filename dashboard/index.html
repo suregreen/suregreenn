@@ -22687,47 +22687,113 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
 
 <style id="mobile-pages-fix">
 /* ══════════════════════════════════════════════════════
-   MOBILE PAGES FIX — pg-conta, pg-ir, pg-ajuda
-   Corrige padding desktop que vaza no mobile
-   REGRA: só afeta mobile (max-width: 600px)
-   Desktop: INTOCADO
+   MOBILE PAGES FIX — pg-conta, pg-ir, pg-ajuda, pg-hist, pg-odds
+   REGRA: só afeta mobile (max-width: 600px). Desktop INTOCADO.
    ══════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
 
-  /* ── pg-conta: hero e body com padding desktop de 48px ── */
-  .pc-hero {
-    padding: 24px 16px 20px !important;
+  /* ════════════════════════════════════
+     FIX 1: ODDS — esconde tabela desktop, mostra cards
+     O div de overflow não tem classe, então escondemos
+     a table diretamente
+     ════════════════════════════════════ */
+  #pg-odds .opx-table,
+  #pg-odds .opx-thead,
+  #pg-odds div[style*="overflow-x:auto"],
+  #pg-odds div[style*="overflow-x: auto"] {
+    display: none !important;
   }
-  .pc-hero-inner {
+  #opx-mobile-cards {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 0 12px 12px !important;
+  }
+
+  /* ════════════════════════════════════
+     FIX 2: ANÁLISE — gráficos em coluna única, tamanho real
+     ════════════════════════════════════ */
+  #pg-hist .hist-grid > div:first-child > div:first-child {
+    margin-bottom: 12px !important;
+  }
+  /* Gráfico principal (Lucro Acumulado) — altura maior */
+  #pg-hist div[style*="height:240px"],
+  #pg-hist div[style*="height: 240px"] {
+    height: 200px !important;
+  }
+  /* Grid dos 2 gráficos menores (Tipo + GP) — empilha em coluna */
+  #pg-hist div[style*="grid-template-columns:1fr 1fr"],
+  #pg-hist div[style*="grid-template-columns: 1fr 1fr"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  /* Cada gráfico menor fica com altura proporcional */
+  #pg-hist div[style*="height:180px"],
+  #pg-hist div[style*="height: 180px"] {
+    height: 160px !important;
+  }
+  /* Grid principal do hist (gráficos + calendário) — coluna única */
+  .hist-grid {
+    grid-template-columns: 1fr !important;
     gap: 14px !important;
   }
-  .pc-avatar {
-    width: 56px !important; height: 56px !important;
-    font-size: 20px !important;
-  }
-  .pc-name-input {
-    font-size: 18px !important;
-  }
-  .pc-body {
-    padding: 16px 14px calc(90px + env(safe-area-inset-bottom,0px)) 14px !important;
+  /* dp-chart-w (curva acumulada do diário) */
+  .dp-chart-w { height: 160px !important; }
+
+  /* ════════════════════════════════════
+     FIX 3: DECLARAÇÃO IR — cards 3 colunas → 1 coluna
+     e grid principal → 1 coluna
+     ════════════════════════════════════ */
+  /* 3 cards informativos do topo do IR */
+  #pg-ir div[style*="grid-template-columns:repeat(3,1fr)"],
+  #pg-ir div[style*="grid-template-columns: repeat(3, 1fr)"],
+  #pg-ir div[style*="grid-template-columns:repeat(3, 1fr)"] {
+    display: flex !important;
+    flex-direction: column !important;
     gap: 10px !important;
   }
-  .pc-benefits {
-    grid-template-columns: 1fr !important;
-    padding: 14px 16px !important;
-    gap: 8px !important;
+  /* Grid principal do IR (form + painel lateral) */
+  #pg-ir div[style*="grid-template-columns:1fr 360px"],
+  #pg-ir div[style*="grid-template-columns: 1fr 360px"],
+  #pg-ir div[style*="grid-template-columns:1fr 340px"],
+  #pg-ir div[style*="grid-template-columns: 1fr 340px"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
   }
-  .pc-support-grid {
-    grid-template-columns: 1fr 1fr !important;
+  .ir-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .ir-stepper {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
     padding: 12px 14px !important;
-    gap: 8px !important;
   }
-  .pc-support-item {
-    padding: 12px !important;
+  .ir-step + .ir-step {
+    border-left: none !important;
+    border-top: 1px solid rgba(255,255,255,.06) !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    padding-top: 10px !important;
+    margin-top: 4px !important;
+    width: 100% !important;
   }
-  .pc-support-ico {
-    width: 30px !important; height: 30px !important;
-  }
+  .ir-toprow { flex-direction: column !important; gap: 10px !important; margin-bottom: 16px !important; }
+  .ir-auto-banner { flex-wrap: wrap !important; }
+  .ir-auto-btn { width: 100% !important; justify-content: center !important; }
+
+  /* ════════════════════════════════════
+     FIX 4: pg-conta — padding desktop de 48px
+     ════════════════════════════════════ */
+  .pc-hero { padding: 24px 16px 20px !important; }
+  .pc-hero-inner { gap: 14px !important; }
+  .pc-avatar { width: 56px !important; height: 56px !important; font-size: 20px !important; }
+  .pc-name-input { font-size: 18px !important; }
+  .pc-body { padding: 16px 14px calc(90px + env(safe-area-inset-bottom,0px)) 14px !important; gap: 10px !important; }
+  .pc-benefits { grid-template-columns: 1fr !important; padding: 14px 16px !important; gap: 8px !important; }
+  .pc-support-grid { grid-template-columns: 1fr 1fr !important; padding: 12px 14px !important; gap: 8px !important; }
+  .pc-support-item { padding: 12px !important; }
+  .pc-support-ico { width: 30px !important; height: 30px !important; }
   .pc-support-name { font-size: 12px !important; }
   .pc-support-sub  { font-size: 10px !important; }
   .pc-card-header  { padding: 12px 16px !important; }
@@ -22735,41 +22801,39 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
   .pc-badges       { flex-wrap: wrap !important; gap: 6px !important; }
   .pc-hero-actions { display: none !important; }
 
-  /* ── pg-ir: conteúdo com padding lateral grande ── */
-  #pg-ir {
-    padding: 14px 14px calc(90px + env(safe-area-inset-bottom,0px)) !important;
+  /* ════════════════════════════════════
+     FIX 5: pg-ajuda — hero 2 colunas → coluna única
+     ════════════════════════════════════ */
+  #pg-ajuda { padding: 14px 14px calc(90px + env(safe-area-inset-bottom,0px)) !important; }
+  .gh-hero {
+    grid-template-columns: 1fr !important;
+    padding: 24px 16px 20px !important;
+    gap: 16px !important;
   }
-  .ir-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
-  .ir-stepper { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; padding: 12px 14px !important; }
-  .ir-step + .ir-step { border-left: none !important; border-top: 1px solid rgba(255,255,255,.06) !important; padding-left: 0 !important; margin-left: 0 !important; padding-top: 10px !important; margin-top: 4px !important; width: 100% !important; }
-  .ir-toprow { flex-direction: column !important; gap: 10px !important; margin-bottom: 16px !important; }
-  .ir-auto-banner { flex-wrap: wrap !important; }
-  .ir-auto-btn { width: 100% !important; justify-content: center !important; }
-
-  /* ── pg-ajuda: guia primeiros passos ── */
-  #pg-ajuda {
-    padding: 14px 14px calc(90px + env(safe-area-inset-bottom,0px)) !important;
+  .gh-cta {
+    grid-template-columns: 1fr !important;
+    padding: 24px 16px !important;
   }
-  .gh-hero { padding: 20px 0 16px !important; }
+  .gh-cta-left  { border-radius: 16px 16px 0 0 !important; padding: 28px 20px !important; }
+  .gh-cta-right { border-left: 1px solid rgba(255,255,255,.08) !important; border-top: none !important; border-radius: 0 0 16px 16px !important; padding: 24px 20px !important; }
   .gh-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
   .gh-card { padding: 16px 14px !important; border-radius: 14px !important; }
   .gh-steps { gap: 10px !important; }
-  .gh-step { padding: 14px !important; border-radius: 12px !important; }
+  .gh-step  { padding: 14px !important; border-radius: 12px !important; }
 
-  /* ── pg-hist no mobile via drawer ── */
-  #pg-hist {
-    padding: 14px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important;
-  }
+  /* ════════════════════════════════════
+     FIX 6: pg-ir — padding geral
+     ════════════════════════════════════ */
+  #pg-ir { padding: 14px 14px calc(90px + env(safe-area-inset-bottom,0px)) !important; }
 
-  /* ── Garantir que o drawer fica acima do teclado virtual ── */
-  #mais-drawer {
-    padding-bottom: calc(16px + env(safe-area-inset-bottom,0px)) !important;
-  }
+  /* ── pg-hist no mobile ── */
+  #pg-hist { padding: 14px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important; }
 
-  /* ── Botão "Mais" ativo quando drawer está aberto ── */
-  #mnav-mais.drawer-open {
-    color: #4AD55E !important;
-  }
+  /* ── Garantir drawer acima de tudo ── */
+  #mais-drawer { padding-bottom: calc(16px + env(safe-area-inset-bottom,0px)) !important; }
+
+  /* ── Botão Mais ativo ── */
+  #mnav-mais.drawer-open { color: #4AD55E !important; }
   #mnav-mais.drawer-open::after {
     content: '';
     position: absolute;
