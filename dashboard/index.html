@@ -7190,16 +7190,16 @@ window.dvSalvar = async function() {
 </nav>
 
 <!-- ══ MAIS DRAWER ══ -->
-<div id="mais-overlay" onclick="maisDrawerClose()" style="display:none;position:fixed;inset:0;z-index:8998;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);"></div>
+<div id="mais-overlay" onclick="maisDrawerClose()" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);"></div>
 <div id="mais-drawer" style="
   display:none;
   position:fixed;
   bottom:0;left:0;right:0;
-  z-index:8999;
+  z-index:9001;
   background:#080d18;
   border-top:1px solid rgba(74,213,94,.18);
   border-radius:22px 22px 0 0;
-  padding:0 0 calc(16px + env(safe-area-inset-bottom,0px));
+  padding:0 0 calc(80px + env(safe-area-inset-bottom,0px));
   box-shadow:0 -8px 40px rgba(0,0,0,.7);
   transform:translateY(100%);
   transition:transform .32s cubic-bezier(.22,1,.36,1);
@@ -7517,6 +7517,12 @@ function maisGo(pageId, cb) {
 
 /* ══ MOBILE ODDS — CARD LAYOUT ══ */
 @media(max-width:600px){
+  /* Header e filtros: esconder desktop, mostrar mobile */
+  .opx-hdr-desktop { display:none !important; }
+  .opx-filters-desktop { display:none !important; }
+  .opx-hdr-mobile { display:block !important; }
+  .opx-filters-mobile { display:flex !important; flex-direction:column !important; }
+
   /* CRÍTICO: pg-odds nunca ultrapassa a tela */
   #pg-odds {
     width: 100% !important;
@@ -7608,8 +7614,8 @@ function maisGo(pageId, cb) {
 }
 </style>
 
-<!-- HEADER -->
-<div class="opx-hdr">
+<!-- HEADER MOBILE -->
+<div class="opx-hdr opx-hdr-desktop">
   <div class="opx-title-row">
     <h1 class="opx-title">Comparador de Odds</h1>
     <span class="opx-beta">BETA</span>
@@ -7620,8 +7626,27 @@ function maisGo(pageId, cb) {
   </div>
 </div>
 
-<!-- FILTERS -->
-<div class="opx-filters">
+<!-- HEADER MOBILE -->
+<div class="opx-hdr-mobile" style="display:none;padding:14px 14px 0;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+    <div>
+      <span style="font-size:18px;font-weight:800;color:#eef6ff;letter-spacing:-.02em;">Comparador de Odds</span>
+      <span style="font-size:9px;font-weight:800;color:#22c55e;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:5px;padding:2px 7px;margin-left:8px;letter-spacing:.08em;vertical-align:middle;">BETA</span>
+    </div>
+    <button style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:9px;color:rgba(255,255,255,.6);font-size:12px;font-weight:600;padding:7px 12px;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:5px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+      Filtros
+    </button>
+  </div>
+  <div style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:10px;">
+    <span id="odds-update-txt-m">Carregando...</span>
+    <span id="odp-count-m" style="margin-left:4px;">· 0 jogos</span>
+    <span onclick="sgOddsLoad()" style="margin-left:6px;cursor:pointer;opacity:.5;font-size:12px;">↻</span>
+  </div>
+</div>
+
+<!-- FILTERS DESKTOP -->
+<div class="opx-filters opx-filters-desktop">
   <button class="opx-filter-btn active">Pré-jogo</button>
   <div class="opx-filter-btn">
     <span>🏆</span>
@@ -7653,8 +7678,64 @@ function maisGo(pageId, cb) {
     <input type="text" id="opx-search" placeholder="Buscar jogo ou liga..." oninput="opxFilter()">
   </div>
   <div class="opx-spacer"></div>
-  <button class="opx-action-btn green">⚡ Rápidas</button>
-  <button class="opx-action-btn outline">⚙ Filtros</button>
+  <button class="opx-action-btn green">&#x26A1; Rápidas</button>
+  <button class="opx-action-btn outline">&#x2699; Filtros</button>
+</div>
+
+<!-- FILTERS MOBILE -->
+<div class="opx-filters-mobile" style="display:none;">
+  <div style="display:flex;gap:8px;padding:0 14px 8px;">
+    <button style="flex:1;padding:11px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:10px;color:#22c55e;font-size:13px;font-weight:700;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Pré-jogo
+    </button>
+    <button style="flex:1;padding:11px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:rgba(255,255,255,.45);font-size:13px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;">
+      <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 5px #22c55e;flex-shrink:0;"></span>
+      Ao vivo
+    </button>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 8px;">
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:6px;">
+      <span style="font-size:14px;flex-shrink:0;">&#127942;</span>
+      <select id="opx-liga-sel-m" onchange="document.getElementById('opx-liga-sel').value=this.value;opxFilter();" style="flex:1;background:transparent;border:none;color:#eef6ff;font-size:12px;font-weight:600;font-family:DM Sans,sans-serif;cursor:pointer;outline:none;min-width:0;max-width:100%;">
+        <option value="">Todas as ligas</option>
+        <option value="Copa do Brasil">Copa do Brasil</option>
+        <option value="Premier League">Premier League</option>
+        <option value="La Liga">La Liga</option>
+        <option value="Brasileirão Série A">Brasileirão</option>
+        <option value="Libertadores">Libertadores</option>
+        <option value="Ligue 1">Ligue 1</option>
+        <option value="Serie A">Serie A</option>
+        <option value="Bundesliga">Bundesliga</option>
+      </select>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:6px;">
+      <span style="font-size:14px;flex-shrink:0;">&#127968;</span>
+      <select id="opx-casa-sel-m" onchange="document.getElementById('opx-casa-sel').value=this.value;opxFilter();" style="flex:1;background:transparent;border:none;color:#eef6ff;font-size:12px;font-weight:600;font-family:DM Sans,sans-serif;cursor:pointer;outline:none;min-width:0;max-width:100%;">
+        <option value="">Todas as casas</option>
+        <option value="Betano">Betano</option>
+        <option value="bet365">bet365</option>
+        <option value="Stake.com">Stake</option>
+        <option value="1xBet">1xBet</option>
+        <option value="Novibet">Novibet</option>
+      </select>
+    </div>
+  </div>
+  <div style="padding:0 14px 8px;">
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="opx-search-m" placeholder="Buscar jogo ou liga..." oninput="document.getElementById('opx-search').value=this.value;opxFilter();" style="flex:1;background:transparent;border:none;color:#eef6ff;font-size:14px;font-family:DM Sans,sans-serif;outline:none;">
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 10px;">
+    <button style="padding:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;color:rgba(255,255,255,.6);font-size:13px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+      Filtros
+    </button>
+    <button style="padding:11px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);border-radius:10px;color:#22c55e;font-size:13px;font-weight:700;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;">
+      &#x26A1; Rápidas
+    </button>
+  </div>
 </div>
 
 <!-- TABLE DESKTOP -->
@@ -21506,6 +21587,12 @@ function sgOddsRender(games) {
   window._opxGames = games;
   opxRender(games);
   opxMobileRender(games);
+  // Sincronizar texto de update no header mobile
+  var upd = document.getElementById('odds-update-txt');
+  var updM = document.getElementById('odds-update-txt-m');
+  if (upd && updM) updM.textContent = upd.textContent;
+  var cntM = document.getElementById('odp-count-m');
+  if (cntM) cntM.textContent = '· ' + games.length + ' jogos';
 }
 
 function opxMobileRender(games) {
@@ -21516,14 +21603,18 @@ function opxMobileRender(games) {
   if (countEl) countEl.textContent = games.length;
 
   if (!games || !games.length) {
-    el.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:13px;">Nenhum jogo disponível</div>';
+    el.innerHTML = '<div style="text-align:center;padding:48px 20px;color:rgba(255,255,255,.3);font-size:13px;">Nenhum jogo disponível</div>';
     return;
   }
 
   var PREFER = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet','sportingbet','superbet'];
-  function isPref(b) {
-    var n = (b.name||'').toLowerCase();
-    return PREFER.some(function(p){return n.includes(p);});
+  function isPref(b) { var n=(b.name||'').toLowerCase(); return PREFER.some(function(p){return n.includes(p);}); }
+
+  function oddColor(name) {
+    var n = (name||'').toLowerCase();
+    if (n.includes('betano')) return '#ff6b35';
+    if (n.includes('bet365')) return '#22c55e';
+    return '#22c55e';
   }
 
   var html = '';
@@ -21532,6 +21623,7 @@ function opxMobileRender(games) {
     var bkUse = bk.filter(isPref);
     if (bkUse.length < 2) bkUse = bk;
 
+    // Melhores odds por resultado
     var bHome=null, bDraw=null, bAway=null;
     bkUse.forEach(function(b){
       if(b.home&&(!bHome||b.home>bHome.home))bHome=b;
@@ -21539,56 +21631,127 @@ function opxMobileRender(games) {
       if(b.away&&(!bAway||b.away>bAway.away))bAway=b;
     });
 
-    // Lucro
-    var lucroHtml = '';
+    // Cálculo de lucro surebet
+    var lucroTxt = '';
     if (bHome && bAway) {
       var h=bHome.home, d=bDraw?bDraw.draw:0, a=bAway.away;
-      var inv=1/h+(d?1/d:0)+1/a;
-      var pct=(1-inv)*100;
-      if (pct > 0) lucroHtml = '<span style="font-size:11px;font-weight:700;color:#22c55e;">+'+pct.toFixed(2)+'%</span>';
+      var inv = 1/h + (d?1/d:0) + 1/a;
+      var pct = (1-inv)*100;
+      if (pct > 0) lucroTxt = '+'+pct.toFixed(2)+'%';
     }
 
-    function oddCol(b, key, lbl) {
-      if (!b||!b[key]) return '<div style="flex:1;text-align:center;"><div style="font-size:10px;color:rgba(255,255,255,.35);font-weight:600;margin-bottom:2px;">'+lbl+'</div><div style="font-size:10px;color:rgba(255,255,255,.3);">—</div></div>';
-      var isOrange = (b.name||'').toLowerCase().includes('betano');
-      var color = isOrange ? '#ff6b35' : '#22c55e';
-      return '<div style="flex:1;text-align:center;">'
-        +'<div style="font-size:9px;color:rgba(255,255,255,.4);font-weight:700;margin-bottom:1px;">'+b.name+'</div>'
-        +'<div style="font-size:20px;font-weight:800;color:'+color+';letter-spacing:-.02em;font-family:Space Grotesk,sans-serif;line-height:1.1;">'+b[key].toFixed(2)+'</div>'
-        +'<div style="font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.06em;">'+lbl+'</div>'
-        +'</div>';
-    }
-
-    var jg = g.home + ' x ' + g.away;
-
-    html += '<div style="background:#0f1923;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 14px;">'
-      // Header do card
-      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
-        +'<div style="display:flex;align-items:center;gap:6px;">'
-          +'<span style="font-size:11px;">⚽</span>'
-          +'<span style="font-size:10px;color:rgba(255,255,255,.35);">'+g.time+' · '+(g.league||'')+'</span>'
+    // Coluna de odd inline
+    function oddCell(b, key, lbl) {
+      if (!b||!b[key]) return (
+        '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">'
+        +'<span style="font-size:10px;color:rgba(255,255,255,.3);font-weight:600;">'+lbl+'</span>'
+        +'<span style="font-size:18px;font-weight:800;color:rgba(255,255,255,.2);font-family:Space Grotesk,sans-serif;">—</span>'
         +'</div>'
-        +lucroHtml
+      );
+      var col = oddColor(b.name);
+      return (
+        '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">'
+        +'<span style="font-size:10px;color:rgba(255,255,255,.45);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70px;">'+b.name+'</span>'
+        +'<span style="font-size:21px;font-weight:800;color:'+col+';font-family:Space Grotesk,sans-serif;line-height:1;">'+b[key].toFixed(2)+'</span>'
+        +'<span style="font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;">'+lbl+'</span>'
+        +'</div>'
+      );
+    }
+
+    // Lista de todas as casas (expandida)
+    var casasHtml = '';
+    bkUse.forEach(function(b) {
+      casasHtml += (
+        '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">'
+        +'<span style="font-size:13px;font-weight:600;color:#d4e8ff;flex:1;">'+b.name+'</span>'
+        +'<div style="display:flex;gap:16px;">'
+        +(b.home?'<div style="text-align:center;"><div style="font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.06em;">CASA</div><div style="font-size:15px;font-weight:700;color:'+oddColor(b.name)+';font-family:Space Grotesk,sans-serif;">'+b.home.toFixed(2)+'</div></div>':'')
+        +(b.draw?'<div style="text-align:center;"><div style="font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.06em;">EMP</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:Space Grotesk,sans-serif;">'+b.draw.toFixed(2)+'</div></div>':'')
+        +(b.away?'<div style="text-align:center;"><div style="font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.06em;">FORA</div><div style="font-size:15px;font-weight:700;color:'+oddColor(b.name)+';font-family:Space Grotesk,sans-serif;">'+b.away.toFixed(2)+'</div></div>':'')
+        +'</div>'
+        +'</div>'
+      );
+    });
+
+    html += (
+      '<div class="opx-m-card" style="background:#0d1520;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;margin-bottom:2px;">'
+
+      // ── Linha clicável do jogo ──
+      +'<div onclick="opxMCardToggle(this)" style="padding:14px 14px 0;cursor:pointer;">'
+
+        // Topo: horário + liga + estrela
+        +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">'
+          +'<div style="display:flex;align-items:center;gap:5px;">'
+            +'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l3 3"/></svg>'
+            +'<span style="font-size:11px;color:rgba(255,255,255,.4);font-weight:500;">'+g.time+' · '+(g.league||'')+'</span>'
+          +'</div>'
+          +'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
+        +'</div>'
+
+        // Times
+        +'<div style="margin-bottom:12px;">'
+          +'<div style="font-size:16px;font-weight:700;color:#eef6ff;line-height:1.2;">'+g.home+'</div>'
+          +'<div style="font-size:12px;color:rgba(200,220,235,.4);margin-top:2px;">vs '+g.away+'</div>'
+        +'</div>'
+
       +'</div>'
-      // Times
-      +'<div style="margin-bottom:10px;">'
-        +'<div style="font-size:15px;font-weight:700;color:#fff;">'+g.home+'</div>'
-        +'<div style="font-size:12px;color:rgba(255,255,255,.45);">vs '+g.away+'</div>'
+
+      // ── Odds row + botão Usar (linha principal, sempre visível) ──
+      +'<div style="display:flex;align-items:stretch;gap:0;padding:0 0 0 14px;">'
+
+        // 3 odds
+        +'<div style="flex:1;display:flex;align-items:flex-end;padding-bottom:14px;gap:0;">'
+          +oddCell(bHome,'home','CASA')
+          +'<div style="width:1px;background:rgba(255,255,255,.06);margin:0 4px;align-self:stretch;"></div>'
+          +oddCell(bDraw,'draw','EMPATE')
+          +'<div style="width:1px;background:rgba(255,255,255,.06);margin:0 4px;align-self:stretch;"></div>'
+          +oddCell(bAway,'away','FORA')
+        +'</div>'
+
+        // Botão Usar vertical
+        +'<button onclick="event.stopPropagation();opxUsarTop('+gi+')" style="'
+          +'background:#22c55e;color:#071a0e;border:none;'
+          +'padding:0 18px;'
+          +'font-size:13px;font-weight:800;'
+          +'font-family:DM Sans,sans-serif;'
+          +'cursor:pointer;'
+          +'border-radius:0 0 0 0;'
+          +'min-height:70px;'
+          +'display:flex;align-items:center;justify-content:center;'
+          +'white-space:nowrap;'
+          +'letter-spacing:.02em;'
+          +'transition:background .15s;'
+          +'-webkit-tap-highlight-color:transparent;'
+        +'">'
+          +'Usar →'
+        +'</button>'
+
       +'</div>'
-      // Odds row
-      +'<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);">'
-        +oddCol(bHome,'home','CASA')
-        +'<div style="width:1px;background:rgba(255,255,255,.06);align-self:stretch;"></div>'
-        +oddCol(bDraw,'draw','EMPATE')
-        +'<div style="width:1px;background:rgba(255,255,255,.06);align-self:stretch;"></div>'
-        +oddCol(bAway,'away','FORA')
+
+      // ── Painel expandido: todas as casas ──
+      +'<div class="opx-m-casas" style="display:none;padding:0 14px 14px;border-top:1px solid rgba(255,255,255,.06);">'
+        +'<div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;padding:10px 0 6px;">Todas as casas ('+bkUse.length+')</div>'
+        +casasHtml
       +'</div>'
-      // Botão Usar
-      +'<button onclick="opxUsarTop('+gi+')" style="width:100%;padding:10px;background:#22c55e;color:#000;border:none;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;font-family:DM Sans,sans-serif;letter-spacing:.02em;">Usar →</button>'
-      +'</div>';
+
+      +'</div>'
+    );
   });
 
   el.innerHTML = html;
+
+  // Injetar toggle CSS uma vez
+  if (!document.getElementById('opx-m-style')) {
+    var s = document.createElement('style');
+    s.id = 'opx-m-style';
+    s.textContent = '.opx-m-card .opx-m-casas{display:none}.opx-m-card.open .opx-m-casas{display:block!important}.opx-m-card.open{border-color:rgba(34,197,94,.2)!important}';
+    document.head.appendChild(s);
+  }
+}
+
+function opxMCardToggle(headerEl) {
+  var card = headerEl.closest('.opx-m-card') || headerEl.parentElement.parentElement;
+  card.classList.toggle('open');
 }
 
 var _opxLigaIcons = {
