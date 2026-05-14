@@ -7165,12 +7165,13 @@ window.dvSalvar = async function() {
 </div>
 
 <!-- ── BOTTOM NAV MOBILE ── -->
+<!-- ══ MOBILE NAV — 4 abas fixas + Mais drawer ══ -->
 <nav class="mobile-nav" id="mobile-nav">
   <button class="mobile-nav-btn on" id="mnav-org" onclick="goPage('pg-org',this);syncMobileNav('mnav-org')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     Início
   </button>
-  <button class="mobile-nav-btn" id="mnav-calc" onclick="goPage('pg-calc',this);syncMobileNav('mnav-calc')">
+  <button class="mobile-nav-btn" id="mnav-calc" onclick="goPage('pg-calc',this);syncMobileNav('mnav-calc');try{coRender()}catch(e){}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
     Calcular
   </button>
@@ -7178,12 +7179,181 @@ window.dvSalvar = async function() {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
     Odds
   </button>
-
   <button class="mobile-nav-btn" id="mnav-conta" onclick="goPage('pg-conta',null);syncMobileNav('mnav-conta');if(typeof window.renderConta==='function'){window.renderConta();}else{setTimeout(function(){if(typeof window.renderConta==='function')window.renderConta();},400);}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Conta
   </button>
+  <button class="mobile-nav-btn" id="mnav-mais" onclick="maisDrawerOpen()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+    Mais
+  </button>
 </nav>
+
+<!-- ══ MAIS DRAWER ══ -->
+<div id="mais-overlay" onclick="maisDrawerClose()" style="display:none;position:fixed;inset:0;z-index:8998;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);"></div>
+<div id="mais-drawer" style="
+  display:none;
+  position:fixed;
+  bottom:0;left:0;right:0;
+  z-index:8999;
+  background:#080d18;
+  border-top:1px solid rgba(74,213,94,.18);
+  border-radius:22px 22px 0 0;
+  padding:0 0 calc(16px + env(safe-area-inset-bottom,0px));
+  box-shadow:0 -8px 40px rgba(0,0,0,.7);
+  transform:translateY(100%);
+  transition:transform .32s cubic-bezier(.22,1,.36,1);
+">
+  <!-- Handle -->
+  <div style="display:flex;justify-content:center;padding:12px 0 4px;">
+    <div style="width:36px;height:4px;border-radius:99px;background:rgba(255,255,255,.12);"></div>
+  </div>
+  <!-- Título -->
+  <div style="padding:8px 22px 14px;display:flex;align-items:center;justify-content:space-between;">
+    <span style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#eef6ff;letter-spacing:-.01em;">Todos os recursos</span>
+    <button onclick="maisDrawerClose()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:rgba(160,190,215,.5);font-size:18px;line-height:1;padding:4px 10px;cursor:pointer;">×</button>
+  </div>
+  <!-- Grade de ações -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 6px;">
+
+    <!-- Análise -->
+    <button class="mais-item" onclick="maisGo('pg-hist',function(){renderHist()})">
+      <div class="mais-item-ico" style="background:rgba(56,189,248,.10);border-color:rgba(56,189,248,.20);color:#89A5B9;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
+      <span class="mais-item-lbl">Análise</span>
+      <span class="mais-item-sub">Histórico e gráficos</span>
+    </button>
+
+    <!-- Pendentes -->
+    <button class="mais-item" onclick="maisGo(null,function(){sgIrPendentes(null)})">
+      <div class="mais-item-ico" style="background:rgba(245,158,11,.10);border-color:rgba(245,158,11,.22);color:#f59e0b;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <span class="mais-item-lbl">Pendentes</span>
+      <span class="mais-item-sub" id="mais-pend-sub">Apostas em aberto</span>
+    </button>
+
+    <!-- Bankroll -->
+    <button class="mais-item" onclick="maisGo('pg-hist',function(){renderHist();histSetView('bankroll',document.querySelector('.hptab[onclick*=bankroll]'));})">
+      <div class="mais-item-ico" style="background:rgba(74,213,94,.10);border-color:rgba(74,213,94,.22);color:#4AD55E;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      </div>
+      <span class="mais-item-lbl">Bankroll</span>
+      <span class="mais-item-sub">Saldo por casa</span>
+    </button>
+
+    <!-- Declaração IR -->
+    <button class="mais-item" onclick="maisGo('pg-ir',null)">
+      <div class="mais-item-ico" style="background:rgba(168,85,247,.10);border-color:rgba(168,85,247,.22);color:#c084fc;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <span class="mais-item-lbl">Declaração IR</span>
+      <span class="mais-item-sub">Imposto de renda</span>
+    </button>
+
+    <!-- Primeiros Passos ocupa linha inteira -->
+    <button class="mais-item mais-item--wide" onclick="maisGo('pg-ajuda',null)">
+      <div class="mais-item-ico" style="background:rgba(34,197,94,.10);border-color:rgba(34,197,94,.22);color:#22c55e;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="3"/></svg>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:1px;">
+        <span class="mais-item-lbl">Primeiros passos</span>
+        <span class="mais-item-sub">Guia completo de uso</span>
+      </div>
+    </button>
+
+  </div>
+</div>
+
+<style>
+/* ══ MAIS DRAWER STYLES ══ */
+.mais-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px 14px;
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .12s;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.mais-item:active { transform: scale(0.96); }
+.mais-item:hover  { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.13); }
+.mais-item--wide  {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  gap: 14px;
+  text-align: left;
+  padding: 14px 18px;
+}
+.mais-item-ico {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  border: 1px solid;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.mais-item--wide .mais-item-ico { width: 40px; height: 40px; }
+.mais-item-lbl {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: #eef6ff;
+  white-space: nowrap;
+}
+.mais-item-sub {
+  font-size: 11px;
+  color: rgba(148,180,210,.5);
+  white-space: nowrap;
+}
+.mais-item--wide .mais-item-lbl { font-size: 14px; }
+</style>
+
+<script>
+function maisDrawerOpen() {
+  var overlay = document.getElementById('mais-overlay');
+  var drawer  = document.getElementById('mais-drawer');
+  var btn     = document.getElementById('mnav-mais');
+  overlay.style.display = 'block';
+  drawer.style.display  = 'block';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      drawer.style.transform = 'translateY(0)';
+    });
+  });
+  if (btn) btn.classList.add('drawer-open');
+  // atualiza badge pendentes
+  var badge = document.getElementById('sb-pend-badge');
+  var sub   = document.getElementById('mais-pend-sub');
+  if (badge && sub) {
+    var n = parseInt(badge.textContent) || 0;
+    sub.textContent = n > 0 ? n + ' em aberto' : 'Apostas em aberto';
+  }
+}
+function maisDrawerClose() {
+  var drawer  = document.getElementById('mais-drawer');
+  var overlay = document.getElementById('mais-overlay');
+  var btn     = document.getElementById('mnav-mais');
+  drawer.style.transform = 'translateY(100%)';
+  if (btn) btn.classList.remove('drawer-open');
+  setTimeout(function(){
+    drawer.style.display  = 'none';
+    overlay.style.display = 'none';
+  }, 340);
+}
+function maisGo(pageId, cb) {
+  maisDrawerClose();
+  setTimeout(function(){
+    if (pageId) goPage(pageId, null);
+    if (cb) try { cb(); } catch(e) {}
+    syncMobileNav(null);
+  }, 120);
+}
+</script>
 <!-- ══════════════════════════ PAGE: ODDS ══════════════════════════ -->
 <div id="pg-odds" class="page" style="padding:0;">
 <style>
@@ -10536,8 +10706,9 @@ window._fbReady = true;
 var _PAGE_TO_MNAV = {
   'pg-org':   'mnav-org',
   'pg-calc':  'mnav-calc',
-  'pg-conta': 'mnav-conta',
-  'pg-hist':  'mnav-hist'
+  'pg-odds':  'mnav-odds',
+  'pg-conta': 'mnav-conta'
+  /* pg-hist, pg-ir, pg-ajuda: acessados pelo drawer — nenhum botão fixo ativo */
 };
 
 function syncMobileNav(activeId) {
@@ -22385,9 +22556,7 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
 .ld-perda-valor.has {
   color: #f87171 !important;
 }
-</style>
 
-<style id="sg-mobile-critical-fixes">
 /* ══════════════════════════════════════════════
    CORREÇÕES CRÍTICAS MOBILE — v2
    Aplicadas por último para garantir prioridade
@@ -22513,6 +22682,102 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
   .mobile-nav { display: flex !important; }
   .sidebar-nav { display: none !important; }
   .main-content { margin-left: 0 !important; }
+}
+</style>
+
+<style id="mobile-pages-fix">
+/* ══════════════════════════════════════════════════════
+   MOBILE PAGES FIX — pg-conta, pg-ir, pg-ajuda
+   Corrige padding desktop que vaza no mobile
+   REGRA: só afeta mobile (max-width: 600px)
+   Desktop: INTOCADO
+   ══════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* ── pg-conta: hero e body com padding desktop de 48px ── */
+  .pc-hero {
+    padding: 24px 16px 20px !important;
+  }
+  .pc-hero-inner {
+    gap: 14px !important;
+  }
+  .pc-avatar {
+    width: 56px !important; height: 56px !important;
+    font-size: 20px !important;
+  }
+  .pc-name-input {
+    font-size: 18px !important;
+  }
+  .pc-body {
+    padding: 16px 14px calc(90px + env(safe-area-inset-bottom,0px)) 14px !important;
+    gap: 10px !important;
+  }
+  .pc-benefits {
+    grid-template-columns: 1fr !important;
+    padding: 14px 16px !important;
+    gap: 8px !important;
+  }
+  .pc-support-grid {
+    grid-template-columns: 1fr 1fr !important;
+    padding: 12px 14px !important;
+    gap: 8px !important;
+  }
+  .pc-support-item {
+    padding: 12px !important;
+  }
+  .pc-support-ico {
+    width: 30px !important; height: 30px !important;
+  }
+  .pc-support-name { font-size: 12px !important; }
+  .pc-support-sub  { font-size: 10px !important; }
+  .pc-card-header  { padding: 12px 16px !important; }
+  .pc-row          { padding: 12px 16px !important; }
+  .pc-badges       { flex-wrap: wrap !important; gap: 6px !important; }
+  .pc-hero-actions { display: none !important; }
+
+  /* ── pg-ir: conteúdo com padding lateral grande ── */
+  #pg-ir {
+    padding: 14px 14px calc(90px + env(safe-area-inset-bottom,0px)) !important;
+  }
+  .ir-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .ir-stepper { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; padding: 12px 14px !important; }
+  .ir-step + .ir-step { border-left: none !important; border-top: 1px solid rgba(255,255,255,.06) !important; padding-left: 0 !important; margin-left: 0 !important; padding-top: 10px !important; margin-top: 4px !important; width: 100% !important; }
+  .ir-toprow { flex-direction: column !important; gap: 10px !important; margin-bottom: 16px !important; }
+  .ir-auto-banner { flex-wrap: wrap !important; }
+  .ir-auto-btn { width: 100% !important; justify-content: center !important; }
+
+  /* ── pg-ajuda: guia primeiros passos ── */
+  #pg-ajuda {
+    padding: 14px 14px calc(90px + env(safe-area-inset-bottom,0px)) !important;
+  }
+  .gh-hero { padding: 20px 0 16px !important; }
+  .gh-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+  .gh-card { padding: 16px 14px !important; border-radius: 14px !important; }
+  .gh-steps { gap: 10px !important; }
+  .gh-step { padding: 14px !important; border-radius: 12px !important; }
+
+  /* ── pg-hist no mobile via drawer ── */
+  #pg-hist {
+    padding: 14px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important;
+  }
+
+  /* ── Garantir que o drawer fica acima do teclado virtual ── */
+  #mais-drawer {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom,0px)) !important;
+  }
+
+  /* ── Botão "Mais" ativo quando drawer está aberto ── */
+  #mnav-mais.drawer-open {
+    color: #4AD55E !important;
+  }
+  #mnav-mais.drawer-open::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 20%; right: 20%;
+    height: 2px;
+    background: #4AD55E;
+    border-radius: 0 0 3px 3px;
+  }
 }
 </style>
 
