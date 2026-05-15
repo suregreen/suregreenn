@@ -6202,10 +6202,18 @@ window.addEventListener('unhandledrejection', function(e) {
     </div>
 
     <!-- Histórico de entradas do mês -->
-    <div class="card">
-      <div class="ent-head">
-        <div class="ent-title" id="hist-list-title">Entradas do Mês</div>
-        <div class="ecnt" id="hist-list-cnt">0</div>
+    <div style="background:transparent;border:none;padding:0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0 16px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span id="hist-list-title" style="font-size:20px;font-weight:700;color:#eef6ff;">Entradas de valor</span>
+          <span id="hist-list-cnt" style="font-size:12px;font-weight:600;color:rgba(220,235,255,.4);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:3px 10px;">0</span>
+        </div>
+        <button style="height:36px;padding:0 14px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(220,235,255,.6);font-size:12px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:6px;transition:all .15s;"
+          onmouseover="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='#eef6ff'"
+          onmouseout="this.style.borderColor='rgba(255,255,255,.1)';this.style.color='rgba(220,235,255,.6)'">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+          Filtros
+        </button>
       </div>
       <div id="hist-list"></div>
     </div>
@@ -7359,160 +7367,229 @@ function maisGo(pageId, cb) {
 <!-- ══════════════════════════ PAGE: ODDS ══════════════════════════ -->
 <div id="pg-odds" class="page" style="padding:0;">
 <style>
-/* ══ ODDS PREMIUM — Bloomberg Dark ══ */
+/* ══ ODDS PREMIUM DARK ══ */
 #pg-odds {
-  background: var(--l0) !important;
+  background: #0a0f1a !important;
   color: #d4e8ff;
   font-family: 'DM Sans', sans-serif;
   padding: 0 !important;
   min-height: 100vh;
 }
 
-/* PAGE HEADER */
+/* ── HEADER ── */
 .opx-hdr {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 28px 0; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
+  padding: 22px 28px 14px; flex-wrap: wrap; gap: 10px;
 }
 .opx-title-row { display: flex; align-items: center; gap: 10px; }
-.opx-title { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -.03em; margin: 0; }
-.opx-beta { font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; background: rgba(34,197,94,.1); color: #22c55e; border: 1px solid rgba(34,197,94,.22); border-radius: 5px; padding: 2px 7px; }
-.opx-live-pill { display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #22c55e; background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2); border-radius: 20px; padding: 4px 10px; }
-.opx-live-dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; animation: xPulse 1.5s infinite; }
-@keyframes xPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{opacity:.7;box-shadow:0 0 0 4px rgba(34,197,94,0)}}
-.opx-update { font-size: 11px; color: rgba(255,255,255,.3); display: flex; align-items: center; gap: 6px; }
-.opx-refresh { cursor: pointer; opacity: .5; transition: opacity .15s; font-size: 13px; }
+.opx-title { font-size: 22px; font-weight: 800; color: #eef6ff; letter-spacing: -.03em; margin: 0; }
+.opx-beta {
+  font-size: 11px; font-weight: 700; letter-spacing: .05em;
+  background: rgba(34,197,94,.1); color: #22c55e;
+  border: 1px solid rgba(34,197,94,.25);
+  border-radius: 6px; padding: 3px 9px;
+}
+.opx-update { font-size: 11px; color: rgba(220,230,255,.3); display: flex; align-items: center; gap: 5px; }
+.opx-refresh { cursor: pointer; opacity: .45; transition: opacity .15s; }
 .opx-refresh:hover { opacity: 1; }
 
-/* FILTER BAR */
+/* ── FILTROS ── */
 .opx-filters {
-  display: flex; align-items: center; gap: 6px;
-  padding: 0 28px 14px; flex-wrap: wrap;
-  border-bottom: 1px solid rgba(255,255,255,.05);
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 28px 16px; flex-wrap: wrap;
 }
 .opx-filter-btn {
-  padding: 6px 14px; border-radius: 7px;
+  height: 36px; padding: 0 14px; border-radius: 8px;
   border: 1px solid rgba(255,255,255,.08);
-  background: var(--l2); color: rgba(255,255,255,.5);
-  font-size: 11px; font-weight: 600;
+  background: rgba(255,255,255,.04); color: rgba(220,235,255,.7);
+  font-size: 12px; font-weight: 600;
   cursor: pointer; font-family: 'DM Sans', sans-serif;
   transition: all .15s; display: flex; align-items: center; gap: 6px;
   white-space: nowrap;
 }
-.opx-filter-btn.active { background: rgba(34,197,94,.1); border-color: rgba(34,197,94,.3); color: #22c55e; }
+.opx-filter-btn:hover { border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.07); }
+.opx-filter-btn.active { background: #22c55e; border-color: #22c55e; color: #071a0e; font-weight: 700; }
 .opx-filter-btn select {
   background: transparent; border: none; color: inherit;
-  font-size: 11px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
   cursor: pointer; outline: none; max-width: 130px;
 }
 .opx-search {
-  flex: 1; min-width: 160px; max-width: 280px;
+  flex: 1; min-width: 180px; max-width: 300px; height: 36px;
   display: flex; align-items: center; gap: 7px;
-  background: var(--l2); border: 1px solid rgba(255,255,255,.07);
-  border-radius: 7px; padding: 6px 12px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px; padding: 0 14px;
 }
 .opx-search input {
-  background: transparent; border: none; color: #c8d8cc;
-  font-size: 11px; font-family: 'DM Sans', sans-serif; outline: none; width: 100%;
+  background: transparent; border: none; color: #d4e8ff;
+  font-size: 12px; font-family: 'DM Sans', sans-serif; outline: none; width: 100%;
 }
-.opx-search input::placeholder { color: rgba(255,255,255,.25); }
+.opx-search input::placeholder { color: rgba(220,230,255,.25); }
 .opx-spacer { flex: 1; }
 .opx-action-btn {
-  padding: 6px 14px; border-radius: 7px; font-size: 11px; font-weight: 700;
+  height: 36px; padding: 0 16px; border-radius: 8px;
+  font-size: 12px; font-weight: 700;
   cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s;
-  display: flex; align-items: center; gap: 5px;
+  display: flex; align-items: center; gap: 5px; border: 1px solid transparent;
 }
-.opx-action-btn.green { background: rgba(34,197,94,.15); border: 1px solid rgba(34,197,94,.3); color: #22c55e; }
-.opx-action-btn.outline { background: transparent; border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.4); }
+.opx-action-btn.green  { background: #22c55e; color: #071a0e; border-color: #22c55e; }
+.opx-action-btn.green:hover  { background: #16a34a; }
+.opx-action-btn.outline { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.1); color: rgba(220,235,255,.55); }
+.opx-action-btn.outline:hover { background: rgba(255,255,255,.07); }
 
-/* TABLE HEADER */
-.opx-thead { background: var(--l1); border-bottom: 1px solid rgba(255,255,255,.06); }
-.opx-thead td { padding: 8px 16px; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.2); white-space: nowrap; }
-.opx-thead td.right { text-align: right; }
+/* ── HEADER DA TABELA ── */
+.opx-thead-custom {
+  display: grid;
+  grid-template-columns: 2.2fr 3fr 130px 90px;
+  padding: 8px 20px 8px 24px;
+  font-size: 10px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(220,230,255,.22);
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  margin: 0 20px;
+}
 
-/* TABLE */
-.opx-table { width: 100%; border-collapse: collapse; }
+/* ── WRAP DOS CARDS ── */
+#opx-cards-wrap {
+  padding: 8px 20px 32px !important;
+}
 
-/* ROW */
-.opx-row { border-bottom: 1px solid rgba(255,255,255,.04); cursor: pointer; transition: background .1s; }
-.opx-row:hover { background: rgba(255,255,255,.025); }
-.opx-row.open { background: rgba(34,197,94,.04); }
+/* ── CADA LINHA — card sutil ── */
+.opx-row {
+  background: rgba(255,255,255,.018);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  margin-bottom: 6px;
+  display: block;
+  width: 100%;
+}
+.opx-row:hover {
+  background: rgba(255,255,255,.032);
+  border-color: rgba(255,255,255,.10);
+}
+.opx-row.open { border-color: rgba(34,197,94,.18); }
 
-/* GAME CELL */
-.opx-td-game { padding: 13px 16px; min-width: 180px; }
+/* Linha interna do card */
+.opx-row-inner {
+  display: grid;
+  grid-template-columns: 2.2fr 3fr 130px 90px;
+  align-items: center;
+  padding: 14px 20px 14px 24px;
+  gap: 0;
+}
+
+/* ── CÉLULA JOGO ── */
 .opx-row-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
-.opx-live-tag { font-size: 8px; font-weight: 800; letter-spacing: .08em; color: #ef4444; display: flex; align-items: center; gap: 3px; }
-.opx-live-tag .d { width: 4px; height: 4px; border-radius: 50%; background: #ef4444; animation: xPulse 1.5s infinite; }
-.opx-row-time { font-size: 9px; color: rgba(255,255,255,.3); font-weight: 600; }
-.opx-row-home { font-size: 14px; font-weight: 700; color: #fff; display: block; line-height: 1.35; }
-.opx-row-away { font-size: 12px; color: rgba(255,255,255,.45); display: block; line-height: 1.35; }
+.opx-row-time { font-size: 11px; color: rgba(220,230,255,.38); font-weight: 600; }
+.opx-row-league { font-size: 11px; color: rgba(210,220,240,.3); }
+.opx-row-teams {
+  font-size: 15px; font-weight: 700; color: #eef6ff;
+  display: flex; align-items: center; gap: 6px; line-height: 1.3;
+}
+.opx-row-teams-icon { opacity: .2; flex-shrink: 0; }
+.opx-row-vs { font-size: 12px; font-weight: 500; color: rgba(220,230,255,.35); }
 
-/* LIGA */
-.opx-td-liga { padding: 13px 16px; white-space: nowrap; }
-.opx-liga { display: flex; align-items: center; gap: 7px; font-size: 12px; color: rgba(255,255,255,.4); font-weight: 500; }
-.opx-liga-badge { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
-
-/* CASAS ODDS */
-.opx-td-casas { padding: 13px 16px; }
-.opx-casas { display: flex; align-items: center; gap: 24px; }
-.opx-casa { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; min-width: 56px; }
-.opx-casa-name { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.4); letter-spacing: .02em; }
-.opx-casa-name.betano { color: #ff5722; }
-.opx-casa-name.bet365 { color: #22c55e; }
-.opx-casa-name.superbet { color: #f87171; }
-.opx-casa-name.betway { color: #00c853; }
-.opx-casa-odd { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: -.02em; font-family: 'Space Grotesk', sans-serif; }
+/* ── CÉLULA CASAS ── */
+.opx-casas-cell { display: flex; align-items: center; gap: 24px; }
+.opx-casa { display: flex; flex-direction: column; gap: 2px; min-width: 55px; }
+.opx-casa-name { font-size: 11px; font-weight: 600; color: rgba(220,230,255,.4); }
+.opx-casa-name.betano     { color: #ff6b35; }
+.opx-casa-name.bet365     { color: #22c55e; }
+.opx-casa-name.novibet    { color: #818cf8; }
+.opx-casa-name.sportingbet{ color: #a78bfa; }
+.opx-casa-name.vbet       { color: #fb923c; }
+.opx-casa-name.superbet   { color: #f87171; }
+.opx-casa-name.stake      { color: #94a3b8; }
+.opx-casa-name.kto        { color: #fbbf24; }
+.opx-casa-name.b1xbet     { color: #818cf8; }
+.opx-casa-odd {
+  font-size: 18px; font-weight: 800; letter-spacing: -.02em;
+  color: #eef6ff; font-family: 'Space Grotesk', sans-serif; line-height: 1;
+}
 .opx-casa-odd.best { color: #22c55e; }
-.opx-casa-lbl { font-size: 8px; color: rgba(255,255,255,.2); text-transform: uppercase; letter-spacing: .06em; }
+.opx-casa-lbl {
+  font-size: 9px; color: rgba(220,230,255,.22);
+  text-transform: uppercase; letter-spacing: .1em; font-weight: 600;
+}
 
-/* LUCRO */
-.opx-td-lucro { padding: 13px 16px; text-align: right; white-space: nowrap; }
-.opx-lucro-pos { font-size: 13px; font-weight: 800; color: #22c55e; font-family: 'Space Grotesk', sans-serif; }
-.opx-lucro-neg { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.2); font-family: 'Space Grotesk', sans-serif; }
+/* ── CÉLULA LUCRO ── */
+.opx-lucro-cell { text-align: right; }
+.opx-lucro-pos { font-size: 13px; font-weight: 700; color: #22c55e; font-family: 'Space Grotesk', sans-serif; }
+.opx-lucro-neg { font-size: 13px; font-weight: 600; color: rgba(220,230,255,.3); font-family: 'Space Grotesk', sans-serif; }
 
-/* USAR BTN */
-.opx-td-usar { padding: 13px 16px; white-space: nowrap; }
-.opx-usar { padding: 7px 18px; border-radius: 7px; background: #22c55e; color: #000; font-size: 11px; font-weight: 800; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; letter-spacing: .02em; }
-.opx-usar:hover { background: #16a34a; transform: scale(1.02); }
+/* ── CÉLULA AÇÃO ── */
+.opx-action-cell { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.opx-usar {
+  height: 36px; padding: 0 18px; border-radius: 8px;
+  background: #22c55e; color: #071a0e;
+  font-size: 13px; font-weight: 800; border: none;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all .15s; white-space: nowrap;
+}
+.opx-usar:hover { background: #16a34a; }
+.opx-chev { color: rgba(220,230,255,.22); transition: transform .2s; flex-shrink: 0; }
+.opx-row.open .opx-chev { transform: rotate(180deg); }
 
-/* CHEV */
-.opx-td-chev { padding: 13px 10px; color: rgba(255,255,255,.2); }
-
-/* EXPAND */
-.opx-exp { display: none; border-bottom: 1px solid rgba(255,255,255,.06); }
-.opx-exp.open { display: table-row; }
-.opx-exp-inner { padding: 14px 20px 18px; background: var(--l0); }
-.opx-exp-tabs { display: flex; gap: 5px; margin-bottom: 12px; }
-.opx-exp-tab { padding: 5px 14px; border-radius: 7px; font-size: 11px; font-weight: 700; border: 1px solid rgba(255,255,255,.07); background: transparent; color: rgba(255,255,255,.3); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+/* ── EXPAND ── */
+.opx-exp { display: none; }
+.opx-exp.open { display: block; }
+.opx-exp-inner {
+  padding: 0 24px 16px;
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+.opx-exp-tabs { display: flex; gap: 6px; margin-bottom: 12px; padding-top: 14px; }
+.opx-exp-tab {
+  padding: 5px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;
+  border: 1px solid rgba(255,255,255,.08); background: transparent;
+  color: rgba(220,230,255,.3); cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all .15s;
+}
 .opx-exp-tab.on { background: rgba(34,197,94,.1); border-color: rgba(34,197,94,.25); color: #22c55e; }
-.opx-exp-body { display: none; }
-.opx-exp-body.on { display: flex; flex-direction: column; gap: 4px; }
-.opx-bk { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 8px; background: var(--l2); border: 1px solid rgba(255,255,255,.04); transition: background .1s; }
+.opx-exp-body { display: none; flex-direction: column; gap: 3px; }
+.opx-exp-body.on { display: flex; }
+.opx-bk {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px; border-radius: 8px;
+  background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05);
+  transition: background .12s;
+}
 .opx-bk:hover { background: rgba(255,255,255,.04); }
-.opx-bk.best { background: rgba(34,197,94,.05); border-color: rgba(34,197,94,.15); }
+.opx-bk.best { background: rgba(34,197,94,.04); border-color: rgba(34,197,94,.12); }
 .opx-bk-l { display: flex; align-items: center; gap: 10px; }
-.opx-bk-rank { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.2); width: 16px; }
+.opx-bk-rank { font-size: 11px; font-weight: 700; color: rgba(220,230,255,.2); width: 16px; }
 .opx-bk-rank.f { color: #22c55e; }
 .opx-bk-name { font-size: 13px; font-weight: 600; color: #d4e8ff; }
-.opx-bk-logo { width: 22px; height: 22px; border-radius: 4px; object-fit: contain; background: #fff; padding: 2px; flex-shrink: 0; }
-.opx-bk-logo-err { display: none; }
-.opx-casa-logo { width: 18px; height: 18px; border-radius: 3px; object-fit: contain; background: #fff; padding: 1px; flex-shrink: 0; vertical-align: middle; margin-right: 3px; }
 .opx-bk-r { display: flex; align-items: center; gap: 10px; }
-.opx-bk-odd { font-size: 17px; font-weight: 800; color: #fff; font-family: 'Space Grotesk', sans-serif; }
+.opx-bk-odd { font-size: 16px; font-weight: 700; color: #eef6ff; font-family: 'Space Grotesk', sans-serif; letter-spacing: -.02em; }
 .opx-bk-odd.best { color: #22c55e; }
-.opx-bk-btn { padding: 4px 11px; border-radius: 6px; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.2); color: #22c55e; font-size: 10px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; }
-.opx-bk-btn:hover { background: rgba(34,197,94,.18); }
+.opx-bk-btn {
+  padding: 4px 12px; border-radius: 6px;
+  background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
+  color: #22c55e; font-size: 11px; font-weight: 700;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .12s;
+}
+.opx-bk-btn:hover { background: rgba(34,197,94,.14); }
 
-/* EMPTY / LOADING */
-.opx-loading { display: flex; flex-direction: column; align-items: center; padding: 60px; gap: 12px; }
+/* ── THEAD da tabela (esconder) ── */
+.opx-thead { display: none; }
+.opx-table-wrap { overflow: visible !important; }
+
+/* ── LOADING ── */
+.opx-loading { display: flex; flex-direction: column; align-items: center; padding: 80px; gap: 12px; }
 .opx-ldots { display: flex; gap: 5px; }
 .opx-ld { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: xLd 1.2s infinite; }
 .opx-ld:nth-child(2){animation-delay:.2s}.opx-ld:nth-child(3){animation-delay:.4s}
-@keyframes xLd{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+@keyframes xLd{0%,80%,100%{opacity:.15;transform:scale(.7)}40%{opacity:1;transform:scale(1)}}
 
-@media(max-width:860px){
-  .opx-td-liga,.opx-td-lucro{display:none;}
-  .opx-casas{gap:14px;}
-  .opx-casa-odd{font-size:15px;}
+@media(max-width:1100px){
+  .opx-row-inner,.opx-thead-custom { grid-template-columns: 2fr 3fr 110px 80px; }
+  .opx-casas-cell { gap: 16px; }
+}
+@media(max-width:900px){
+  .opx-row-inner,.opx-thead-custom { grid-template-columns: 1.8fr 2.5fr 80px; }
+  .opx-lucro-cell { display: none; }
+  .opx-thead-custom span:nth-child(3) { display: none; }
 }
 
 /* ══ MOBILE ODDS — CARD LAYOUT ══ */
@@ -7649,7 +7726,7 @@ function maisGo(pageId, cb) {
 <div class="opx-filters opx-filters-desktop">
   <button class="opx-filter-btn active">Pré-jogo</button>
   <div class="opx-filter-btn">
-    <span>🏆</span>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
     <select id="opx-liga-sel" onchange="opxFilter()">
       <option value="">Todas as ligas</option>
       <option value="Copa do Brasil">Copa do Brasil</option>
@@ -7663,7 +7740,7 @@ function maisGo(pageId, cb) {
     </select>
   </div>
   <div class="opx-filter-btn">
-    <span>🏠</span>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <select id="opx-casa-sel" onchange="opxFilter()">
       <option value="">Todas as casas</option>
       <option value="Betano">Betano</option>
@@ -7696,7 +7773,7 @@ function maisGo(pageId, cb) {
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 8px;">
     <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:6px;">
-      <span style="font-size:14px;flex-shrink:0;">&#127942;</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
       <select id="opx-liga-sel-m" onchange="document.getElementById('opx-liga-sel').value=this.value;opxFilter();" style="flex:1;background:transparent;border:none;color:#eef6ff;font-size:12px;font-weight:600;font-family:DM Sans,sans-serif;cursor:pointer;outline:none;min-width:0;max-width:100%;">
         <option value="">Todas as ligas</option>
         <option value="Copa do Brasil">Copa do Brasil</option>
@@ -7710,7 +7787,7 @@ function maisGo(pageId, cb) {
       </select>
     </div>
     <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:6px;">
-      <span style="font-size:14px;flex-shrink:0;">&#127968;</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       <select id="opx-casa-sel-m" onchange="document.getElementById('opx-casa-sel').value=this.value;opxFilter();" style="flex:1;background:transparent;border:none;color:#eef6ff;font-size:12px;font-weight:600;font-family:DM Sans,sans-serif;cursor:pointer;outline:none;min-width:0;max-width:100%;">
         <option value="">Todas as casas</option>
         <option value="Betano">Betano</option>
@@ -14849,45 +14926,94 @@ function renderHistCompare() {
 
 // Reutiliza o HTML de entrada do organizador
 function entryHTML(e) {
-  const tipoMap = { surebet:'b-su', superodds:'b-so', freebet:'b-fb', apostagrats:'b-ag' };
   const tipoLabel = { surebet:'Surebet', superodds:'Super Odds', freebet:'Freebet', apostagrats:'Duplo Green' };
+  const tipoColor = {
+    surebet:    { bg:'rgba(139,92,246,.15)',  border:'rgba(139,92,246,.25)',  color:'#c4b5fd' },
+    freebet:    { bg:'rgba(245,158,11,.12)',  border:'rgba(245,158,11,.25)',  color:'#fcd34d' },
+    superodds:  { bg:'rgba(34,197,94,.10)',   border:'rgba(34,197,94,.22)',   color:'#86efac' },
+    apostagrats:{ bg:'rgba(251,146,60,.12)',  border:'rgba(251,146,60,.25)',  color:'#fdba74' },
+  };
+  const tc = tipoColor[e.tipo] || tipoColor.superodds;
   const isFree = e.tipo === 'freebet';
-  let pc, pt;
+  let plTxt, plColor, stIcon, stTxt, stColor, stBg;
+
   if (e.status === 'pending') {
-    if ((e.lucroEst||0) < 0) { pc = 'r'; pt = `Est. -R$ ${Math.abs(e.lucroEst||0).toFixed(2)}`; }
-    else { pc = 'y'; pt = `Est. +R$ ${(e.lucroEst||0).toFixed(2)}`; }
+    const est = e.lucroEst || 0;
+    plTxt   = 'Est. ' + (est >= 0 ? '+' : '-') + 'R$ ' + Math.abs(est).toFixed(2).replace('.',',');
+    plColor = '#f59e0b'; stIcon = '⏳'; stTxt = 'Pendente';
+    stColor = '#f59e0b'; stBg = 'rgba(245,158,11,.1)';
+  } else if (e.status === 'won') {
+    plTxt   = '+R$ ' + (e.pl||0).toFixed(2).replace('.',',');
+    plColor = '#22c55e'; stIcon = '✓'; stTxt = 'Ganhou';
+    stColor = '#22c55e'; stBg = 'rgba(34,197,94,.1)';
+  } else {
+    plTxt   = isFree ? '-R$ 0,00' : '-R$ ' + Math.abs(e.pl||0).toFixed(2).replace('.',',');
+    plColor = '#f87171'; stIcon = '✕'; stTxt = 'Perdeu';
+    stColor = '#f87171'; stBg = 'rgba(248,113,113,.08)';
   }
-  else if (e.status === 'won')  { pc = 'g'; pt = `+R$ ${(e.pl||0).toFixed(2)}`; }
-  else { pc = 'r'; pt = isFree ? `-R$ 0,00` : `-R$ ${Math.abs(e.pl||0).toFixed(2)}`; }
-  const d = new Date(e.id);
-  const dtStr = d.toLocaleDateString('pt-BR') + ' · ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-  const casasH = (e.casas||[]).map(c=>`<span class="em"><span class="hn">${c.nome}</span></span>`).join('');
-  return `<div class="ec ${e.status}">
+
+  const d      = new Date(e.id);
+  const dtStr  = d.toLocaleDateString('pt-BR') + ' · ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  const casasH = (e.casas||[]).map(c =>
+    `<span style="display:inline-flex;align-items:center;padding:3px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:6px;font-size:12px;font-weight:500;color:rgba(220,235,255,.55);">${c.nome}</span>`
+  ).join('');
+
+  // Botão ícone reutilizável
+  const iconBtn = (onclick, title, svg, hoverColor) =>
+    `<button onclick="${onclick}" title="${title}" style="width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:rgba(200,220,240,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;"
+     onmouseover="this.style.borderColor='${hoverColor}40';this.style.color='${hoverColor}';this.style.background='${hoverColor}10'"
+     onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.color='rgba(200,220,240,.4)';this.style.background='rgba(255,255,255,.04)'">${svg}</button>`;
+
+  const editSVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
+  const trashSVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>`;
+
+  return `<div style="
+    background:rgba(255,255,255,.018);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:14px;
+    padding:16px 20px;
+    margin-bottom:8px;
+    display:grid;
+    grid-template-columns:1fr 160px 80px;
+    gap:16px;
+    align-items:center;
+    transition:background .15s,border-color .15s;
+  "
+  onmouseover="this.style.background='rgba(255,255,255,.028)';this.style.borderColor='rgba(255,255,255,.11)'"
+  onmouseout="this.style.background='rgba(255,255,255,.018)';this.style.borderColor='rgba(255,255,255,.07)'">
+
+    <!-- Col 1: tipo + data + jogo + casas -->
     <div>
-      <div class="eht">
-        <span class="badge ${tipoMap[e.tipo]||'b-so'}">${tipoLabel[e.tipo]||e.tipo}</span>
-        <span class="etm">${dtStr}</span>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <span style="font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:${tc.bg};color:${tc.color};border:1px solid ${tc.border};border-radius:6px;padding:3px 10px;">${tipoLabel[e.tipo]||e.tipo}</span>
+        <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:rgba(220,235,255,.32);">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          ${dtStr}
+        </span>
       </div>
-      <div class="edesc">${e.desc||'—'}</div>
-      <div class="emeta">${casasH}
-        ${e.link?`<span class="em"><a href="${e.link}" target="_blank">↗ Link</a></span>`:''}
-        ${e.obs?`<span class="em">✎ ${e.obs}</span>`:''}
-      </div>
+      <div style="font-size:15px;font-weight:700;color:#eef6ff;margin-bottom:8px;">${e.desc||'—'}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;">${casasH}</div>
     </div>
-    <div class="er">
-      <div>
-        <div class="esk-lbl">Resultado</div>
-        <div class="epl ${pc}" style="margin-top:4px;font-size:14px;padding:5px 12px;">${pt}</div>
+
+    <!-- Col 2: resultado -->
+    <div style="text-align:right;">
+      <div style="font-size:10px;font-weight:700;color:rgba(220,235,255,.28);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Resultado</div>
+      <div style="font-size:18px;font-weight:800;color:${plColor};font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;margin-bottom:8px;">${plTxt}</div>
+      <div style="display:inline-flex;align-items:center;gap:5px;background:${stBg};border-radius:8px;padding:5px 11px;">
+        <span style="font-size:12px;color:${stColor};">${stIcon}</span>
+        <span style="font-size:12px;font-weight:700;color:${stColor};">${stTxt}</span>
       </div>
-      <select class="ssel" onchange="upSt(${e.id},this.value)">
-        <option value="pending" ${e.status==='pending'?'selected':''}>⏳ Pendente</option>
-        <option value="won"     ${e.status==='won'    ?'selected':''}>✓ Ganhou</option>
-        <option value="lost"    ${e.status==='lost'   ?'selected':''}>✕ Perdeu</option>
+      <select class="ssel" onchange="upSt(${e.id},this.value)" style="display:none;">
+        <option value="pending" ${e.status==='pending'?'selected':''}>Pendente</option>
+        <option value="won"     ${e.status==='won'    ?'selected':''}>Ganhou</option>
+        <option value="lost"    ${e.status==='lost'   ?'selected':''}>Perdeu</option>
       </select>
-      <div style="display:flex;gap:5px;">
-        <button class="btn-edit" onclick="openEdit(${e.id})" title="Editar">✏️</button>
-        <button class="btn-del"  onclick="delEnt(${e.id})"  title="Remover">🗑</button>
-      </div>
+    </div>
+
+    <!-- Col 3: ações -->
+    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+      ${iconBtn(`openEdit(${e.id})`, 'Editar', editSVG, '#eef6ff')}
+      ${iconBtn(`delEnt(${e.id})`,   'Remover', trashSVG, '#f87171')}
     </div>
   </div>`;
 }
@@ -21411,48 +21537,47 @@ function _sgOddsAtualizarCard(jogo) {
     card = document.createElement('div');
     card.id = 'sg-odds-calc-card';
     card.style.cssText =
-      'position:fixed;bottom:28px;right:24px;z-index:9999;width:272px;' +
-      'background:#060e09;' +
-      'border:1px solid rgba(34,197,94,0.22);border-radius:20px;' +
+      'position:fixed;bottom:32px;right:28px;z-index:9999;width:300px;' +
+      'background:#0d1824;' +
+      'border:1px solid rgba(255,255,255,0.1);border-radius:16px;' +
       'padding:0;overflow:hidden;' +
-      'box-shadow:0 32px 80px rgba(0,0,0,0.75),0 0 0 1px rgba(34,197,94,0.05),inset 0 1px 0 rgba(255,255,255,0.05);' +
+      'box-shadow:0 24px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04);' +
       'animation:loginIn .35s cubic-bezier(.22,1,.36,1) both;';
     document.body.appendChild(card);
   }
 
-  // Linhas das odds
   var linhas = ['casa','empate','fora'].map(function(r) {
-    var sel = _sgOddsSelecao[r];
+    var sel    = _sgOddsSelecao[r];
     var filled = !!sel;
-    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 18px;border-bottom:1px solid rgba(255,255,255,0.04);">'
-      + '<div style="display:flex;align-items:center;gap:8px;">'
-      + '<span style="width:5px;height:5px;border-radius:50%;background:' + (filled ? '#22c55e' : 'rgba(255,255,255,0.12)') + ';display:inline-block;flex-shrink:0;"></span>'
-      + '<span style="font-size:12px;color:' + (filled ? 'rgba(220,255,235,0.85)' : 'rgba(255,255,255,0.2)') + ';font-family:DM Sans,sans-serif;">'
-      + labels[r] + (filled ? '<span style="color:rgba(34,197,94,0.6);margin-left:5px;font-size:11px;">· ' + sel.casa + '</span>' : '') + '</span>'
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.05);">'
+      + '<div style="display:flex;align-items:center;gap:10px;">'
+      + '<span style="width:6px;height:6px;border-radius:50%;background:' + (filled ? '#4ade80' : 'rgba(255,255,255,0.1)') + ';flex-shrink:0;"></span>'
+      + '<span style="font-size:13px;font-weight:600;color:' + (filled ? '#eef6ff' : 'rgba(255,255,255,0.25)') + ';font-family:DM Sans,sans-serif;">'
+      + labels[r]
+      + (filled ? '<span style="color:rgba(255,255,255,0.35);margin-left:6px;font-size:12px;font-weight:400;">· ' + sel.casa + '</span>' : '')
+      + '</span>'
       + '</div>'
-      + '<span style="font-size:15px;font-weight:700;color:' + (filled ? '#22c55e' : 'rgba(255,255,255,0.12)') + ';font-family:Space Grotesk,sans-serif;letter-spacing:-0.02em;">'
+      + '<span style="font-size:17px;font-weight:800;color:' + (filled ? '#4ade80' : 'rgba(255,255,255,0.12)') + ';font-family:Space Grotesk,sans-serif;letter-spacing:-0.03em;">'
       + (filled ? sel.odd.toFixed(2) : '—') + '</span>'
       + '</div>';
   }).join('');
 
   card.innerHTML =
-    // Header
-    '<div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px 12px;border-bottom:1px solid rgba(255,255,255,0.05);">'
+    '<div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,0.06);">'
     + '<div style="display:flex;align-items:center;gap:8px;">'
-    + '<div style="width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,0.8);"></div>'
-    + '<span style="font-size:10px;font-weight:700;color:rgba(34,197,94,0.8);letter-spacing:.12em;text-transform:uppercase;font-family:DM Sans,sans-serif;">Surebet</span>'
+    + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>'
+    + '<span style="font-size:11px;font-weight:800;color:#eef6ff;letter-spacing:.10em;text-transform:uppercase;font-family:DM Sans,sans-serif;">Surebet</span>'
     + '</div>'
-    + '<span style="font-size:11px;font-weight:600;color:' + (pronto ? '#22c55e' : 'rgba(255,255,255,0.25)') + ';font-family:Space Grotesk,sans-serif;">' + total + '<span style="color:rgba(255,255,255,0.2);">/3</span></span>'
+    + '<span style="font-size:12px;font-weight:700;color:' + (pronto ? '#4ade80' : 'rgba(255,255,255,0.3)') + ';font-family:Space Grotesk,sans-serif;">'
+    + total + '<span style="color:rgba(255,255,255,0.2);font-weight:500;">/3</span></span>'
     + '</div>'
-    // Linhas
     + linhas
-    // Footer
-    + '<div style="padding:14px 16px 12px;">'
+    + '<div style="padding:14px 16px 14px;">'
     + (pronto
-      ? '<button onclick="sgOddsEnviarCalc()" style="width:100%;padding:12px;background:linear-gradient(135deg,#16a34a 0%,#15803d 100%);border:none;border-radius:12px;color:#fff;font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.03em;box-shadow:0 4px 16px rgba(22,163,74,0.35);transition:all .18s;" onmouseover="this.style.opacity=\'.88\'" onmouseout="this.style.opacity=\'1\'">→ Abrir Calculadora</button>'
-      : '<div style="text-align:center;padding:4px 0 6px;font-size:11px;color:rgba(255,255,255,0.2);font-family:DM Sans,sans-serif;">Selecione mais ' + (3 - total) + ' resultado(s)</div>'
+      ? '<button onclick="sgOddsEnviarCalc()" style="width:100%;padding:13px;background:#22c55e;border:none;border-radius:10px;color:#071a0e;font-family:DM Sans,sans-serif;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:.02em;transition:background .15s;" onmouseover=\"this.style.opacity=.85\" onmouseout=\"this.style.opacity=1\">→ Abrir Calculadora</button>'
+      : '<div style="text-align:center;padding:2px 0 8px;font-size:12px;color:rgba(255,255,255,0.3);font-family:DM Sans,sans-serif;">Selecione mais ' + (3 - total) + ' resultado(s)</div>'
     )
-    + '<button onclick="sgOddsLimparSelecao()" style="width:100%;margin-top:6px;padding:7px;background:transparent;border:1px solid rgba(255,255,255,0.06);border-radius:10px;color:rgba(255,255,255,0.2);font-family:DM Sans,sans-serif;font-size:11px;cursor:pointer;transition:all .15s;" onmouseover="this.style.borderColor=\'rgba(239,68,68,0.3)\';this.style.color=\'#f87171\'" onmouseout="this.style.borderColor=\'rgba(255,255,255,0.06)\';this.style.color=\'rgba(255,255,255,0.2)\'">✕ Limpar seleção</button>'
+    + '<button onclick="sgOddsLimparSelecao()" style="width:100%;margin-top:8px;padding:9px;background:transparent;border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:rgba(255,255,255,0.3);font-family:DM Sans,sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;" onmouseover=\"this.style.opacity=.7\" onmouseout=\"this.style.opacity=1\">✕ Limpar seleção</button>'
     + '</div>';
 }
 
@@ -21797,11 +21922,17 @@ var _opxLigaIcons = {
 };
 
 function opxBookieClass(n) {
-  var l = n.toLowerCase();
-  if (l.includes('betano')) return 'betano';
-  if (l.includes('bet365')) return 'bet365';
-  if (l.includes('superbet')) return 'superbet';
-  if (l.includes('betway')) return 'betway';
+  var l = (n||'').toLowerCase();
+  if (l.includes('betano'))     return 'betano';
+  if (l.includes('bet365'))     return 'bet365';
+  if (l.includes('superbet'))   return 'superbet';
+  if (l.includes('betway'))     return 'betway';
+  if (l.includes('novibet'))    return 'novibet';
+  if (l.includes('sportingbet'))return 'sportingbet';
+  if (l.includes('vbet'))       return 'vbet';
+  if (l.includes('stake'))      return 'stake';
+  if (l.includes('kto'))        return 'kto';
+  if (l.includes('1xbet'))      return 'b1xbet';
   return '';
 }
 
@@ -21833,126 +21964,100 @@ function opxFilter() {
 }
 
 function opxRender(games) {
-  var tbody = document.getElementById('odds-com-pa-body');
-  if (!tbody) return;
+  // Garantir wrapper de cards (substitui a tabela antiga)
+  var wrap = document.getElementById('opx-cards-wrap');
+  if (!wrap) {
+    wrap = document.createElement('div');
+    wrap.id = 'opx-cards-wrap';
+    wrap.style.cssText = 'padding:0 32px 32px;display:flex;flex-direction:column;';
+    var tbl = document.querySelector('.opx-table-wrap');
+    if (tbl) {
+      tbl.style.display = 'none';
+      tbl.parentNode.insertBefore(wrap, tbl.nextSibling);
+    } else {
+      document.getElementById('pg-odds').appendChild(wrap);
+    }
+  }
 
   var countEl = document.getElementById('odp-count');
   if (countEl) countEl.textContent = games.length;
 
   if (!games.length) {
-    tbody.innerHTML = '<tr><td colspan="6"><div class="opx-loading"><div style="font-size:12px;color:rgba(255,255,255,.3);">📭 Nenhum jogo encontrado</div></div></td></tr>';
+    wrap.innerHTML = '<div class="opx-loading"><div class="opx-ldots"><span class="opx-ld"></span><span class="opx-ld"></span><span class="opx-ld"></span></div><div style="font-size:13px;color:rgba(220,230,255,.3);">Nenhum jogo encontrado</div></div>';
     return;
   }
 
+  var PREFER = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet','sportingbet','superbet'];
+  function isPrio(b){ var n=(b.name||'').toLowerCase(); return PREFER.some(function(p){return n.includes(p);}); }
+
+  var headerHtml = '<div class="opx-thead-custom"><span>JOGO</span><span>CASAS DE APOSTA</span><span style="text-align:right">LUCRO</span><span style="text-align:right">A&Ccedil;&Atilde;O</span></div>';
   var html = '';
+
   games.forEach(function(g, gi) {
     var rid = 'opxr'+gi, eid = 'opxe'+gi;
     var bk = g.bookmakers || [];
-
-    // Preferred bookies para linha resumo
-    var BR_PREF = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet','sportingbet','superbet'];
-
-    function isPrio(b) {
-      var n = (b.name||'').toLowerCase();
-      return BR_PREF.some(function(p){ return n.includes(p); });
-    }
-
     var bkPref = bk.filter(isPrio);
-    var bkUse = bkPref.length >= 2 ? bkPref : bk;
+    var bkUse  = bkPref.length >= 2 ? bkPref : bk;
 
     var bHome=null, bDraw=null, bAway=null;
-    bkUse.forEach(function(b) {
-      if (b.home && (!bHome || b.home > bHome.home)) bHome = b;
-      if (b.draw && (!bDraw || b.draw > bDraw.draw)) bDraw = b;
-      if (b.away && (!bAway || b.away > bAway.away)) bAway = b;
+    bkUse.forEach(function(b){
+      if(b.home&&(!bHome||b.home>bHome.home))bHome=b;
+      if(b.draw&&(!bDraw||b.draw>bDraw.draw))bDraw=b;
+      if(b.away&&(!bAway||b.away>bAway.away))bAway=b;
     });
 
-    // Lucro surebet
-    var lucroHtml = '<span class="opx-lucro-neg">—</span>';
+    var lucroHtml = '<span class="opx-lucro-neg">-</span>';
     if (bHome && bAway) {
-      var h = bHome.home, d = bDraw ? bDraw.draw : 0, a = bAway.away;
-      var inv = 1/h + (d ? 1/d : 0) + 1/a;
-      var pct = (1 - inv) * 100;
-      if (pct > 0) lucroHtml = '<span class="opx-lucro-pos">+'+pct.toFixed(2)+'%</span>';
-      else lucroHtml = '<span class="opx-lucro-neg">'+pct.toFixed(2)+'%</span>';
+      var h=bHome.home, d=bDraw?bDraw.draw:0, a=bAway.away;
+      var inv=1/h+(d?1/d:0)+1/a, pct=(1-inv)*100;
+      if (pct>0) lucroHtml='<span class="opx-lucro-pos">+'+pct.toFixed(2)+'%</span>';
+      else       lucroHtml='<span class="opx-lucro-neg">'+pct.toFixed(2)+'%</span>';
     }
 
-    // 3 casas top
-    var casas = [];
-    if (bHome) casas.push({b:bHome, key:'home', lbl:'CASA', best:true});
-    if (bDraw)  casas.push({b:bDraw,  key:'draw', lbl:'X', best:true});
-    if (bAway)  casas.push({b:bAway,  key:'away', lbl:'FORA', best:true});
+    var maxOdd = Math.max(bHome?bHome.home:0, bDraw?bDraw.draw:0, bAway?bAway.away:0);
+    function oddCell(b, key, lbl) {
+      if (!b||!b[key]) return '<div class="opx-casa"><span class="opx-casa-name" style="color:rgba(220,230,255,.2)">-</span><span class="opx-casa-odd" style="color:rgba(220,230,255,.15)">-</span><span class="opx-casa-lbl">'+lbl+'</span></div>';
+      var cls = opxBookieClass(b.name);
+      var isBest = b[key] === maxOdd;
+      return '<div class="opx-casa"><span class="opx-casa-name '+cls+'">'+b.name+'</span><span class="opx-casa-odd'+(isBest?' best':'')+'">'+b[key].toFixed(2)+'</span><span class="opx-casa-lbl">'+lbl+'</span></div>';
+    }
 
-    // Find overall highest odd to highlight
-    var maxOdd = 0;
-    casas.forEach(function(c){if(c.b[c.key]>maxOdd)maxOdd=c.b[c.key];});
+    html += '<div class="opx-row" id="'+rid+'" data-eid="'+eid+'" onclick="opxTog(this.id,this.dataset.eid)"><div class="opx-row-inner">'
+      +'<div class="opx-game-cell"><div class="opx-row-meta"><span class="opx-row-time">'+g.time+'</span><span class="opx-row-league">&nbsp;·&nbsp;'+(g.league||'')+'</span></div>'
+      +'<div class="opx-row-teams"><svg class="opx-row-teams-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'
+      +'<span>'+g.home+' <span class="opx-row-vs">vs</span> '+g.away+'</span></div></div>'
+      +'<div class="opx-casas-cell">'+oddCell(bHome,'home','CASA')+oddCell(bDraw,'draw','X')+oddCell(bAway,'away','FORA')+'</div>'
+      +'<div class="opx-lucro-cell">'+lucroHtml+'</div>'
+      +'<div class="opx-action-cell"><button class="opx-usar" onclick="event.stopPropagation();opxUsarTop('+gi+')">Usar</button>'
+      +'<svg class="opx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>'
+      +'</div></div>';
 
-    var casasHtml = casas.map(function(c) {
-      var cls = opxBookieClass(c.b.name);
-      var isMax = c.b[c.key] === maxOdd;
-      return '<div class="opx-casa">'
-        + '<div class="opx-casa-name '+cls+'" style="display:flex;align-items:center;gap:4px;">'+opxCasaLogo(c.b.slug,c.b.name)+c.b.name+'</div>'
-        + '<div class="opx-casa-odd'+(isMax?' best':'')+'">'+c.b[c.key].toFixed(2)+'</div>'
-        + '<div class="opx-casa-lbl">'+c.lbl+'</div>'
-        + '</div>';
-    }).join('');
-
-    var icon = _opxLigaIcons[g.league] || '⚽';
-
-    html += '<tr class="opx-row" id="'+rid+'" onclick="opxTog(\''+rid+'\',\''+eid+'\')"> '
-      +'<td class="opx-td-game">'
-        +'<div class="opx-row-meta"><span class="opx-row-time">'+g.time+'</span><span style="font-size:9px;color:rgba(255,255,255,.25);margin-left:4px;">'+( g.league||'')+'</span></div>'
-        +'<span class="opx-row-home">'+g.home+'</span>'
-        +'<span class="opx-row-away">'+g.away+'</span>'
-      +'</td>'
-      +'<td class="opx-td-liga"><div class="opx-liga"><span class="opx-liga-badge">'+icon+'</span>'+( g.league||'')+'</div></td>'
-      +'<td class="opx-td-casas"><div class="opx-casas">'+casasHtml+'</div></td>'
-      +'<td class="opx-td-lucro">'+lucroHtml+'</td>'
-      +'<td class="opx-td-usar"><button class="opx-usar" onclick="event.stopPropagation();opxUsarTop('+gi+')">Usar</button></td>'
-      +'<td class="opx-td-chev"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></td>'
-      +'</tr>';
-
-    // EXPAND
-    var res = [{key:'home',lbl:g.home+' vence'},{key:'draw',lbl:'Empate'},{key:'away',lbl:g.away+' vence'}];
-
-    var tabs = res.map(function(r,i){
-      return '<button class="opx-exp-tab'+(i===0?' on':'')+'" onclick="event.stopPropagation();opxTab(\''+eid+'\','+i+',this)">'+r.lbl+'</button>';
-    }).join('');
-
-    var bodies = res.map(function(r,i){
-      // Preferred bookies — mostra primeiro, resto depois
-      var PREFER = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet','sportingbet','superbet'];
-
-      var allSorted = bk.filter(function(b){return b[r.key];}).sort(function(a,b){return b[r.key]-a[r.key];});
-
-      var preferred = allSorted.filter(function(b){
-        var n = (b.name||'').toLowerCase();
-        return PREFER.some(function(p){ return n.includes(p); });
+    // Expand
+    html += '<div class="opx-exp" id="'+eid+'"><div class="opx-exp-inner"><div class="opx-exp-tabs">';
+    var res=[{key:'home',lbl:g.home+' vence'},{key:'draw',lbl:'Empate'},{key:'away',lbl:g.away+' vence'}];
+    res.forEach(function(r,i){ html+='<button class="opx-exp-tab'+(i===0?' on':'')+'" data-eid="'+eid+'" data-idx="'+i+'" onclick="event.stopPropagation();opxTab(this.dataset.eid,+this.dataset.idx,this)">'+r.lbl+'</button>'; });
+    html += '</div>';
+    res.forEach(function(r,i){
+      var P2=['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet','sportingbet','superbet'];
+      var sorted=bk.filter(function(b){return b[r.key];}).sort(function(a,b){return b[r.key]-a[r.key];});
+      var pref=sorted.filter(function(b){var n=(b.name||'').toLowerCase();return P2.some(function(p){return n.includes(p);});});
+      var rest=sorted.filter(function(b){var n=(b.name||'').toLowerCase();return !P2.some(function(p){return n.includes(p);});});
+      var sl=pref.concat(rest).slice(0,8);
+      html+='<div class="opx-exp-body'+(i===0?' on':'')+'">';
+      if(!sl.length){html+='<div style="padding:12px;color:rgba(220,230,255,.3);font-size:13px;">Sem dados</div>';}
+      sl.forEach(function(b,bi){
+        var jgS=(g.home+' x '+g.away).replace(/'/g,"&#39;");
+        var nmS=(b.name||'').replace(/'/g,"&#39;");
+        html+='<div class="opx-bk'+(bi===0?' best':'')+'"><div class="opx-bk-l"><span class="opx-bk-rank'+(bi===0?' f':'')+'">'+( bi+1)+'</span><span class="opx-bk-name">'+b.name+'</span></div>'
+          +'<div class="opx-bk-r"><span class="opx-bk-odd'+(bi===0?' best':'')+'">'+b[r.key].toFixed(2)+'</span>'
+          +'<button class="opx-bk-btn" data-jg="'+jgS+'" data-nm="'+nmS+'" data-odd="'+b[r.key].toFixed(2)+'" data-res="'+r.key+'" onclick="event.stopPropagation();sgOddsUsar(this.dataset.jg,this.dataset.nm,this.dataset.odd,this.dataset.res)">&#8594; Usar</button></div></div>';
       });
-      var others = allSorted.filter(function(b){
-        var n = (b.name||'').toLowerCase();
-        return !PREFER.some(function(p){ return n.includes(p); });
-      });
-
-      var sorted = preferred.concat(others).slice(0,8);
-      if (!sorted.length) return '<div class="opx-exp-body'+(i===0?' on':'')+'"><div style="padding:10px;color:rgba(255,255,255,.3);font-size:12px;">Sem dados</div></div>';
-      var items = sorted.map(function(b,bi){
-        var jg = g.home+' x '+g.away;
-        var jgSafe = jg.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-        var nameSafe = b.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-        return '<div class="opx-bk'+(bi===0?' best':'')+'">'
-          +'<div class="opx-bk-l"><span class="opx-bk-rank'+(bi===0?' f':'')+'">'+(bi+1)+'º</span>'+opxBookieLogo(b.slug,b.name)+'<span class="opx-bk-name">'+b.name+'</span></div>'
-          +'<div class="opx-bk-r"><span class="opx-bk-odd'+(bi===0?' best':'')+'">'+ b[r.key].toFixed(2)+'</span>'
-          +'<button class="opx-bk-btn" onclick="event.stopPropagation();sgOddsUsar(\''+jgSafe+'\',\''+nameSafe+'\',\''+b[r.key].toFixed(2)+'\',\''+r.key+'\')">→ Usar</button>'
-          +'</div></div>';
-      }).join('');
-      return '<div class="opx-exp-body'+(i===0?' on':'')+'">'+items+'</div>';
-    }).join('');
-
-    html += '<tr class="opx-exp" id="'+eid+'"><td colspan="6"><div class="opx-exp-inner"><div class="opx-exp-tabs">'+tabs+'</div>'+bodies+'</div></td></tr>';
+      html+='</div>';
+    });
+    html+='</div></div></div>';
   });
 
-  tbody.innerHTML = html;
+  wrap.innerHTML = headerHtml + html;
 }
 
 function opxTog(rid,eid){
