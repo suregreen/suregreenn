@@ -21755,7 +21755,7 @@ function sgOddsRender(games) {
   if (cntM) cntM.textContent = '· ' + games.length + ' jogos';
 }
 
-function opxMobileRender(games) {
+function opxMobileRender(games) { return; /* desabilitado */
   var el = document.getElementById('opx-mobile-cards');
   if (!el) return;
 
@@ -23140,18 +23140,37 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
     max-width: 100vw !important;
   }
 
-  /* ════ ODDS: esconder tabela, mostrar cards ════ */
-  #pg-odds .opx-table-wrap { display: none !important; }
-  #pg-odds table.opx-table  { display: none !important; }
-  #pg-odds #opx-mobile-cards {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    padding: 10px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important;
+  /* ════ ODDS: layout via #opx-cards-wrap ════ */
+  #pg-odds .opx-table-wrap   { display: none !important; }
+  #pg-odds table.opx-table   { display: none !important; }
+  #pg-odds #opx-mobile-cards { display: none !important; }
+  #pg-odds { overflow-x: hidden !important; width: 100% !important; }
+  .opx-hdr-desktop     { display: none !important; }
+  .opx-filters-desktop { display: none !important; }
+  .opx-hdr-mobile      { display: block !important; }
+  .opx-filters-mobile  { display: flex !important; flex-direction: column !important; }
+  #opx-cards-wrap {
+    padding: 0 12px calc(90px + env(safe-area-inset-bottom,0px)) !important;
   }
-  #pg-odds { overflow-x: hidden !important; }
+  .opx-thead-custom { display: none !important; }
+  .opx-row { border-radius: 14px !important; margin-bottom: 8px !important; }
+  .opx-row-inner {
+    grid-template-columns: 1fr !important;
+    padding: 14px !important;
+    gap: 6px !important;
+  }
+  .opx-casas-cell {
+    gap: 0 !important;
+    border-top: 1px solid rgba(255,255,255,.06) !important;
+    padding-top: 12px !important;
+    margin-top: 6px !important;
+  }
+  .opx-casa   { flex: 1 !important; text-align: center !important; }
+  .opx-lucro-cell { display: none !important; }
+  .opx-usar   { width: 100% !important; height: 44px !important; border-radius: 10px !important; margin-top: 8px !important; }
+  .opx-chev   { display: none !important; }
 
-  /* ════ ANÁLISE: grids em coluna única ════ */
+/* ════ ANÁLISE: grids em coluna única ════ */
   #pg-hist {
     padding: 10px 12px calc(90px + env(safe-area-inset-bottom,0px)) !important;
     overflow-x: hidden !important;
