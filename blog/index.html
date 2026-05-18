@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog SureGreen — Guias de Surebet, Duplo Green e Apostas Esportivas</title>
+<meta name="description" content="Guias completos sobre Surebet, Duplo Green, Freebet e apostas esportivas. Aprenda estratégias e maximize seus lucros com o SureGreen.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suregreen.com.br/blog/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Blog SureGreen",
+  "description": "Guias completos sobre Surebet, Duplo Green, Freebet e apostas esportivas.",
+  "url": "https://suregreen.com.br/blog/",
+  "publisher": {"@type": "Organization","name": "SureGreen","url": "https://suregreen.com.br"}
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06090d;--bg2:#080c12;--card:#0c1119;--card2:#0f1520;
+  --g:#1df078;--g2:#16d868;--gdim:rgba(29,240,120,.08);
+  --border:rgba(255,255,255,.08);--border-g:rgba(29,240,120,.22);
+  --text:#f0f5f1;--text2:#8aab96;--text3:#4d7060;
+  --font:'Inter',sans-serif;--r:10px;--r2:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;}
+a{color:var(--g);text-decoration:none;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(6,9,13,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;}
+.nav-logo-mark{width:32px;height:32px;background:var(--gdim);border:1px solid var(--border-g);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.nav-logo-text{font-size:1.15rem;font-weight:800;letter-spacing:-.03em;color:var(--text);}
+.nav-logo-text span{color:var(--g);}
+.nav-mid{display:flex;align-items:center;gap:1.75rem;}
+.nav-mid a{font-size:.88rem;color:var(--text2);transition:color .2s;}
+.nav-mid a:hover,.nav-mid a.active{color:var(--text);}
+.nav-cta{background:var(--g);color:#04110a;font-weight:700;font-size:.85rem;padding:.55rem 1.25rem;border-radius:8px;transition:background .2s;}
+.nav-cta:hover{background:var(--g2);}
+
+/* HERO */
+.hero{padding:5rem 2.5rem 3.5rem;background:linear-gradient(180deg,#080d15 0%,var(--bg) 100%);border-bottom:1px solid var(--border);text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(29,240,120,.05) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{max-width:600px;margin:0 auto;position:relative;}
+.hero-label{display:inline-flex;align-items:center;gap:.5rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--g);background:var(--gdim);border:1px solid var(--border-g);padding:.3rem .9rem;border-radius:5px;margin-bottom:1.25rem;}
+.hero h1{font-size:2.5rem;font-weight:900;letter-spacing:-.04em;line-height:1.15;color:var(--text);margin-bottom:1rem;}
+.hero h1 em{color:var(--g);font-style:normal;}
+.hero p{font-size:1rem;color:var(--text2);line-height:1.7;}
+
+/* GRID */
+.blog-wrap{max-width:1100px;margin:0 auto;padding:4rem 2.5rem 6rem;}
+.blog-section-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--text3);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;}
+.blog-section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* DESTAQUE */
+.featured{display:grid;grid-template-columns:1.4fr 1fr;gap:1.25rem;margin-bottom:3rem;}
+.featured-main{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:2rem;text-decoration:none;display:flex;flex-direction:column;gap:1rem;transition:border-color .2s,transform .15s;position:relative;overflow:hidden;}
+.featured-main::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g),transparent);}
+.featured-main:hover{border-color:var(--border-g);transform:translateY(-2px);}
+.featured-tag{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--g);}
+.featured-main h2{font-size:1.4rem;font-weight:800;color:var(--text);line-height:1.3;letter-spacing:-.02em;}
+.featured-main p{font-size:.88rem;color:var(--text2);line-height:1.65;flex:1;}
+.featured-meta{display:flex;align-items:center;gap:1rem;font-size:.75rem;color:var(--text3);}
+.featured-meta span{display:flex;align-items:center;gap:.35rem;}
+.featured-arrow{display:flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:700;color:var(--g);}
+
+.featured-side{display:flex;flex-direction:column;gap:1rem;}
+.side-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1.4rem;text-decoration:none;display:flex;flex-direction:column;gap:.6rem;transition:border-color .2s,transform .15s;flex:1;}
+.side-card:hover{border-color:var(--border-g);transform:translateY(-1px);}
+.side-card h3{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.35;}
+.side-card p{font-size:.82rem;color:var(--text2);line-height:1.6;flex:1;}
+
+/* GRID TODOS */
+.all-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.art-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem;text-decoration:none;display:flex;flex-direction:column;gap:.6rem;transition:border-color .2s,transform .15s;}
+.art-card:hover{border-color:var(--border-g);transform:translateY(-2px);}
+.art-card-tag{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--g);}
+.art-card h3{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.35;}
+.art-card p{font-size:.82rem;color:var(--text2);line-height:1.6;flex:1;}
+.art-card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.25rem;}
+.art-card-time{font-size:.72rem;color:var(--text3);display:flex;align-items:center;gap:.3rem;}
+.art-card-arrow{font-size:.75rem;font-weight:700;color:var(--g);display:flex;align-items:center;gap:.3rem;}
+
+/* CTA BANNER */
+.cta-banner{background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid var(--border-g);border-radius:var(--r2);padding:2.5rem 3rem;margin:3rem 0;display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+.cta-text h3{font-size:1.3rem;font-weight:800;color:var(--text);margin-bottom:.4rem;}
+.cta-text p{font-size:.88rem;color:var(--text2);}
+.cta-btn{background:var(--g);color:#04110a;font-weight:800;font-size:.9rem;padding:.85rem 1.75rem;border-radius:var(--r);white-space:nowrap;display:flex;align-items:center;gap:.5rem;transition:background .2s;}
+.cta-btn:hover{background:var(--g2);}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2.5rem 2rem;}
+.foot-wrap{max-width:1100px;margin:0 auto;}
+.foot-cols{display:grid;grid-template-columns:1.8fr repeat(3,1fr);gap:2.5rem;margin-bottom:2rem;}
+.foot-logo{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;}
+.foot-logo-mark{width:26px;height:26px;background:var(--gdim);border:1px solid var(--border-g);border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.foot-logo-text{font-size:1rem;font-weight:800;letter-spacing:-.03em;color:var(--text);}
+.foot-logo-text span{color:var(--g);}
+.foot-desc{font-size:.8rem;color:var(--text3);line-height:1.6;max-width:260px;}
+.foot-h{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:.8rem;}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:.4rem;}
+.foot-links a{font-size:.82rem;color:var(--text2);transition:color .2s;}
+.foot-links a:hover{color:var(--g);}
+.foot-bottom{border-top:1px solid var(--border);padding-top:1.25rem;display:flex;justify-content:space-between;font-size:.76rem;color:var(--text3);}
+
+@media(max-width:900px){
+  .featured{grid-template-columns:1fr;}
+  .all-grid{grid-template-columns:1fr 1fr;}
+  .cta-banner{flex-direction:column;text-align:center;}
+  .foot-cols{grid-template-columns:1fr 1fr;gap:1.5rem;}
+}
+@media(max-width:600px){
+  nav{padding:0 1.25rem;height:60px;}
+  .nav-mid{display:none;}
+  .hero{padding:3rem 1.25rem 2.5rem;}
+  .hero h1{font-size:1.8rem;}
+  .blog-wrap{padding:2.5rem 1.25rem 4rem;}
+  .all-grid{grid-template-columns:1fr;}
+  .foot-cols{grid-template-columns:1fr;}
+  .foot-bottom{flex-direction:column;gap:.4rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+    <div class="nav-logo-text">Sure<span>Green</span></div>
+  </a>
+  <div class="nav-mid">
+    <a href="/">Início</a>
+    <a href="/#como-funciona">Como Funciona</a>
+    <a href="/#preco">Preços</a>
+    <a href="/blog/" class="active">Blog</a>
+  </div>
+  <a href="https://suregreen.com.br/dashboard/" class="nav-cta">Acessar dashboard →</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Blog SureGreen
+    </div>
+    <h1>Guias de <em>Surebet</em> e<br>Apostas Esportivas</h1>
+    <p>Aprenda estratégias de Surebet, Duplo Green e Freebet com guias práticos, exemplos reais e calculadoras gratuitas.</p>
+  </div>
+</section>
+
+<div class="blog-wrap">
+
+  <div class="blog-section-label">Destaque</div>
+
+  <div class="featured">
+    <a href="/blog/o-que-e-duplo-green.html" class="featured-main">
+      <div class="featured-tag">Estratégia · 7 min</div>
+      <h2>O que é Duplo Green? Guia Completo com Exemplos e Calculadora</h2>
+      <p>Aprenda o que é Duplo Green, como calcular os stakes corretamente, quais são as melhores ligas e como automatizar — com exemplos práticos e números reais.</p>
+      <div class="featured-meta">
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          7 min de leitura
+        </span>
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Maio 2026
+        </span>
+      </div>
+      <div class="featured-arrow">
+        Ler artigo completo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <div class="featured-side">
+      <a href="/blog/o-que-e-surebet.html" class="side-card">
+        <div class="featured-tag">Estratégia · 7 min</div>
+        <h3>O que é Surebet: guia completo de arbitragem esportiva</h3>
+        <p>Como funciona, como calcular e as melhores dicas para praticar no Brasil.</p>
+        <div class="featured-arrow" style="margin-top:auto;">
+          Ler artigo <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </a>
+      <a href="/blog/calculadora-freebet.html" class="side-card">
+        <div class="featured-tag">Freebet · 6 min</div>
+        <h3>Como maximizar suas Freebets: guia completo de conversão</h3>
+        <p>Converta Freebets em dinheiro real com risco mínimo.</p>
+        <div class="featured-arrow" style="margin-top:auto;">
+          Ler artigo <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="blog-section-label">Todos os artigos</div>
+
+  <div class="all-grid">
+    <a href="/blog/o-que-e-duplo-green.html" class="art-card">
+      <div class="art-card-tag">Estratégia</div>
+      <h3>O que é Duplo Green e como calcular os stakes</h3>
+      <p>Guia completo com exemplos práticos, fórmulas e as melhores ligas para operar.</p>
+      <div class="art-card-foot">
+        <div class="art-card-time">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          7 min
+        </div>
+        <div class="art-card-arrow">Ler <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+
+    <a href="/blog/o-que-e-surebet.html" class="art-card">
+      <div class="art-card-tag">Estratégia</div>
+      <h3>O que é Surebet: arbitragem esportiva explicada</h3>
+      <p>Entenda como funciona, como calcular e as melhores dicas para apostadores no Brasil.</p>
+      <div class="art-card-foot">
+        <div class="art-card-time">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          7 min
+        </div>
+        <div class="art-card-arrow">Ler <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+
+    <a href="/blog/calculadora-freebet.html" class="art-card">
+      <div class="art-card-tag">Freebet</div>
+      <h3>Como maximizar suas Freebets com risco mínimo</h3>
+      <p>Aprenda a converter Freebets em dinheiro real. Exemplos práticos e calculadora.</p>
+      <div class="art-card-foot">
+        <div class="art-card-time">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          6 min
+        </div>
+        <div class="art-card-arrow">Ler <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+
+    <a href="/blog/melhores-casas-surebet-brasil.html" class="art-card">
+      <div class="art-card-tag">Casas</div>
+      <h3>Melhores casas de aposta para Surebet no Brasil em 2026</h3>
+      <p>Bet365, Betano, Novibet e mais — quais usar e por quê.</p>
+      <div class="art-card-foot">
+        <div class="art-card-time">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          5 min
+        </div>
+        <div class="art-card-arrow">Ler <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="cta-banner">
+    <div class="cta-text">
+      <h3>Pronto para automatizar suas apostas?</h3>
+      <p>Calculadora automática, comparador de odds ao vivo e dashboard financeiro — tudo por R$ 47,99/mês.</p>
+    </div>
+    <a href="https://suregreen.com.br" class="cta-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Começar agora
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-cols">
+      <div>
+        <div class="foot-logo">
+          <div class="foot-logo-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="foot-logo-text">Sure<span>Green</span></div>
+        </div>
+        <p class="foot-desc">Plataforma de gestão de apostas esportivas. Calculadora automática, comparador de odds e dashboard financeiro.</p>
+      </div>
+      <div>
+        <div class="foot-h">Plataforma</div>
+        <ul class="foot-links">
+          <li><a href="/">Início</a></li>
+          <li><a href="/#preco">Preços</a></li>
+          <li><a href="/dashboard/">Dashboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Blog</div>
+        <ul class="foot-links">
+          <li><a href="/blog/o-que-e-duplo-green.html">Duplo Green</a></li>
+          <li><a href="/blog/o-que-e-surebet.html">Surebet</a></li>
+          <li><a href="/blog/calculadora-freebet.html">Freebet</a></li>
+          <li><a href="/blog/melhores-casas-surebet-brasil.html">Casas de aposta</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Suporte</div>
+        <ul class="foot-links">
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/">Termos de Uso</a></li>
+          <li><a href="/">Privacidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SureGreen. Todos os direitos reservados.</span>
+      <span>Não somos uma casa de apostas. Somos uma ferramenta de gestão.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
