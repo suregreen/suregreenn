@@ -4438,6 +4438,7 @@ body::after  { display: none !important; }
 .bk-kpi--gold::before { background: linear-gradient(90deg, transparent, #64748B, transparent) !important; }
 .bk-kpi__label { color: #94A3B8 !important; }
 .bk-kpi__val { color: #E8F4FF !important; }
+#bk-total { color: #22c55e !important; }
 .bk-kpi--green .bk-kpi__val { color: #16A34A !important; }
 .bk-kpi--red .bk-kpi__val   { color: #EF4444 !important; }
 .bk-kpi--gold .bk-kpi__val  { color: #9ec4de !important; }
@@ -6236,152 +6237,136 @@ window.addEventListener('unhandledrejection', function(e) {
   <!-- VIEW: BANKROLL -->
   <div id="hv-bankroll" style="display:none;">
 <style>
-/* ══ BANKROLL POR CASA — PREMIUM ══ */
-.bk-page { display:flex; flex-direction:column; gap:20px; }
+/* ══ BANKROLL — REDESIGN PREMIUM ══ */
+.bk-page { display:flex; flex-direction:column; gap:18px; padding:0 0 40px; }
 
-/* ── KPIs topo ── */
-.bk-kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+/* ── KPIs ── */
+.bk-kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
 .bk-kpi {
-  background:#0d1525; border:1px solid rgba(255,255,255,0.08); border-radius:14px;
-  padding:18px 20px; position:relative; overflow:hidden;
-  box-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.06);
-  transition:transform .2s,box-shadow .2s;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px; padding:18px 20px;
+  position:relative; overflow:hidden; transition:border-color .2s;
 }
-.bk-kpi:hover { transform:translateY(-2px); box-shadow:0 4px 10px rgba(0,0,0,.08),0 14px 28px rgba(0,0,0,.08); }
-.bk-kpi__label { font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9CA3AF;margin-bottom:8px; }
-.bk-kpi__val { font-size:1.5rem;font-weight:800;letter-spacing:-.03em;line-height:1;color:#eef6ff; }
-.bk-kpi__val--pos { color:#059669; }
-.bk-kpi__val--neg { color:#dc2626; }
-.bk-kpi__sub { font-size:11px;color:#9CA3AF;margin-top:8px;padding-top:8px;border-top:1px solid rgba(0,0,0,.06); }
+.bk-kpi:hover { border-color:rgba(255,255,255,.12); }
+.bk-kpi__label { font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(220,235,255,.35);margin-bottom:10px; }
+.bk-kpi__val { font-size:1.55rem;font-weight:800;letter-spacing:-.04em;line-height:1;color:#eef6ff; }
+.bk-kpi__val--pos { color:#22c55e; }
+.bk-kpi__val--neg { color:#f87171; }
+.bk-kpi__sub { font-size:11px;color:rgba(220,235,255,.3);margin-top:8px; }
 
-/* ── Grid principal ── */
-.bk-grid { display:grid; grid-template-columns:1fr 340px; gap:18px; align-items:start; }
+/* ── Grid ── */
+.bk-grid { display:grid; grid-template-columns:1fr 320px; gap:14px; align-items:start; }
 
-/* ── Tabela de casas ── */
+/* ── Tabela ── */
 .bk-table-card {
-  background:#0d1525; border:1px solid rgba(255,255,255,0.08); border-radius:14px; overflow:hidden;
-  box-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.06);
+  background:rgba(255,255,255,.018);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px; overflow:hidden;
 }
 .bk-table-head {
   display:flex; align-items:center; justify-content:space-between;
-  padding:14px 18px; border-bottom:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.04);
+  padding:14px 18px; border-bottom:1px solid rgba(255,255,255,.06);
 }
-.bk-table-title { font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B7280; }
+.bk-table-title { font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(220,235,255,.3); }
 .bk-add-btn {
-  display:flex;align-items:center;gap:6px;background:#00B050;color:#fff;
-  border:none;border-radius:8px;padding:7px 13px;font-size:11px;font-weight:700;
-  cursor:pointer;font-family:inherit;transition:all .15s;
+  display:flex;align-items:center;gap:6px;background:#22c55e;color:#04110a;
+  border:none;border-radius:8px;padding:7px 13px;font-size:11px;font-weight:800;
+  cursor:pointer;font-family:inherit;transition:background .15s;
 }
-.bk-add-btn:hover { background:#009444; transform:translateY(-1px); }
-
-/* Header da tabela */
+.bk-add-btn:hover { background:#16a34a; }
 .bk-col-head {
-  display:grid; grid-template-columns:1fr 90px 90px 90px 80px 44px;
-  padding:8px 18px; border-bottom:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.04);
+  display:grid; grid-template-columns:1fr 90px 100px 80px 60px 100px;
+  padding:8px 18px; border-bottom:1px solid rgba(255,255,255,.05);
 }
-.bk-ch { font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;color:#9CA3AF; }
+.bk-ch { font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;color:rgba(220,235,255,.2); }
 .bk-ch.r { text-align:right; }
-
-/* Linha de casa */
 .bk-row {
-  display:grid; grid-template-columns:1fr 90px 90px 90px 80px 44px;
-  padding:14px 18px; border-bottom:1px solid rgba(255,255,255,0.06); align-items:center;
+  display:grid; grid-template-columns:1fr 90px 100px 80px 60px 100px;
+  padding:13px 18px; border-bottom:1px solid rgba(255,255,255,.05); align-items:center;
   transition:background .12s;
 }
 .bk-row:last-child { border-bottom:none; }
-.bk-row:hover { background:rgba(255,255,255,0.04); }
-
-.bk-casa-nome { font-size:13px;font-weight:700;color:#eef6ff; display:flex;align-items:center;gap:8px; }
+.bk-row:hover { background:rgba(255,255,255,.03); }
+.bk-casa-nome { font-size:13px;font-weight:700;color:#eef6ff;display:flex;align-items:center;gap:9px; }
 .bk-casa-ico {
-  width:28px;height:28px;border-radius:8px;background:#04060c;
+  width:28px;height:28px;border-radius:8px;
   display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:800;color:#6B7280;flex-shrink:0;
+  font-size:11px;font-weight:800;color:#fff;flex-shrink:0;
 }
-.bk-num { font-size:13px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums; }
-.bk-num.pos { color:#059669; }
-.bk-num.neg { color:#dc2626; }
-.bk-num.neu { color:#374151; }
+.bk-num { font-size:13px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums;color:rgba(220,235,255,.6); }
+.bk-num.pos { color:#22c55e; }
+.bk-num.neg { color:#f87171; }
+.bk-num.neu { color:rgba(220,235,255,.35); }
 .bk-roi-wrap { text-align:right; }
 .bk-roi-pct { font-size:12px;font-weight:700; }
-.bk-roi-bar { height:3px;border-radius:2px;background:#04060c;margin-top:3px; }
+.bk-roi-bar { height:2px;border-radius:2px;background:rgba(255,255,255,.06);margin-top:4px; }
 .bk-roi-fill { height:100%;border-radius:2px; }
-.bk-acts { display:flex;gap:4px;justify-content:flex-end; }
+.bk-acts { display:flex;gap:6px;justify-content:flex-end;align-items:center; }
 .bk-act {
-  width:26px;height:26px;border-radius:7px;background:#0d1525;border:1px solid #E2E8F0;
-  color:#9CA3AF;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  font-size:11px;transition:all .15s;
+  width:28px;height:28px;border-radius:8px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:rgba(200,220,240,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:11px;transition:all .15s;flex-shrink:0;
 }
-.bk-act:hover { border-color:#9CA3AF;color:#374151; }
-.bk-act.dep:hover { background:rgba(0,176,80,.06);border-color:rgba(0,176,80,.25);color:#059669; }
-.bk-act.saq:hover { background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.25);color:#d97706; }
-.bk-act.del:hover { background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.25);color:#dc2626; }
+.bk-act:hover { border-color:rgba(255,255,255,.15);color:#eef6ff; }
+.bk-act.dep:hover { background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.25);color:#22c55e; }
+.bk-act.saq:hover { background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25);color:#f59e0b; }
+.bk-act.del:hover { background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.25);color:#f87171; }
 
-/* ── Sidebar direita ── */
-.bk-side { display:flex;flex-direction:column;gap:14px; }
-
-/* Gráfico de pizza por casa */
-.bk-pie-card {
-  background:#0d1525;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;
-  box-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.06);
+/* ── Sidebar ── */
+.bk-side { display:flex;flex-direction:column;gap:12px; }
+.bk-pie-card, .bk-hist-card {
+  background:rgba(255,255,255,.018);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px; overflow:hidden;
 }
-.bk-pie-head { padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#6B7280;background:rgba(255,255,255,0.04); }
-.bk-pie-wrap { padding:16px;position:relative;height:200px;display:flex;align-items:center;justify-content:center; }
-
-/* Histórico de movimentações */
-.bk-hist-card {
-  background:#0d1525;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;
-  box-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.06);
+.bk-pie-head, .bk-hist-head {
+  padding:12px 16px; border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(220,235,255,.3);
+  display:flex;align-items:center;justify-content:space-between;
 }
-.bk-hist-head { padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#6B7280;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:space-between; }
-.bk-hist-item { display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.05); }
+.bk-pie-wrap { padding:16px;height:190px;display:flex;align-items:center;justify-content:center; }
+.bk-hist-item { display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.04); }
 .bk-hist-item:last-child { border-bottom:none; }
 .bk-hist-ico { width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
-.bk-hist-ico.dep { background:rgba(0,176,80,.09);color:#059669; }
-.bk-hist-ico.saq { background:rgba(245,158,11,.09);color:#d97706; }
-.bk-hist-ico.apo { background:rgba(99,102,241,.09);color:#6366f1; }
+.bk-hist-ico.dep { background:rgba(34,197,94,.08);color:#22c55e; }
+.bk-hist-ico.saq { background:rgba(245,158,11,.08);color:#f59e0b; }
+.bk-hist-ico.apo { background:rgba(99,102,241,.08);color:#818cf8; }
 .bk-hist-lbl { flex:1; }
 .bk-hist-nome { font-size:12px;font-weight:600;color:#eef6ff; }
-.bk-hist-data { font-size:10px;color:#9CA3AF;margin-top:1px; }
+.bk-hist-data { font-size:10px;color:rgba(220,235,255,.3);margin-top:1px; }
 .bk-hist-val { font-size:13px;font-weight:700; }
 
-/* ── Modal Adicionar/Editar Casa ── */
-#bk-modal-overlay {
+/* ── Modais ── */
+#bk-modal-overlay, #bk-mov-overlay {
   display:none;position:fixed;inset:0;z-index:99998;
-  background:rgba(0,0,0,.5);backdrop-filter:blur(6px);
+  background:rgba(0,0,0,.6);backdrop-filter:blur(6px);
   align-items:center;justify-content:center;padding:20px;
 }
-#bk-modal-overlay.open { display:flex; }
+#bk-modal-overlay.open, #bk-mov-overlay.open { display:flex; }
 .bk-modal {
-  background:#0d1525;border:1px solid #E3E6EA;border-radius:16px;
+  background:#0d1525;border:1px solid rgba(255,255,255,.1);border-radius:16px;
   padding:24px;width:100%;max-width:420px;
-  box-shadow:0 12px 40px rgba(0,0,0,.14);
+  box-shadow:0 24px 60px rgba(0,0,0,.5);
   animation:loginIn .22s ease both;
 }
 .bk-modal-title { font-size:16px;font-weight:800;color:#eef6ff;margin-bottom:4px; }
-.bk-modal-sub { font-size:12px;color:#9CA3AF;margin-bottom:20px; }
+.bk-modal-sub { font-size:12px;color:rgba(220,235,255,.35);margin-bottom:20px; }
 .bk-modal-field { margin-bottom:14px; }
-.bk-modal-lbl { font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:6px; }
+.bk-modal-lbl { font-size:11px;font-weight:600;color:rgba(220,235,255,.4);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:6px; }
 .bk-modal-inp {
-  width:100%;background:rgba(255,255,255,0.04);border:1px solid #D8DCE0;border-radius:10px;
+  width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;
   padding:11px 14px;font-size:14px;font-weight:600;color:#eef6ff;
-  outline:none;font-family:inherit;transition:border-color .15s,box-shadow .15s;
+  outline:none;font-family:inherit;transition:border-color .15s;
 }
-.bk-modal-inp:focus { border-color:#00B050;box-shadow:0 0 0 3px rgba(0,176,80,.12);background:#0d1525; }
+.bk-modal-inp:focus { border-color:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.1); }
 .bk-modal-btns { display:flex;gap:10px;margin-top:20px; }
-.bk-modal-cancel { flex:1;padding:12px;background:transparent;border:1px solid #D8DCE0;border-radius:10px;color:#6B7280;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s; }
-.bk-modal-cancel:hover { border-color:#9CA3AF;color:#374151; }
-.bk-modal-save { flex:1;padding:12px;background:#00B050;border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 4px 12px rgba(0,176,80,.25); }
-.bk-modal-save:hover { background:#009444;transform:translateY(-1px); }
+.bk-modal-cancel { flex:1;padding:12px;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:rgba(220,235,255,.4);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer; }
+.bk-modal-save { flex:1;padding:12px;background:#22c55e;border:none;border-radius:10px;color:#04110a;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer; }
+.bk-modal-save:hover { background:#16a34a; }
 
-/* ── Modal Depósito/Saque ── */
-#bk-mov-overlay {
-  display:none;position:fixed;inset:0;z-index:99998;
-  background:rgba(0,0,0,.5);backdrop-filter:blur(6px);
-  align-items:center;justify-content:center;padding:20px;
-}
-#bk-mov-overlay.open { display:flex; }
-
-/* ── Responsivo mobile ── */
+/* ── Responsivo ── */
 @media(max-width:900px) {
   .bk-grid { grid-template-columns:1fr; }
   .bk-kpis { grid-template-columns:1fr 1fr; }
@@ -6389,14 +6374,20 @@ window.addEventListener('unhandledrejection', function(e) {
 @media(max-width:600px) {
   .bk-kpis { grid-template-columns:1fr 1fr; gap:8px; }
   .bk-kpi { padding:14px; border-radius:12px; }
-  .bk-kpi__val { font-size:1.2rem; }
-  .bk-col-head { grid-template-columns:1fr 80px 80px 44px; }
+  .bk-kpi__val { font-size:1.25rem; }
+  .bk-col-head { grid-template-columns:1fr 80px 44px; }
+  .bk-col-head .bk-ch:nth-child(2),
   .bk-col-head .bk-ch:nth-child(3),
-  .bk-col-head .bk-ch:nth-child(4) { display:none; }
-  .bk-row { grid-template-columns:1fr 80px 80px 44px; }
+  .bk-col-head .bk-ch:nth-child(4),
+  .bk-col-head .bk-ch:nth-child(5) { display:none; }
+  .bk-col-head .bk-ch:nth-child(6) { display:block; }
+  .bk-row { grid-template-columns:1fr 80px 44px; }
+  .bk-row > *:nth-child(2),
   .bk-row > *:nth-child(3),
-  .bk-row > *:nth-child(4) { display:none; }
-  .bk-modal { max-width:100%; border-radius:20px; }
+  .bk-row > *:nth-child(4),
+  .bk-row > *:nth-child(5) { display:none; }
+  .bk-row > *:nth-child(6) { display:flex; }
+  .bk-modal { border-radius:20px; }
 }
 </style>
 
@@ -6407,23 +6398,43 @@ window.addEventListener('unhandledrejection', function(e) {
     <div class="bk-modal-sub">Configure o saldo inicial desta casa de aposta</div>
     <div class="bk-modal-field">
       <label class="bk-modal-lbl">Casa de Aposta</label>
-      <input class="bk-modal-inp" id="bk-inp-nome" type="text" placeholder="Ex: Bet365, Betano..." autocomplete="off">
+      <!-- Dropdown customizado -->
+      <input type="hidden" id="bk-inp-nome" value="">
+      <div id="bk-casa-dropdown" style="position:relative;">
+        <div id="bk-casa-trigger" onclick="bkToggleDropdown()" style="
+          display:flex;align-items:center;justify-content:space-between;
+          background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+          border-radius:10px;padding:11px 14px;cursor:pointer;transition:border-color .15s;
+        ">
+          <div id="bk-casa-selected" style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:13px;color:rgba(220,235,255,.3);">Selecione uma casa...</span>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(220,235,255,.3)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div id="bk-casa-list" style="
+          display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;
+          background:#0d1525;border:1px solid rgba(255,255,255,.1);border-radius:12px;
+          z-index:9999;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.6);
+          max-height:320px;overflow-y:auto;
+        "></div>
+      </div>
+      <input class="bk-modal-inp" id="bk-inp-nome-custom" type="text" placeholder="Digite o nome da casa..." autocomplete="off" style="margin-top:8px;display:none;">
     </div>
     <div class="bk-modal-field">
       <label class="bk-modal-lbl">Saldo Atual (R$)</label>
       <input class="bk-modal-inp" id="bk-inp-saldo" type="number" placeholder="0,00" step="0.01" min="0">
     </div>
     <div class="bk-modal-field">
-      <label class="bk-modal-lbl">Cor <span style="font-size:10px;color:#B0B6C0;font-weight:400;">(opcional)</span></label>
+      <label class="bk-modal-lbl">Cor <span style="font-size:10px;color:rgba(220,235,255,.25);font-weight:400;">(opcional)</span></label>
       <div style="display:flex;gap:8px;flex-wrap:wrap;" id="bk-cor-picker">
-        <div onclick="bkSetCor(this,'#00B050')" data-cor="#00B050" style="width:28px;height:28px;border-radius:7px;background:#00B050;cursor:pointer;border:2px solid transparent;transition:all .15s;" title="Verde"></div>
-        <div onclick="bkSetCor(this,'#3b82f6')" data-cor="#3b82f6" style="width:28px;height:28px;border-radius:7px;background:#3b82f6;cursor:pointer;border:2px solid transparent;transition:all .15s;" title="Azul"></div>
-        <div onclick="bkSetCor(this,'#8b5cf6')" data-cor="#8b5cf6" style="width:28px;height:28px;border-radius:7px;background:#8b5cf6;cursor:pointer;border:2px solid transparent;transition:all .15s;" title="Roxo"></div>
-        <div onclick="bkSetCor(this,'#f59e0b')" data-cor="#f59e0b" style="width:28px;height:28px;border-radius:7px;background:#f59e0b;cursor:pointer;border:2px solid transparent;transition:all .15s;" title="Amarelo"></div>
-        <div onclick="bkSetCor(this,'#ef4444')" data-cor="#ef4444" style="width:28px;height:28px;border-radius:7px;background:#ef4444;cursor:pointer;border:2px solid transparent;transition:all .15s;" title="Vermelho"></div>
-        <div onclick="bkSetCor(this,'#ec4899')" data-cor="#ec4899" style="width:28px;height:28px;border-radius:7px;background:#ec4899;cursor:pointer;border:2px solid transparent;transition:all .15s;" title="Rosa"></div>
-        <div onclick="bkSetCor(this,'#0ea5e9')" data-cor="#0ea5e9" style="width:28px;height:28px;border-radius:7px;background:#0ea5e9;cursor:pointer;border:2px solid transparent;transition:all .15s;" title="Ciano"></div>
-        <div onclick="bkSetCor(this,'#6b7280')" data-cor="#6b7280" style="width:28px;height:28px;border-radius:7px;background:#6b7280;cursor:pointer;border:2px solid transparent;transition:all .15s;" title="Cinza"></div>
+        <div onclick="bkSetCor(this,'#22c55e')" data-cor="#22c55e" style="width:28px;height:28px;border-radius:7px;background:#22c55e;cursor:pointer;border:2px solid transparent;" title="Verde"></div>
+        <div onclick="bkSetCor(this,'#3b82f6')" data-cor="#3b82f6" style="width:28px;height:28px;border-radius:7px;background:#3b82f6;cursor:pointer;border:2px solid transparent;" title="Azul"></div>
+        <div onclick="bkSetCor(this,'#8b5cf6')" data-cor="#8b5cf6" style="width:28px;height:28px;border-radius:7px;background:#8b5cf6;cursor:pointer;border:2px solid transparent;" title="Roxo"></div>
+        <div onclick="bkSetCor(this,'#f59e0b')" data-cor="#f59e0b" style="width:28px;height:28px;border-radius:7px;background:#f59e0b;cursor:pointer;border:2px solid transparent;" title="Amarelo"></div>
+        <div onclick="bkSetCor(this,'#ef4444')" data-cor="#ef4444" style="width:28px;height:28px;border-radius:7px;background:#ef4444;cursor:pointer;border:2px solid transparent;" title="Vermelho"></div>
+        <div onclick="bkSetCor(this,'#ec4899')" data-cor="#ec4899" style="width:28px;height:28px;border-radius:7px;background:#ec4899;cursor:pointer;border:2px solid transparent;" title="Rosa"></div>
+        <div onclick="bkSetCor(this,'#0ea5e9')" data-cor="#0ea5e9" style="width:28px;height:28px;border-radius:7px;background:#0ea5e9;cursor:pointer;border:2px solid transparent;" title="Ciano"></div>
+        <div onclick="bkSetCor(this,'#6b7280')" data-cor="#6b7280" style="width:28px;height:28px;border-radius:7px;background:#6b7280;cursor:pointer;border:2px solid transparent;" title="Cinza"></div>
       </div>
     </div>
     <div class="bk-modal-btns">
@@ -6445,7 +6456,7 @@ window.addEventListener('unhandledrejection', function(e) {
       <input class="bk-modal-inp" id="bk-mov-valor" type="number" placeholder="0,00" step="0.01" min="0.01" onkeydown="if(event.key==='Enter')bkConfirmarMov()">
     </div>
     <div class="bk-modal-field">
-      <label class="bk-modal-lbl">Observação <span style="color:#B0B6C0;font-weight:400;">(opcional)</span></label>
+      <label class="bk-modal-lbl">Observação <span style="color:rgba(220,235,255,.25);font-weight:400;">(opcional)</span></label>
       <input class="bk-modal-inp" id="bk-mov-obs" type="text" placeholder="Ex: Depósito via Pix..." onkeydown="if(event.key==='Enter')bkConfirmarMov()">
     </div>
     <div class="bk-modal-btns">
@@ -6455,14 +6466,13 @@ window.addEventListener('unhandledrejection', function(e) {
   </div>
 </div>
 
-<!-- Conteúdo da aba Bankroll -->
+<!-- Conteúdo Bankroll -->
 <div class="bk-page">
 
-  <!-- KPIs -->
   <div class="bk-kpis">
     <div class="bk-kpi">
       <div class="bk-kpi__label">Banca Total</div>
-      <div class="bk-kpi__val" id="bk-total">R$ 0,00</div>
+      <div class="bk-kpi__val" id="bk-total" style="color:#22c55e;">R$ 0,00</div>
       <div class="bk-kpi__sub" id="bk-total-sub">em todas as casas</div>
     </div>
     <div class="bk-kpi">
@@ -6482,10 +6492,7 @@ window.addEventListener('unhandledrejection', function(e) {
     </div>
   </div>
 
-  <!-- Grid: Tabela + Sidebar -->
   <div class="bk-grid">
-
-    <!-- Tabela de casas -->
     <div class="bk-table-card">
       <div class="bk-table-head">
         <div class="bk-table-title">Minhas Casas de Aposta</div>
@@ -6503,59 +6510,51 @@ window.addEventListener('unhandledrejection', function(e) {
         <div class="bk-ch"></div>
       </div>
       <div id="bk-lista">
-        <div style="padding:40px 20px;text-align:center;color:#9CA3AF;font-size:13px;">
+        <div style="padding:40px 20px;text-align:center;color:rgba(220,235,255,.3);font-size:13px;">
           Nenhuma casa adicionada ainda.<br>
           <span style="font-size:12px;opacity:.7;">Clique em "Adicionar Casa" para começar.</span>
         </div>
       </div>
     </div>
 
-    <!-- Sidebar: gráfico + histórico -->
     <div class="bk-side">
-
-      <!-- Gráfico pizza distribuição -->
       <div class="bk-pie-card">
         <div class="bk-pie-head">Distribuição da Banca</div>
         <div class="bk-pie-wrap">
-          <canvas id="bk-chart-pie" style="max-width:180px;max-height:180px;"></canvas>
-          <div id="bk-pie-empty" style="display:none;color:#9CA3AF;font-size:12px;text-align:center;">Adicione casas para ver a distribuição</div>
+          <canvas id="bk-chart-pie" style="max-width:170px;max-height:170px;"></canvas>
+          <div id="bk-pie-empty" style="display:none;color:rgba(220,235,255,.3);font-size:12px;text-align:center;">Adicione casas para ver a distribuição</div>
         </div>
-        <div id="bk-pie-legend" style="padding:0 16px 14px;display:flex;flex-direction:column;gap:6px;"></div>
+        <div id="bk-pie-legend" style="padding:0 16px 14px;display:flex;flex-direction:column;gap:5px;"></div>
       </div>
-
-      <!-- Histórico de movimentações -->
       <div class="bk-hist-card">
         <div class="bk-hist-head">
           <span>Últimas Movimentações</span>
-          <span id="bk-hist-cnt" style="font-size:10px;color:#9CA3AF;font-weight:400;">0</span>
+          <span id="bk-hist-cnt" style="color:rgba(220,235,255,.25);font-weight:400;">0</span>
         </div>
         <div id="bk-hist-lista">
-          <div style="padding:24px 16px;text-align:center;color:#9CA3AF;font-size:12px;">Nenhuma movimentação ainda.</div>
+          <div style="padding:24px 16px;text-align:center;color:rgba(220,235,255,.3);font-size:12px;">Nenhuma movimentação ainda.</div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Curva do Bankroll Total -->
-  <div class="card">
-    <div class="card-head" style="margin-bottom:16px;">Curva do Bankroll Total</div>
+  <div style="background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px;">
+    <div style="font-size:13px;font-weight:700;color:rgba(220,235,255,.6);margin-bottom:16px;">Curva do Bankroll Total</div>
     <div style="position:relative;height:240px;">
       <canvas id="chartBankroll"></canvas>
     </div>
-    <div id="bk-empty" style="display:none;text-align:center;padding:40px 0;color:#9CA3AF;font-size:13px;">Nenhuma entrada com resultado ainda.</div>
+    <div id="bk-empty" style="display:none;text-align:center;padding:40px 0;color:rgba(220,235,255,.3);font-size:13px;">Nenhuma entrada com resultado ainda.</div>
   </div>
 
-  <!-- ROI por Casa -->
-  <div class="card">
-    <div class="card-head" style="margin-bottom:16px;">Performance por Casa</div>
-    <div class="sep"></div>
-    <div id="roi-casa-list" style="margin-top:8px;"></div>
+  <div style="background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px;">
+    <div style="font-size:13px;font-weight:700;color:rgba(220,235,255,.6);margin-bottom:16px;">Performance por Casa</div>
+    <div id="roi-casa-list"></div>
   </div>
 
 </div>
 </div>
 
+  <!-- VIEW: DIÁRIO -->
   <!-- VIEW: DIÁRIO -->
   <!-- IDs ocultos mantidos para compatibilidade com JS externo -->
   <span id="diar-auto-lucro" style="display:none;"></span>
@@ -7503,6 +7502,7 @@ function maisGo(pageId, cb) {
 .opx-casa-name.stake      { color: #94a3b8; }
 .opx-casa-name.kto        { color: #fbbf24; }
 .opx-casa-name.b1xbet     { color: #818cf8; }
+.opx-casa-name.jogodeouro { color: #f59e0b; }
 .opx-casa-odd {
   font-size: 18px; font-weight: 800; letter-spacing: -.02em;
   color: #eef6ff; font-family: 'Space Grotesk', sans-serif; line-height: 1;
@@ -13298,7 +13298,7 @@ function histSetView(v, btn) {
   var histNav = document.querySelector('.hist-nav');
   if (histNav) histNav.style.display = v === 'diario' ? 'none' : '';
   if (v === 'diario' && typeof window.diarRender === 'function') window.diarRender();
-  if (v === 'bankroll') { if (typeof window.bkRender === 'function') { bkLoad(); window.bkRender(); } else { renderBankroll(); } if (typeof window.diarRender === 'function') window.diarRender(); }
+  if (v === 'bankroll') { if (typeof window.bkRender === 'function') { bkLoad(); window.bkRender(); bkLoadFirestore(); } else { renderBankroll(); } if (typeof window.diarRender === 'function') window.diarRender(); }
   else renderHist();
 }
 
@@ -13832,15 +13832,42 @@ function renderBankroll() {
   // Para exibição: guarda o nome normalizado
   var casaDisplayMap = {};
 
+  // Mapa de aliases — agrupa variações no mesmo nome canônico
+  var ALIAS_MAP = {
+    // Bet365
+    'bet3':'Bet365','bet 3':'Bet365','bet365':'Bet365','bet3 65':'Bet365',
+    // Betano
+    'betano sport':'Betano','betano esport':'Betano','betanosport':'Betano',
+    // Jogo de Ouro
+    'jogo':'Jogo de Ouro','jogodeouro':'Jogo de Ouro','jogo de ouro':'Jogo de Ouro',
+    // Esporte da Sorte
+    'esportes':'Esporte da Sorte','esporte da sorte':'Esporte da Sorte','esportesdasorte':'Esporte da Sorte',
+    // Bolsa de Aposta
+    'bolsa de apostas':'Bolsa de Aposta','bolsadeapostas':'Bolsa de Aposta','bolsadeaposta':'Bolsa de Aposta',
+    // EsportivaBet
+    'esportiva bet':'EsportivaBet','esportivanet':'EsportivaBet','esportiva':'EsportivaBet',
+    // Betano variações
+    'betao':'Betano','betaoo':'Betano',
+    // 1xBet
+    '1x bet':'1xBet','1 xbet':'1xBet',
+    // Outros
+    'betesporte':'BetEsporte','betesportes':'BetEsporte',
+  };
+
+  function resolveAlias(nome) {
+    var nl = nome.toLowerCase().replace(/\s+/g,' ').trim();
+    return ALIAS_MAP[nl] || ALIAS_MAP[nl.replace(/\s/g,'')] || null;
+  }
+
   all.forEach(function(e) {
     (e.casas || []).forEach(function(c) {
       var nomeOriginal = (c.nome || '').trim();
       if (!nomeOriginal) return;
-      // Chave de agrupamento: lowercase sem espaços
-      var key = nomeOriginal.toLowerCase().replace(/\s+/g, '');
-      // Nome de exibição: normalizado
-      var nomeDisplay = normalizarCasa(nomeOriginal);
-      if (!casaDisplayMap[key]) casaDisplayMap[key] = nomeDisplay;
+      // Resolver alias primeiro
+      var nomeCanon = resolveAlias(nomeOriginal) || normalizarCasa(nomeOriginal);
+      // Chave de agrupamento: lowercase sem espaços do nome canônico
+      var key = nomeCanon.toLowerCase().replace(/\s+/g, '');
+      if (!casaDisplayMap[key]) casaDisplayMap[key] = nomeCanon;
       if (!casaMap[key]) casaMap[key] = { lucro: 0, vol: 0, cnt: 0 };
       casaMap[key].vol   += parseFloat(e.stake) || 0;
       casaMap[key].cnt   += 1;
@@ -13848,11 +13875,37 @@ function renderBankroll() {
     });
   });
 
+  // Lista de nomes válidos (igual ao dropdown do bankroll)
+  var CASAS_VALIDAS = [
+    'bet365','betano','novibet','sportingbet','kto','1xbet','stake','vbet','betsson',
+    'superbet','betnacional','esportivanet','esportivanet','jogo de ouro','betfair',
+    'bolsa de aposta','betbra','pinnacle','apostabet','betpix365','betcris',
+    'betesporte','br4bet','estrela bet','f12.bet','fulltbet','galera.bet',
+    'mr.jack','pagolbet','vaidebet','esportivabet','bolsa de apostas',
+    'matchbook','betsson','smarkets','betnacional','superbet','fullbet',
+    'betesporte','betesportes','playuzu','tivobet','viva sorte','sportybet',
+    'betfa','betway','888sport','unibet','william hill','pinnacle','betdaq',
+    'parimatch','mozzartbet','meridianbet','esporte da sorte','jogo de ouro',
+    'betesporte','betao','lottu','betcris','apostabet','vaidebet','br4bet',
+    'bet3','galera.bet','888sport','bolsadeaposta'
+  ];
+
   var casas = Object.keys(casaMap).map(function(key) {
     var d = casaMap[key];
     var nomeDisplay = casaDisplayMap[key] || key;
     return { nome: nomeDisplay, roi: d.vol > 0 ? (d.lucro / d.vol * 100) : 0, lucro: d.lucro, cnt: d.cnt };
-  }).sort(function(a,b) { return b.roi - a.roi; });
+  })
+  .filter(function(c) {
+    var n = (c.nome || '').trim();
+    var nl = n.toLowerCase();
+    // Remover: nomes muito curtos (≤3 chars), genéricos ou sem apostas
+    if (n.length <= 3) return false;
+    if (['casa', 'bet', 'super', 'outra', 'casa 1', 'casa 2', 'teste'].indexOf(nl) >= 0) return false;
+    // Manter se está na lista válida OU tem mais de 2 apostas (usuário real)
+    var isValida = CASAS_VALIDAS.some(function(v){ return nl.includes(v) || v.includes(nl); });
+    return isValida || c.cnt >= 2;
+  })
+  .sort(function(a,b) { return b.roi - a.roi; });
 
   var roiEl = document.getElementById('roi-casa-list');
   if (!casas.length) {
@@ -13901,12 +13954,15 @@ var _bkPieChart  = null;
 
 var BK_KEY_CASAS = 'sg_bk_casas_v2';
 var BK_KEY_MOVS  = 'sg_bk_movs_v2';
+var _bkSaving = false;
 
-// ── Persistência local (localStorage por uid) ──
+// ── Persistência: Firestore (principal) + localStorage (fallback) ──
 function bkUid() {
   try { return window.auth && window.auth.currentUser ? window.auth.currentUser.uid : 'local'; } catch(e) { return 'local'; }
 }
+
 function bkLoad() {
+  // Carrega do localStorage como cache imediato
   try {
     var uid = bkUid();
     var c = localStorage.getItem(BK_KEY_CASAS + '_' + uid);
@@ -13915,12 +13971,45 @@ function bkLoad() {
     _bkMovs  = m ? JSON.parse(m) : [];
   } catch(e) { _bkCasas = []; _bkMovs = []; }
 }
+
+function bkLoadFirestore() {
+  // Carrega do Firestore e sincroniza
+  try {
+    var uid = bkUid();
+    if (uid === 'local' || !window.db) return;
+    window.db.collection('users').doc(uid).collection('bankroll').doc('data').get()
+      .then(function(doc) {
+        if (doc.exists) {
+          var data = doc.data();
+          _bkCasas = data.casas || [];
+          _bkMovs  = data.movs  || [];
+          // Sincroniza localStorage como cache
+          localStorage.setItem(BK_KEY_CASAS + '_' + uid, JSON.stringify(_bkCasas));
+          localStorage.setItem(BK_KEY_MOVS  + '_' + uid, JSON.stringify(_bkMovs));
+          bkRender();
+        }
+      })
+      .catch(function(e) { console.log('bkLoadFirestore erro:', e.message); });
+  } catch(e) {}
+}
+
 function bkSave() {
+  // Salva no localStorage imediatamente
   try {
     var uid = bkUid();
     localStorage.setItem(BK_KEY_CASAS + '_' + uid, JSON.stringify(_bkCasas));
     localStorage.setItem(BK_KEY_MOVS  + '_' + uid, JSON.stringify(_bkMovs));
   } catch(e) {}
+  // Salva no Firestore em background
+  try {
+    var uid2 = bkUid();
+    if (uid2 === 'local' || !window.db || _bkSaving) return;
+    _bkSaving = true;
+    window.db.collection('users').doc(uid2).collection('bankroll').doc('data')
+      .set({ casas: _bkCasas, movs: _bkMovs, updatedAt: Date.now() })
+      .then(function() { _bkSaving = false; })
+      .catch(function(e) { _bkSaving = false; console.log('bkSave Firestore erro:', e.message); });
+  } catch(e) { _bkSaving = false; }
 }
 
 // ── Calcula stats de cada casa a partir das entradas reais ──
@@ -13948,9 +14037,19 @@ function bkRender() {
   var lucroTotal = (window._entries||[]).filter(function(e){ return e.status !== 'pending'; })
     .reduce(function(s,e){ return s + (parseFloat(e.pl)||0); }, 0);
 
+  // Se não há casas cadastradas localmente, mostrar lucro total como referência de banca
+  var bancaDisplay = totalSaldo;
+  var bancaSub = 'em todas as casas';
+  if (_bkCasas.length === 0 && lucroTotal !== 0) {
+    bancaDisplay = lucroTotal;
+    bancaSub = 'lucro acumulado (adicione casas para ver saldo)';
+  }
+
   // KPIs
   var bkTotalEl = document.getElementById('bk-total');
-  if (bkTotalEl) { bkTotalEl.textContent = 'R$ ' + totalSaldo.toFixed(2).replace('.',','); bkTotalEl.className = 'bk-kpi__val ' + (totalSaldo >= 0 ? 'bk-kpi__val--pos' : 'bk-kpi__val--neg'); }
+  if (bkTotalEl) { bkTotalEl.textContent = (bancaDisplay >= 0 ? '' : '-') + 'R$ ' + Math.abs(bancaDisplay).toFixed(2).replace('.',','); bkTotalEl.className = 'bk-kpi__val bk-kpi__val--pos'; bkTotalEl.style.color = bancaDisplay >= 0 ? '#22c55e' : '#f87171'; }
+  var bkTotalSubEl = document.getElementById('bk-total-sub');
+  if (bkTotalSubEl) bkTotalSubEl.textContent = bancaSub;
   var bkLucroEl = document.getElementById('bk-lucro-total');
   if (bkLucroEl) { bkLucroEl.textContent = (lucroTotal >= 0 ? '+' : '') + 'R$ ' + lucroTotal.toFixed(2).replace('.',','); bkLucroEl.className = 'bk-kpi__val ' + (lucroTotal >= 0 ? 'bk-kpi__val--pos' : 'bk-kpi__val--neg'); }
   var bkNEl = document.getElementById('bk-ncasas');
@@ -13967,34 +14066,49 @@ function bkRender() {
   var lista = document.getElementById('bk-lista');
   if (lista) {
     if (!_bkCasas.length) {
-      lista.innerHTML = '<div style="padding:40px 20px;text-align:center;color:#9CA3AF;font-size:13px;">Nenhuma casa adicionada ainda.<br><span style="font-size:12px;opacity:.7;">Clique em "Adicionar Casa" para começar.</span></div>';
+      lista.innerHTML = '<div style="padding:40px 20px;text-align:center;color:rgba(220,235,255,.3);font-size:13px;">Nenhuma casa adicionada ainda.<br><span style="font-size:12px;opacity:.7;">Clique em \"Adicionar Casa\" para começar.</span></div>';
     } else {
       var maxSaldo = Math.max.apply(null, _bkCasas.map(function(c){ return Math.abs(parseFloat(c.saldo||0)); })) || 1;
+
+      var COR_MAPA = {
+        'bet365':'#22c55e','betano':'#ff6b35','novibet':'#60a5fa','sportingbet':'#a78bfa',
+        'kto':'#f87171','1xbet':'#818cf8','stake':'#94a3b8','vbet':'#a78bfa',
+        'betsson':'#f59e0b','superbet':'#f87171','betnacional':'#60a5fa',
+        'esportivanet':'#22c55e','jogo de ouro':'#f59e0b','betfair':'#22c55e',
+        'bolsa de aposta':'#3b82f6','betbra':'#8b5cf6','pinnacle':'#94a3b8'
+      };
+
       lista.innerHTML = _bkCasas.map(function(casa) {
         var saldo  = parseFloat(casa.saldo || 0);
-        var cor    = casa.cor || '#00B050';
+        var nomeLC = (casa.nome || '').toLowerCase();
+        var cor    = casa.cor || COR_MAPA[nomeLC] || '#6b7280';
         var letra  = (casa.nome || '?').charAt(0).toUpperCase();
         var stats  = bkCalcCasa(casa.nome);
         var roiStr = stats.cnt > 0 ? (stats.roi >= 0 ? '+' : '') + stats.roi.toFixed(1) + '%' : '—';
         var roiPct = stats.cnt > 0 ? Math.min(100, Math.abs(stats.roi) / 50 * 100) : 0;
+        var roiColor = stats.roi >= 0 ? '#22c55e' : '#f87171';
         var saldoCls = saldo >= 0 ? 'pos' : 'neg';
+
+        var svgDep = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>';
+        var svgSaq = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>';
+        var svgDel = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>';
 
         return '<div class="bk-row">' +
           '<div class="bk-casa-nome">' +
-            '<div class="bk-casa-ico" style="background:' + cor + '22;color:' + cor + ';">' + letra + '</div>' +
-            '<span>' + (casa.nome || '—') + '</span>' +
+            '<div class="bk-casa-ico" style="background:' + cor + '18;border:1px solid ' + cor + '30;color:' + cor + ';font-weight:800;">' + letra + '</div>' +
+            '<span style="font-size:13px;font-weight:700;color:#eef6ff;">' + (casa.nome || '—') + '</span>' +
           '</div>' +
-          '<div class="bk-num ' + saldoCls + '">R$ ' + Math.abs(saldo).toFixed(2).replace('.',',') + '</div>' +
+          '<div class="bk-num" style="color:rgba(220,235,255,.7);">R$ ' + Math.abs(saldo).toFixed(2).replace('.',',') + '</div>' +
           '<div class="bk-num ' + (stats.lucro >= 0 ? 'pos' : 'neg') + '">' + (stats.cnt > 0 ? (stats.lucro >= 0 ? '+' : '-') + 'R$ ' + Math.abs(stats.lucro).toFixed(2).replace('.',',') : '—') + '</div>' +
           '<div class="bk-roi-wrap">' +
-            '<div class="bk-roi-pct" style="color:' + (stats.roi >= 0 ? '#059669' : '#dc2626') + ';">' + roiStr + '</div>' +
-            '<div class="bk-roi-bar"><div class="bk-roi-fill" style="width:' + roiPct + '%;background:' + (stats.roi >= 0 ? '#059669' : '#dc2626') + ';"></div></div>' +
+            '<div class="bk-roi-pct" style="font-size:12px;font-weight:700;color:' + roiColor + ';">' + roiStr + '</div>' +
+            '<div class="bk-roi-bar"><div class="bk-roi-fill" style="width:' + roiPct + '%;background:' + roiColor + ';"></div></div>' +
           '</div>' +
-          '<div class="bk-num neu">' + stats.cnt + '</div>' +
+          '<div class="bk-num neu" style="color:rgba(220,235,255,.4);">' + stats.cnt + '</div>' +
           '<div class="bk-acts">' +
-            '<button class="bk-act dep" title="Depósito" onclick="bkAbrirMov(\'' + casa.id + '\',\'dep\')">↑</button>' +
-            '<button class="bk-act saq" title="Saque" onclick="bkAbrirMov(\'' + casa.id + '\',\'saq\')">↓</button>' +
-            '<button class="bk-act del" title="Remover" onclick="bkRemoverCasa(\'' + casa.id + '\')">✕</button>' +
+            '<button class="bk-act dep" title="Depósito" onclick="bkAbrirMov(\'' + casa.id + '\',\'dep\')">' + svgDep + '</button>' +
+            '<button class="bk-act saq" title="Saque" onclick="bkAbrirMov(\'' + casa.id + '\',\'saq\')">' + svgSaq + '</button>' +
+            '<button class="bk-act del" title="Remover" onclick="bkRemoverCasa(\'' + casa.id + '\')">' + svgDel + '</button>' +
           '</div>' +
         '</div>';
       }).join('');
@@ -14095,21 +14209,128 @@ function bkRenderHist() {
 }
 
 // ── Modal adicionar/editar ──
+// ── Dropdown customizado de casas ──
+var BK_CASAS_DATA = {
+  'Principais': [
+    {n:'Bet365',c:'#22c55e'},{n:'Betano',c:'#ff6b35'},{n:'Novibet',c:'#60a5fa'},
+    {n:'Sportingbet',c:'#a78bfa'},{n:'KTO',c:'#f87171'},{n:'1xBet',c:'#818cf8'},
+    {n:'Stake',c:'#94a3b8'},{n:'Vbet',c:'#a78bfa'},{n:'Betsson',c:'#f59e0b'},
+    {n:'Superbet',c:'#f87171'},{n:'Betnacional',c:'#60a5fa'},
+    {n:'EsportivaBet',c:'#22c55e'},{n:'Jogo de Ouro',c:'#f59e0b'}
+  ],
+  'Exchange': [
+    {n:'Betfair',c:'#22c55e'},{n:'Bolsa de Aposta',c:'#3b82f6'},
+    {n:'Betbra',c:'#8b5cf6'},{n:'Pinnacle',c:'#94a3b8'}
+  ],
+  'Outras Casas': [
+    {n:'Apostabet',c:'#6b7280'},{n:'BetPix365',c:'#6b7280'},{n:'Betcris',c:'#6b7280'},
+    {n:'Betesporte',c:'#6b7280'},{n:'Br4bet',c:'#6b7280'},{n:'Estrela Bet',c:'#f59e0b'},
+    {n:'F12.bet',c:'#6b7280'},{n:'Fulltbet',c:'#6b7280'},{n:'Galera.bet',c:'#22c55e'},
+    {n:'Mr.Jack',c:'#6b7280'},{n:'Pagolbet',c:'#6b7280'},{n:'Vaidebet',c:'#6b7280'}
+  ]
+};
+
+function bkBuildDropdown() {
+  var list = document.getElementById('bk-casa-list');
+  if (!list) return;
+  var html = '';
+  Object.keys(BK_CASAS_DATA).forEach(function(grupo) {
+    html += '<div style="padding:8px 14px 4px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(220,235,255,.25);border-top:1px solid rgba(255,255,255,.05);">' + grupo + '</div>';
+    BK_CASAS_DATA[grupo].forEach(function(casa) {
+      var letra = casa.n.charAt(0).toUpperCase();
+      html += '<div onclick="bkSelectCasa(\'' + casa.n.replace(/'/g,"\\'") + '\',\'' + casa.c + '\')" style="display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;transition:background .12s;" onmouseover="this.style.background=\'rgba(255,255,255,.05)\'" onmouseout="this.style.background=\'transparent\'">'
+        + '<div style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:800;color:' + casa.c + ';">' + letra + '</div>'
+        + '<span style="font-size:13px;font-weight:600;color:#eef6ff;">' + casa.n + '</span>'
+        + '</div>';
+    });
+  });
+  // Outra casa
+  html += '<div style="padding:8px 14px 4px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(220,235,255,.25);border-top:1px solid rgba(255,255,255,.05);">Personalizar</div>';
+  html += '<div onclick="bkSelectCasa(\'__outro__\',\'\')" style="display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;transition:background .12s;" onmouseover="this.style.background=\'rgba(255,255,255,.05)\'" onmouseout="this.style.background=\'transparent\'">'
+    + '<div style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;color:rgba(220,235,255,.4);">+</div>'
+    + '<span style="font-size:13px;font-weight:600;color:rgba(220,235,255,.5);">Outra casa (digitar)</span>'
+    + '</div>';
+  list.innerHTML = html;
+}
+
+window.bkToggleDropdown = function() {
+  var list = document.getElementById('bk-casa-list');
+  var trigger = document.getElementById('bk-casa-trigger');
+  if (!list) return;
+  var isOpen = list.style.display !== 'none';
+  list.style.display = isOpen ? 'none' : 'block';
+  if (trigger) trigger.style.borderColor = isOpen ? 'rgba(255,255,255,.1)' : '#22c55e';
+};
+
+window.bkSelectCasa = function(nome, cor) {
+  var list    = document.getElementById('bk-casa-list');
+  var trigger = document.getElementById('bk-casa-trigger');
+  var sel     = document.getElementById('bk-casa-selected');
+  var inp     = document.getElementById('bk-inp-nome');
+  var custom  = document.getElementById('bk-inp-nome-custom');
+  if (list)    list.style.display = 'none';
+  if (trigger) trigger.style.borderColor = 'rgba(255,255,255,.1)';
+
+  if (nome === '__outro__') {
+    if (inp) inp.value = '';
+    if (custom) { custom.style.display = 'block'; custom.focus(); }
+    if (sel) sel.innerHTML = '<span style="font-size:13px;color:rgba(220,235,255,.5);">Outra casa (digitar abaixo)...</span>';
+    return;
+  }
+  if (custom) custom.style.display = 'none';
+  if (inp) inp.value = nome;
+  if (sel) {
+    var letra = nome.charAt(0).toUpperCase();
+    sel.innerHTML = '<div style="width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:' + (cor||'#eef6ff') + ';flex-shrink:0;">' + letra + '</div>'
+      + '<span style="font-size:13px;font-weight:600;color:#eef6ff;">' + nome + '</span>';
+  }
+  // Auto-selecionar cor da casa
+  if (cor) { _bkCorSel = cor; document.querySelectorAll('#bk-cor-picker div').forEach(function(d){ d.style.border = d.dataset.cor===cor?'2px solid #eef6ff':'2px solid transparent'; d.style.transform = d.dataset.cor===cor?'scale(1.15)':'scale(1)'; }); }
+};
+
+// Fechar dropdown ao clicar fora
+document.addEventListener('click', function(e) {
+  var dd = document.getElementById('bk-casa-dropdown');
+  if (dd && !dd.contains(e.target)) {
+    var list = document.getElementById('bk-casa-list');
+    var trigger = document.getElementById('bk-casa-trigger');
+    if (list) list.style.display = 'none';
+    if (trigger) trigger.style.borderColor = 'rgba(255,255,255,.1)';
+  }
+});
+
 window.bkAbrirModal = function(id) {
   bkLoad();
   _bkEditId = id || null;
-  _bkCorSel = '#00B050';
-  var modal = document.getElementById('bk-modal-overlay');
+  _bkCorSel = '#22c55e';
+  var modal   = document.getElementById('bk-modal-overlay');
   var titleEl = document.getElementById('bk-modal-title');
   var saveBtn = document.getElementById('bk-modal-save-btn');
-  document.getElementById('bk-inp-nome').value  = '';
+  var inp     = document.getElementById('bk-inp-nome');
+  var sel     = document.getElementById('bk-casa-selected');
+  var custom  = document.getElementById('bk-inp-nome-custom');
+  var list    = document.getElementById('bk-casa-list');
+
+  // Build dropdown
+  bkBuildDropdown();
+
+  // Reset
+  if (inp)    inp.value = '';
+  if (sel)    sel.innerHTML = '<span style="font-size:13px;color:rgba(220,235,255,.3);">Selecione uma casa...</span>';
+  if (custom) { custom.value = ''; custom.style.display = 'none'; }
+  if (list)   list.style.display = 'none';
   document.getElementById('bk-inp-saldo').value = '';
+
   if (id) {
     var casa = _bkCasas.find(function(c){ return c.id === id; });
     if (casa) {
-      document.getElementById('bk-inp-nome').value  = casa.nome || '';
+      if (inp) inp.value = casa.nome;
+      // Encontrar cor da casa no mapa
+      var corCasa = casa.cor || '#22c55e';
+      var letra = casa.nome.charAt(0).toUpperCase();
+      if (sel) sel.innerHTML = '<div style="width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:'+corCasa+';flex-shrink:0;">'+letra+'</div><span style="font-size:13px;font-weight:600;color:#eef6ff;">'+casa.nome+'</span>';
       document.getElementById('bk-inp-saldo').value = parseFloat(casa.saldo||0).toFixed(2);
-      _bkCorSel = casa.cor || '#00B050';
+      _bkCorSel = casa.cor || '#22c55e';
       if (titleEl) titleEl.textContent = 'Editar Casa';
       if (saveBtn) saveBtn.textContent = 'Salvar Alterações';
     }
@@ -14117,12 +14338,12 @@ window.bkAbrirModal = function(id) {
     if (titleEl) titleEl.textContent = 'Adicionar Casa';
     if (saveBtn) saveBtn.textContent = 'Salvar Casa';
   }
-  // Highlight cor selecionada
+
   document.querySelectorAll('#bk-cor-picker div').forEach(function(d) {
-    d.style.border = d.dataset.cor === _bkCorSel ? '2px solid #111827' : '2px solid transparent';
+    d.style.border    = d.dataset.cor === _bkCorSel ? '2px solid #eef6ff' : '2px solid transparent';
     d.style.transform = d.dataset.cor === _bkCorSel ? 'scale(1.15)' : 'scale(1)';
   });
-  if (modal) { modal.classList.add('open'); setTimeout(function(){ document.getElementById('bk-inp-nome').focus(); }, 120); }
+  if (modal) modal.classList.add('open');
 };
 
 window.bkFecharModal = function() {
@@ -14140,16 +14361,23 @@ window.bkSetCor = function(el, cor) {
 };
 
 window.bkSalvarCasa = function() {
-  var nome  = (document.getElementById('bk-inp-nome').value || '').trim();
+  var inp    = document.getElementById('bk-inp-nome');
+  var custom = document.getElementById('bk-inp-nome-custom');
+  var nome   = (inp ? inp.value : '').trim();
+  // Se campo custom visível, usar ele
+  if (custom && custom.style.display !== 'none') {
+    nome = custom.value.trim();
+    if (!nome) { shakeField('bk-inp-nome-custom'); if(window.fbToast) window.fbToast('Digite o nome da casa.', 'warning'); return; }
+  } else {
+    if (!nome) { if(window.fbToast) window.fbToast('Selecione uma casa.', 'warning'); return; }
+  }
   var saldo = parseFloat(document.getElementById('bk-inp-saldo').value) || 0;
-  if (!nome) { shakeField('bk-inp-nome'); if(window.fbToast) window.fbToast('Digite o nome da casa.', 'warning'); return; }
 
   bkLoad();
   if (_bkEditId) {
     var casa = _bkCasas.find(function(c){ return c.id === _bkEditId; });
     if (casa) { casa.nome = nome; casa.saldo = saldo; casa.cor = _bkCorSel; }
   } else {
-    // Verifica duplicata
     var existe = _bkCasas.find(function(c){ return c.nome.toLowerCase() === nome.toLowerCase(); });
     if (existe) { if(window.fbToast) window.fbToast('Essa casa já foi adicionada.', 'warning'); return; }
     _bkCasas.push({ id: 'bk_' + Date.now(), nome: nome, saldo: saldo, cor: _bkCorSel });
@@ -21933,6 +22161,7 @@ function opxBookieClass(n) {
   if (l.includes('stake'))      return 'stake';
   if (l.includes('kto'))        return 'kto';
   if (l.includes('1xbet'))      return 'b1xbet';
+  if (l.includes('jogo de ouro') || l.includes('jogodeouro')) return 'jogodeouro';
   return '';
 }
 
