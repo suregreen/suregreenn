@@ -22382,6 +22382,16 @@ function sgOddsLimparSelecao() {
   });
 }
 
+// Auto-reload a cada 2 minutos para garantir odds atualizadas
+var _sgOddsAutoReload = null;
+function sgOddsStartAutoReload() {
+  if (_sgOddsAutoReload) clearInterval(_sgOddsAutoReload);
+  _sgOddsAutoReload = setInterval(function() {
+    console.log('[SureGreen] Auto-reload odds...');
+    sgOddsLoad();
+  }, 2 * 60 * 1000); // 2 minutos
+}
+
 function sgOddsLoad() {
   var comBody = document.getElementById('odds-com-pa-body');
   var semBody = document.getElementById('odds-sem-pa-body');
@@ -22461,18 +22471,36 @@ function sgOddsLoad() {
         }
 
         sgOddsRender(converted.length > 0 ? converted : ODDS_EXAMPLE);
+        // Inicia auto-reload após primeira carga bem-sucedida
+        if (typeof sgOddsStartAutoReload === 'function') sgOddsStartAutoReload();
+        // Limpa timeout de segurança
+        if (window._sgOddsLoadTimeout) { clearTimeout(window._sgOddsLoadTimeout); window._sgOddsLoadTimeout = null; }
       }, function(err) {
         console.error('Firestore odds error:', err);
         sgOddsRender(ODDS_EXAMPLE);
+        // Tenta reconectar em 5 segundos
+        setTimeout(function() { sgOddsLoad(); }, 5000);
       });
     } catch(e) {
       console.error('sgOddsLoad error:', e);
       sgOddsRender(ODDS_EXAMPLE);
+      setTimeout(function() { sgOddsLoad(); }, 5000);
     }
   }).catch(function(e) {
     console.error('sgOddsLoad import error:', e);
     sgOddsRender(ODDS_EXAMPLE);
+    setTimeout(function() { sgOddsLoad(); }, 5000);
   });
+
+  // Timeout de segurança — se em 8s não carregou, tenta de novo
+  if (window._sgOddsLoadTimeout) clearTimeout(window._sgOddsLoadTimeout);
+  window._sgOddsLoadTimeout = setTimeout(function() {
+    var wrap = document.getElementById('opx-cards-wrap');
+    if (wrap && wrap.innerHTML.indexOf('odds-loading') !== -1) {
+      console.log('[SureGreen] Timeout — tentando reconectar...');
+      sgOddsLoad();
+    }
+  }, 8000);
 }
 
 var _LOADING_HTML = '<div class="odds-loading"><div><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span></div><div class="odds-loading-txt">Carregando...</div></div>';
