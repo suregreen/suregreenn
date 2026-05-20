@@ -7490,9 +7490,11 @@ function maisGo(pageId, cb) {
 .opx-row-vs { font-size: 12px; font-weight: 500; color: rgba(220,230,255,.35); }
 
 /* ── CÉLULA CASAS ── */
-.opx-casas-cell { display: flex; align-items: center; gap: 24px; }
-.opx-casa { display: flex; flex-direction: column; gap: 2px; min-width: 55px; }
-.opx-casa-name { font-size: 11px; font-weight: 600; color: rgba(220,230,255,.4); }
+.opx-casas-cell { display: flex; align-items: center; gap: 32px; }
+.opx-casa { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 52px; }
+.opx-casa-top { display: flex; align-items: center; justify-content: center; margin-bottom: 2px; }
+.opx-casa-logo { width: 20px; height: 20px; border-radius: 5px; object-fit: contain; flex-shrink: 0; }
+.opx-casa-name { font-size: 11px; font-weight: 600; color: rgba(220,230,255,.4); display: none; }
 .opx-casa-name.betano     { color: #ff6b35; }
 .opx-casa-name.bet365     { color: #22c55e; }
 .opx-casa-name.novibet    { color: #818cf8; }
@@ -16681,6 +16683,221 @@ document.getElementById('fg-email').addEventListener('keydown', function(e) {
 .sgw-tip strong{color:#22c55e;}
 </style>
 
+<style id="sg-odds-modal-css">
+/* ══ MODAL DE ODDS SUREGREEN ══ */
+#sg-odds-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+#sg-odds-modal-overlay.open {
+  display: flex;
+}
+#sg-odds-modal {
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+  width: 100%;
+  max-width: 980px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: sgModalIn 0.22s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes sgModalIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+#sg-odds-modal::-webkit-scrollbar { width: 6px; }
+#sg-odds-modal::-webkit-scrollbar-track { background: transparent; }
+#sg-odds-modal::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+.sgm-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sgm-header-left { flex: 1; }
+.sgm-badges { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.sgm-badge {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+.sgm-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.sgm-title .vs { color: #3fb950; margin: 0 6px; }
+.sgm-time { font-size: 13px; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 5px; }
+.sgm-close {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: rgba(255,255,255,0.5);
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.sgm-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.sgm-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.sgm-col {
+  padding: 20px 24px;
+}
+.sgm-col-pa { border-right: 1px solid rgba(255,255,255,0.06); }
+.sgm-col-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 8px;
+}
+.sgm-col-title-wrap {}
+.sgm-col-title {
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+.sgm-col-title.green { color: #3fb950; }
+.sgm-col-title.gray { color: rgba(255,255,255,0.85); }
+.sgm-col-subtitle { font-size: 11px; color: rgba(255,255,255,0.35); }
+.sgm-ev-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.1;
+  min-width: 60px;
+}
+.sgm-ev-badge.green { background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); color: #3fb950; }
+.sgm-ev-badge.gray  { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); }
+.sgm-ev-label { font-size: 9px; font-weight: 500; letter-spacing: 0.5px; opacity: 0.7; }
+.sgm-table { width: 100%; border-collapse: collapse; }
+.sgm-table thead tr th {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.3);
+  text-align: left;
+  padding: 4px 6px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.sgm-table thead tr th:not(:first-child) { text-align: center; }
+.sgm-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.sgm-table tbody tr:last-child { border-bottom: none; }
+.sgm-table tbody tr td { padding: 7px 6px; vertical-align: middle; }
+.sgm-book-cell { display: flex; align-items: center; gap: 8px; }
+.sgm-initials {
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: -0.5px;
+  overflow: hidden;
+  position: relative;
+}
+.sgm-initials img {
+  width: 20px; height: 20px;
+  object-fit: contain;
+  border-radius: 3px;
+  display: block;
+}
+.sgm-initials .sgm-init-fallback {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  font-size: 10px; font-weight: 700;
+}
+.sgm-book-name { font-size: 12px; color: rgba(255,255,255,0.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90px; }
+.sgm-book-link { color: rgba(255,255,255,0.75) !important; text-decoration: none !important; transition: color 0.15s; }
+.sgm-book-link:hover { color: #3fb950 !important; }
+.sgm-odd-cell { text-align: center; }
+.sgm-odd {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-width: 48px;
+}
+.sgm-odd:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.sgm-odd.best { background: rgba(13,40,24,0.8); border-color: #3fb950; color: #3fb950; font-weight: 700; }
+.sgm-odd.best:hover { background: rgba(63,185,80,0.15); }
+.sgm-usar-btn {
+  background: transparent;
+  border: 1px solid rgba(63,185,80,0.3);
+  border-radius: 6px;
+  color: #3fb950;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.sgm-usar-btn:hover { background: rgba(63,185,80,0.1); border-color: #3fb950; }
+.sgm-footer {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sgm-footer.green { background: rgba(63,185,80,0.06); color: #3fb950; }
+.sgm-footer.gray  { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.3); }
+.sgm-footer-bottom {
+  padding: 12px 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  text-align: center;
+}
+.sgm-footer-bottom span { color: #3fb950; }
+@media (max-width: 680px) {
+  .sgm-body { grid-template-columns: 1fr; }
+  .sgm-col-pa { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .sgm-title { font-size: 16px; }
+  #sg-odds-modal { border-radius: 16px; }
+  .sgm-book-name { max-width: 60px; }
+  .sgm-odd { padding: 4px 7px; font-size: 12px; min-width: 40px; }
+}
+</style>
+
 <div class="sgw-box">
   <!-- HEADER -->
   <div class="sgw-header">
@@ -16854,6 +17071,311 @@ setTimeout(function() {
     sgwShowIfNew();
   }
 }, 2500);
+</script>
+
+<!-- ══ MODAL DE ODDS ══ -->
+<div id="sg-odds-modal-overlay">
+  <div id="sg-odds-modal">
+    <div class="sgm-header">
+      <div class="sgm-header-left">
+        <div class="sgm-badges">
+          <span class="sgm-badge" id="sgm-date">--/--/----</span>
+          <span class="sgm-badge" id="sgm-league">Liga</span>
+        </div>
+        <div class="sgm-title" id="sgm-title">Time A <span class="vs">vs</span> Time B</div>
+        <div class="sgm-time"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span id="sgm-time">--:--</span></div>
+      </div>
+      <button class="sgm-close" id="sgm-close-btn">×</button>
+    </div>
+    <div class="sgm-body" id="sgm-body"></div>
+    <div class="sgm-footer-bottom">PA (Predição Avançada) identifica <span>valor verdadeiro</span> antes do mercado.</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var _sgModalGame = null;
+
+  // Mapa casa → domínio .bet.br ou internacional
+  var BOOK_DOMAINS = {
+    'apostabet':    'aposta.bet.br',
+    'aposta bet':   'aposta.bet.br',
+    'bet365':       'bet365.com',
+    'betano':       'betano.com',
+    'betfair':      'betfair.com',
+    'bet7k':        '7k.bet.br',
+    'betboom':      'betboom.com',
+    'betesporte':   'esportiva.bet.br',
+    'esportiva':    'esportiva.bet.br',
+    'betfast':      'betfast.bet.br',
+    'betmgm':       'betmgm.bet.br',
+    'betvip':       'betvip.bet.br',
+    'novibet':      'novibet.bet.br',
+    'superbet':     'superbet.bet.br',
+    'sportingbet':  'sportingbet.bet.br',
+    'mrjack':       'mrjack.bet.br',
+    'betnacional':  'betnacional.bet.br',
+    'br4bet':       'br4.bet.br',
+    'casadeapostas':'casadeapostas.bet.br',
+    'kto':          'kto.bet.br',
+    'stake':        'stake.com',
+    'meridianbet':  'meridianbet.bet.br',
+    'pinnacle':     'pinnacle.com',
+    'betsson':      'betsson.com',
+    'unibet':       'unibet.com',
+    'vaidebet':     'vaidebet.bet.br',
+    'f12':          'f12.bet.br',
+    'galera':       'galera.bet.br',
+    'onabet':       'onabet.bet.br',
+    'betpix365':    'betpix365.bet.br',
+    'segurobet':    'segurobet.bet.br',
+    'realsbet':     'realsbet.bet.br',
+    'betwarrior':   'betwarrior.bet.br',
+    'parimatch':    'parimatch.bet.br',
+    'rivalo':       'rivalo.com',
+    'jonbet':       'jonbet.bet.br',
+  };
+
+  // Fallback colors por casa
+  var BOOK_COLORS = {
+    'bet365':     { bg: '#1a472a', color: '#86efac', initials: '365' },
+    'betano':     { bg: '#7c2d12', color: '#fb923c', initials: 'BN'  },
+    'betfair':    { bg: '#713f12', color: '#fde68a', initials: 'BF'  },
+    'bet7k':      { bg: '#1e3a5f', color: '#93c5fd', initials: 'B7'  },
+    'betboom':    { bg: '#4a1d96', color: '#c4b5fd', initials: 'BB'  },
+    'betesporte': { bg: '#312e81', color: '#a5b4fc', initials: 'ESP' },
+    'betfast':    { bg: '#7f1d1d', color: '#fca5a5', initials: 'BFS' },
+    'betmgm':     { bg: '#1a3a2a', color: '#6ee7b7', initials: 'MGM' },
+    'novibet':    { bg: '#0c4a6e', color: '#7dd3fc', initials: 'NV'  },
+    'apostabet':  { bg: '#134e2a', color: '#6ee7b7', initials: 'AB'  },
+    'superbet':   { bg: '#1e1b4b', color: '#a78bfa', initials: 'SUP' },
+    'sportingbet':{ bg: '#0f3460', color: '#60a5fa', initials: 'SPB' },
+    'betnacional':{ bg: '#1a2e4a', color: '#93c5fd', initials: 'BNC' },
+    'br4bet':     { bg: '#3d1a00', color: '#fdba74', initials: 'BR4' },
+    'kto':        { bg: '#0f2027', color: '#67e8f9', initials: 'KTO' },
+    'stake':      { bg: '#003320', color: '#4ade80', initials: 'STK' },
+    'meridianbet':{ bg: '#1e3a5f', color: '#7dd3fc', initials: 'MRD' },
+  };
+
+  function getBookDomain(name) {
+    var key = (name||'').toLowerCase().trim();
+    // Match exato
+    if (BOOK_DOMAINS[key]) return BOOK_DOMAINS[key];
+    // Match parcial
+    var best = null, bestLen = 0;
+    for (var k in BOOK_DOMAINS) {
+      if (key.indexOf(k) !== -1 && k.length > bestLen) { best = BOOK_DOMAINS[k]; bestLen = k.length; }
+      if (k.indexOf(key) !== -1 && key.length > bestLen) { best = BOOK_DOMAINS[k]; bestLen = key.length; }
+    }
+    if (best) return best;
+    // Tenta inferir: "Casa de Apostas" → "casadeapostas.bet.br"
+    var slug = key.replace(/\s+/g,'').replace(/[^a-z0-9]/g,'');
+    return slug + '.bet.br';
+  }
+
+  function getBookColor(name) {
+    var key = (name||'').toLowerCase().replace(/[\s\-_.]/g,'');
+    var best = null, bestLen = 0;
+    for (var k in BOOK_COLORS) {
+      var kn = k.replace(/[\s\-_.]/g,'');
+      if (key === kn || key.indexOf(kn) === 0) return BOOK_COLORS[k];
+      if (key.indexOf(kn) !== -1 && kn.length > bestLen) { best = BOOK_COLORS[k]; bestLen = kn.length; }
+    }
+    if (best) return best;
+    var hash = 0;
+    for (var i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    var hue = Math.abs(hash) % 360;
+    return { bg: 'hsl('+hue+',40%,18%)', color: 'hsl('+hue+',70%,72%)', initials: null };
+  }
+
+  function getInitials(name) {
+    var key = (name||'').toLowerCase().replace(/[\s\-_.]/g,'');
+    for (var k in BOOK_COLORS) {
+      var kn = k.replace(/[\s\-_.]/g,'');
+      if (key === kn || key.indexOf(kn) === 0) return BOOK_COLORS[k].initials || name.substring(0,3).toUpperCase();
+    }
+    var clean = name.trim();
+    if (clean.toLowerCase().startsWith('bet') && clean.length > 3) return clean.substring(3,6).toUpperCase();
+    var words = clean.split(/\s+/);
+    if (words.length >= 2) return (words[0][0]+words[1][0]).toUpperCase();
+    return clean.substring(0, Math.min(3, clean.length)).toUpperCase();
+  }
+
+  function buildLogoHtml(name, bc, initials) {
+    var domain = getBookDomain(name);
+    var logoUrl = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=64';
+    var wrap = document.createElement('div');
+    wrap.className = 'sgm-initials';
+    wrap.style.background = bc.bg;
+    var img = document.createElement('img');
+    img.src = logoUrl;
+    img.alt = name;
+    img.width = 20;
+    img.height = 20;
+    var fallback = document.createElement('span');
+    fallback.className = 'sgm-init-fallback';
+    fallback.style.color = bc.color;
+    fallback.style.display = 'none';
+    fallback.textContent = initials;
+    img.onerror = function() { this.style.display='none'; fallback.style.display='flex'; };
+    img.onload  = function() { fallback.style.display='none'; };
+    wrap.appendChild(img);
+    wrap.appendChild(fallback);
+    return wrap.outerHTML;
+  }
+
+  function calcEV(books) {
+    var evs = [];
+    books.forEach(function(b) {
+      if (b.home && b.draw && b.away) {
+        var margin = 1/b.home + 1/b.draw + 1/b.away;
+        var ev = ((1/margin) - 1) * 100;
+        evs.push(ev);
+      }
+    });
+    if (!evs.length) return null;
+    return evs.reduce(function(a,b){return a+b;},0) / evs.length;
+  }
+
+  function findBest(books, field) {
+    var best = null;
+    books.forEach(function(b) { if (b[field] && (!best || b[field] > best)) best = b[field]; });
+    return best;
+  }
+
+  function renderCol(books, isPA) {
+    var cls = isPA ? 'green' : 'gray';
+    var ev = calcEV(books);
+    var evStr = ev !== null ? (ev >= 0 ? '+' : '') + ev.toFixed(2) + '%' : '--';
+
+    var bestHome = findBest(books, 'home');
+    var bestDraw = findBest(books, 'draw');
+    var bestAway = findBest(books, 'away');
+
+    var rows = books.map(function(b) {
+      var bc = getBookColor(b.slug || b.name);
+      var init = getInitials(b.name);
+      var hBest = b.home === bestHome ? ' best' : '';
+      var dBest = b.draw === bestDraw ? ' best' : '';
+      var aBest = b.away === bestAway ? ' best' : '';
+      var tipo = isPA ? 'COM_PA' : 'SEM_PA';
+      return '<tr>' +
+        '<td><div class="sgm-book-cell">' +
+          buildLogoHtml(b.name, bc, init) +
+          (b.url ? '<a href="'+b.url+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="sgm-book-name sgm-book-link">'+b.name+'</a>' : '<span class="sgm-book-name">'+b.name+'</span>') +
+        '</div></td>' +
+        '<td class="sgm-odd-cell">'+(b.url?'<a href="'+b.url+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="text-decoration:none">':'')+' <span class="sgm-odd'+hBest+'" onclick="sgOddsUsar(_sgModalGame,\''+b.name+'\','+b.home+',\'1\',\''+tipo+'\')">'+b.home.toFixed(2)+'</span>'+(b.url?'</a>':'')+'</td>' +
+        '<td class="sgm-odd-cell">'+(b.draw ? '<span class="sgm-odd'+dBest+'" onclick="sgOddsUsar(_sgModalGame,\''+b.name+'\','+b.draw+',\'X\',\''+tipo+'\')">'+b.draw.toFixed(2)+'</span>' : '<span style="color:rgba(255,255,255,0.2);font-size:12px">—</span>')+'</td>' +
+        '<td class="sgm-odd-cell"><span class="sgm-odd'+aBest+'" onclick="sgOddsUsar(_sgModalGame,\''+b.name+'\','+b.away+',\'2\',\''+tipo+'\')">'+b.away.toFixed(2)+'</span></td>' +
+        '<td><button class="sgm-usar-btn" onclick="sgOddsUsarLinha(_sgModalGame,\''+b.name+'\','+b.home+','+b.draw+','+b.away+',\''+tipo+'\')">→ Usar</button></td>' +
+      '</tr>';
+    }).join('');
+
+    var footerTxt = isPA
+      ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Melhores oportunidades identificadas com PA'
+      : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Odds do mercado sem análise de performance';
+
+    return '<div class="sgm-col '+(isPA?'sgm-col-pa':'sgm-col-noPA')+'">' +
+      '<div class="sgm-col-header">' +
+        '<div class="sgm-col-title-wrap">' +
+          '<div class="sgm-col-title '+cls+'">'+(isPA?'⚡ COM PA':'SEM PA')+'</div>' +
+          '<div class="sgm-col-subtitle">'+(isPA?'Percentual de acerto maior':'Mercado tradicional')+'</div>' +
+        '</div>' +
+        '<div class="sgm-ev-badge '+cls+'">'+evStr+'<span class="sgm-ev-label">EV MÉDIO</span></div>' +
+      '</div>' +
+      '<table class="sgm-table">' +
+        '<thead><tr><th>Casa</th><th>1</th><th>X</th><th>2</th><th></th></tr></thead>' +
+        '<tbody>'+rows+'</tbody>' +
+      '</table>' +
+      '<div class="sgm-footer '+cls+'">'+footerTxt+'</div>' +
+    '</div>';
+  }
+
+  window.sgOddsOpenModal = function(game) {
+    _sgModalGame = game;
+    var overlay = document.getElementById('sg-odds-modal-overlay');
+    if (!overlay) return;
+
+    // Header
+    if (game.startTime) {
+      var d = new Date(game.startTime);
+      document.getElementById('sgm-date').textContent =
+        d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getFullYear();
+    } else {
+      document.getElementById('sgm-date').textContent = '';
+    }
+    document.getElementById('sgm-league').textContent = game.league || '';
+    document.getElementById('sgm-title').innerHTML = (game.home||'') + ' <span class="vs">vs</span> ' + (game.away||'');
+    document.getElementById('sgm-time').textContent = game.time || '--:--';
+
+    // Separar COM_PA e SEM_PA
+    var comPA = (game.bookmakers||[]).filter(function(b){ 
+      var cat = (b.pa_category||'').toUpperCase().trim();
+      return cat === 'COM_PA' || cat === 'COMPA' || cat === 'COM PA';
+    });
+    var semPA = (game.bookmakers||[]).filter(function(b){ 
+      var cat = (b.pa_category||'').toUpperCase().trim();
+      return cat === 'SEM_PA' || cat === 'SEMPA' || cat === 'SEM PA' || cat === '' || !cat;
+    });
+    // Debug
+    console.log('Modal:', game.home, 'vs', game.away);
+    console.log('COM_PA:', comPA.length, 'SEM_PA:', semPA.length);
+    if (game.bookmakers && game.bookmakers[0]) console.log('pa_category exemplo:', game.bookmakers[0].pa_category);
+
+    var body = document.getElementById('sgm-body');
+    body.innerHTML = renderCol(comPA, true) + renderCol(semPA, false);
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.sgOddsUsar = function(game, casa, odd, selecao, tipo) {
+    sgOddsFecharModal();
+    if (typeof sgCalculadoraAbrir === 'function') {
+      sgCalculadoraAbrir({ game: game, casa: casa, odd: odd, selecao: selecao, tipo: tipo });
+    } else {
+      console.log('Usar:', { game: game, casa: casa, odd: odd, selecao: selecao, tipo: tipo });
+    }
+  };
+
+  window.sgOddsUsarLinha = function(game, casa, home, draw, away, tipo) {
+    sgOddsFecharModal();
+    if (typeof sgCalculadoraAbrir === 'function') {
+      sgCalculadoraAbrir({ game: game, casa: casa, home: home, draw: draw, away: away, tipo: tipo });
+    } else {
+      console.log('Usar linha:', { game: game, casa: casa, home: home, draw: draw, away: away, tipo: tipo });
+    }
+  };
+
+  window.sgOddsFecharModal = function() {
+    var overlay = document.getElementById('sg-odds-modal-overlay');
+    if (overlay) overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    _sgModalGame = null;
+  };
+
+  // Fechar ao clicar fora ou no X
+  document.addEventListener('DOMContentLoaded', function() {
+    var overlay = document.getElementById('sg-odds-modal-overlay');
+    var closeBtn = document.getElementById('sgm-close-btn');
+    if (overlay) overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) sgOddsFecharModal();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', sgOddsFecharModal);
+  });
+
+  // Fechar com ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') sgOddsFecharModal();
+  });
+
+  // Expor _sgModalGame para os botões inline
+  Object.defineProperty(window, '_sgModalGame', {
+    get: function() { return _sgModalGame; },
+    set: function(v) { _sgModalGame = v; },
+    configurable: true
+  });
+})();
 </script>
 
 </body>
@@ -21888,29 +22410,46 @@ function sgOddsLoad() {
       try { app = appMod.getApp('suregreen-odds'); }
       catch(e) { app = appMod.initializeApp(firebaseConfig, 'suregreen-odds'); }
       var db = fs.getFirestore(app);
-      var docRef = fs.doc(db, 'odds', 'oddspedia_br');
+      // var docRef = fs.doc(db, 'odds', 'oddspedia_br'); // OddsPedia (desativado)
+      var docRef = fs.doc(db, 'odds', 'lzcommunity_br'); // LZ Community
       _sgOddsUnsubscribe = fs.onSnapshot(docRef, function(snap) {
         if (!snap.exists()) { sgOddsRender(ODDS_EXAMPLE); return; }
         var data = snap.data();
         var games = data.games || [];
 
+        // Debug: ver estrutura real do primeiro jogo
+        if (games.length > 0 && games[0].bookmakers && games[0].bookmakers.length > 0) {
+          var bk0 = games[0].bookmakers[0];
+          console.log('LZ raw bookmaker[0]:', JSON.stringify(bk0));
+          console.log('pa_category value:', bk0.pa_category, '| type:', typeof bk0.pa_category);
+        }
+
         var converted = games.map(function(g) {
-          // Nova estrutura: g.bookmakers = [{name, slug, home, draw, away, color}, ...]
+          // Estrutura LZ: g.bookmakers = [{name, slug, home, draw, away, pa_category, url}, ...]
           var books = (g.bookmakers || []).map(function(bk) {
+            // Normalizar pa_category — pode vir como string ou objeto Firestore
+            var paCat = bk.pa_category;
+            if (paCat && typeof paCat === 'object') paCat = paCat.stringValue || '';
+            paCat = (paCat || '').toString().toUpperCase().trim();
             return {
               name: bk.name || bk.slug || '',
-              home: bk.home || null,
-              draw: bk.draw || null,
-              away: bk.away || null,
+              slug: bk.slug || '',
+              home: parseFloat(bk.home) || null,
+              draw: parseFloat(bk.draw) || null,
+              away: parseFloat(bk.away) || null,
+              pa_category: paCat || 'SEM_PA',
+              url: bk.url || '',
               home_pa: null, draw_pa: null, away_pa: null
             };
           }).filter(function(b) { return b.home && b.away; });
 
           return {
+            id: g.id || '',
             home: g.home || '',
             away: g.away || '',
             time: g.time || '--:--',
             league: g.tournament || '',
+            startTime: g.startTime || '',
             bookmakers: books
           };
         });
@@ -22245,19 +22784,25 @@ function opxRender(games) {
 
     var maxOdd = Math.max(bHome?bHome.home:0, bDraw?bDraw.draw:0, bAway?bAway.away:0);
     function oddCell(b, key, lbl) {
-      if (!b||!b[key]) return '<div class="opx-casa"><span class="opx-casa-name" style="color:rgba(220,230,255,.2)">-</span><span class="opx-casa-odd" style="color:rgba(220,230,255,.15)">-</span><span class="opx-casa-lbl">'+lbl+'</span></div>';
-      var cls = opxBookieClass(b.name);
+      if (!b||!b[key]) return '<div class="opx-casa"><div class="opx-casa-top"><span style="width:20px;height:20px;display:inline-block"></span></div><span class="opx-casa-odd" style="color:rgba(220,230,255,.15)">—</span><span class="opx-casa-lbl">'+lbl+'</span></div>';
       var isBest = b[key] === maxOdd;
-      return '<div class="opx-casa"><span class="opx-casa-name '+cls+'">'+b.name+'</span><span class="opx-casa-odd'+(isBest?' best':'')+'">'+b[key].toFixed(2)+'</span><span class="opx-casa-lbl">'+lbl+'</span></div>';
+      var domain = typeof getBookDomain === 'function' ? getBookDomain(b.name) : b.name.toLowerCase().replace(/\s+/g,'')+'.bet.br';
+      var logoUrl = 'https://www.google.com/s2/favicons?domain='+domain+'&sz=32';
+      var bookUrl = b.url || ('https://'+domain);
+      var logoHtml = '<img class="opx-casa-logo" src="'+logoUrl+'" alt="'+b.name+'" title="'+b.name+'" onerror="this.style.opacity=\'0\'">';
+      var oddVal = '<span class="opx-casa-odd'+(isBest?' best':'')+'">'+b[key].toFixed(2)+'</span>';
+      var lnk = '<a href="'+bookUrl+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:3px;">'
+        +'<div class="opx-casa-top">'+logoHtml+'</div>'+oddVal+'</a>';
+      return '<div class="opx-casa">'+lnk+'<span class="opx-casa-lbl">'+lbl+'</span></div>';
     }
 
-    html += '<div class="opx-row" id="'+rid+'" data-eid="'+eid+'" onclick="opxTog(this.id,this.dataset.eid)"><div class="opx-row-inner">'
+    html += '<div class="opx-row" id="'+rid+'" data-eid="'+eid+'" data-gi="'+gi+'" onclick="opxRowClick(event,this)"><div class="opx-row-inner">'
       +'<div class="opx-game-cell"><div class="opx-row-meta"><span class="opx-row-time">'+g.time+'</span><span class="opx-row-league">&nbsp;·&nbsp;'+(g.league||'')+'</span></div>'
-      +'<div class="opx-row-teams"><svg class="opx-row-teams-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'
+      +'<div class="opx-row-teams">'
       +'<span>'+g.home+' <span class="opx-row-vs">vs</span> '+g.away+'</span></div></div>'
       +'<div class="opx-casas-cell">'+oddCell(bHome,'home','CASA')+oddCell(bDraw,'draw','X')+oddCell(bAway,'away','FORA')+'</div>'
       +'<div class="opx-lucro-cell">'+lucroHtml+'</div>'
-      +'<div class="opx-action-cell"><button class="opx-usar" onclick="event.stopPropagation();opxUsarTop('+gi+')">Usar</button>'
+      +'<div class="opx-action-cell"><button class="opx-usar" onclick="event.stopPropagation();sgOddsOpenModal((window._opxGames||[])['+gi+'])">Ver Odds</button>'
       +'<svg class="opx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>'
       +'</div></div>';
 
@@ -22296,6 +22841,15 @@ function opxTog(rid,eid){
   document.querySelectorAll('.opx-row').forEach(function(x){x.classList.remove('open');});
   document.querySelectorAll('.opx-exp').forEach(function(x){x.classList.remove('open');});
   if(!open){r.classList.add('open');e.classList.add('open');}
+}
+
+function opxRowClick(event, el) {
+  var gi = parseInt(el.dataset.gi);
+  var games = window._opxGames || [];
+  var game = games[gi];
+  if (game && typeof sgOddsOpenModal === 'function') {
+    sgOddsOpenModal(game);
+  }
 }
 
 function opxTab(eid,idx,el){
