@@ -11171,6 +11171,47 @@ const CASA_OPTS = [
 ];
 const casaOptsHTML = CASA_OPTS.map(c => c.startsWith('────') ? `<option disabled style="color:#888;font-size:10px;">${c}</option>` : `<option>${c}</option>`).join('');
 
+
+// Helper global para logo das casas (usado em dropdowns, bankroll, etc.)
+function sgGetCasaLogoUrl(nome) {
+  var CASA_DOMAIN_MAP = {
+    'bet365': 'bet365.com', 'betano': 'betano.com', 'betfair': 'betfair.com',
+    'betfair exchange': 'betfair.com', 'superbet': 'superbet.bet.br',
+    'sportingbet': 'sportingbet.bet.br', 'novibet': 'novibet.bet.br',
+    'kto': 'kto.bet.br', 'vaidebet': 'vaidebet.bet.br', 'pixbet': 'pixbet.bet.br',
+    'pinnacle': 'pinnacle.com', 'matchbook': 'matchbook.com',
+    'smarkets': 'smarkets.com', 'betdaq': 'betdaq.com',
+    'esportiva bet': 'esportiva.bet.br', 'estrelabet': 'estrelabet.bet.br',
+    'bolsa de aposta': 'bolsadeaposta.bet.br', 'viva sorte': 'vivasorte.bet.br',
+    'apostabet': 'aposta.bet.br', 'betesportes': 'betesporte.bet.br',
+    'jogo de ouro': 'jogodeouro.bet.br', 'betnacional': 'betnacional.bet.br',
+    'segurobet': 'segurobet.bet.br', 'galera.bet': 'galera.bet.br',
+    'betpix365': 'betpix365.bet.br', 'stake': 'stake.com',
+    'mr.jack': 'mrjack.bet.br', 'betvip': 'betvip.bet.br',
+    'william hill': 'williamhill.com', 'unibet': 'unibet.com',
+    '888sport': '888sport.com', 'bwin': 'bwin.com',
+    'betway': 'betway.com', '1xbet': '1xbet.com', 'betsson': 'betsson.com',
+    'bet7k': '7k.bet.br', 'betmgm': 'betmgm.bet.br',
+    'br4bet': 'br4.bet.br', 'casadeapostas': 'casadeapostas.bet.br',
+    'betboom': 'betboom.com', 'meridianbet': 'meridianbet.bet.br',
+    'lotogreen': 'lotogreen.bet.br', 'sportybet': 'sportybet.bet.br',
+    'versusbet': 'versus.bet.br', 'vupibet': 'vupi.bet.br',
+    'f12.bet': 'f12.bet.br', 'brbet': 'brbet.bet.br',
+  };
+  var key = (nome || '').toLowerCase().trim();
+  if (CASA_DOMAIN_MAP[key]) return 'https://www.google.com/s2/favicons?domain=' + CASA_DOMAIN_MAP[key] + '&sz=32';
+  // Tenta inferir domínio .bet.br
+  var slug = key.replace(/[^a-z0-9]/g, '');
+  return 'https://www.google.com/s2/favicons?domain=' + slug + '.bet.br&sz=32';
+}
+
+function sgCasaLogoHtml(nome, size) {
+  size = size || 20;
+  var url = sgGetCasaLogoUrl(nome);
+  return '<img src="' + url + '" alt="' + nome + '" width="' + size + '" height="' + size + '" '
+    + 'style="border-radius:' + Math.round(size*0.25) + 'px;object-fit:contain;flex-shrink:0;vertical-align:middle;" '
+    + 'onerror="this.style.opacity=0">';
+}
 // ── Componente de busca de casas com dropdown ──
 function casaSelectHTML(n, selected) {
   const defOpts = CASA_OPTS.filter(c => !c.startsWith('────'));
@@ -11188,8 +11229,8 @@ function casaSelectHTML(n, selected) {
         background:#0a1220;border:1px solid rgba(255,255,255,0.12);border-top:none;
         border-radius:0 0 8px 8px;max-height:200px;overflow-y:auto;
         box-shadow:0 8px 24px rgba(0,0,0,.12);">
-        ${defOpts.map(c => `<div class="csd-item" onclick="casaSearchSelect(${n},'${c.replace(/'/g,"\\'")}')"
-          style="padding:9px 13px;font-size:13px;cursor:pointer;color:#9ec4de;border-bottom:1px solid rgba(255,255,255,0.05);"
+        ${defOpts.map(c => `<div class="csd-item" onclick="casaSearchSelect(${n},'${c.replace(/'/g,"\'")}')"
+          style="padding:8px 13px;font-size:13px;cursor:pointer;color:#9ec4de;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;"
           onmouseover="this.style.background='rgba(61,158,110,0.12)';this.style.color='#4CAF82'"
           onmouseout="this.style.background='';this.style.color='#9ec4de'">${c}</div>`).join('')}
       </div>
@@ -16850,8 +16891,12 @@ document.getElementById('fg-email').addEventListener('keydown', function(e) {
   background: rgba(255,255,255,0.04);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
   min-width: 48px;
+  width: 56px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .sgm-odd:hover { background: rgba(255,255,255,0.08); color: #fff; }
 .sgm-odd.best { background: rgba(13,40,24,0.8); border-color: #3fb950; color: #3fb950; font-weight: 700; }
@@ -16889,12 +16934,26 @@ document.getElementById('fg-email').addEventListener('keydown', function(e) {
 }
 .sgm-footer-bottom span { color: #3fb950; }
 @media (max-width: 680px) {
+  #sg-odds-modal-overlay {
+    padding: 0 !important;
+    align-items: flex-end !important;
+  }
+  #sg-odds-modal {
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 92vh !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
   .sgm-body { grid-template-columns: 1fr; }
   .sgm-col-pa { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .sgm-col { padding: 16px !important; }
   .sgm-title { font-size: 16px; }
-  #sg-odds-modal { border-radius: 16px; }
-  .sgm-book-name { max-width: 60px; }
-  .sgm-odd { padding: 4px 7px; font-size: 12px; min-width: 40px; }
+  .sgm-book-name { max-width: 70px; }
+  .sgm-odd { padding: 4px 7px; font-size: 12px; min-width: 38px; }
+  .sgm-usar-btn { font-size: 10px; padding: 3px 6px; }
+  .sgm-header { padding: 16px !important; }
+  .sgm-footer-bottom { padding: 10px 16px; }
 }
 </style>
 
@@ -17262,12 +17321,11 @@ setTimeout(function() {
       return '<tr>' +
         '<td><div class="sgm-book-cell">' +
           buildLogoHtml(b.name, bc, init) +
-          (b.url ? '<a href="'+b.url+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="sgm-book-name sgm-book-link">'+b.name+'</a>' : '<span class="sgm-book-name">'+b.name+'</span>') +
+          (b.url ? '<a href="'+b.url+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="sgm-book-name sgm-book-link" title="Abrir '+b.name+'">'+b.name+' ↗</a>' : '<span class="sgm-book-name">'+b.name+'</span>') +
         '</div></td>' +
-        '<td class="sgm-odd-cell">'+(b.url?'<a href="'+b.url+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="text-decoration:none">':'')+' <span class="sgm-odd'+hBest+'" onclick="sgOddsUsar(_sgModalGame,\''+b.name+'\','+b.home+',\'1\',\''+tipo+'\')">'+b.home.toFixed(2)+'</span>'+(b.url?'</a>':'')+'</td>' +
-        '<td class="sgm-odd-cell">'+(b.draw ? '<span class="sgm-odd'+dBest+'" onclick="sgOddsUsar(_sgModalGame,\''+b.name+'\','+b.draw+',\'X\',\''+tipo+'\')">'+b.draw.toFixed(2)+'</span>' : '<span style="color:rgba(255,255,255,0.2);font-size:12px">—</span>')+'</td>' +
-        '<td class="sgm-odd-cell"><span class="sgm-odd'+aBest+'" onclick="sgOddsUsar(_sgModalGame,\''+b.name+'\','+b.away+',\'2\',\''+tipo+'\')">'+b.away.toFixed(2)+'</span></td>' +
-        '<td><button class="sgm-usar-btn" onclick="sgOddsUsarLinha(_sgModalGame,\''+b.name+'\','+b.home+','+b.draw+','+b.away+',\''+tipo+'\')">→ Usar</button></td>' +
+        '<td class="sgm-odd-cell"><span class="sgm-odd'+hBest+'" onclick="sgOddsUsar(_sgModalGame,\''+b.name+'\','+b.home+',\'1\',\''+tipo+'\',this)">'+b.home.toFixed(2)+'</span></td>' +
+        '<td class="sgm-odd-cell">'+(b.draw ? '<span class="sgm-odd'+dBest+'" onclick="sgOddsUsar(_sgModalGame,\''+b.name+'\','+b.draw+',\'X\',\''+tipo+'\',this)">'+b.draw.toFixed(2)+'</span>' : '<span style="color:rgba(255,255,255,0.2);font-size:12px">—</span>')+'</td>' +
+        '<td class="sgm-odd-cell"><span class="sgm-odd'+aBest+'" onclick="sgOddsUsar(_sgModalGame,\''+b.name+'\','+b.away+',\'2\',\''+tipo+'\',this)">'+b.away.toFixed(2)+'</span></td>' +
       '</tr>';
     }).join('');
 
@@ -17329,21 +17387,38 @@ setTimeout(function() {
     document.body.style.overflow = 'hidden';
   };
 
-  window.sgOddsUsar = function(game, casa, odd, selecao, tipo) {
-    sgOddsFecharModal();
-    if (typeof sgCalculadoraAbrir === 'function') {
-      sgCalculadoraAbrir({ game: game, casa: casa, odd: odd, selecao: selecao, tipo: tipo });
-    } else {
-      console.log('Usar:', { game: game, casa: casa, odd: odd, selecao: selecao, tipo: tipo });
-    }
-  };
+  window.sgOddsUsar = function(game, casa, odd, selecao, tipo, el) {
+    // Mapeia coluna para slot correto — '1'=casa, 'X'=empate, '2'=fora
+    var resKey = selecao === 'X' ? 'empate' : selecao === '2' ? 'fora' : 'casa';
+    var jogo = game ? (game.home + ' x ' + game.away) : '';
+    var oddVal = parseFloat(odd);
 
-  window.sgOddsUsarLinha = function(game, casa, home, draw, away, tipo) {
-    sgOddsFecharModal();
-    if (typeof sgCalculadoraAbrir === 'function') {
-      sgCalculadoraAbrir({ game: game, casa: casa, home: home, draw: draw, away: away, tipo: tipo });
-    } else {
-      console.log('Usar linha:', { game: game, casa: casa, home: home, draw: draw, away: away, tipo: tipo });
+    // Preenche o slot correto
+    window._sgOddsSelecao[resKey] = { odd: oddVal, casa: casa };
+    window._sgOddsAtualizarCard(jogo);
+
+    // Remove seleção anterior da mesma coluna
+    document.querySelectorAll('.sgm-sel-' + resKey).forEach(function(s) {
+      s.style.background = 'rgba(255,255,255,0.04)';
+      s.style.color = 'rgba(255,255,255,0.7)';
+      s.style.borderColor = 'transparent';
+      s.style.fontWeight = '600';
+      s.classList.remove('sgm-sel-' + resKey);
+    });
+
+    // Marca odd clicada como selecionada
+    if (el) {
+      el.style.background = 'rgba(34,197,94,0.2)';
+      el.style.color = '#22c55e';
+      el.style.borderColor = '#22c55e';
+      el.style.fontWeight = '800';
+      el.classList.add('sgm-sel-' + resKey);
+    }
+
+    // Fecha modal quando os 3 slots estiverem preenchidos
+    var preenchidos = Object.values(window._sgOddsSelecao).filter(function(v){ return v !== null; }).length;
+    if (preenchidos >= 3) {
+      setTimeout(sgOddsFecharModal, 400);
     }
   };
 
@@ -22287,44 +22362,41 @@ function _sgOddsAtualizarCard(jogo) {
     card = document.createElement('div');
     card.id = 'sg-odds-calc-card';
     card.style.cssText =
-      'position:fixed;bottom:32px;right:28px;z-index:9999;width:300px;' +
-      'background:#0d1824;' +
-      'border:1px solid rgba(255,255,255,0.1);border-radius:16px;' +
+      'position:fixed;bottom:28px;right:24px;z-index:999999;width:310px;' +
+      'background:#0d1117;' +
+      'border:1px solid rgba(255,255,255,0.08);border-radius:20px;' +
       'padding:0;overflow:hidden;' +
-      'box-shadow:0 24px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04);' +
-      'animation:loginIn .35s cubic-bezier(.22,1,.36,1) both;';
+      'box-shadow:0 32px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.04);' +
+      'animation:loginIn .3s cubic-bezier(.22,1,.36,1) both;';
     document.body.appendChild(card);
   }
 
   var linhas = ['casa','empate','fora'].map(function(r) {
     var sel    = _sgOddsSelecao[r];
     var filled = !!sel;
-    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.05);">'
-      + '<div style="display:flex;align-items:center;gap:10px;">'
-      + '<span style="width:6px;height:6px;border-radius:50%;background:' + (filled ? '#4ade80' : 'rgba(255,255,255,0.1)') + ';flex-shrink:0;"></span>'
-      + '<span style="font-size:13px;font-weight:600;color:' + (filled ? '#eef6ff' : 'rgba(255,255,255,0.25)') + ';font-family:DM Sans,sans-serif;">'
-      + labels[r]
-      + (filled ? '<span style="color:rgba(255,255,255,0.35);margin-left:6px;font-size:12px;font-weight:400;">· ' + sel.casa + '</span>' : '')
-      + '</span>'
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.04);">'
+      + '<div style="display:flex;align-items:center;gap:12px;">'
+      + '<span style="width:7px;height:7px;border-radius:50%;flex-shrink:0;background:' + (filled ? '#4ade80' : 'rgba(255,255,255,0.08)') + ';box-shadow:' + (filled ? '0 0 6px rgba(74,222,128,0.5)' : 'none') + ';"></span>'
+      + '<div style="display:flex;flex-direction:column;gap:2px;">'
+      + '<span style="font-size:13px;font-weight:700;color:' + (filled ? '#eef6ff' : 'rgba(255,255,255,0.2)') + ';font-family:DM Sans,sans-serif;">' + labels[r] + '</span>'
+      + (filled ? '<span style="font-size:11px;font-weight:500;color:rgba(255,255,255,0.35);font-family:DM Sans,sans-serif;">' + sel.casa + '</span>' : '')
       + '</div>'
-      + '<span style="font-size:17px;font-weight:800;color:' + (filled ? '#4ade80' : 'rgba(255,255,255,0.12)') + ';font-family:Space Grotesk,sans-serif;letter-spacing:-0.03em;">'
+      + '</div>'
+      + '<span style="font-size:20px;font-weight:800;color:' + (filled ? '#4ade80' : 'rgba(255,255,255,0.1)') + ';font-family:Space Grotesk,sans-serif;letter-spacing:-0.04em;">'
       + (filled ? sel.odd.toFixed(2) : '—') + '</span>'
       + '</div>';
   }).join('');
 
   card.innerHTML =
     '<div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px 14px;border-bottom:1px solid rgba(255,255,255,0.06);">'
-    + '<div style="display:flex;align-items:center;gap:8px;">'
-    + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>'
-    + '<span style="font-size:11px;font-weight:800;color:#eef6ff;letter-spacing:.10em;text-transform:uppercase;font-family:DM Sans,sans-serif;">Surebet</span>'
-    + '</div>'
+    + '<span style="font-size:13px;font-weight:700;color:#eef6ff;font-family:DM Sans,sans-serif;letter-spacing:0;">Odds Selecionadas</span>'
     + '<span style="font-size:12px;font-weight:700;color:' + (pronto ? '#4ade80' : 'rgba(255,255,255,0.3)') + ';font-family:Space Grotesk,sans-serif;">'
     + total + '<span style="color:rgba(255,255,255,0.2);font-weight:500;">/3</span></span>'
     + '</div>'
     + linhas
     + '<div style="padding:14px 16px 14px;">'
     + (pronto
-      ? '<button onclick="sgOddsEnviarCalc()" style="width:100%;padding:13px;background:#22c55e;border:none;border-radius:10px;color:#071a0e;font-family:DM Sans,sans-serif;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:.02em;transition:background .15s;" onmouseover=\"this.style.opacity=.85\" onmouseout=\"this.style.opacity=1\">→ Abrir Calculadora</button>'
+      ? '<button onclick="sgOddsEnviarCalc()" style="width:100%;padding:14px;background:linear-gradient(135deg,#22c55e,#16a34a);border:none;border-radius:12px;color:#fff;font-family:DM Sans,sans-serif;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:.01em;transition:opacity .15s;box-shadow:0 4px 16px rgba(34,197,94,0.3);" onmouseover=\"this.style.opacity=.85\" onmouseout=\"this.style.opacity=1\">Abrir Calculadora →</button>'
       : '<div style="text-align:center;padding:2px 0 8px;font-size:12px;color:rgba(255,255,255,0.3);font-family:DM Sans,sans-serif;">Selecione mais ' + (3 - total) + ' resultado(s)</div>'
     )
     + '<button onclick="sgOddsLimparSelecao()" style="width:100%;margin-top:8px;padding:9px;background:transparent;border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:rgba(255,255,255,0.3);font-family:DM Sans,sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;" onmouseover=\"this.style.opacity=.7\" onmouseout=\"this.style.opacity=1\">✕ Limpar seleção</button>'
@@ -22901,18 +22973,16 @@ function opxUsarTop(gi){
 function sgOddsToggle(a,b){opxTog(a,b);}
 function sgOddsExpTab(a,b,c){opxTab(a,b,c);}
 
-function sgOddsUsar(jogo, casa, oddStr, resultado) {
+function sgOddsUsarLegacy(jogo, casa, oddStr, resultado) {
   var oddVal = parseFloat(oddStr);
   if (isNaN(oddVal)) return;
 
-  // Mapeia resultado para chave interna (recebe home/draw/away)
   var resKey = resultado === 'draw' ? 'empate'
              : resultado === 'away' ? 'fora'
              : 'casa';
 
   _sgOddsSelecao[resKey] = { odd: oddVal, casa: casa };
 
-  // Atualiza visual do botão clicado
   var btn = event ? event.currentTarget : null;
   if (btn) {
     btn.style.background = 'rgba(34,197,94,0.18)';
