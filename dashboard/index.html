@@ -11147,8 +11147,9 @@ const CASA_OPTS = [
   'Matchbook','Smarkets','Betdaq','Betfair Exchange',
   // ── Brasileiras regulamentadas ──
   '──── Brasileiras ────',
-  'Esportiva Bet','EstrelaBet','Bolsa de Aposta','Viva Sorte',
+  'Esportivabet','Estrelabet','Bolsa de Aposta','Viva Sorte',
   'Apostabet','Betesportes','Jogo de Ouro','Fulltbet',
+  'Jogodeouro',
   'Aposta Tudo','Betnacional','f12.bet','Brbet',
   'Segurobet','Onabet','Betsul','Galera.bet',
   'Betpix365','Reals','4BET','Bodog','Parimatch',
@@ -12392,7 +12393,6 @@ function coOddInput(n, el) {
 
   // Se termina em ponto ou está incompleto (ex: "2.", "1.0") — aguarda mais input
   if (/[.,]$/.test(raw) || /^\d*[.,]\d?$/.test(raw)) {
-    // Usuário ainda está digitando o decimal — não calcular ainda
     clearTimeout(_coOddTimer[n]);
     return;
   }
@@ -12404,10 +12404,19 @@ function coOddInput(n, el) {
     if (!isNaN(val) && val > 1) {
       coOnOddChange(n);
     } else if (raw === '' || raw === '0') {
-      // Campo vazio — recalcula (mostra/esconde resultado)
       coCalc();
     }
   }, 400);
+}
+
+// Garante cálculo ao sair do campo (mobile)
+function coOddBlur(n, el) {
+  clearTimeout(_coOddTimer[n]);
+  var raw = el.value.replace(',', '.');
+  var val = parseFloat(raw);
+  if (!isNaN(val) && val > 1) {
+    coOnOddChange(n);
+  }
 }
 
 // Limpa os campos de uma casa (odd, stake, aum)
@@ -12515,13 +12524,13 @@ function coRender() {
          </div>`;
 
     return `<div class="co-card">
-      <div class="co-card-title">Casa ${n}</div>
+      <div class="co-card-title" id="co_card_title${n}">Casa ${n}</div>
       <div class="co-field">
         <div class="co-lbl" style="display:flex;align-items:center;justify-content:space-between;">
           <span>Odd</span>
           <button onclick="coLimparCasa(${n})" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:5px;color:#5c7f99;font-size:10px;font-weight:600;padding:2px 8px;cursor:pointer;letter-spacing:.04em;transition:all .15s;" onmouseover="this.style.background='rgba(239,68,68,.08)';this.style.borderColor='rgba(239,68,68,.3)';this.style.color='#ef4444'" onmouseout="this.style.background='rgba(255,255,255,.05)';this.style.borderColor='rgba(255,255,255,.10)';this.style.color='#5c7f99'">✕ Limpar</button>
         </div>
-        <input class="co-inp" id="co_odd${n}" type="text" inputmode="decimal" placeholder="2.00" value="${p.odd}" oninput="coOddInput(${n}, this)">
+        <input class="co-inp" id="co_odd${n}" type="text" inputmode="decimal" placeholder="2.00" value="${p.odd}" oninput="coOddInput(${n}, this)" onblur="coOddBlur(${n}, this)" onchange="coOddBlur(${n}, this)">
       </div>
       <div class="co-field">
         <div class="co-lbl">Tipo</div>
@@ -12714,7 +12723,7 @@ function coCalc() {
   </div>`;
 
   res.className = 'co-result show';
-  res.innerHTML = leftPanel + rightPanel;
+  res.innerHTML = '<div class="co-result-grid">' + leftPanel + rightPanel + '</div>';
   if (sendWrap) sendWrap.style.display = 'flex';
 }
 
@@ -12891,10 +12900,18 @@ function coAbrirModalRegistro() {
   _coModalData = { casas, custoSoma, lucroReal, tipoSug };
 
   document.getElementById('co-registro-bg').style.display = 'flex';
+  // Preencher nomes das casas vindos das odds automaticamente
   setTimeout(function() {
-    var first = list.querySelector('.cr-nome');
-    if (first) first.focus();
-  }, 180);
+    Object.keys(_coNomesCasas).forEach(function(n) {
+      var idx = parseInt(n) - 1;
+      var nome = _coNomesCasas[n];
+      if (nome && typeof crDdSelect === 'function') {
+        var fakeEv = { preventDefault: function(){} };
+        crDdSelect(fakeEv, idx, nome);
+      }
+    });
+    _coNomesCasas = {};
+  }, 250);
 }
 
 
@@ -12908,7 +12925,7 @@ var CR_CASAS = [
   // Principais
   {n:'Bet365',        u:'https://www.bet365.com',               c:'Principal'},
   {n:'Betano',        u:'https://www.betano.bet.br',            c:'Principal'},
-  {n:'BetEsporte',    u:'https://www.betesporte.com.br',        c:'Principal'},
+  {n:'Betesporte',    u:'https://www.betesporte.com.br',        c:'Principal'},
   {n:'Superbet',      u:'https://www.superbet.bet.br',          c:'Principal'},
   {n:'Sportingbet',   u:'https://www.sportingbet.com',          c:'Principal'},
   {n:'Betnacional',   u:'https://www.betnacional.com',          c:'Principal'},
@@ -12943,7 +12960,9 @@ var CR_CASAS = [
   {n:'Energia Bet',   u:'https://www.energia.bet.br',           c:'Outras'},
   {n:'HiperBet',      u:'https://www.hiperbet.bet.br',          c:'Outras'},
   {n:'Bet7k',         u:'https://www.bet7k.com',                c:'Outras'},
-  {n:'EsportivaBet',  u:'https://www.esportivabet.com',         c:'Outras'},
+  {n:'Esportivabet',  u:'https://www.esportivabet.com',         c:'Outras'},
+  {n:'Apostabet',    u:'https://www.apostabet.com.br',         c:'Outras'},
+  {n:'Jogodeouro',   u:'https://www.jogodeouro.bet.br',        c:'Outras'},
   {n:'BetMGM',        u:'https://www.betmgm.com',               c:'Outras'},
   {n:'PlayUZU',       u:'https://www.playuzu.com',              c:'Outras'},
   {n:'Lottoland',     u:'https://www.lottoland.com',            c:'Outras'},
@@ -13075,6 +13094,7 @@ document.addEventListener('mousedown', function(e) {
 
 
 var _coRegistrando = false;
+var _coNomesCasas = {}; // nomes vindos das odds: {1: "Bet365", 2: "Betano", 3: "Betfair"}
 
 function coRegistrarDoModal() {
   // ── Proteção anti-duplo-clique ──
@@ -13887,14 +13907,14 @@ function renderBankroll() {
     'esportes':'Esporte da Sorte','esporte da sorte':'Esporte da Sorte','esportesdasorte':'Esporte da Sorte',
     // Bolsa de Aposta
     'bolsa de apostas':'Bolsa de Aposta','bolsadeapostas':'Bolsa de Aposta','bolsadeaposta':'Bolsa de Aposta',
-    // EsportivaBet
-    'esportiva bet':'EsportivaBet','esportivanet':'EsportivaBet','esportiva':'EsportivaBet',
+    // Esportivabet
+    'esportiva bet':'Esportivabet','esportivanet':'Esportivabet','esportiva':'Esportivabet','esportivabet':'Esportivabet',
     // Betano variações
     'betao':'Betano','betaoo':'Betano',
     // 1xBet
     '1x bet':'1xBet','1 xbet':'1xBet',
     // Outros
-    'betesporte':'BetEsporte','betesportes':'BetEsporte',
+    'betesporte':'Betesporte','betesportes':'Betesporte','bet esporte':'Betesporte',
   };
 
   function resolveAlias(nome) {
@@ -14259,7 +14279,7 @@ var BK_CASAS_DATA = {
     {n:'Sportingbet',c:'#a78bfa'},{n:'KTO',c:'#f87171'},{n:'1xBet',c:'#818cf8'},
     {n:'Stake',c:'#94a3b8'},{n:'Vbet',c:'#a78bfa'},{n:'Betsson',c:'#f59e0b'},
     {n:'Superbet',c:'#f87171'},{n:'Betnacional',c:'#60a5fa'},
-    {n:'EsportivaBet',c:'#22c55e'},{n:'Jogo de Ouro',c:'#f59e0b'}
+    {n:'Esportivabet',c:'#22c55e'},{n:'Jogo de Ouro',c:'#f59e0b'}
   ],
   'Exchange': [
     {n:'Betfair',c:'#22c55e'},{n:'Bolsa de Aposta',c:'#3b82f6'},
@@ -15976,9 +15996,6 @@ document.getElementById('fg-email').addEventListener('keydown', function(e) {
 
 /* ── PAINEL RESULTADO ── */
 #pg-calc .co-result.show {
-  display: grid !important;
-  grid-template-columns: 1fr 1.5fr !important;
-  gap: 16px !important;
   margin-bottom: 16px !important;
   animation: calcCardIn .3s cubic-bezier(.22,1,.36,1) both !important;
 }
@@ -22426,11 +22443,21 @@ function sgOddsEnviarCalc() {
         { s: sel.fora,   id: 'co_odd3', n: 3 }
       ].forEach(function(m) {
         if (!m.s) return;
+        // Preencher odd
         var el = document.getElementById(m.id);
         if (el) {
           el.value = m.s.odd.toFixed(2);
           if (typeof coOddInput === 'function') coOddInput(m.n, el);
           el.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        // Guardar nome da casa para preencher no modal de registro e no título do card
+        if (m.s.nome) {
+          _coNomesCasas[m.n] = m.s.nome;
+          // Atualizar título do card da calculadora
+          setTimeout(function(nn, nome){
+            var t = document.getElementById('co_card_title' + nn);
+            if (t) t.textContent = nome;
+          }, 600, m.n, m.s.nome);
         }
       });
 
@@ -24202,6 +24229,98 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
 
 <style id="sg-mobile-dashboard-v4-final">
 @media screen and (max-width: 768px){
+  /* Resultados + Distribuição em coluna no mobile */
+  /* ── Calculadora: resultado em coluna, largura total ── */
+  #pg-calc{
+    padding:16px 14px 100px!important;
+    overflow-x:hidden!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+  }
+  .co-result,
+  .co-result.show{
+    display:block!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    grid-template-columns:none!important;
+  }
+  .co-result-grid{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:12px!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+  }
+  /* Cards redesenhados */
+  .co-result-grid .co-panel{
+    width:100%!important;
+    box-sizing:border-box!important;
+    border-radius:20px!important;
+    overflow:hidden!important;
+    background:linear-gradient(160deg,#0d1e32,#08121e)!important;
+    border:1px solid rgba(255,255,255,.08)!important;
+  }
+  /* Título Resultados */
+  .co-result-grid .co-panel .co-panel-title{
+    padding:16px 18px!important;
+    font-size:16px!important;
+    font-weight:800!important;
+  }
+  /* Linhas */
+  .co-result-grid .co-panel .co-panel-row{
+    padding:14px 18px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    flex-wrap:nowrap!important;
+    gap:8px!important;
+  }
+  .co-result-grid .co-panel .co-panel-row span:first-child{
+    font-size:13px!important;
+    flex-shrink:0!important;
+  }
+  .co-result-grid .co-panel .co-panel-row span:last-child{
+    font-size:20px!important;
+    font-weight:800!important;
+    white-space:nowrap!important;
+  }
+  /* Distribuição header */
+  .co-dist-header{
+    padding:16px 18px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:8px!important;
+  }
+  .co-panel-badge{
+    white-space:nowrap!important;
+    font-size:11px!important;
+    padding:4px 10px!important;
+    border-radius:20px!important;
+  }
+  /* Rows da distribuição */
+  .co-result-grid .co-panel > div[style*="padding:12px 20px"],
+  .co-result-grid .co-panel > div[style*="padding:16px 20px"]{
+    padding:14px 18px!important;
+    box-sizing:border-box!important;
+  }
+  /* Retorno garantido */
+  .co-dist-retorno{
+    padding:16px 18px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    border-radius:0 0 20px 20px!important;
+  }
+  .co-dist-retorno-lbl{
+    font-size:13px!important;
+    white-space:nowrap!important;
+  }
+  .co-dist-retorno-val{
+    font-size:22px!important;
+    font-weight:800!important;
+    white-space:nowrap!important;
+  }
   :root{
     --sgm-bg:#040B14;
     --sgm-card:#0B1726;
