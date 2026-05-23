@@ -10523,7 +10523,7 @@ html, body, .main-content, .page, #pg-calc { background: #04060c !important; }
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword, sendPasswordResetEmail, setPersistence, browserLocalPersistence, browserSessionPersistence }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc, onSnapshot, query, orderBy }
+import { getFirestore, collection, doc, getDoc, setDoc, getDocs, deleteDoc, onSnapshot, query, orderBy }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -10830,9 +10830,21 @@ onAuthStateChanged(auth, user => {
   const ash = document.getElementById('app-shell');
   if (user) {
     // Verificar vencimento do plano
-    getDoc(doc(db, 'users', user.uid)).then(function(snap) {
-      var dados = snap.exists() ? snap.data() : {};
-      var venc = dados.plano_expira || dados.expira || dados.vencimento || null;
+    // Buscar dados de expiração — paralelo em users/ e usuarios/
+    Promise.all([
+      getDoc(doc(db, 'users', user.uid)).catch(function(){ return null; }),
+      getDoc(doc(db, 'usuarios', user.uid)).catch(function(){ return null; })
+    ]).then(function(snaps) {
+      var dados = {};
+      snaps.forEach(function(s){ if (s && s.exists()) Object.assign(dados, s.data()); });
+      // Campo salvo pelo kirvano-webhook.js como Timestamp
+      var vencTs = dados.assinatura_expira || dados.plano_expira || null;
+      var venc = null;
+      if (vencTs) {
+        // Firestore Timestamp tem .toDate(), string ISO não
+        var vencDate = (vencTs && typeof vencTs.toDate === 'function') ? vencTs.toDate() : new Date(vencTs);
+        venc = vencDate.toISOString().slice(0, 10);
+      }
       if (venc) {
         var hoje = new Date().toISOString().slice(0, 10);
         if (hoje > venc) {
@@ -10847,7 +10859,7 @@ onAuthStateChanged(auth, user => {
               + '<div style="font-size:48px;margin-bottom:16px;">🔒</div>'
               + '<div style="font-size:24px;font-weight:800;color:#eef6ff;margin-bottom:8px;">Acesso Expirado</div>'
               + '<div style="font-size:14px;color:rgba(190,215,235,.65);margin-bottom:28px;line-height:1.6;">Seu plano venceu em <strong style="color:#f87171">' + venc.split('-').reverse().join('/') + '</strong>.<br>Renove agora para continuar usando o SureGreen.</div>'
-              + '<a href="https://wa.me/SEU_NUMERO?text=Quero+renovar+meu+plano+SureGreen" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-weight:800;font-size:16px;padding:16px 32px;border-radius:14px;text-decoration:none;box-shadow:0 8px 24px rgba(34,197,94,.3);">Renovar pelo WhatsApp</a>'
+              + '<a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-weight:800;font-size:16px;padding:16px 32px;border-radius:14px;text-decoration:none;box-shadow:0 8px 24px rgba(34,197,94,.3);">Renovar pelo WhatsApp</a>'
               + '<div style="margin-top:20px;"><button onclick="window.doLogout&&window.doLogout()" style="background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(190,215,235,.5);font-size:13px;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:DM Sans,sans-serif;">Sair da conta</button></div>'
               + '</div>';
             document.body.appendChild(bloq);
