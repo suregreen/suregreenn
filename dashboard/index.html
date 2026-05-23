@@ -2375,6 +2375,7 @@ body::after{content:none;}
   from { opacity:0; transform:translateY(18px) scale(.98); }
   to   { opacity:1; transform:none; }
 }
+@keyframes aovivo { 0%,100%{opacity:1} 50%{opacity:0.25} }
 
 /* Base idêntica ao .hk */
 .hkpi {
@@ -5240,7 +5241,7 @@ window.addEventListener('unhandledrejection', function(e) {
     <button class="sn-tab" onclick="goPage('pg-odds',this);sgOddsInit()">
       <span class="sn-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
       <span>Odds</span>
-      <span style="margin-left:auto;font-size:9px;font-weight:700;background:rgba(137,165,185,.15);color:#89A5B9;border:1px solid rgba(137,165,185,.3);border-radius:20px;padding:1px 6px;">BETA</span>
+      <span style="margin-left:auto;font-size:9px;font-weight:700;color:#22c55e;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:20px;padding:2px 8px;display:inline-flex;align-items:center;gap:5px;"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;animation:aovivo 1.4s ease-in-out infinite;"></span>AO VIVO</span>
     </button>
 
     <div style="padding:0 16px 8px;margin-top:18px;"><div style="font-size:10px;font-weight:500;color:var(--label);text-transform:uppercase;letter-spacing:0.14em;">Relatórios</div></div>
@@ -7717,7 +7718,7 @@ function maisGo(pageId, cb) {
 <div class="opx-hdr opx-hdr-desktop">
   <div class="opx-title-row">
     <h1 class="opx-title">Comparador de Odds</h1>
-    <span class="opx-beta">BETA</span>
+    <span class="opx-beta"><span style="display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:700;color:#22c55e;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:20px;padding:2px 8px;"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;animation:aovivo 1.4s ease-in-out infinite;"></span>AO VIVO</span></span>
   </div>
   <div class="opx-update">
     <span id="odds-update-txt">Carregando...</span>
@@ -7730,7 +7731,7 @@ function maisGo(pageId, cb) {
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
     <div>
       <span style="font-size:18px;font-weight:800;color:#eef6ff;letter-spacing:-.02em;">Comparador de Odds</span>
-      <span style="font-size:9px;font-weight:800;color:#22c55e;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:5px;padding:2px 7px;margin-left:8px;letter-spacing:.08em;vertical-align:middle;">BETA</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:700;color:#22c55e;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:20px;padding:2px 8px;"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;animation:aovivo 1.4s ease-in-out infinite;"></span>AO VIVO</span>
     </div>
     <button style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:9px;color:rgba(255,255,255,.6);font-size:12px;font-weight:600;padding:7px 12px;cursor:pointer;font-family:DM Sans,sans-serif;display:flex;align-items:center;gap:5px;">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
