@@ -7482,6 +7482,26 @@ function maisGo(pageId, cb) {
 .opx-row-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
 .opx-row-time { font-size: 11px; color: rgba(220,230,255,.38); font-weight: 600; }
 .opx-row-league { font-size: 11px; color: rgba(210,220,240,.3); }
+.opx-league-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px 8px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  margin-top: 4px;
+}
+.opx-league-header:first-child { border-top: none; }
+.opx-league-name {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #1EEF78;
+}
+.opx-league-count {
+  font-size: 11px;
+  color: rgba(190,215,235,.3);
+}
 .opx-row-teams {
   font-size: 15px; font-weight: 700; color: #eef6ff;
   display: flex; align-items: center; gap: 6px; line-height: 1.3;
@@ -10809,37 +10829,69 @@ onAuthStateChanged(auth, user => {
   const ls  = document.getElementById('login-screen');
   const ash = document.getElementById('app-shell');
   if (user) {
-    ls.style.display = 'none';
-    ash.style.display = 'flex';
-    ash.style.flexDirection = 'row';
-    ash.style.minHeight = '100vh';
-    // Popula sidebar com dados do usuário
-    const nome = (user.displayName || user.email || '').split('@')[0] || 'Conta';
-    // Avatar com iniciais
-    const avatarEl = document.getElementById('sb-avatar');
-    if (avatarEl) {
-      const parts = nome.split(/[\s._-]/);
-      const initials = parts.length >= 2
-        ? (parts[0][0] + parts[1][0]).toUpperCase()
-        : nome.slice(0,2).toUpperCase();
-      avatarEl.textContent = initials;
-    }
-    const nameEl = document.getElementById('sb-user-name');
-    if (nameEl) nameEl.textContent = nome.charAt(0).toUpperCase() + nome.slice(1);
-    // Carrega entradas do usuário
-    loadEntries(user.uid);
-    loadExtras(user.uid);
-    loadDiario(user.uid);
-    if (typeof diarAgendarMeiaNoite === 'function') diarAgendarMeiaNoite();
-    // UX FIX — restaura última aba visitada após reload
-    setTimeout(function() {
-      if (typeof window._sgRestorePage === 'function') window._sgRestorePage();
-    }, 350);
+    // Verificar vencimento do plano
+    getDoc(doc(db, 'users', user.uid)).then(function(snap) {
+      var dados = snap.exists() ? snap.data() : {};
+      var venc = dados.plano_expira || dados.expira || dados.vencimento || null;
+      if (venc) {
+        var hoje = new Date().toISOString().slice(0, 10);
+        if (hoje > venc) {
+          ls.style.display = 'none';
+          ash.style.display = 'none';
+          var bloq = document.getElementById('sg-bloqueio');
+          if (!bloq) {
+            bloq = document.createElement('div');
+            bloq.id = 'sg-bloqueio';
+            bloq.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#040B14;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:DM Sans,sans-serif;';
+            bloq.innerHTML = '<div style="text-align:center;padding:32px;max-width:380px;">'
+              + '<div style="font-size:48px;margin-bottom:16px;">🔒</div>'
+              + '<div style="font-size:24px;font-weight:800;color:#eef6ff;margin-bottom:8px;">Acesso Expirado</div>'
+              + '<div style="font-size:14px;color:rgba(190,215,235,.65);margin-bottom:28px;line-height:1.6;">Seu plano venceu em <strong style="color:#f87171">' + venc.split('-').reverse().join('/') + '</strong>.<br>Renove agora para continuar usando o SureGreen.</div>'
+              + '<a href="https://wa.me/SEU_NUMERO?text=Quero+renovar+meu+plano+SureGreen" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-weight:800;font-size:16px;padding:16px 32px;border-radius:14px;text-decoration:none;box-shadow:0 8px 24px rgba(34,197,94,.3);">Renovar pelo WhatsApp</a>'
+              + '<div style="margin-top:20px;"><button onclick="window.doLogout&&window.doLogout()" style="background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(190,215,235,.5);font-size:13px;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:DM Sans,sans-serif;">Sair da conta</button></div>'
+              + '</div>';
+            document.body.appendChild(bloq);
+          }
+          bloq.style.display = 'flex';
+          return;
+        }
+      }
+      sgMostrarApp(user, ls, ash);
+    }).catch(function() {
+      sgMostrarApp(user, ls, ash);
+    });
   } else {
     ls.style.display = 'flex';
     ash.style.display = 'none';
+    var bloq = document.getElementById('sg-bloqueio');
+    if (bloq) bloq.style.display = 'none';
   }
 });
+
+function sgMostrarApp(user, ls, ash) {
+  ls.style.display = 'none';
+  ash.style.display = 'flex';
+  ash.style.flexDirection = 'row';
+  ash.style.minHeight = '100vh';
+  const nome = (user.displayName || user.email || '').split('@')[0] || 'Conta';
+  const avatarEl = document.getElementById('sb-avatar');
+  if (avatarEl) {
+    const parts = nome.split(/[\s._-]/);
+    const initials = parts.length >= 2
+      ? (parts[0][0] + parts[1][0]).toUpperCase()
+      : nome.slice(0,2).toUpperCase();
+    avatarEl.textContent = initials;
+  }
+  const nameEl = document.getElementById('sb-user-name');
+  if (nameEl) nameEl.textContent = nome.charAt(0).toUpperCase() + nome.slice(1);
+  loadEntries(user.uid);
+  loadExtras(user.uid);
+  loadDiario(user.uid);
+  if (typeof diarAgendarMeiaNoite === 'function') diarAgendarMeiaNoite();
+  setTimeout(function() {
+    if (typeof window._sgRestorePage === 'function') window._sgRestorePage();
+  }, 350);
+}
 
 // ── Carrega entradas do Firestore ──
 
@@ -22889,7 +22941,21 @@ function opxRender(games) {
   var headerHtml = '<div class="opx-thead-custom"><span>JOGO</span><span>CASAS DE APOSTA</span><span style="text-align:right">LUCRO</span><span style="text-align:right">A&Ccedil;&Atilde;O</span></div>';
   var html = '';
 
+  // Agrupar por liga
+  var leagueOrder = [];
+  var leagueMap = {};
   games.forEach(function(g, gi) {
+    var lg = g.league || 'Outros';
+    if (!leagueMap[lg]) { leagueMap[lg] = []; leagueOrder.push(lg); }
+    leagueMap[lg].push({g:g, gi:gi});
+  });
+
+  leagueOrder.forEach(function(league) {
+    html += '<div class="opx-league-header"><span class="opx-league-name">' + league + '</span><span class="opx-league-count">' + leagueMap[league].length + ' jogos</span></div>';
+    leagueMap[league].forEach(function(item) {
+      var g = item.g;
+      var gi = item.gi;
+
     var rid = 'opxr'+gi, eid = 'opxe'+gi;
     var bk = g.bookmakers || [];
     var bkPref = bk.filter(isPrio);
@@ -22957,6 +23023,7 @@ function opxRender(games) {
       html+='</div>';
     });
     html+='</div></div></div>';
+    });
   });
 
   wrap.innerHTML = headerHtml + html;
