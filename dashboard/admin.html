@@ -6,6 +6,9 @@
 <title>SureGreen Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <style>
 :root {
   --bg: #050816;
@@ -354,6 +357,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <div class="notif-dot" id="notif-count">0</div>
         </button>
+        <button class="btn-topbar" id="btn-logout" style="border-color:transparent;color:var(--text3)">Sair</button>
       </div>
     </div>
 
@@ -361,7 +365,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
       <div class="alert-bar" id="alert-expiring"></div>
 
       <!-- KPIs -->
-      <div id="sec-visao" class="main-section">
+      <div class="kpi-grid" id="sec-visao">
         <div class="kpi-card kpi-green">
           <div class="kpi-header">
             <div>
@@ -572,11 +576,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 
 <div class="toast" id="toast"></div>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
 <script>
+window.addEventListener('load', function() {
 const firebaseConfig = {
   apiKey: "AIzaSyAwVfYGWzkJ74FaWpeF2LQhRTMlCEyJdFw",
   authDomain: "xuxa-bet.firebaseapp.com",
@@ -924,6 +925,7 @@ window.sendReminders=async function(){
   }catch(e){alert('Erro: '+e.message);}
   finally{btn.textContent='📧 Enviar lembrete';btn.disabled=false;}
 };
+}); // fim window.load
 </script>
 </body>
 </html>
