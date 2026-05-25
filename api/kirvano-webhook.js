@@ -66,8 +66,20 @@ module.exports = async function handler(req, res) {
     expiracao.setDate(expiracao.getDate() + diasAcesso);
     const assinatura_expira = Timestamp.fromDate(expiracao);
 
+    // ── Calcula valor do plano ──
+    const valorPago = (body && body.payment && body.payment.amount)
+      ? body.payment.amount / 100
+      : (body && body.amount)
+      ? body.amount / 100
+      : null;
+
+    const metodoPagamento = (body && body.payment && body.payment.method)
+      ? body.payment.method
+      : (body && body.payment_method)
+      ? body.payment_method
+      : "desconhecido";
+
     // ── Verifica se esse email já tem um usuário cadastrado ──
-    // Se já existe, só renova a assinatura (não precisa de novo código)
     const usuariosSnap = await db
       .collection("usuarios")
       .where("email", "==", email)
@@ -79,7 +91,6 @@ module.exports = async function handler(req, res) {
       const usuarioDoc = usuariosSnap.docs[0];
       const dadosAtuais = usuarioDoc.data();
 
-      // Se ainda tem dias restantes, soma a partir do vencimento. Senão, soma a partir de hoje.
       let baseRenovacao = new Date();
       if (dadosAtuais.assinatura_expira) {
         const vencimentoAtual = dadosAtuais.assinatura_expira.toDate();
@@ -94,6 +105,17 @@ module.exports = async function handler(req, res) {
         assinatura_expira: Timestamp.fromDate(novaExpiracao),
         renovadoEm: Timestamp.fromDate(agora),
         plano: nomePlano || "mensal",
+      });
+
+      // ── NOVO: Salva pagamento de renovação ──
+      await db.collection("pagamentos").add({
+        email: email,
+        tipo: "renovacao",
+        plano: nomePlano || "mensal",
+        diasAcesso: diasAcesso,
+        valor: valorPago,
+        metodoPagamento: metodoPagamento,
+        criadoEm: Timestamp.fromDate(agora),
       });
 
       console.log("Assinatura renovada para:", email, "| Dias:", diasAcesso, "| Expira:", novaExpiracao);
@@ -115,23 +137,30 @@ module.exports = async function handler(req, res) {
     const codigoDoc = snap.docs[0];
     const codigo = codigoDoc.id;
 
-    // Reserva o código (mas NÃO marca usado:true ainda)
-    // usado:true só é marcado quando o cliente criar a conta
     await codigoDoc.ref.update({
       reservado: true,
       email: email,
       reservadoEm: Timestamp.fromDate(agora),
-      assinatura_expira: assinatura_expira, // salva aqui também para referência
+      assinatura_expira: assinatura_expira,
     });
 
-    // ── Salva dados do cliente em usuarios/ (sem uid ainda) ──
-    // O uid real é adicionado quando o cliente criar a conta no cadastro.html
     await db.collection("usuarios").doc("pendente_" + codigo).set({
       email: email,
       codigo: codigo,
       assinatura_expira: assinatura_expira,
       criadoEm: Timestamp.fromDate(agora),
-      status: "pendente", // vira "ativo" quando criar a conta
+      status: "pendente",
+    });
+
+    // ── NOVO: Salva pagamento de novo cliente ──
+    await db.collection("pagamentos").add({
+      email: email,
+      tipo: "novo_cliente",
+      plano: nomePlano || "mensal",
+      diasAcesso: diasAcesso,
+      valor: valorPago,
+      metodoPagamento: metodoPagamento,
+      criadoEm: Timestamp.fromDate(agora),
     });
 
     // ── Envia e-mail com o código ──
