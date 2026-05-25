@@ -572,11 +572,11 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 
 <div class="toast" id="toast"></div>
 
-<script type="module">
-import { initializeApp } from 'https://esm.sh/firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://esm.sh/firebase/auth';
-import { getFirestore, collection, getDocs, query, orderBy, limit } from 'https://esm.sh/firebase/firestore';
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
+<script>
 const firebaseConfig = {
   apiKey: "AIzaSyAwVfYGWzkJ74FaWpeF2LQhRTMlCEyJdFw",
   authDomain: "xuxa-bet.firebaseapp.com",
@@ -587,9 +587,9 @@ const firebaseConfig = {
 };
 
 const ADMIN_UID = 'GsOTllyMKMadvh87Urqg8kgZ8X62';
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 let allUsers = [], allPagamentos = [], currentFilter = 'todos', searchTerm = '';
 
 function updateClock() {
@@ -603,17 +603,17 @@ document.getElementById('btn-login').addEventListener('click', async () => {
   const pass = document.getElementById('password').value;
   document.getElementById('login-error').style.display = 'none';
   try {
-    const cred = await signInWithEmailAndPassword(auth, email, pass);
-    if(cred.user.uid !== ADMIN_UID) { await signOut(auth); showErr('Acesso não autorizado.'); }
+    const cred = await auth.signInWithEmailAndPassword(email, pass);
+    if(cred.user.uid !== ADMIN_UID) { await auth.signOut(); showErr('Acesso não autorizado.'); }
   } catch(e) { showErr('Email ou senha incorretos'); }
 });
 document.getElementById('password').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('btn-login').click(); });
-document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
+document.getElementById('btn-logout').addEventListener('click', () => auth.signOut());
 document.getElementById('btn-refresh').addEventListener('click', () => loadData());
 
 function showErr(msg) { const el=document.getElementById('login-error'); el.textContent=msg; el.style.display='block'; }
 
-onAuthStateChanged(auth, user => {
+auth.onAuthStateChanged(user => {
   if(user && user.uid === ADMIN_UID) {
     document.getElementById('login-screen').style.display='none';
     document.getElementById('admin-screen').style.display='block';
@@ -627,8 +627,8 @@ onAuthStateChanged(auth, user => {
 async function loadData() {
   try {
     const [us, ps] = await Promise.all([
-      getDocs(collection(db,'usuarios')),
-      getDocs(query(collection(db,'pagamentos'), orderBy('criadoEm','desc'), limit(100))).catch(()=>({docs:[]}))
+      db.collection('usuarios').get(),
+      db.collection('pagamentos').orderBy('criadoEm','desc').limit(100).get().catch(()=>({docs:[]}))
     ]);
     allUsers = us.docs.map(d=>({id:d.id,...d.data()}));
     allPagamentos = ps.docs.map(d=>({id:d.id,...d.data()}));
