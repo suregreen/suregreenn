@@ -262,15 +262,15 @@
 
 /* ── CARD ── */
 .login-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.015) 100%);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-top: 1px solid rgba(255,255,255,0.14);
+  background: rgba(8,16,12,0.85);
+  border: 1px solid rgba(76,175,130,0.15);
+  border-top: 1px solid rgba(76,175,130,0.25);
   border-radius: 20px; padding: 32px 28px;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
   box-shadow:
-    0 1px 0 rgba(255,255,255,0.06) inset,
-    0 4px 6px rgba(0,0,0,0.3),
-    0 24px 60px rgba(0,0,0,0.5);
+    0 1px 0 rgba(76,175,130,0.08) inset,
+    0 4px 6px rgba(0,0,0,0.4),
+    0 24px 60px rgba(0,0,0,0.7);
 }
 
 /* ── FIELDS ── */
@@ -279,7 +279,7 @@
   display: block;
   font-size: 10px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.16em;
-  color: rgba(160,190,215,0.6); margin-bottom: 8px;
+  color: rgba(160,190,215,0.45); margin-bottom: 8px;
 }
 .login-input {
   width: 100%;
@@ -4542,9 +4542,9 @@ body::after  { display: none !important; }
   background: radial-gradient(ellipse at center, rgba(34,197,94,.07) 0%, transparent 65%) !important;
 }
 .login-card {
-  background: #0B1929 !important;
-  border: 1px solid rgba(255,255,255,.09) !important;
-  box-shadow: 0 4px 16px rgba(0,0,0,.06), 0 16px 48px rgba(0,0,0,.04) !important;
+  background: rgba(8,16,12,0.85) !important;
+  border: 1px solid rgba(76,175,130,0.15) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 24px 60px rgba(0,0,0,0.7) !important;
 }
 .login-title { color: #E8F4FF !important; }
 .login-title em { color: #16A34A !important; }
@@ -4983,9 +4983,7 @@ html,body,.main-content,.page,#pg-calc{background:var(--sg-bg)!important;}
 .fb-toast.warning{background: #0B1929 !important;border-color:rgba(217,119,6,.25)!important;color:#B45309!important;box-shadow:0 4px 16px rgba(0,0,0,.08)!important;}
 
 /* LOGIN */
-#login-screen{background:var(--sg-bg)!important;}
-#login-screen::before{display:none!important;}
-.login-card{background: #0B1929 !important;border:1px solid var(--sg-border)!important;box-shadow:0 4px 20px rgba(0,0,0,.07)!important;border-radius:12px!important;}
+
 .login-title{color:var(--sg-text)!important;}
 .login-title em{color:var(--sg-green)!important;}
 .login-sub,.login-label,.login-footer{color:var(--sg-muted)!important;}
@@ -5112,6 +5110,13 @@ window.addEventListener('unhandledrejection', function(e) {
 <div id="login-screen">
   <div class="login-box" style="position:relative;z-index:1;">
 
+    <!-- BG GRAPH -->
+    <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;opacity:0.2;">
+      <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;">
+        <polyline points="0,400 100,360 200,250 300,320 400,150 500,220 600,100 700,200 800,160" fill="none" stroke="#4CAF82" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
     <!-- LOGO -->
     <div class="login-logo">
       <div class="login-logo-icon">
@@ -5125,31 +5130,57 @@ window.addEventListener('unhandledrejection', function(e) {
     <div class="login-card">
       <div class="login-field">
         <label class="login-label">E-mail</label>
-        <input class="login-input" id="l-user" type="email" placeholder="seu@email.com" autocomplete="username" aria-label="E-mail de acesso">
+        <div style="position:relative;">
+          <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none;" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <input class="login-input" id="l-user" type="email" placeholder="seu@email.com" autocomplete="username" style="padding-left:42px;">
+        </div>
       </div>
       <div class="login-field">
         <label class="login-label">Senha</label>
-        <input class="login-input" id="l-pass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+        <div style="position:relative;">
+          <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none;" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input class="login-input" id="l-pass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" style="padding-left:42px;padding-right:42px;">
+          <button onclick="var i=document.getElementById('l-pass');i.type=i.type==='password'?'text':'password'" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:transparent;border:none;cursor:pointer;padding:0;color:rgba(160,190,215,0.4);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
         <div style="text-align:right;margin-top:8px;">
-          <button onclick="doForgotPassword()" style="background:transparent;border:none;color:rgba(160,190,215,0.4);font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;padding:0;transition:color .15s;" onmouseover="this.style.color='#4CAF82'" onmouseout="this.style.color='rgba(160,190,215,0.4)'">Esqueci minha senha</button>
+          <button onclick="doForgotPassword()" style="background:transparent;border:none;color:#4CAF82;font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;padding:0;">Esqueci minha senha</button>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;margin-top:4px;">
-        <input type="checkbox" id="l-remember" checked style="width:16px;height:16px;border-radius:4px;cursor:pointer;accent-color:#4CAF82;flex-shrink:0;">
-        <label for="l-remember" style="font-size:12px;color:rgba(190,215,235,0.75);cursor:pointer;font-family:'DM Sans',sans-serif;user-select:none;">Lembrar de mim neste dispositivo</label>
+        <input type="checkbox" id="l-remember" checked style="width:15px;height:15px;cursor:pointer;accent-color:#4CAF82;flex-shrink:0;">
+        <label for="l-remember" style="font-size:12px;color:rgba(190,215,235,0.6);cursor:pointer;font-family:'DM Sans',sans-serif;user-select:none;">Lembrar de mim neste dispositivo</label>
       </div>
-      <button class="login-btn" onclick="doLogin()">Entrar na plataforma</button>
+      <button class="login-btn" onclick="doLogin()" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+        <span>ENTRAR NA PLATAFORMA</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
       <div class="login-err" id="l-err">E-mail ou senha incorretos.</div>
     </div>
 
-    <!-- LINKS -->
-    <div style="display:flex;justify-content:center;gap:20px;margin-top:20px;flex-wrap:wrap;">
-      <a href="#" onclick="showPolicy('termos');return false;" style="font-size:11px;color:rgba(255,255,255,0.18);text-decoration:none;letter-spacing:.04em;transition:color .15s;" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.18)'">Termos de Uso</a>
-      <a href="#" onclick="showPolicy('privacidade');return false;" style="font-size:11px;color:rgba(255,255,255,0.18);text-decoration:none;letter-spacing:.04em;transition:color .15s;" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.18)'">Privacidade</a>
-      <a href="https://wa.me/5511964549082" target="_blank" style="font-size:11px;color:rgba(76,175,130,0.5);text-decoration:none;letter-spacing:.04em;display:flex;align-items:center;gap:4px;transition:color .15s;" onmouseover="this.style.color='#4CAF82'" onmouseout="this.style.color='rgba(76,175,130,0.5)'">Suporte</a>
+    <!-- BADGES -->
+    <div style="display:flex;justify-content:center;gap:28px;margin-top:24px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);">Seguro</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.25);">Dados protegidos</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);">Privacidade</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.25);">100% confidencial</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);">Suporte</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.25);">Atendimento dedicado</div>
+      </div>
     </div>
-    <div style="text-align:center;margin-top:14px;">
-      <button onclick="showRegister()" style="background:transparent;border:none;color:rgba(255,255,255,0.25);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline;transition:color .15s;" onmouseover="this.style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.color='rgba(255,255,255,0.25)'">Não tem conta? Criar acesso</button>
+
+    <!-- CRIAR CONTA -->
+    <div style="text-align:center;margin-top:16px;">
+      <span style="font-size:12px;color:rgba(255,255,255,0.3);font-family:'DM Sans',sans-serif;">Não tem conta? </span><button onclick="showRegister()" style="background:transparent;border:none;color:#4CAF82;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;font-weight:600;">Criar acesso</button>
     </div>
   </div>
 </div>
@@ -19250,7 +19281,7 @@ body::before { display: none !important; }
 /* ── LOGIN ───────────────────────────────────────────────────────── */
 #login-screen { background: var(--n-bg) !important; }
 #login-screen::before { background: radial-gradient(ellipse at center, rgba(0,214,143,.07) 0%, transparent 68%) !important; }
-.login-card { background: linear-gradient(145deg, #0F2236 0%, #091826 100%) !important; border: 1px solid var(--n-border2) !important; border-radius: 20px !important; box-shadow: var(--n-shadow-lg) !important; }
+.login-card { background: rgba(8,16,12,0.85) !important; border: 1px solid rgba(76,175,130,0.15) !important; border-radius: 20px !important; }
 .login-title { color: var(--n-text1) !important; }
 .login-title em { color: var(--n-green) !important; }
 .login-label { color: var(--n-text4) !important; }
@@ -20325,7 +20356,7 @@ html body .empty-state__cta   { background: rgba(0,214,143,.10) !important; bord
 
 /* LOGIN */
 html body #login-screen { background: #060F1A !important; }
-html body .login-card { background: linear-gradient(145deg,#0F2236,#091826) !important; border: 1px solid rgba(255,255,255,.10) !important; border-radius: 20px !important; }
+html body .login-card { background: rgba(8,16,12,0.85) !important; border: 1px solid rgba(76,175,130,0.15) !important; border-radius: 20px !important; }
 html body .login-title { color: #E8F4FF !important; }
 html body .login-title em { color: #00D68F !important; }
 html body .login-label, html body .login-sub, html body .login-footer { color: #2D4A62 !important; }
