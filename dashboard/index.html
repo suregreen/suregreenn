@@ -10526,6 +10526,9 @@ const app   = initializeApp(firebaseConfig);
 const auth  = getAuth(app);
 const db    = getFirestore(app);
 window._sgFirestore = db;
+window._sgDoc    = function(db, path) { return doc(db, path); };
+window._sgGetDoc = getDoc;
+window._sgSetDoc = setDoc;
 
 // ── Importar query/where para busca no Firestore ──
 
@@ -14087,42 +14090,39 @@ function bkLoad() {
 }
 
 function bkLoadFirestore() {
-  // Carrega do Firestore e sincroniza
   try {
     var uid = bkUid();
-    if (uid === 'local' || !window.db) return;
-    window.db.collection('users').doc(uid).collection('bankroll').doc('data').get()
-      .then(function(doc) {
-        if (doc.exists) {
-          var data = doc.data();
-          _bkCasas = data.casas || [];
-          _bkMovs  = data.movs  || [];
-          // Sincroniza localStorage como cache
-          localStorage.setItem(BK_KEY_CASAS + '_' + uid, JSON.stringify(_bkCasas));
-          localStorage.setItem(BK_KEY_MOVS  + '_' + uid, JSON.stringify(_bkMovs));
-          bkRender();
-        }
-      })
-      .catch(function(e) { console.log('bkLoadFirestore erro:', e.message); });
-  } catch(e) {}
+    var fsDb = window._sgFirestore;
+    if (uid === 'local' || !fsDb) return;
+    var docRef = window._sgDoc(fsDb, 'users/' + uid + '/bankroll/data');
+    window._sgGetDoc(docRef).then(function(snap) {
+      if (snap.exists()) {
+        var data = snap.data();
+        _bkCasas = data.casas || [];
+        _bkMovs  = data.movs  || [];
+        localStorage.setItem(BK_KEY_CASAS + '_' + uid, JSON.stringify(_bkCasas));
+        localStorage.setItem(BK_KEY_MOVS  + '_' + uid, JSON.stringify(_bkMovs));
+        bkRender();
+      }
+    }).catch(function(e) { console.log('bkLoadFirestore erro:', e.message); });
+  } catch(e) { console.log('bkLoadFirestore ex:', e); }
 }
 
 function bkSave() {
-  // Salva no localStorage imediatamente
   try {
     var uid = bkUid();
     localStorage.setItem(BK_KEY_CASAS + '_' + uid, JSON.stringify(_bkCasas));
     localStorage.setItem(BK_KEY_MOVS  + '_' + uid, JSON.stringify(_bkMovs));
   } catch(e) {}
-  // Salva no Firestore em background
   try {
     var uid2 = bkUid();
-    if (uid2 === 'local' || !window.db || _bkSaving) return;
+    var fsDb2 = window._sgFirestore;
+    if (uid2 === 'local' || !fsDb2 || _bkSaving) return;
     _bkSaving = true;
-    window.db.collection('users').doc(uid2).collection('bankroll').doc('data')
-      .set({ casas: _bkCasas, movs: _bkMovs, updatedAt: Date.now() })
+    var docRef2 = window._sgDoc(fsDb2, 'users/' + uid2 + '/bankroll/data');
+    window._sgSetDoc(docRef2, { casas: _bkCasas, movs: _bkMovs, updatedAt: Date.now() })
       .then(function() { _bkSaving = false; })
-      .catch(function(e) { _bkSaving = false; console.log('bkSave Firestore erro:', e.message); });
+      .catch(function(e) { _bkSaving = false; console.log('bkSave erro:', e.message); });
   } catch(e) { _bkSaving = false; }
 }
 
