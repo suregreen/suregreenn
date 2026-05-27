@@ -10526,7 +10526,10 @@ const app   = initializeApp(firebaseConfig);
 const auth  = getAuth(app);
 const db    = getFirestore(app);
 window._sgFirestore = db;
-window._sgDoc    = function(db, path) { return doc(db, path); };
+window._sgDoc    = function(db, path) { 
+  var parts = path.split('/').filter(function(p){ return p.length > 0; });
+  return doc.apply(null, [db].concat(parts));
+};
 window._sgGetDoc = getDoc;
 window._sgSetDoc = setDoc;
 
@@ -14121,7 +14124,7 @@ function bkSave() {
     _bkSaving = true;
     var docRef2 = window._sgDoc(fsDb2, 'users/' + uid2 + '/bankroll/data');
     window._sgSetDoc(docRef2, { casas: _bkCasas, movs: _bkMovs, updatedAt: Date.now() })
-      .then(function() { _bkSaving = false; })
+      .then(function() { _bkSaving = false; console.log('bkSave OK - Firestore salvo'); })
       .catch(function(e) { _bkSaving = false; console.log('bkSave erro:', e.message); });
   } catch(e) { _bkSaving = false; }
 }
