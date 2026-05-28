@@ -12455,7 +12455,7 @@ function coOddInput(n, el) {
     return;
   }
 
-  // Debounce: só calcula 400ms após parar de digitar
+  // Debounce: só calcula 150ms após parar de digitar
   clearTimeout(_coOddTimer[n]);
   _coOddTimer[n] = setTimeout(function() {
     var val = parseFloat(normalized);
@@ -12474,6 +12474,8 @@ function coOddBlur(n, el) {
   var val = parseFloat(raw);
   if (!isNaN(val) && val > 1) {
     coOnOddChange(n);
+  } else {
+    coCalc();
   }
 }
 
@@ -12974,6 +12976,13 @@ function coAbrirModalRegistro() {
 
 
 function coFecharModalRegistro() {
+  _coRegistrando = false;
+  var btnSave = document.querySelector('.cr-save');
+  if (btnSave) {
+    btnSave.disabled      = false;
+    btnSave.style.opacity = '';
+    btnSave.innerHTML     = '✓ Registrar Aposta';
+  }
   document.getElementById('co-registro-bg').style.display = 'none';
   crDdCloseAll();
 }
@@ -13241,7 +13250,15 @@ function coRegistrarDoModal() {
 
   // ── Callbacks ──
   function onSuccess() {
-    // Fecha modal primeiro — antes de qualquer render
+    // Reseta estado imediatamente
+    _coRegistrando = false;
+    if (btnSave) {
+      btnSave.disabled      = false;
+      btnSave.style.opacity = '';
+      btnSave.innerHTML     = '✓ Registrar Aposta';
+    }
+
+    // Fecha modal
     coFecharModalRegistro();
 
     // Mostra toast de sucesso
@@ -13256,8 +13273,6 @@ function coRegistrarDoModal() {
       try { if (typeof updateStats     === 'function') updateStats(); } catch(e) { console.warn('updateStats err', e); }
       try { if (typeof renderLucroHoje === 'function') renderLucroHoje(); } catch(e) { console.warn('renderLucroHoje err', e); }
     }, 200);
-
-    setTimeout(function() { _coRegistrando = false; }, 1500);
   }
 
   function onError(e) {
