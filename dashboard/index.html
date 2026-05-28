@@ -10730,6 +10730,11 @@ window.submitForgotModal = async function() {
 
 // ── Logout ──
 window.doLogout = async function() {
+  if (typeof _unsubEntries === 'function') { _unsubEntries(); _unsubEntries = null; }
+  if (typeof _unsubExtras  === 'function') { _unsubExtras();  _unsubExtras  = null; }
+  if (typeof _unsubDiario  === 'function') { _unsubDiario();  _unsubDiario  = null; }
+  if (typeof _sgOddsUnsubscribe === 'function') { _sgOddsUnsubscribe(); _sgOddsUnsubscribe = null; }
+  window._sgCurrentUid = null;
   await signOut(auth);
 }
 window.contaSair = window.doLogout;
@@ -10919,13 +10924,14 @@ function _scheduleRender() {
   }, 200);
 }
 
+var _unsubEntries = null;
 function loadEntries(uid) {
+  if (_unsubEntries) { _unsubEntries(); _unsubEntries = null; }
   const q = query(collection(db, 'users', uid, 'entries'), orderBy('id', 'desc'));
-  onSnapshot(q, snap => {
+  _unsubEntries = onSnapshot(q, snap => {
     window._entries = [];
     snap.forEach(d => window._entries.push(d.data()));
     window._entries.sort((a,b) => b.id - a.id);
-    // Sinaliza que o Firestore já retornou — usado pelo welcome screen
     window._sgFirstSnapshotDone = true;
     _scheduleRender();
   });
@@ -10986,9 +10992,11 @@ window.fbDelete = async function(id) {
 // ── Extras (Cassino / Outros) ──────────────────────────
 window._extras = [];
 
+var _unsubExtras = null;
 function loadExtras(uid) {
+  if (_unsubExtras) { _unsubExtras(); _unsubExtras = null; }
   const q = query(collection(db, 'users', uid, 'extras'), orderBy('id', 'desc'));
-  onSnapshot(q, snap => {
+  _unsubExtras = onSnapshot(q, snap => {
     window._extras = [];
     snap.forEach(d => window._extras.push(d.data()));
     window._extras.sort((a,b) => b.id - a.id);
@@ -11021,9 +11029,11 @@ window.fbDeleteExtra = async function(id) {
 // ── Diário de Fechamento ──────────────────────────────────
 window._diario = [];
 
+var _unsubDiario = null;
 window.loadDiario = function(uid) {
+  if (_unsubDiario) { _unsubDiario(); _unsubDiario = null; }
   const q = query(collection(db, 'users', uid, 'diario'), orderBy('data', 'asc'));
-  onSnapshot(q, snap => {
+  _unsubDiario = onSnapshot(q, snap => {
     window._diario = [];
     snap.forEach(d => window._diario.push(d.data()));
     _scheduleRender();
@@ -12464,7 +12474,7 @@ function coOddInput(n, el) {
     } else if (raw === '' || raw === '0') {
       coCalc();
     }
-  }, 400);
+  }, 150);
 }
 
 // Garante cálculo ao sair do campo (mobile)
@@ -12590,7 +12600,7 @@ function coRender() {
           <span>Odd</span>
           <button onclick="coLimparCasa(${n})" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:5px;color:#5c7f99;font-size:10px;font-weight:600;padding:2px 8px;cursor:pointer;letter-spacing:.04em;transition:all .15s;" onmouseover="this.style.background='rgba(239,68,68,.08)';this.style.borderColor='rgba(239,68,68,.3)';this.style.color='#ef4444'" onmouseout="this.style.background='rgba(255,255,255,.05)';this.style.borderColor='rgba(255,255,255,.10)';this.style.color='#5c7f99'">✕ Limpar</button>
         </div>
-        <input class="co-inp" id="co_odd${n}" type="text" inputmode="decimal" placeholder="2.00" value="${p.odd}" oninput="coOddInput(${n}, this)" onblur="coOddBlur(${n}, this)" onchange="coOddBlur(${n}, this)">
+        <input class="co-inp" id="co_odd${n}" type="text" inputmode="decimal" placeholder="2.00" value="${p.odd}" oninput="coOddInput(${n}, this)" onblur="coOddBlur(${n}, this)" onchange="coOddBlur(${n}, this)" onkeyup="coOddInput(${n}, this)">
       </div>
       <div class="co-field">
         <div class="co-lbl">Tipo</div>
@@ -14143,7 +14153,7 @@ function bkSave() {
     _bkSaving = true;
     var docRef2 = window._sgDoc(fsDb2, 'users/' + uid2 + '/bankroll/data');
     window._sgSetDoc(docRef2, { casas: _bkCasas, movs: _bkMovs, updatedAt: Date.now() })
-      .then(function() { _bkSaving = false; console.log('bkSave OK - Firestore salvo'); })
+      .then(function() { _bkSaving = false; })
       .catch(function(e) { _bkSaving = false; console.log('bkSave erro:', e.message); });
   } catch(e) { _bkSaving = false; }
 }
@@ -15417,7 +15427,7 @@ document.getElementById('policy-modal').addEventListener('click', function(e){ i
 
 // ── Recalcula fechamentos do mês a partir das apostas reais ──
 window.diarRecalcularMes = async function() {
-  if (!window.fbToast) { console.log('recalc'); } else { window.fbToast('Recalculando fechamentos...', 'warning'); }
+  if (window.fbToast) window.fbToast('Recalculando fechamentos...', 'warning');
   var anoAlvo = _diarAno, mesAlvo = _diarMes;
   var mesStr  = anoAlvo + '-' + String(mesAlvo+1).padStart(2,'0');
   var dayMap  = {};
@@ -17459,9 +17469,6 @@ setTimeout(function() {
       return cat === 'SEM_PA' || cat === 'SEMPA' || cat === 'SEM PA' || cat === '' || !cat;
     });
     // Debug
-    console.log('Modal:', game.home, 'vs', game.away);
-    console.log('COM_PA:', comPA.length, 'SEM_PA:', semPA.length);
-    if (game.bookmakers && game.bookmakers[0]) console.log('pa_category exemplo:', game.bookmakers[0].pa_category);
 
     var body = document.getElementById('sgm-body');
     body.innerHTML = renderCol(comPA, true) + renderCol(semPA, false);
@@ -22557,7 +22564,6 @@ var _sgOddsAutoReload = null;
 function sgOddsStartAutoReload() {
   if (_sgOddsAutoReload) clearInterval(_sgOddsAutoReload);
   _sgOddsAutoReload = setInterval(function() {
-    console.log('[SureGreen] Auto-reload odds...');
     sgOddsLoad();
   }, 30 * 1000); // 30 segundos
 }
@@ -22600,8 +22606,6 @@ function sgOddsLoad() {
         // Debug: ver estrutura real do primeiro jogo
         if (games.length > 0 && games[0].bookmakers && games[0].bookmakers.length > 0) {
           var bk0 = games[0].bookmakers[0];
-          console.log('LZ raw bookmaker[0]:', JSON.stringify(bk0));
-          console.log('pa_category value:', bk0.pa_category, '| type:', typeof bk0.pa_category);
         }
 
         var converted = games.map(function(g) {
@@ -22667,7 +22671,6 @@ function sgOddsLoad() {
   window._sgOddsLoadTimeout = setTimeout(function() {
     var wrap = document.getElementById('opx-cards-wrap');
     if (wrap && wrap.innerHTML.indexOf('odds-loading') !== -1) {
-      console.log('[SureGreen] Timeout — tentando reconectar...');
       sgOddsLoad();
     }
   }, 8000);
