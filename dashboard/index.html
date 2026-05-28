@@ -10889,6 +10889,7 @@ function sgMostrarApp(user, ls, ash) {
   }
   const nameEl = document.getElementById('sb-user-name');
   if (nameEl) nameEl.textContent = nome.charAt(0).toUpperCase() + nome.slice(1);
+  window._sgCurrentUid = user.uid;
   loadEntries(user.uid);
   loadExtras(user.uid);
   loadDiario(user.uid);
@@ -13418,7 +13419,7 @@ function histSetView(v, btn) {
   var histNav = document.querySelector('.hist-nav');
   if (histNav) histNav.style.display = v === 'diario' ? 'none' : '';
   if (v === 'diario' && typeof window.diarRender === 'function') window.diarRender();
-  if (v === 'bankroll') { if (typeof window.bkRender === 'function') { bkLoad(); window.bkRender(); bkLoadFirestore(); } else { renderBankroll(); } if (typeof window.diarRender === 'function') window.diarRender(); }
+  if (v === 'bankroll') { if (typeof window.bkRender === 'function') { window.bkRender(); bkLoadFirestore(); } else { renderBankroll(); } if (typeof window.diarRender === 'function') window.diarRender(); }
   else renderHist();
 }
 
@@ -14078,7 +14079,10 @@ var _bkSaving = false;
 
 // ── Persistência: Firestore (principal) + localStorage (fallback) ──
 function bkUid() {
-  try { return window.auth && window.auth.currentUser ? window.auth.currentUser.uid : 'local'; } catch(e) { return 'local'; }
+  try {
+    if (window._sgCurrentUid) return window._sgCurrentUid;
+    return window.auth && window.auth.currentUser ? window.auth.currentUser.uid : 'local';
+  } catch(e) { return 'local'; }
 }
 
 function bkLoad() {
@@ -14148,7 +14152,6 @@ function bkCalcCasa(casaNome) {
 
 // ── Render principal ──
 function bkRender() {
-  bkLoad();
 
   var totalSaldo = _bkCasas.reduce(function(s,c){ return s + (parseFloat(c.saldo)||0); }, 0);
   var lucroTotal = (window._entries||[]).filter(function(e){ return e.status !== 'pending'; })
@@ -14417,7 +14420,6 @@ document.addEventListener('click', function(e) {
 });
 
 window.bkAbrirModal = function(id) {
-  bkLoad();
   _bkEditId = id || null;
   _bkCorSel = '#22c55e';
   var modal   = document.getElementById('bk-modal-overlay');
@@ -14490,7 +14492,6 @@ window.bkSalvarCasa = function() {
   }
   var saldo = parseFloat(document.getElementById('bk-inp-saldo').value) || 0;
 
-  bkLoad();
   if (_bkEditId) {
     var casa = _bkCasas.find(function(c){ return c.id === _bkEditId; });
     if (casa) { casa.nome = nome; casa.saldo = saldo; casa.cor = _bkCorSel; }
@@ -14506,7 +14507,6 @@ window.bkSalvarCasa = function() {
 };
 
 window.bkRemoverCasa = function(id) {
-  bkLoad();
   var casa = _bkCasas.find(function(c){ return c.id === id; });
   if (!casa) return;
   // Usa o modal de confirmação premium existente
@@ -14515,7 +14515,6 @@ window.bkRemoverCasa = function(id) {
   document.getElementById('confirm-modal').classList.add('show');
   document.getElementById('confirm-btn-del').onclick = function() {
     document.getElementById('confirm-modal').classList.remove('show');
-    bkLoad();
     _bkCasas = _bkCasas.filter(function(c){ return c.id !== id; });
     _bkMovs  = _bkMovs.filter(function(m){ return m.casaId !== id; });
     bkSave();
@@ -14527,7 +14526,6 @@ window.bkRemoverCasa = function(id) {
 
 // ── Modal depósito/saque ──
 window.bkAbrirMov = function(casaId, tipo) {
-  bkLoad();
   document.getElementById('bk-mov-casa-id').value = casaId;
   document.getElementById('bk-mov-tipo').value    = tipo;
   document.getElementById('bk-mov-valor').value   = '';
@@ -14551,7 +14549,6 @@ window.bkConfirmarMov = function() {
   var obs    = document.getElementById('bk-mov-obs').value.trim();
   if (!valor || valor <= 0) { shakeField('bk-mov-valor'); if(window.fbToast) window.fbToast('Digite um valor válido.', 'warning'); return; }
 
-  bkLoad();
   var casa = _bkCasas.find(function(c){ return c.id === casaId; });
   if (!casa) return;
 
