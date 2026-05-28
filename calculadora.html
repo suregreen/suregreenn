@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Calculadora de Surebet gratuita — calcule stakes, lucro garantido e ROI em segundos. Back, Lay, Freebet, Duplo Green. De 2 a 5 casas de apostas.">
+<meta name="keywords" content="calculadora surebet, calculadora duplo green, surebet, green surebet, calculadora apostas, suregreen, duplo green, matched betting, calculadora lay back">
+<meta name="author" content="SureGreen">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Calculadora de Surebet Gratuita — SureGreen">
+<meta property="og:description" content="Calcule stakes, lucro garantido e ROI em segundos. Back, Lay, Freebet e Duplo Green. De 2 a 5 casas. 100% gratuita.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://suregreen.com.br/calculadora/">
+<meta property="og:image" content="https://suregreen.com.br/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculadora de Surebet Gratuita — SureGreen">
+<meta name="twitter:description" content="Calcule stakes, lucro garantido e ROI em segundos. Gratuita, sem cadastro.">
+<title>Calculadora de Surebet Gratuita — Duplo Green e Back/Lay | SureGreen</title>
+<link rel="canonical" href="https://suregreen.com.br/calculadora/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231EEF78'/><polyline points='26,9 16,19.5 10.5,14 4,20' fill='none' stroke='%230f1722' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Calculadora de Surebet — SureGreen",
+  "description": "Calculadora gratuita de surebet, duplo green, back e lay. Calcule stakes, lucro garantido e ROI para 2 a 5 casas de apostas.",
+  "url": "https://suregreen.com.br/calculadora/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+  "provider": { "@type": "Organization", "name": "SureGreen", "url": "https://suregreen.com.br" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Montserrat','Segoe UI',sans-serif;background:rgb(15,23,42);color:#fff;min-height:100vh;}
+
+/* HEADER */
+header{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:rgba(15,23,42,.98);border-bottom:1px solid rgba(209,213,219,.1);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;}
+.logo-ico{width:30px;height:30px;background:#1EEF78;border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.logo-ico svg{width:16px;height:16px;}
+.logo-nm{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#fff;}
+.logo-nm span{color:#1EEF78;}
+.hcta{background:#1EEF78;color:rgb(15,23,42);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;padding:8px 20px;border-radius:7px;border:none;cursor:pointer;text-decoration:none;transition:filter .15s;}
+.hcta:hover{filter:brightness(1.08);}
+
+/* TOOLBAR */
+.bar{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid rgba(209,213,219,.1);flex-wrap:wrap;gap:12px;}
+.bar-l{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.bar-title{font-size:16px;font-weight:700;color:#fff;}
+.bar-div{width:1px;height:22px;background:rgba(209,213,219,.15);}
+.bar-lbl{font-size:12px;font-weight:500;color:rgb(209,213,219);}
+
+/* Radio buttons — exato deles */
+.rg{display:flex;gap:6px;}
+.rg input[type=radio]{display:none;}
+.rg label{
+  display:block;
+  background:rgba(255,255,255,.05);
+  border:2px solid transparent;
+  border-radius:8px;
+  padding:8px 16px;
+  font-size:14px;font-weight:600;
+  color:rgb(209,213,219);
+  cursor:pointer;transition:all .15s;user-select:none;
+}
+.rg label:hover{border-color:rgba(30,239,120,.4);color:#1EEF78;}
+.rg input[type=radio]:checked + label{background:#1EEF78;border-color:#1EEF78;color:rgb(17,24,39);}
+
+.bar-r{display:flex;align-items:center;gap:10px;}
+
+.bcl{background:transparent;border:1px solid rgba(209,213,219,.2);color:rgb(209,213,219);font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;padding:8px 18px;border-radius:7px;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.bcl:hover{border-color:rgba(255,82,82,.4);color:#ff5252;}
+
+/* MAIN */
+main{padding:20px 12px 52px;}
+
+/* CARDS WRAP — flex igual deles */
+.cards-wrap{display:flex;gap:20px;padding:20px;flex-wrap:wrap;}
+.cards-wrap .casa{flex:1;min-width:220px;}
+
+/* CARD */
+.casa{
+  background:rgb(30,41,59);
+  border:1px solid rgba(209,213,219,.1);
+  border-radius:14px;
+  padding:30px;
+  box-shadow:rgba(0,0,0,.4) 0px 15px 35px 0px;
+}
+
+/* HEADER DO CARD — input editável centralizado */
+.casa-header{
+  padding-bottom:15px;
+  border-bottom:1px solid rgba(209,213,219,.1);
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.casa-nome-input{
+  background:transparent;
+  border:none;outline:none;
+  font-family:'Montserrat',sans-serif;
+  font-size:19.2px;font-weight:600;color:#fff;
+  text-align:center;width:100%;padding:5px;
+  cursor:default;
+}
+.clbtn{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  background:transparent;border:none;
+  color:rgb(156,163,175);font-size:11px;font-weight:500;
+  cursor:pointer;padding:3px 6px;border-radius:5px;
+  transition:color .15s;font-family:'Montserrat',sans-serif;
+}
+.clbtn:hover{color:#ff5252;}
+
+/* ROW DE CAMPOS — flex coluna com gap 20px */
+.casa-input-row{display:flex;flex-direction:column;gap:20px;}
+
+/* CADA CAMPO */
+.field-wrap{display:block;}
+.field-wrap label{
+  display:block;
+  font-size:14.4px;font-weight:500;
+  color:rgb(209,213,219);
+  margin-bottom:5px;
+}
+.field-lbl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;}
+.field-lbl-row label{margin-bottom:0;font-size:14.4px;font-weight:500;color:rgb(209,213,219);}
+.al{font-size:11px;color:#1EEF78;cursor:pointer;font-weight:600;}
+
+/* INPUT — exato deles */
+.fi{
+  width:100%;
+  background:rgb(45,55,72);
+  border:1px solid rgba(209,213,219,.1);
+  border-radius:8px;
+  color:#fff;
+  font-family:'Montserrat',sans-serif;
+  font-size:16px;font-weight:500;
+  padding:12px;
+  height:44.5px;
+  outline:none;
+  transition:border-color .15s;
+  -webkit-appearance:none;appearance:none;
+}
+.fi:focus{border-color:rgba(30,239,120,.4);}
+.fi::placeholder{color:rgba(209,213,219,.3);}
+.fi.cv{color:rgb(209,213,219);background:rgb(45,55,72);border-color:rgba(209,213,219,.1);}
+.fi.lv{color:#22c55e;background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.25);}
+select.fi{cursor:pointer;}
+
+/* COMISSÃO E FREEBET */
+.comissao-input,.freebet-input{display:flex;gap:10px;align-items:center;}
+.comissao-input input[type=checkbox],
+.freebet-input input[type=checkbox]{width:16px;height:16px;accent-color:#1EEF78;cursor:pointer;flex-shrink:0;}
+.comissao-input label,.freebet-input label{font-size:14.4px;font-weight:500;color:rgb(209,213,219);cursor:pointer;margin:0;}
+.cp{width:58px;background:rgb(45,55,72);border:1px solid rgba(209,213,219,.1);border-radius:6px;color:#fff;font-size:13px;padding:5px 8px;outline:none;display:none;-webkit-appearance:none;font-family:'Montserrat',sans-serif;}
+.cp.show{display:inline-block;}
+
+/* LIABILITY */
+.lb-box{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:10px 14px;display:none;align-items:center;justify-content:space-between;}
+.lb-l{font-size:10px;font-weight:600;color:rgba(209,213,219,.5);letter-spacing:.06em;text-transform:uppercase;}
+.lb-v{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#22c55e;}
+
+/* FIXAR STAKE — exato deles */
+.fixar-stake-btn{
+  width:100%;
+  background:transparent;
+  border:0px none;
+  border-radius:8px;
+  color:rgb(156,163,175);
+  font-family:'Montserrat',sans-serif;
+  font-size:16px;font-weight:500;
+  padding:12px 18px;
+  cursor:pointer;
+  transition:all .15s;
+  text-align:center;
+}
+.fixar-stake-btn:hover{color:#1EEF78;background:rgba(30,239,120,.06);}
+.fixar-stake-btn.on{color:rgb(209,213,219);background:rgba(255,255,255,.08);border:1px solid rgba(209,213,219,.2);}
+
+/* RESULTADO */
+.rs{display:none;margin:0 12px 20px;}
+.rs.show{display:block;}
+.rg-res{display:flex;gap:20px;flex-wrap:wrap;padding:0 20px;}
+.rp{flex:1;min-width:280px;background:rgb(30,41,59);border:1px solid rgba(209,213,219,.1);border-radius:14px;overflow:hidden;box-shadow:rgba(0,0,0,.4) 0px 15px 35px 0px;}
+.rh{padding:16px 22px;border-bottom:1px solid rgba(209,213,219,.1);display:flex;align-items:center;justify-content:space-between;}
+.rt{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#1EEF78;letter-spacing:.08em;text-transform:uppercase;}
+.rb{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;}
+.rb.ok{background:rgba(30,239,120,.1);border:1px solid rgba(30,239,120,.3);color:#1EEF78;}
+.rb.bad{background:rgba(255,82,82,.1);border:1px solid rgba(255,82,82,.25);color:#ff5252;}
+.rr{padding:13px 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(209,213,219,.08);}
+.rr:last-child{border-bottom:none;}
+.rl{font-size:13px;font-weight:500;color:rgb(209,213,219);display:flex;align-items:center;gap:8px;}
+.rl::before{content:'';display:inline-block;width:2px;height:12px;border-radius:2px;background:rgba(30,239,120,.4);flex-shrink:0;}
+.rv{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.02em;}
+.rv.g{color:#16c95d;}.rv.r{color:#ef4444;}.rv.w{color:#fff;}
+.dr{padding:11px 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(209,213,219,.08);}
+.dl{font-size:10px;font-weight:600;color:rgb(209,213,219);text-transform:uppercase;letter-spacing:.08em;}
+.ds{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-top:3px;}
+.db{font-size:13px;font-weight:700;padding:5px 12px;border-radius:6px;}
+.ret{padding:14px 22px;display:flex;align-items:center;justify-content:space-between;}
+.ret-l{font-size:13px;font-weight:600;color:rgb(209,213,219);}
+.ret-v{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:800;color:#16c95d;letter-spacing:-.02em;}
+
+/* CTA */
+.cta{margin:20px 12px 0;background:rgba(30,239,120,.05);border:1px solid rgba(30,239,120,.3);border-radius:14px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.cta-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(30,239,120,.1);border:1px solid rgba(30,239,120,.25);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:600;color:#1EEF78;margin-bottom:10px;letter-spacing:.03em;}
+.cta-t h3{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;margin-bottom:8px;letter-spacing:-.02em;line-height:1.2;}
+.cta-t p{font-size:13px;color:rgb(209,213,219);line-height:1.6;max-width:500px;}
+.cta-t p strong{color:#1EEF78;}
+.cta-f{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.cf{font-size:11px;font-weight:600;color:rgb(209,213,219);background:rgba(255,255,255,.06);border:1px solid rgba(209,213,219,.15);border-radius:5px;padding:3px 9px;}
+.cta-right{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;}
+.ctab{background:#1EEF78;color:rgb(15,23,42);font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;padding:14px 30px;border-radius:9px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:filter .15s,transform .15s;}
+.ctab:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.cta-sub{font-size:11px;color:rgba(209,213,219,.45);font-weight:500;}
+
+footer{text-align:center;padding:28px;border-top:1px solid rgba(209,213,219,.1);font-size:11px;color:rgba(209,213,219,.25);margin-top:32px;}
+footer a{color:#1EEF78;text-decoration:none;}
+
+@media(max-width:860px){
+  header,.bar{padding-left:16px;padding-right:16px;}
+  .cards-wrap{padding:12px;gap:14px;}
+  .rg-res{padding:0 12px;}
+  .cta{margin:16px 12px 0;flex-direction:column;padding:22px;}
+  .cta-right{width:100%;}
+  .ctab{width:100%;justify-content:center;}
+}
+@media(max-width:500px){
+  header,.bar{padding-left:10px;padding-right:10px;}
+  .cards-wrap{flex-direction:column;}
+  .rg-res{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://suregreen.com.br" class="logo">
+    <div class="logo-ico">
+      <svg viewBox="0 0 24 24" fill="none" stroke="rgb(15,23,42)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+      </svg>
+    </div>
+    <span class="logo-nm">Sure<span>Green</span></span>
+  </a>
+</header>
+
+<div class="bar">
+  <div class="bar-l">
+    <span class="bar-title">Configurações</span>
+    <div class="bar-div"></div>
+    
+    <div class="rg" id="radioGroup">
+      <input type="radio" id="r2" name="nc" value="2"><label for="r2">2</label>
+      <input type="radio" id="r3" name="nc" value="3" checked><label for="r3">3</label>
+      <input type="radio" id="r4" name="nc" value="4"><label for="r4">4</label>
+      <input type="radio" id="r5" name="nc" value="5"><label for="r5">5</label>
+    </div>
+  </div>
+  <div class="bar-r">
+    <button class="bcl" onclick="limparTudo()">Limpar</button>
+  </div>
+</div>
+
+<main>
+  <div class="cards-wrap" id="cardsWrap"></div>
+  <div class="rs" id="rs">
+    <div class="rg-res" id="rgRes"></div>
+  </div>
+  <div class="cta">
+    <div class="cta-t">
+      <div class="cta-badge">Usado por apostadores profissionais</div>
+      <h3>Você ainda digita odds à mão?</h3>
+      <p>No SureGreen, você clica na odd e a calculadora preenche sozinha. Registra a aposta em 1 clique. Tudo salvo no histórico com ROI, lucro acumulado e bankroll em tempo real.</p>
+      <div class="cta-f">
+        <span class="cf">✓ Odds ao vivo integradas</span>
+        <span class="cf">✓ Calculadora automática</span>
+        <span class="cf">✓ Bankroll e histórico</span>
+        <span class="cf">✓ A partir de R$ 33,15/mês</span>
+      </div>
+    </div>
+    <div class="cta-right">
+      <a href="https://suregreen.com.br" class="ctab" target="_blank">
+        Ver o SureGreen →
+      </a>
+      <span class="cta-sub">Teste grátis por 7 dias</span>
+    </div>
+  </div>
+</main>
+
+
+
+<script>
+let N=3,base=1;
+const man={};let wr=false,ot={};
+
+document.getElementById('radioGroup').addEventListener('change',e=>{
+  N=parseInt(e.target.value);
+  for(let i=1;i<=5;i++)man[i]=false;
+  if(base>N)base=1;
+  render();
+});
+
+function render(){
+  const wrap=document.getElementById('cardsWrap');
+  const p={};
+  for(let i=1;i<=N;i++){
+    const v=i===1?document.getElementById('v1'):document.getElementById('v'+i);
+    p[i]={o:document.getElementById('o'+i)?.value||'',t:document.getElementById('t'+i)?.value||'back',a:document.getElementById('a'+i)?.value||'0',cc:document.getElementById('cc'+i)?.checked||false,cv:document.getElementById('cv'+i)?.value||'5',fb:document.getElementById('fb'+i)?.checked||false,v:v?.value||''};
+  }
+
+  wrap.innerHTML=Array.from({length:N},(_,idx)=>{
+    const n=idx+1,q=p[n]||{},lay=q.t==='lay';
+
+    const valField=lay
+      ?`<div class="field-wrap">
+          <label>Stake (calculado)</label>
+          <input class="fi lv" id="ld${n}" readonly placeholder="—">
+        </div>
+        <div class="lb-box" id="lb${n}">
+          <span class="lb-l">Responsabilidade</span>
+          <span class="lb-v" id="lv${n}">—</span>
+        </div>`
+      :`<div class="field-wrap">
+          <div class="field-lbl-row">
+            <label>Valor</label>
+            ${n>1?'<span class="al" onclick="sa('+n+')">↺ auto</span>':''}
+          </div>
+          <input class="fi${n>1?' cv':''}" id="${n===1?'v1':'v'+n}"
+            type="number" placeholder="R$ 0,00" step="0.01" min="0"
+            value="${q.v}" oninput="ov(${n})">
+        </div>
+        <div class="lb-box" id="lb${n}">
+          <span class="lb-l">Responsabilidade</span>
+          <span class="lb-v" id="lv${n}">—</span>
+        </div>`;
+
+    return `<div class="casa">
+      <div class="casa-header">
+        <input class="casa-nome-input" type="text" value="Casa ${n}" readonly>
+        <button class="clbtn" onclick="lc(${n})">✕ Limpar</button>
+      </div>
+      <div class="casa-input-row">
+        <div class="field-wrap">
+          <label>Odd</label>
+          <input class="fi" id="o${n}" type="text" inputmode="decimal"
+            placeholder="2.00" value="${q.o}"
+            oninput="oi(${n},this)" onblur="ob(${n},this)"
+            onchange="ob(${n},this)" onkeyup="oi(${n},this)">
+        </div>
+        <div class="field-wrap">
+          <label>Tipo</label>
+          <select class="fi" id="t${n}" onchange="tc(${n})">
+            <option value="back" ${(q.t||'back')==='back'?'selected':''}>Back</option>
+            <option value="lay" ${q.t==='lay'?'selected':''}>Lay</option>
+          </select>
+        </div>
+        <div class="field-wrap">
+          <label>Aumento (%)</label>
+          <input class="fi" id="a${n}" type="number" placeholder="0%"
+            step="0.1" min="0" value="${q.a||'0'}" oninput="calc()">
+        </div>
+        ${valField}
+        <div class="comissao-input">
+          <input type="checkbox" id="cc${n}" ${q.cc?'checked':''} onchange="tg(${n})">
+          <label for="cc${n}">Comissão</label>
+          <input class="cp ${q.cc?'show':''}" id="cv${n}" type="number"
+            placeholder="%" step="0.1" min="0" max="100"
+            value="${q.cv||'5'}" oninput="calc()">
+        </div>
+        <div class="freebet-input">
+          <input type="checkbox" id="fb${n}" ${q.fb?'checked':''} onchange="calc()">
+          <label for="fb${n}">Freebet</label>
+        </div>
+        <button class="fixar-stake-btn ${base===n?'on':''}" id="fx${n}" onclick="fs(${n})">
+          ${base===n?'⊙ Fixado':'Fixar Stake'}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+  calc();
+}
+
+function oi(n,el){clearTimeout(ot[n]);const r=el.value;if(/[.,]$/.test(r)||/^\d*[.,]\d?$/.test(r))return;ot[n]=setTimeout(()=>calc(),150);}
+function ob(n){clearTimeout(ot[n]);calc();}
+function ov(n){if(wr)return;const el=n===1?document.getElementById('v1'):document.getElementById('v'+n);man[n]=(parseFloat(el?.value)||0)>0;calc();}
+function sa(n){man[n]=false;const el=document.getElementById('v'+n);if(el)el.value='';calc();}
+function tc(n){man[n]=false;for(let i=1;i<=N;i++)if(i!==n)man[i]=false;render();}
+function tg(n){document.getElementById('cv'+n).classList.toggle('show',document.getElementById('cc'+n).checked);calc();}
+function fs(n){base=n;for(let i=1;i<=N;i++){const b=document.getElementById('fx'+i);if(!b)continue;b.classList.toggle('on',i===n);b.textContent=i===n?'⊙ Fixado':'Fixar Stake';if(i!==n)man[i]=false;}calc();}
+function lc(n){['o'+n,n===1?'v1':'v'+n,'a'+n].forEach(id=>{const el=document.getElementById(id);if(el)el.value=id.startsWith('a')?'0':'';});man[n]=false;clearTimeout(ot[n]);calc();}
+function limparTudo(){for(let i=1;i<=N;i++)man[i]=false;base=1;render();}
+
+function calc(){
+  const rs=document.getElementById('rs'),cs=[];
+  for(let i=1;i<=N;i++){
+    const or=parseFloat((document.getElementById('o'+i)?.value||'').replace(',','.'))||0;
+    const tp=document.getElementById('t'+i)?.value||'back';
+    const au=parseFloat(document.getElementById('a'+i)?.value)||0;
+    const hc=document.getElementById('cc'+i)?.checked;
+    const cm=(hc?parseFloat(document.getElementById('cv'+i)?.value)||0:0)/100;
+    const fb=document.getElementById('fb'+i)?.checked||false;
+    const of=or>1?or*(1+au/100):0;
+    const ve=i===1?document.getElementById('v1'):document.getElementById('v'+i);
+    const sr=parseFloat(ve?.value)||0;
+    cs.push({n:i,of,tp,au,cm,fb,sr,mn:!!man[i]&&sr>0});
+  }
+  const bi=(base<=N&&cs[base-1]?.of>1&&cs[base-1]?.sr>0)?base-1:0;
+  const cb=cs[bi],vl=cs.filter(c=>c.of>1);
+  if(vl.length<2||!cb.sr||cb.of<=1){rs.classList.remove('show');return;}
+  let K;
+  if(cb.fb)K=cb.sr*(cb.of-1);
+  else if(cb.tp==='back')K=cb.sr*cb.of;
+  else K=cb.sr*(cb.of-cb.cm);
+  cs.forEach(c=>{
+    if(c.n===cb.n){c.si=c.sr;}
+    else if(c.of<=1){c.si=0;}
+    else if(c.mn){c.si=c.sr;}
+    else{
+      if(c.fb)c.si=K/(c.of-1);
+      else if(c.tp==='back')c.si=K/c.of;
+      else c.si=K/(c.of-c.cm);
+      if(c.tp==='lay'){const d=document.getElementById('ld'+c.n);if(d)d.value='R$ '+fmt(c.si);}
+      else{const el=c.n===1?document.getElementById('v1'):document.getElementById('v'+c.n);if(el){wr=true;el.value=c.si.toFixed(2);wr=false;}}
+    }
+    c.li=c.tp==='lay'&&c.si>0?c.si*(c.of-1):0;
+    const lel=document.getElementById('lv'+c.n),lbx=document.getElementById('lb'+c.n);
+    if(lel)lel.textContent=c.li>0?'R$ '+fmt(c.li):'—';
+    if(lbx)lbx.style.display=c.li>0?'flex':'none';
+  });
+  cb.li=cb.tp==='lay'&&cb.sr>0?cb.sr*(cb.of-1):0;
+  const lel=document.getElementById('lv'+cb.n),lbx=document.getElementById('lb'+cb.n);
+  if(lel)lel.textContent=cb.li>0?'R$ '+fmt(cb.li):'—';
+  if(lbx)lbx.style.display=cb.li>0?'flex':'none';
+  const cr=cs.reduce((s,c)=>{if(!c.si||c.of<=1||c.fb)return s;return s+(c.tp==='lay'?c.li:c.si);},0);
+  cs.forEach(c=>{
+    if(!c.si||c.of<=1){c.re=0;c.lc=0;return;}
+    if(c.fb)c.re=c.si*(c.of-1);
+    else if(c.tp==='back')c.re=c.si*c.of;
+    else c.re=c.si*(1-c.cm);
+    c.lc=c.re-(c.tp==='lay'?cr-c.li:cr);
+  });
+  cs.forEach(c=>{
+    if(!c.si||c.of<=1){c.rb=0;return;}
+    if(c.fb)c.rb=c.si*(c.of-1);
+    else if(c.tp==='back')c.rb=c.si*c.of;
+    else c.rb=c.si*(c.of-c.cm);
+  });
+  const rb=cs.filter(c=>c.rb>0).map(c=>c.rb);
+  const Kr=rb.length>0?Math.min(...rb):K;
+  const lcs=cs.filter(c=>c.si>0&&c.of>1).map(c=>c.lc);
+  const lr=lcs.length>0?Math.min(...lcs):Kr-cr;
+  const roi=cr>0?(lr/cr)*100:0;
+  const tl=vl.some(c=>c.tp==='lay'),hf=cs.some(c=>c.fb);
+  const bv=vl.filter(c=>c.tp==='back'&&!c.fb);
+  const mg=bv.length>=2?bv.reduce((s,c)=>s+1/c.of,0):null;
+  const is=(vl.some(c=>c.tp==='back'&&!c.fb)&&tl)||(mg!==null&&mg<1);
+  const bc=(hf||is)?'ok':'bad',bt=hf?'Freebet':is?(tl?'Matched Bet':'Surebet'):'Sem cobertura';
+  const lc=lr>=0?'g':'r',rc=roi>=0?'g':'r',ls=lr>=0?'+':'',rs2=roi>=0?'+':'';
+  const ca=cs.filter(c=>c.si>0&&c.of>1);
+  const dr=ca.map(c=>{
+    const co=c.lc>=0?'#fff':'#fff',bg=c.lc>=0?'#16c95d':'#ef4444',bd=c.lc>=0?'#16c95d':'#ef4444',sg=c.lc>=0?'+':'';
+    return `<div class="dr"><div><div class="dl">Casa ${c.n}${c.tp==='lay'?' · Lay':''}${c.fb?' · Freebet':''}</div><div class="ds">R$ ${fmt(c.si)}</div></div><span class="db" style="color:${co};background:${bg};border:1px solid ${bd}">${sg}R$ ${fmt(Math.abs(c.lc))}</span></div>`;
+  }).join('');
+  document.getElementById('rgRes').innerHTML=
+    `<div class="rp"><div class="rh"><span class="rt">Resultados</span></div>
+    <div class="rr"><span class="rl">Lucro garantido</span><span class="rv ${lc}">${ls}R$ ${fmt(lr)}</span></div>
+    <div class="rr"><span class="rl">ROI estimado</span><span class="rv ${rc}">${rs2}${fmt(roi)}%</span></div>
+    <div class="rr"><span class="rl">Investimento total</span><span class="rv w">R$ ${fmt(cr)}</span></div></div>
+    <div class="rp"><div class="rh"><span class="rt">Distribuição das apostas</span><span class="rb ${bc}">${bt}</span></div>
+    ${dr}
+    <div class="ret"><span class="ret-l">Retorno garantido:</span><span class="ret-v">R$ ${fmt(Kr)}</span></div></div>`;
+  rs.classList.add('show');
+}
+
+function fmt(v){return v.toFixed(2).replace('.',',');}
+render();
+</script>
+</body>
+</html>
