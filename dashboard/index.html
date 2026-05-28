@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>SureGreen — Gestão de Apostas</title>
@@ -14151,10 +14151,11 @@ function bkSave() {
     var fsDb2 = window._sgFirestore;
     if (uid2 === 'local' || !fsDb2 || _bkSaving) return;
     _bkSaving = true;
+    var _bkSavingTimeout = setTimeout(function() { _bkSaving = false; }, 10000);
     var docRef2 = window._sgDoc(fsDb2, 'users/' + uid2 + '/bankroll/data');
     window._sgSetDoc(docRef2, { casas: _bkCasas, movs: _bkMovs, updatedAt: Date.now() })
-      .then(function() { _bkSaving = false; })
-      .catch(function(e) { _bkSaving = false; console.log('bkSave erro:', e.message); });
+      .then(function() { clearTimeout(_bkSavingTimeout); _bkSaving = false; })
+      .catch(function(e) { clearTimeout(_bkSavingTimeout); _bkSaving = false; console.log('bkSave erro:', e.message); });
   } catch(e) { _bkSaving = false; }
 }
 
