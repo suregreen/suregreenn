@@ -1,6 +1,7 @@
 const { initializeApp, cert, getApps } = require("firebase-admin/app");
 const { getFirestore, Timestamp } = require("firebase-admin/firestore");
 const { Resend } = require("resend");
+const crypto = require("crypto");
 
 if (!getApps().length) {
   initializeApp({
@@ -14,6 +15,56 @@ if (!getApps().length) {
 
 const db = getFirestore();
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// ── Extrai transaction_id do payload Kirvano ──
+function extractTransactionId(body, email, valorPago, agora) {
+  const raw =
+    (body.id && String(body.id)) ||
+    (body.order_id && String(body.order_id)) ||
+    (body.payment?.id && String(body.payment.id)) ||
+    (body.transaction_id && String(body.transaction_id)) ||
+    (body.checkout?.id && String(body.checkout.id));
+
+  if (raw) return raw;
+
+  // Fallback determinístico — mesma compra sempre gera o mesmo ID
+  const base = `${email}_${valorPago || 0}_${agora.toISOString().slice(0, 10)}`;
+  return "sg_" + crypto.createHash("md5").update(base).digest("hex").slice(0, 12);
+}
+
+// ── Envia evento purchase para GA4 via Measurement Protocol ──
+async function sendGA4Purchase(transactionId, value, planName) {
+  try {
+    if (!process.env.GA4_API_SECRET) return;
+    const payload = {
+      client_id: transactionId,
+      events: [{
+        name: "purchase",
+        params: {
+          transaction_id: transactionId,
+          value: value || 0,
+          currency: "BRL",
+          items: [{
+            item_name: "SureGreen " + (planName || "mensal"),
+            price: value || 0,
+            quantity: 1
+          }]
+        }
+      }]
+    };
+    await fetch(
+      `https://www.google-analytics.com/mp/collect?measurement_id=G-E50PBPX0KF&api_secret=${process.env.GA4_API_SECRET}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }
+    );
+    console.log("GA4 purchase enviado:", transactionId, value);
+  } catch (e) {
+    console.error("GA4 erro:", e.message);
+  }
+}
 
 module.exports = async function handler(req, res) {
   console.log("Metodo:", req.method);
@@ -39,7 +90,6 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ error: "Email nao encontrado" });
     }
 
-    // ── Detecta o plano comprado e calcula dias de acesso ──
     const agora = new Date();
     const expiracao = new Date(agora);
 
@@ -52,7 +102,7 @@ module.exports = async function handler(req, res) {
 
     console.log("Plano detectado:", nomePlano);
 
-    let diasAcesso = 30; // padrao: mensal
+    let diasAcesso = 30;
     if (nomePlano.includes("trimestral") || nomePlano.includes("3 meses")) {
       diasAcesso = 90;
     } else if (nomePlano.includes("semestral") || nomePlano.includes("6 meses")) {
@@ -66,7 +116,6 @@ module.exports = async function handler(req, res) {
     expiracao.setDate(expiracao.getDate() + diasAcesso);
     const assinatura_expira = Timestamp.fromDate(expiracao);
 
-    // ── Calcula valor do plano ──
     const valorPago = (body && body.payment && body.payment.amount)
       ? body.payment.amount / 100
       : (body && body.amount)
@@ -79,7 +128,11 @@ module.exports = async function handler(req, res) {
       ? body.payment_method
       : "desconhecido";
 
-    // ── Verifica se esse email já tem um usuário cadastrado ──
+    // ── Transaction ID seguro ──
+    const transactionId = extractTransactionId(body, email, valorPago, agora);
+    console.log("Transaction ID:", transactionId);
+
+    // ── Verifica se usuário já existe (renovação) ──
     const usuariosSnap = await db
       .collection("usuarios")
       .where("email", "==", email)
@@ -87,16 +140,14 @@ module.exports = async function handler(req, res) {
       .get();
 
     if (!usuariosSnap.empty) {
-      // Cliente já existe — renova a partir da data atual ou do vencimento atual (o que for maior)
+      // ── RENOVAÇÃO ──
       const usuarioDoc = usuariosSnap.docs[0];
       const dadosAtuais = usuarioDoc.data();
 
       let baseRenovacao = new Date();
       if (dadosAtuais.assinatura_expira) {
         const vencimentoAtual = dadosAtuais.assinatura_expira.toDate();
-        if (vencimentoAtual > baseRenovacao) {
-          baseRenovacao = vencimentoAtual;
-        }
+        if (vencimentoAtual > baseRenovacao) baseRenovacao = vencimentoAtual;
       }
       const novaExpiracao = new Date(baseRenovacao);
       novaExpiracao.setDate(novaExpiracao.getDate() + diasAcesso);
@@ -107,22 +158,33 @@ module.exports = async function handler(req, res) {
         plano: nomePlano || "mensal",
       });
 
-      // ── NOVO: Salva pagamento de renovação ──
-      await db.collection("pagamentos").add({
-        email: email,
-        tipo: "renovacao",
-        plano: nomePlano || "mensal",
-        diasAcesso: diasAcesso,
-        valor: valorPago,
-        metodoPagamento: metodoPagamento,
-        criadoEm: Timestamp.fromDate(agora),
-      });
+      // ── Tenta criar pagamento — .create() falha se já existe ──
+      try {
+        await db.collection("pagamentos").doc(transactionId).create({
+          email,
+          tipo: "renovacao",
+          plano: nomePlano || "mensal",
+          diasAcesso,
+          valor: valorPago,
+          metodoPagamento,
+          transaction_id: transactionId,
+          criadoEm: Timestamp.fromDate(agora),
+        });
+        // Só chega aqui se criou com sucesso — envia GA4 (sem await — não bloqueia o webhook)
+        sendGA4Purchase(transactionId, valorPago, nomePlano).catch(err => console.error("GA4:", err));
+      } catch (e) {
+        if (e.code === 6 || e.code === "already-exists" || String(e.message).includes("Already exists")) {
+          console.log("Pagamento duplicado ignorado (renovacao):", transactionId);
+        } else {
+          throw e;
+        }
+      }
 
-      console.log("Assinatura renovada para:", email, "| Dias:", diasAcesso, "| Expira:", novaExpiracao);
+      console.log("Assinatura renovada para:", email, "| Dias:", diasAcesso);
       return res.status(200).json({ success: true, renovacao: true, email, diasAcesso });
     }
 
-    // ── Cliente novo — busca um código disponível ──
+    // ── NOVO CLIENTE ──
     const snap = await db
       .collection("codigos")
       .where("usado", "==", false)
@@ -139,29 +201,40 @@ module.exports = async function handler(req, res) {
 
     await codigoDoc.ref.update({
       reservado: true,
-      email: email,
+      email,
       reservadoEm: Timestamp.fromDate(agora),
-      assinatura_expira: assinatura_expira,
+      assinatura_expira,
     });
 
     await db.collection("usuarios").doc("pendente_" + codigo).set({
-      email: email,
-      codigo: codigo,
-      assinatura_expira: assinatura_expira,
+      email,
+      codigo,
+      assinatura_expira,
       criadoEm: Timestamp.fromDate(agora),
       status: "pendente",
     });
 
-    // ── NOVO: Salva pagamento de novo cliente ──
-    await db.collection("pagamentos").add({
-      email: email,
-      tipo: "novo_cliente",
-      plano: nomePlano || "mensal",
-      diasAcesso: diasAcesso,
-      valor: valorPago,
-      metodoPagamento: metodoPagamento,
-      criadoEm: Timestamp.fromDate(agora),
-    });
+    // ── Tenta criar pagamento — .create() falha se já existe ──
+    try {
+      await db.collection("pagamentos").doc(transactionId).create({
+        email,
+        tipo: "novo_cliente",
+        plano: nomePlano || "mensal",
+        diasAcesso,
+        valor: valorPago,
+        metodoPagamento,
+        transaction_id: transactionId,
+        criadoEm: Timestamp.fromDate(agora),
+      });
+      // Só chega aqui se criou com sucesso — envia GA4
+      sendGA4Purchase(transactionId, valorPago, nomePlano).catch(err => console.error("GA4:", err));
+    } catch (e) {
+      if (e.code === 6 || e.code === "already-exists" || String(e.message).includes("Already exists")) {
+        console.log("Pagamento duplicado ignorado (novo_cliente):", transactionId);
+      } else {
+        throw e;
+      }
+    }
 
     // ── Envia e-mail com o código ──
     const htmlEmail =
@@ -187,7 +260,7 @@ module.exports = async function handler(req, res) {
     });
 
     console.log("Codigo enviado:", codigo, "para:", email);
-    return res.status(200).json({ success: true, codigo: codigo });
+    return res.status(200).json({ success: true, codigo });
 
   } catch (err) {
     console.error("Erro:", err.message);
