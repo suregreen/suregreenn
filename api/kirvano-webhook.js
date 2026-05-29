@@ -52,6 +52,7 @@ async function sendGA4Purchase(transactionId, value, planName) {
         }
       }]
     };
+    console.log("=== INICIO SEND GA4 ===");
     console.log("Tentando enviar purchase GA4:", transactionId, value);
     const response = await fetch(
       `https://www.google-analytics.com/mp/collect?measurement_id=G-E50PBPX0KF&api_secret=${process.env.GA4_API_SECRET}`,
@@ -174,6 +175,11 @@ module.exports = async function handler(req, res) {
         });
         // Só chega aqui se criou com sucesso — envia GA4 (sem await — não bloqueia o webhook)
         try {
+          console.log("=== ANTES DO GA4 ===");
+          console.log("transactionId:", transactionId);
+          console.log("valorPago:", valorPago);
+          console.log("nomePlano:", nomePlano);
+          console.log("GA4_API_SECRET existe?", !!process.env.GA4_API_SECRET);
           await sendGA4Purchase(transactionId, valorPago, nomePlano);
         } catch (ga4Error) {
           console.error("GA4 falhou, mas venda continua:", ga4Error.message);
@@ -234,6 +240,11 @@ module.exports = async function handler(req, res) {
       });
       // Só chega aqui se criou com sucesso — envia GA4
       try {
+        console.log("=== ANTES DO GA4 ===");
+        console.log("transactionId:", transactionId);
+        console.log("valorPago:", valorPago);
+        console.log("nomePlano:", nomePlano);
+        console.log("GA4_API_SECRET existe?", !!process.env.GA4_API_SECRET);
         await sendGA4Purchase(transactionId, valorPago, nomePlano);
       } catch (ga4Error) {
         console.error("GA4 falhou, mas venda continua:", ga4Error.message);
