@@ -1229,13 +1229,13 @@ window.handleForgotPassword=async function(){
 </script>
 <script>
 function trackBeginCheckoutAndOpen(url, value, plan) {
-  if (window.gtag) {
-    gtag('event', 'begin_checkout', {
-      currency: 'BRL',
-      value: value,
-      plan: plan
-    });
-  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'begin_checkout',
+    currency: 'BRL',
+    value: value,
+    plan: plan
+  });
   setTimeout(function() {
     window.open(url, '_blank');
   }, 300);
