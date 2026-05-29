@@ -667,7 +667,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="modal-btn" id="modalSubmitBtn" onclick="handleSignup()">Criar conta e acessar</button>
       <div class="modal-divider"><span>ou</span></div>
       <div class="modal-footer">Já tem conta? <a href="https://suregreen.com.br/dashboard/">Entrar agora</a></div>
-      <div class="modal-footer" style="margin-top:.5rem">Ainda não assinou? <a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank" onclick="if(window.gtag){gtag('event','begin_checkout',{currency:'BRL',value:97,plan:'mensal'});};return true;">Assinar agora — R$ 97,00/mês</a></div>
+      <div class="modal-footer" style="margin-top:.5rem">Ainda não assinou? <a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank" onclick="trackBeginCheckoutAndOpen('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c',97,'mensal');return false;">Assinar agora — R$ 97,00/mês</a></div>
       <div class="modal-footer" style="margin-top:.5rem"><a href="#" onclick="showModalScreen('forgot');return false;">Esqueci minha senha</a></div>
     </div>
     <div id="modalSuccess" style="display:none">
@@ -713,7 +713,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <p class="hero-p">Surebet, Freebet, Super Odd, Duplo Green — o SureGreen <strong>calcula os stakes, registra cada operação e fecha o dia sozinho.</strong> Sem planilha. Sem erro. Controle total.</p>
       <div class="hero-btns">
-        <button class="btn-main" onclick="if(window.gtag){gtag('event','begin_checkout',{currency:'BRL',value:97,plan:'mensal'});};window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Começar agora — R$ 97,00/mês</button>
+        <button class="btn-main" onclick="trackBeginCheckoutAndOpen('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c',97,'mensal')">Começar agora — R$ 97,00/mês</button>
         <button class="btn-out" onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">Ver como funciona</button>
       </div>
       <div class="hero-trust">
@@ -1011,7 +1011,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="pc-feat"><div class="pc-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Fechamento diário automático</div>
           <div class="pc-feat"><div class="pc-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Suporte por e-mail e chat</div>
         </div>
-        <button class="pc-btn outline" onclick="if(window.gtag){gtag('event','begin_checkout',{currency:'BRL',value:97,plan:'mensal'});};window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Começar agora</button>
+        <button class="pc-btn outline" onclick="trackBeginCheckoutAndOpen('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c',97,'mensal')">Começar agora</button>
         <div class="pc-fine">Odds ao vivo, automações, dashboard,
 IR automático e calculadora inclusos.</div>
       </div>
@@ -1031,7 +1031,7 @@ IR automático e calculadora inclusos.</div>
           <div class="pc-feat"><div class="pc-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Acesso imediato após confirmação</div>
           <div class="pc-feat"><div class="pc-ck"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>Melhor custo-benefício da plataforma</div>
         </div>
-        <button class="pc-btn solid" onclick="if(window.gtag){gtag('event','begin_checkout',{currency:'BRL',value:247,plan:'trimestral'});};window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Garantir Trimestral — R$ 247,00</button>
+        <button class="pc-btn solid" onclick="trackBeginCheckoutAndOpen('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c',247,'trimestral')">Garantir Trimestral — R$ 247,00</button>
         <div class="pc-fine">Pagamento único · Acesso imediato</div>
       </div>
     </div>
@@ -1050,7 +1050,7 @@ IR automático e calculadora inclusos.</div>
     <h2>Seus grupos VIP merecem<br>uma ferramenta à altura.</h2>
     <p>Pare de perder dinheiro por falta de controle. O SureGreen é a diferença entre apostar e <strong>lucrar de verdade</strong> — com tudo registrado, calculado e declarado.</p>
     <div class="cta-btns">
-      <button class="btn-main" onclick="if(window.gtag){gtag('event','begin_checkout',{currency:'BRL',value:97,plan:'mensal'});};window.open('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c','_blank')">Começar agora — R$ 97,00/mês</button>
+      <button class="btn-main" onclick="trackBeginCheckoutAndOpen('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c',97,'mensal')">Começar agora — R$ 97,00/mês</button>
       <button class="btn-out" onclick="openModal()">Já tenho conta</button>
     </div>
     <p style="margin-top:1rem;font-size:.72rem;color:var(--text3)">Acesso imediato · Sem cartão no teste · Cancele quando quiser</p>
@@ -1226,6 +1226,20 @@ window.handleForgotPassword=async function(){
     msg.className='modal-msg error';msg.textContent='Erro ao enviar. Verifique o e-mail.';
   }
 };
+</script>
+<script>
+function trackBeginCheckoutAndOpen(url, value, plan) {
+  if (window.gtag) {
+    gtag('event', 'begin_checkout', {
+      currency: 'BRL',
+      value: value,
+      plan: plan
+    });
+  }
+  setTimeout(function() {
+    window.open(url, '_blank');
+  }, 300);
+}
 </script>
 </body>
 </html>
