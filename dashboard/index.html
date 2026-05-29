@@ -5421,7 +5421,7 @@ window.addEventListener('unhandledrejection', function(e) {
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary-2)" stroke-width="1.6" stroke-linecap="round"><path d="M22 7l-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg>
           <span class="label">Lucro do Dia</span>
         </div>
-        <div class="num" id="ld-valor" style="font-size:38px;font-weight:700;color:var(--primary-2);margin-top:16px;letter-spacing:-0.03em;line-height:1;">R$ 0,00</div>
+        <div class="num" id="ld-valor" style="font-weight:700;color:var(--primary-2);margin-top:16px;letter-spacing:-0.03em;line-height:1;">R$ 0,00</div>
         <div style="font-size:12px;color:rgba(180,205,225,0.80);margin-top:10px;" id="ld-sub">Nenhum ganho hoje</div>
       </div>
       <button onclick="ldOpenModal()" style="background:rgba(255,255,255,0.03);border:1px solid var(--line-2);border-radius:8px;padding:4px 10px;font-size:11px;color:var(--body);cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;flex-shrink:0;">
@@ -5929,8 +5929,8 @@ window.addEventListener('unhandledrejection', function(e) {
         #co-registro-card .cr-casas-list{padding:8px 10px;}
         #co-registro-card .cr-body{padding:16px 16px 0;}
         #co-registro-card .cr-footer{padding:14px 16px 20px;}
-        #co-registro-card .cr-metrics{grid-template-columns:1fr 1fr;}
-        #co-registro-card .cr-metric:last-child{grid-column:1/-1;}
+        #co-registro-card .cr-metrics{grid-template-columns:1fr 1fr 1fr;}
+        #co-registro-card .cr-metric:last-child{grid-column:auto;}
       }
     </style>
 
@@ -17430,7 +17430,7 @@ setTimeout(function() {
     return '<div class="sgm-col '+(isPA?'sgm-col-pa':'sgm-col-noPA')+'">' +
       '<div class="sgm-col-header">' +
         '<div class="sgm-col-title-wrap">' +
-          '<div class="sgm-col-title '+cls+'">'+(isPA?'⚡ COM PA':'SEM PA')+'</div>' +
+          '<div class="sgm-col-title '+cls+'">'+(isPA?'COM PA':'SEM PA')+'</div>' +
           '<div class="sgm-col-subtitle">'+(isPA?'Percentual de acerto maior':'Mercado tradicional')+'</div>' +
         '</div>' +
         '<div class="sgm-ev-badge '+cls+'">'+evStr+'<span class="sgm-ev-label">EV MÉDIO</span></div>' +
@@ -24561,13 +24561,14 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
     box-shadow:0 0 28px rgba(30,239,120,.14)!important;
   }
   #ld-valor{
-    font-size:50px!important;
-    line-height:.96!important;
-    margin-top:22px!important;
-    letter-spacing:-.065em!important;
+    font-size:clamp(20px, 7vw, 32px)!important;
+    line-height:1.1!important;
+    margin-top:16px!important;
+    letter-spacing:-.04em!important;
     color:var(--sgm-green)!important;
     text-shadow:0 10px 34px rgba(30,239,120,.20)!important;
     white-space:nowrap!important;
+    overflow:visible!important;
   }
   #ld-sub{
     font-size:16px!important;
