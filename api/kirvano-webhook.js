@@ -99,11 +99,13 @@ module.exports = async function handler(req, res) {
     const expiracao = new Date(agora);
 
     const nomePlano = (
-      (body && body.plan && body.plan.name) ||
-      (body && body.product && body.product.name) ||
-      (body && body.offer && body.offer.name) ||
+      body?.plan?.name ||
+      body?.product?.name ||
+      body?.offer?.name ||
+      (Array.isArray(body?.products) && body.products[0]?.name) ||
       ""
     ).toLowerCase();
+    console.log("Plano normalizado:", nomePlano);
 
     console.log("Plano detectado:", nomePlano);
 
@@ -121,11 +123,16 @@ module.exports = async function handler(req, res) {
     expiracao.setDate(expiracao.getDate() + diasAcesso);
     const assinatura_expira = Timestamp.fromDate(expiracao);
 
-    const valorPago = (body && body.payment && body.payment.amount)
-      ? body.payment.amount / 100
-      : (body && body.amount)
-      ? body.amount / 100
-      : null;
+    const valorPago = (() => {
+      if (body?.payment?.amount) return body.payment.amount / 100;
+      if (body?.amount && typeof body.amount === "number") return body.amount / 100;
+      if (body?.total_price) {
+        const n = parseFloat(String(body.total_price).replace(/[^0-9,]/g, "").replace(",", "."));
+        return isNaN(n) ? null : n;
+      }
+      return null;
+    })();
+    console.log("Valor pago normalizado:", valorPago);
 
     const metodoPagamento = (body && body.payment && body.payment.method)
       ? body.payment.method
