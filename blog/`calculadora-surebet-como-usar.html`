@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Surebet: Como Calcular Stakes em Segundos | SureGreen</title>
+<meta name="description" content="Aprenda a usar uma calculadora de surebet para calcular stakes, lucro garantido e ROI em segundos. Guia completo com exemplos práticos e calculadora gratuita.">
+<meta name="keywords" content="calculadora surebet, calculadora duplo green, como calcular surebet, stakes surebet, calculadora apostas gratuita">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://suregreen.com.br/blog/calculadora-surebet-como-usar.html">
+<meta property="og:title" content="Calculadora de Surebet: Como Calcular Stakes em Segundos">
+<meta property="og:description" content="Guia completo para usar calculadora de surebet e calcular stakes, lucro garantido e ROI automaticamente.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://suregreen.com.br/blog/calculadora-surebet-como-usar.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Calculadora de Surebet: Como Calcular Stakes em Segundos",
+  "description": "Guia completo para usar calculadora de surebet e calcular stakes, lucro garantido e ROI automaticamente.",
+  "author": { "@type": "Organization", "name": "SureGreen" },
+  "publisher": { "@type": "Organization", "name": "SureGreen", "url": "https://suregreen.com.br" },
+  "datePublished": "2026-05-29",
+  "url": "https://suregreen.com.br/blog/calculadora-surebet-como-usar.html"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06090d;--bg2:#080c12;--card:#0c1119;--card2:#0f1520;--card3:#111826;
+  --g:#1df078;--g2:#16d868;--gdim:rgba(29,240,120,.08);
+  --border:rgba(255,255,255,.08);--border-g:rgba(29,240,120,.22);
+  --text:#f0f5f1;--text2:#8aab96;--text3:#4d7060;
+  --font:'Inter',sans-serif;--r:10px;--r2:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;}
+a{color:var(--g);text-decoration:none;}
+a:hover{text-decoration:underline;}
+nav{position:sticky;top:0;z-index:100;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(6,9,13,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;}
+.nav-logo-mark{width:32px;height:32px;background:var(--gdim);border:1px solid var(--border-g);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.nav-logo-text{font-size:1.15rem;font-weight:800;letter-spacing:-.03em;color:var(--text);}
+.nav-logo-text span{color:var(--g);}
+.nav-cta{background:var(--g);color:#04110a;font-weight:700;font-size:.85rem;padding:.55rem 1.25rem;border-radius:8px;text-decoration:none;}
+.nav-cta:hover{background:var(--g2);text-decoration:none;}
+.nav-mid{display:flex;align-items:center;gap:1.75rem;}
+.nav-mid a{font-size:.88rem;color:var(--text2);text-decoration:none;}
+.nav-mid a:hover{color:var(--text);}
+.blog-hero{padding:5rem 2.5rem 4rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.blog-hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(29,240,120,.07) 0%,transparent 70%);pointer-events:none;}
+.blog-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;background:var(--gdim);border:1px solid var(--border-g);color:var(--g);padding:.35rem 1rem;border-radius:6px;margin-bottom:1.5rem;}
+.blog-h1{font-size:3rem;font-weight:900;line-height:1.1;letter-spacing:-.04em;color:var(--text);margin-bottom:1rem;}
+.blog-h1 em{color:var(--g);font-style:normal;}
+.blog-desc{font-size:1.05rem;color:var(--text2);max-width:600px;margin:0 auto 2.5rem;line-height:1.7;}
+.blog-section{max-width:900px;margin:0 auto;padding:5rem 2.5rem;}
+.blog-section+.blog-section{border-top:1px solid var(--border);}
+.section-label{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;}
+.section-num{width:32px;height:32px;border-radius:50%;background:var(--gdim);border:1.5px solid var(--border-g);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:var(--g);flex-shrink:0;}
+.section-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--g);}
+.section-h2{font-size:2rem;font-weight:900;line-height:1.2;letter-spacing:-.04em;color:var(--text);margin-bottom:.75rem;}
+.section-h2 em{color:var(--g);font-style:normal;}
+.section-desc{font-size:1rem;color:var(--text2);line-height:1.7;margin-bottom:2rem;max-width:680px;}
+.section-meta{display:flex;align-items:center;gap:1.25rem;margin-bottom:2rem;flex-wrap:wrap;}
+.section-meta-item{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--text3);}
+.content h3{font-size:1.2rem;font-weight:800;color:var(--text);margin:2rem 0 .75rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.content h3:first-child{border-top:none;padding-top:0;margin-top:0;}
+.content p{font-size:.95rem;color:var(--text2);line-height:1.8;margin-bottom:1rem;}
+.content ul,.content ol{padding-left:1.5rem;margin-bottom:1rem;}
+.content li{font-size:.95rem;color:var(--text2);line-height:1.8;margin-bottom:.35rem;}
+.content strong{color:var(--text);}
+.quick-box{background:var(--gdim);border:1px solid var(--border-g);border-radius:var(--r2);padding:1.5rem 1.75rem;margin:1.5rem 0;}
+.quick-box-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--g);margin-bottom:.5rem;}
+.quick-box p{font-size:.92rem;color:var(--text2);line-height:1.7;}
+.quick-box strong{color:var(--text);}
+.box{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem 1.75rem;margin:1.5rem 0;}
+.box.green{background:var(--gdim);border-color:var(--border-g);}
+.box.dark{background:var(--card2);}
+.box.red{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.15);}
+.box-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--g);margin-bottom:.6rem;}
+.box-label.red{color:#f87171;}
+.box h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.6rem;}
+.box p,.box li{font-size:.88rem;color:var(--text2);line-height:1.7;}
+.box ul{padding-left:1.25rem;}
+.box li{margin-bottom:.3rem;}
+.example-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;margin:1.5rem 0;}
+.example-header{background:var(--card2);padding:.9rem 1.25rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.example-title{font-size:.78rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.5rem;}
+.example-badge{font-size:.6rem;font-weight:700;background:var(--gdim);border:1px solid var(--border-g);color:var(--g);padding:.2rem .6rem;border-radius:4px;letter-spacing:.06em;text-transform:uppercase;}
+.example-body{padding:1.25rem;}
+.example-row{display:grid;grid-template-columns:auto 1fr auto auto;gap:.75rem;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.example-row:last-child{border-bottom:none;}
+.ex-num{width:24px;height:24px;border-radius:50%;background:var(--gdim);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--g);flex-shrink:0;}
+.ex-info{min-width:0;}
+.ex-casa{font-size:.7rem;font-weight:700;color:var(--text3);}
+.ex-resultado{font-size:.88rem;font-weight:600;color:var(--text);}
+.ex-odd{font-size:1.1rem;font-weight:800;color:var(--text);font-family:'IBM Plex Mono',monospace;}
+.ex-odd.best{color:var(--g);}
+.ex-stake{font-size:.8rem;font-weight:600;color:var(--text2);text-align:right;}
+.example-footer{padding:.9rem 1.25rem;background:var(--card2);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.ex-footer-label{font-size:.72rem;color:var(--text3);}
+.ex-footer-val{font-size:.88rem;font-weight:700;color:var(--g);}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--r2);overflow:hidden;margin:1.5rem 0;}
+.stat-cell{background:var(--card);padding:1.25rem;text-align:center;}
+.stat-val{font-size:1.8rem;font-weight:900;color:var(--g);font-family:'IBM Plex Mono',monospace;letter-spacing:-.04em;display:block;margin-bottom:.25rem;}
+.stat-label{font-size:.72rem;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+.steps{display:flex;flex-direction:column;gap:.75rem;margin:1.25rem 0;}
+.step{display:grid;grid-template-columns:36px 1fr;gap:1rem;align-items:start;}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--gdim);border:1.5px solid var(--border-g);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;color:var(--g);flex-shrink:0;margin-top:2px;}
+.step-title{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:.2rem;}
+.step-desc{font-size:.85rem;color:var(--text2);line-height:1.6;}
+.faq-list{display:flex;flex-direction:column;gap:.5rem;margin:1.25rem 0;}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:var(--r);}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:1rem 1.25rem;font-size:.9rem;font-weight:600;color:var(--text);cursor:pointer;font-family:var(--font);display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.faq-q svg{flex-shrink:0;transition:transform .2s;color:var(--text3);}
+.faq-item.open .faq-q svg{transform:rotate(180deg);}
+.faq-a{display:none;padding:0 1.25rem 1rem;font-size:.88rem;color:var(--text2);line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+.inline-cta{background:linear-gradient(135deg,var(--card2),var(--card3));border:1px solid var(--border-g);border-radius:var(--r2);padding:2rem 2.25rem;margin:2.5rem 0;display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;}
+.inline-cta h3{font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:.35rem;}
+.inline-cta p{font-size:.85rem;color:var(--text2);line-height:1.5;}
+.inline-cta-btn{background:var(--g);color:#04110a;font-weight:800;font-size:.88rem;padding:.8rem 1.5rem;border-radius:var(--r);text-decoration:none;white-space:nowrap;}
+.inline-cta-btn:hover{background:var(--g2);text-decoration:none;}
+.blog-cta{background:var(--gdim);border-top:1px solid var(--border-g);border-bottom:1px solid var(--border-g);padding:5rem 2.5rem;text-align:center;}
+.blog-cta h2{font-size:2.2rem;font-weight:900;letter-spacing:-.04em;color:var(--text);margin-bottom:.75rem;}
+.blog-cta h2 em{color:var(--g);font-style:normal;}
+.blog-cta p{font-size:1rem;color:var(--text2);max-width:500px;margin:0 auto 2rem;line-height:1.7;}
+.blog-cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--g);color:#04110a;font-weight:800;font-size:1rem;padding:1rem 2.5rem;border-radius:10px;text-decoration:none;}
+.blog-cta-btn:hover{background:var(--g2);text-decoration:none;}
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2.5rem 2rem;}
+.foot-wrap{max-width:1100px;margin:0 auto;}
+.foot-cols{display:grid;grid-template-columns:1.8fr repeat(3,1fr);gap:2.5rem;margin-bottom:2.5rem;}
+.foot-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-bottom:.75rem;}
+.foot-logo-mark{width:28px;height:28px;background:var(--gdim);border:1px solid var(--border-g);border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.foot-logo-text{font-size:1rem;font-weight:800;letter-spacing:-.03em;color:var(--text);}
+.foot-logo-text span{color:var(--g);}
+.foot-desc{font-size:.82rem;color:var(--text3);line-height:1.65;max-width:280px;}
+.foot-h{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:.9rem;}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:.45rem;}
+.foot-links a{font-size:.83rem;color:var(--text2);text-decoration:none;}
+.foot-links a:hover{color:var(--g);}
+.foot-bottom{border-top:1px solid var(--border);padding-top:1.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.foot-copy{font-size:.78rem;color:var(--text3);}
+.formula{font-family:'IBM Plex Mono',monospace;font-size:.9rem;background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;margin:.75rem 0;color:var(--text2);}
+.art-table{width:100%;border-collapse:collapse;margin:1.25rem 0;border-radius:var(--r);overflow:hidden;}
+.art-table th{background:var(--card2);padding:.75rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);text-align:left;}
+.art-table td{padding:.8rem 1rem;font-size:.88rem;color:var(--text2);border-top:1px solid var(--border);}
+.art-table tr:hover td{background:rgba(255,255,255,.02);}
+.art-table td strong{color:var(--text);}
+.art-table td.pos{color:var(--g);font-weight:700;}
+.art-table td.neg{color:#f87171;font-weight:700;}
+@media(max-width:900px){.stat-grid{grid-template-columns:1fr 1fr;}.inline-cta{grid-template-columns:1fr;text-align:center;}}
+@media(max-width:680px){nav{padding:0 1.25rem;height:60px;}.nav-mid{display:none;}.blog-hero{padding:3.5rem 1.25rem 3rem;}.blog-h1{font-size:2rem;}.blog-section{padding:3.5rem 1.25rem;}.content h3{font-size:1.05rem;}footer{padding:2.5rem 1.25rem 1.5rem;}.foot-cols{grid-template-columns:1fr 1fr;gap:1.5rem;}.blog-cta{padding:3.5rem 1.25rem;}.blog-cta h2{font-size:1.6rem;}.example-row{grid-template-columns:auto 1fr auto;}.ex-stake{display:none;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+    <div class="nav-logo-text">Sure<span>Green</span></div>
+  </a>
+  <div class="nav-mid">
+    <a href="/">Início</a>
+    <a href="/#como-funciona">Como Funciona</a>
+    <a href="/#precos">Preços</a>
+    <a href="/blog/">Blog</a>
+  </div>
+  <a href="/dashboard/" class="nav-cta">Acessar dashboard →</a>
+</nav>
+
+<!-- HERO -->
+<div class="blog-hero">
+  <div class="blog-tag">Guia Prático</div>
+  <h1 class="blog-h1">Calculadora de Surebet:<br><em>como calcular stakes</em> em segundos</h1>
+  <p class="blog-desc">Entenda o que é uma calculadora de surebet, como usar, quais campos preencher e como automatizar o processo para nunca mais errar um cálculo.</p>
+</div>
+
+<!-- SEÇÃO 1 — O QUE É -->
+<section class="blog-section">
+  <div class="section-label">
+    <div class="section-num">1</div>
+    <div class="section-tag">Fundamentos</div>
+  </div>
+  <h2 class="section-h2">O que é uma <em>calculadora de surebet</em>?</h2>
+  <p class="section-desc">Uma calculadora de surebet é uma ferramenta que recebe as odds de cada casa de aposta e calcula automaticamente quanto você deve apostar em cada resultado para garantir lucro independente do que aconteça.</p>
+
+  <div class="section-meta">
+    <span class="section-meta-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      8 min de leitura
+    </span>
+    <span class="section-meta-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Maio 2026
+    </span>
+  </div>
+
+  <div class="content">
+    <p>Em uma surebet, você aposta em todos os resultados possíveis de um evento em casas de aposta diferentes. Para que haja lucro garantido, as odds precisam estar em um nível específico. O cálculo manual é complexo e sujeito a erros — por isso a calculadora é indispensável.</p>
+
+    <div class="quick-box">
+      <div class="quick-box-label">Definição</div>
+      <p>A calculadora recebe as odds de cada casa, o valor que você quer investir e retorna os <strong>stakes ideais para cada resultado</strong> — garantindo o mesmo lucro independente do placar final.</p>
+    </div>
+
+    <h3>Por que calcular manualmente é arriscado?</h3>
+    <p>Errar o stake em R$5 pode transformar um lucro garantido em prejuízo. Com odds de 2.10, 3.40 e 4.20 em 3 casas diferentes, o cálculo correto exige precisão decimal. Uma calculadora elimina esse risco completamente.</p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <span class="stat-val">&lt;5s</span>
+        <span class="stat-label">Para calcular</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-val">0</span>
+        <span class="stat-label">Erros de cálculo</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-val">2–5</span>
+        <span class="stat-label">Casas suportadas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO 2 — COMO USAR -->
+<section class="blog-section">
+  <div class="section-label">
+    <div class="section-num">2</div>
+    <div class="section-tag">Passo a passo</div>
+  </div>
+  <h2 class="section-h2">Como usar a calculadora<em> corretamente</em></h2>
+  <p class="section-desc">Siga esses passos para calcular qualquer surebet em segundos, seja com 2, 3 ou até 5 casas de aposta.</p>
+
+  <div class="content">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Encontre as odds em casas diferentes</div>
+          <div class="step-desc">Abra as casas de aposta e procure odds que cobrem todos os resultados do evento (Casa, Empate, Fora). Anote a odd mais alta disponível para cada resultado.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Digite as odds na calculadora</div>
+          <div class="step-desc">Insira cada odd no campo correspondente. A calculadora já calcula a margem automaticamente — se for negativa, você tem uma surebet.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Defina o valor de investimento</div>
+          <div class="step-desc">Digite o valor que deseja investir no campo da Casa 1. Os outros valores são calculados automaticamente para garantir o mesmo retorno em todos os cenários.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Verifique o lucro garantido e aposte</div>
+          <div class="step-desc">A calculadora mostra o lucro garantido, ROI e o stake exato para cada casa. Aposte exatamente esses valores — qualquer desvio pode comprometer o lucro.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="inline-cta">
+      <div>
+        <h3>Calculadora gratuita — sem cadastro</h3>
+        <p>Use a calculadora do SureGreen agora mesmo. Back, Lay, Freebet e até 5 casas. Zero cadastro.</p>
+      </div>
+      <a href="/calculadora/" class="inline-cta-btn">Usar calculadora →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO 3 — EXEMPLO PRÁTICO -->
+<section class="blog-section">
+  <div class="section-label">
+    <div class="section-num">3</div>
+    <div class="section-tag">Exemplo real</div>
+  </div>
+  <h2 class="section-h2">Exemplo prático:<em> surebet com 3 casas</em></h2>
+  <p class="section-desc">Veja como calcular uma surebet real com Flamengo x Palmeiras usando odds de 3 casas diferentes.</p>
+
+  <div class="content">
+    <div class="example-card">
+      <div class="example-header">
+        <div class="example-title">
+          Flamengo x Palmeiras — Resultado Final
+          <span class="example-badge">Surebet confirmada</span>
+        </div>
+        <span style="font-size:.75rem;color:var(--text3)">Investimento: R$ 100,00</span>
+      </div>
+      <div class="example-body">
+        <div class="example-row">
+          <div class="ex-num">1</div>
+          <div class="ex-info">
+            <div class="ex-casa">Bet365</div>
+            <div class="ex-resultado">Flamengo vence</div>
+          </div>
+          <div class="ex-odd best">2.20</div>
+          <div class="ex-stake">R$ 51,22</div>
+        </div>
+        <div class="example-row">
+          <div class="ex-num">2</div>
+          <div class="ex-info">
+            <div class="ex-casa">Betano</div>
+            <div class="ex-resultado">Empate</div>
+          </div>
+          <div class="ex-odd best">3.60</div>
+          <div class="ex-stake">R$ 31,28</div>
+        </div>
+        <div class="example-row">
+          <div class="ex-num">3</div>
+          <div class="ex-info">
+            <div class="ex-casa">Novibet</div>
+            <div class="ex-resultado">Palmeiras vence</div>
+          </div>
+          <div class="ex-odd best">4.10</div>
+          <div class="ex-stake">R$ 27,50</div>
+        </div>
+      </div>
+      <div class="example-footer">
+        <span class="ex-footer-label">Total investido: R$ 110,00</span>
+        <span class="ex-footer-val">Lucro garantido: +R$ 12,73 (+11.6% ROI)</span>
+      </div>
+    </div>
+
+    <h3>Como a calculadora chegou nesses valores?</h3>
+    <p>A fórmula base para surebet é:</p>
+    <div class="formula">Margem = (1/odd1) + (1/odd2) + (1/odd3)<br>Margem = (1/2.20) + (1/3.60) + (1/4.10) = 0.909 + 0.278 + 0.244 = 0.909<br><br>Margem abaixo de 1.0 = Surebet confirmada</div>
+    <p>Com margem de 0.909, existe lucro garantido de aproximadamente 10% sobre o investimento. A calculadora distribui os stakes automaticamente para garantir o mesmo retorno em qualquer resultado.</p>
+
+    <div class="box red">
+      <div class="box-label red">Atenção</div>
+      <p>Sempre confira as odds nas casas antes de apostar — elas mudam em tempo real. Uma odd que era 2.20 pode cair para 2.05 enquanto você faz os cálculos, eliminando o lucro garantido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO 4 — TIPOS -->
+<section class="blog-section">
+  <div class="section-label">
+    <div class="section-num">4</div>
+    <div class="section-tag">Tipos</div>
+  </div>
+  <h2 class="section-h2">Tipos de <em>calculadora de surebet</em></h2>
+  <p class="section-desc">Nem toda calculadora suporta todos os tipos de aposta. Entenda as diferenças.</p>
+
+  <div class="content">
+    <table class="art-table">
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>O que calcula</th>
+          <th>Quando usar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Back/Back</strong></td>
+          <td>Apostas normais em casas de apostas</td>
+          <td>Surebet tradicional entre 2-5 casas</td>
+        </tr>
+        <tr>
+          <td><strong>Back/Lay</strong></td>
+          <td>Combinação com exchange (Betfair)</td>
+          <td>Matched betting, lucro mais consistente</td>
+        </tr>
+        <tr>
+          <td><strong>Freebet</strong></td>
+          <td>Conversão de créditos em dinheiro real</td>
+          <td>Ao receber promoções das casas</td>
+        </tr>
+        <tr>
+          <td><strong>Duplo Green</strong></td>
+          <td>Stakes para lucrar em 2 resultados</td>
+          <td>Estratégia de maior segurança</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box green">
+      <div class="box-label">Dica</div>
+      <p>A calculadora do SureGreen suporta todos esses tipos — Back, Lay, Freebet e até 5 casas simultâneas. <a href="/calculadora/">Teste gratuitamente aqui.</a></p>
+    </div>
+
+    <h3>Calculadora com Aumento de Odds</h3>
+    <p>Algumas casas oferecem promoções de odds turbinadas (Odd Boost). A calculadora deve suportar um campo de "Aumento %" por casa para que o cálculo leve em conta a odd real após o boost.</p>
+    <p>Por exemplo: Bet365 oferece odd 2.50 com 20% de boost → odd real = 3.00. A calculadora aplica esse ajuste automaticamente no cálculo dos stakes.</p>
+  </div>
+</section>
+
+<!-- SEÇÃO 5 — ERROS COMUNS -->
+<section class="blog-section">
+  <div class="section-label">
+    <div class="section-num">5</div>
+    <div class="section-tag">Erros comuns</div>
+  </div>
+  <h2 class="section-h2">Erros que <em>eliminam o lucro</em> garantido</h2>
+  <p class="section-desc">Saber calcular não é suficiente — é preciso evitar os erros mais comuns na execução.</p>
+
+  <div class="content">
+    <div class="box red">
+      <div class="box-label red">Erro 1 — Odd diferente na hora de apostar</div>
+      <p>A odd muda entre o momento que você calculou e o momento que apostou. Sempre confirme a odd na casa antes de finalizar. Se mudou, recalcule antes de apostar.</p>
+    </div>
+    <div class="box red">
+      <div class="box-label red">Erro 2 — Arredondar os stakes</div>
+      <p>Arredondar R$ 51,22 para R$ 51,00 parece inofensivo, mas multiplique isso por 100 apostas. Use o valor exato da calculadora sempre que possível.</p>
+    </div>
+    <div class="box red">
+      <div class="box-label red">Erro 3 — Não conferir os limites da casa</div>
+      <p>Algumas casas limitam o valor máximo de aposta. Se a calculadora diz R$ 300 na Bet365 mas o limite é R$ 100, o lucro garantido não existe mais para esse valor.</p>
+    </div>
+    <div class="box red">
+      <div class="box-label red">Erro 4 — Confundir mercados</div>
+      <p>Apostar "Resultado Final" em uma casa e "Tempo regulamentar" em outra são mercados diferentes. Confirme que todas as casas cobrem exatamente o mesmo mercado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO 6 — AUTOMAÇÃO -->
+<section class="blog-section">
+  <div class="section-label">
+    <div class="section-num">6</div>
+    <div class="section-tag">Próximo nível</div>
+  </div>
+  <h2 class="section-h2">Da calculadora manual para<em> automação completa</em></h2>
+  <p class="section-desc">A calculadora é o primeiro passo. Apostadores que escalam usam sistemas integrados que eliminam a etapa manual.</p>
+
+  <div class="content">
+    <p>Usar uma calculadora avulsa ainda exige que você abra cada casa manualmente, copie as odds, calcule, volte às casas e aposte. Com volume alto, isso toma 10-15 minutos por operação.</p>
+
+    <p>O SureGreen integra odds em tempo real diretamente na calculadora. Você clica na odd no comparador e ela preenche a calculadora automaticamente. Em seguida, registra a aposta com 1 clique e o sistema atualiza bankroll, histórico e ROI.</p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <span class="stat-val">10s</span>
+        <span class="stat-label">Por operação</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-val">100%</span>
+        <span class="stat-label">Automatizado</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-val">0</span>
+        <span class="stat-label">Erros manuais</span>
+      </div>
+    </div>
+
+    <div class="inline-cta">
+      <div>
+        <h3>Veja a automação funcionando</h3>
+        <p>Odds ao vivo → calculadora preenchida → aposta registrada. Tudo em menos de 10 segundos.</p>
+      </div>
+      <a href="/" class="inline-cta-btn">Conhecer o SureGreen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="blog-section">
+  <div class="section-label">
+    <div class="section-num">7</div>
+    <div class="section-tag">Dúvidas frequentes</div>
+  </div>
+  <h2 class="section-h2">Perguntas <em>frequentes</em></h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        A calculadora de surebet é gratuita?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a">Sim. A calculadora do SureGreen é 100% gratuita, sem cadastro e sem limite de uso. Acesse em <a href="/calculadora/">suregreen.com.br/calculadora</a>.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Quantas casas de aposta posso usar?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a">A calculadora suporta de 2 a 5 casas simultaneamente, cobrindo surebets simples até operações mais complexas com múltiplos resultados.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Funciona para Back e Lay?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a">Sim. Cada casa tem um seletor de tipo (Back/Lay), permitindo calcular matched betting com exchanges como Betfair.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Como calcular surebet com Freebet?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a">Marque a opção "Freebet" na casa que oferece o crédito. A calculadora ajusta o cálculo automaticamente, pois em freebets o stake não é retornado com o lucro.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        O que é ROI na calculadora de surebet?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-a">ROI (Return on Investment) é o percentual de lucro sobre o valor investido. Uma surebet com ROI de 3% significa que para cada R$ 100 investidos, você lucra R$ 3,00 garantidos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="blog-cta">
+  <h2>Calcule sua próxima surebet <em>agora</em></h2>
+  <p>Calculadora gratuita com Back, Lay, Freebet e até 5 casas. Sem cadastro, sem login.</p>
+  <a href="/calculadora/" class="blog-cta-btn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    Usar calculadora gratuita
+  </a>
+</div>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-cols">
+      <div>
+        <a href="/" class="foot-logo">
+          <div class="foot-logo-mark"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="foot-logo-text">Sure<span>Green</span></div>
+        </a>
+        <p class="foot-desc">Plataforma completa de gestão de apostas esportivas para apostadores profissionais no Brasil.</p>
+      </div>
+      <div>
+        <div class="foot-h">Produto</div>
+        <ul class="foot-links">
+          <li><a href="/">Landing Page</a></li>
+          <li><a href="/dashboard/">Dashboard</a></li>
+          <li><a href="/calculadora/">Calculadora</a></li>
+          <li><a href="/#precos">Preços</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Blog</div>
+        <ul class="foot-links">
+          <li><a href="/blog/">Todos os artigos</a></li>
+          <li><a href="/blog/o-que-e-surebet.html">O que é Surebet</a></li>
+          <li><a href="/blog/o-que-e-duplo-green.html">Duplo Green</a></li>
+          <li><a href="/blog/calculadora-surebet-como-usar.html">Calculadora</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Suporte</div>
+        <ul class="foot-links">
+          <li><a href="https://wa.me/5511999999999">WhatsApp</a></li>
+          <li><a href="/dashboard/">Acessar conta</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="foot-copy">© 2026 SureGreen. Todos os direitos reservados.</span>
+      <span class="foot-copy">Apostas envolvem risco. Jogue com responsabilidade.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
