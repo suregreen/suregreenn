@@ -84,6 +84,8 @@ module.exports = async function handler(req, res) {
     const email = body && body.customer ? body.customer.email : null;
 
     console.log("Status:", status, "Email:", email);
+    console.log("STATUS RECEBIDO KIRVANO:", status);
+    console.log("BODY COMPLETO KIRVANO:", JSON.stringify(body));
 
     if (!["APPROVED", "PAID", "COMPLETE", "COMPLETED"].includes(status)) {
       return res.status(200).json({ message: "Ignorado. Status: " + status });
