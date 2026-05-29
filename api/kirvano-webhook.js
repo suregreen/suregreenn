@@ -52,7 +52,8 @@ async function sendGA4Purchase(transactionId, value, planName) {
         }
       }]
     };
-    await fetch(
+    console.log("Tentando enviar purchase GA4:", transactionId, value);
+    const response = await fetch(
       `https://www.google-analytics.com/mp/collect?measurement_id=G-E50PBPX0KF&api_secret=${process.env.GA4_API_SECRET}`,
       {
         method: "POST",
@@ -60,6 +61,7 @@ async function sendGA4Purchase(transactionId, value, planName) {
         body: JSON.stringify(payload)
       }
     );
+    console.log("GA4 response status:", response.status);
     console.log("GA4 purchase enviado:", transactionId, value);
   } catch (e) {
     console.error("GA4 erro:", e.message);
@@ -171,7 +173,11 @@ module.exports = async function handler(req, res) {
           criadoEm: Timestamp.fromDate(agora),
         });
         // Só chega aqui se criou com sucesso — envia GA4 (sem await — não bloqueia o webhook)
-        sendGA4Purchase(transactionId, valorPago, nomePlano).catch(err => console.error("GA4:", err));
+        try {
+          await sendGA4Purchase(transactionId, valorPago, nomePlano);
+        } catch (ga4Error) {
+          console.error("GA4 falhou, mas venda continua:", ga4Error.message);
+        }
       } catch (e) {
         if (e.code === 6 || e.code === "already-exists" || String(e.message).includes("Already exists")) {
           console.log("Pagamento duplicado ignorado (renovacao):", transactionId);
@@ -227,7 +233,11 @@ module.exports = async function handler(req, res) {
         criadoEm: Timestamp.fromDate(agora),
       });
       // Só chega aqui se criou com sucesso — envia GA4
-      sendGA4Purchase(transactionId, valorPago, nomePlano).catch(err => console.error("GA4:", err));
+      try {
+        await sendGA4Purchase(transactionId, valorPago, nomePlano);
+      } catch (ga4Error) {
+        console.error("GA4 falhou, mas venda continua:", ga4Error.message);
+      }
     } catch (e) {
       if (e.code === 6 || e.code === "already-exists" || String(e.message).includes("Already exists")) {
         console.log("Pagamento duplicado ignorado (novo_cliente):", transactionId);
