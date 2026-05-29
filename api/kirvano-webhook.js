@@ -134,8 +134,25 @@ module.exports = async function handler(req, res) {
       : "desconhecido";
 
     // ── Transaction ID seguro ──
-    const transactionId = extractTransactionId(body, email, valorPago, agora);
-    console.log("Transaction ID:", transactionId);
+    let transactionId = extractTransactionId(body, email, valorPago, agora);
+
+    // ── Detecta webhook de teste ──
+    const isTestWebhook = !!(
+      body.test === true ||
+      body.mode === "test" ||
+      body.is_test === true ||
+      body.event === "test" ||
+      body.environment === "test" ||
+      body.customer?.email === "exemplo@email.com"
+    );
+
+    console.log("Webhook teste Kirvano?", isTestWebhook);
+
+    if (isTestWebhook) {
+      transactionId = transactionId + "_test_" + Date.now();
+    }
+
+    console.log("Transaction ID final:", transactionId);
 
     // ── Verifica se usuário já existe (renovação) ──
     const usuariosSnap = await db
