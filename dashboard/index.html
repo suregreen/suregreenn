@@ -10868,7 +10868,7 @@ onAuthStateChanged(auth, user => {
               + '<div style="font-size:48px;margin-bottom:16px;">🔒</div>'
               + '<div style="font-size:24px;font-weight:800;color:#eef6ff;margin-bottom:8px;">Acesso Expirado</div>'
               + '<div style="font-size:14px;color:rgba(190,215,235,.65);margin-bottom:28px;line-height:1.6;">Seu plano venceu em <strong style="color:#f87171">' + venc.split('-').reverse().join('/') + '</strong>.<br>Renove agora para continuar usando o SureGreen.</div>'
-              + '<a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-weight:800;font-size:16px;padding:16px 32px;border-radius:14px;text-decoration:none;box-shadow:0 8px 24px rgba(34,197,94,.3);">Renovar pelo WhatsApp</a>'
+              + '<a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank" onclick="trackRenewalCheckout();return false;" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-weight:800;font-size:16px;padding:16px 32px;border-radius:14px;text-decoration:none;box-shadow:0 8px 24px rgba(34,197,94,.3);">Renovar Plano</a>'
               + '<div style="margin-top:20px;"><button onclick="window.doLogout&&window.doLogout()" style="background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(190,215,235,.5);font-size:13px;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:DM Sans,sans-serif;">Sair da conta</button></div>'
               + '</div>';
             document.body.appendChild(bloq);
@@ -24879,6 +24879,14 @@ html body #form-surebet div[style*="display:flex; align-items:center; gap:8px"] 
   }
   window.addEventListener('load', function(){ setTimeout(fix,600); setTimeout(fix,1500); });
 })();
+
+function trackRenewalCheckout() {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: "renewal_checkout" });
+  setTimeout(function() {
+    window.open("https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c", "_blank");
+  }, 300);
+}
 </script>
 
 </html>
