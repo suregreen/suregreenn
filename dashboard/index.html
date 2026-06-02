@@ -12466,26 +12466,16 @@ var _coOddTimer = {};
 // Handler para o campo odd (type=text) — não reinicia com . ou ,
 function coOddInput(n, el) {
   var raw = el.value;
-
-  // Normaliza vírgula para ponto
   var normalized = raw.replace(',', '.');
-
-  // Se termina em ponto ou está incompleto (ex: "2.", "1.0") — aguarda mais input
-  if (/[.,]$/.test(raw) || /^\d*[.,]\d?$/.test(raw)) {
-    clearTimeout(_coOddTimer[n]);
-    return;
-  }
-
-  // Debounce: só calcula 150ms após parar de digitar
   clearTimeout(_coOddTimer[n]);
   _coOddTimer[n] = setTimeout(function() {
     var val = parseFloat(normalized);
     if (!isNaN(val) && val > 1) {
       coOnOddChange(n);
-    } else if (raw === '' || raw === '0') {
+    } else {
       coCalc();
     }
-  }, 150);
+  }, 50);
 }
 
 // Garante cálculo ao sair do campo (mobile)
@@ -12679,7 +12669,7 @@ function coCalc() {
 
   let K;
   if (casaBase.isFreebet)            K = casaBase.stakeRaw * (casaBase.oddFinal - 1);
-  else if (casaBase.tipo === 'back') K = casaBase.stakeRaw * casaBase.oddFinal;
+  else if (casaBase.tipo === 'back') K = casaBase.stakeRaw * (1 + (casaBase.oddFinal - 1) * (1 - casaBase.comm));
   else                               K = casaBase.stakeRaw * (casaBase.oddFinal - casaBase.comm);
 
   casas.forEach(ca => {
@@ -12688,7 +12678,7 @@ function coCalc() {
     else if (ca.isManual) { ca.stakeIdeal = ca.stakeRaw; }
     else {
       if (ca.isFreebet)            ca.stakeIdeal = K / (ca.oddFinal - 1);
-      else if (ca.tipo === 'back') ca.stakeIdeal = K / ca.oddFinal;
+      else if (ca.tipo === 'back') ca.stakeIdeal = K / (1 + (ca.oddFinal - 1) * (1 - ca.comm));
       else                         ca.stakeIdeal = K / (ca.oddFinal - ca.comm);
 
       if (ca.tipo === 'lay') {
@@ -12696,10 +12686,10 @@ function coCalc() {
         const dispEl = document.getElementById('co_lay_val' + ca.n);
         if (dispEl) dispEl.textContent = 'R$ ' + ca.stakeIdeal.toFixed(2).replace('.', ',');
       } else {
-        // BACK: escreve no campo input
+        // BACK: escreve no campo input — mas não se o usuário está editando
         const elId = ca.n === 1 ? 'co_val1_inp' : 'co_val' + ca.n;
         const el   = document.getElementById(elId);
-        if (el) {
+        if (el && document.activeElement !== el) {
           _coWriting = true;
           el.value = ca.stakeIdeal.toFixed(2);
           _coWriting = false;
@@ -12723,7 +12713,7 @@ function coCalc() {
   casas.forEach(ca => {
     if (!ca.stakeIdeal || ca.oddFinal <= 1) { ca.retorno = 0; ca.lucroCenario = 0; return; }
     if (ca.isFreebet)            ca.retorno = ca.stakeIdeal * (ca.oddFinal - 1);
-    else if (ca.tipo === 'back') ca.retorno = ca.stakeIdeal * ca.oddFinal;
+    else if (ca.tipo === 'back') ca.retorno = ca.stakeIdeal * (1 + (ca.oddFinal - 1) * (1 - ca.comm));
     else                         ca.retorno = ca.stakeIdeal * (1 - ca.comm);
     const custo = ca.tipo === 'lay' ? custoReal - ca.liability : custoReal;
     ca.lucroCenario = ca.retorno - custo;
@@ -12737,7 +12727,7 @@ function coCalc() {
   casas.forEach(ca => {
     if (!ca.stakeIdeal || ca.oddFinal <= 1) { ca.retornoBolso = 0; return; }
     if (ca.isFreebet)            ca.retornoBolso = ca.stakeIdeal * (ca.oddFinal - 1);
-    else if (ca.tipo === 'back') ca.retornoBolso = ca.stakeIdeal * ca.oddFinal;
+    else if (ca.tipo === 'back') ca.retornoBolso = ca.stakeIdeal * (1 + (ca.oddFinal - 1) * (1 - ca.comm));
     else /* lay */               ca.retornoBolso = ca.stakeIdeal * (ca.oddFinal - ca.comm);
   });
   const retornosBolso = casas.filter(ca => ca.retornoBolso > 0).map(ca => ca.retornoBolso);
