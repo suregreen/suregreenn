@@ -208,14 +208,14 @@ select.fi{cursor:pointer;}
 .rl{font-size:13px;font-weight:500;color:rgb(209,213,219);display:flex;align-items:center;gap:8px;}
 .rl::before{content:'';display:inline-block;width:2px;height:12px;border-radius:2px;background:rgba(30,239,120,.4);flex-shrink:0;}
 .rv{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.02em;}
-.rv.g{color:#16c95d;}.rv.r{color:#ef4444;}.rv.w{color:#fff;}
+.rv.g{color:#22a85a;}.rv.r{color:#dc2626;}.rv.w{color:#fff;}
 .dr{padding:11px 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(209,213,219,.08);}
 .dl{font-size:10px;font-weight:600;color:rgb(209,213,219);text-transform:uppercase;letter-spacing:.08em;}
 .ds{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-top:3px;}
 .db{font-size:13px;font-weight:700;padding:5px 12px;border-radius:6px;}
 .ret{padding:14px 22px;display:flex;align-items:center;justify-content:space-between;}
 .ret-l{font-size:13px;font-weight:600;color:rgb(209,213,219);}
-.ret-v{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:800;color:#16c95d;letter-spacing:-.02em;}
+.ret-v{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:800;color:#22a85a;letter-spacing:-.02em;}
 
 /* CTA */
 .cta{margin:20px 12px 0;background:rgba(30,239,120,.05);border:1px solid rgba(30,239,120,.3);border-radius:14px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
@@ -478,7 +478,7 @@ function calc(){
   const lc=lr>=0?'g':'r',rc=roi>=0?'g':'r',ls=lr>=0?'+':'',rs2=roi>=0?'+':'';
   const ca=cs.filter(c=>c.si>0&&c.of>1);
   const dr=ca.map(c=>{
-    const co=c.lc>=0?'#fff':'#fff',bg=c.lc>=0?'#16c95d':'#ef4444',bd=c.lc>=0?'#16c95d':'#ef4444',sg=c.lc>=0?'+':'';
+    const co=c.lc>=0?'#fff':'#fff',bg=c.lc>=0?'#166534':'#991b1b',bd=c.lc>=0?'#22a85a':'#dc2626',sg=c.lc>=0?'+':'';
     return `<div class="dr"><div><div class="dl">Casa ${c.n}${c.tp==='lay'?' · Lay':''}${c.fb?' · Freebet':''}</div><div class="ds">R$ ${fmt(c.si)}</div></div><span class="db" style="color:${co};background:${bg};border:1px solid ${bd}">${sg}R$ ${fmt(Math.abs(c.lc))}</span></div>`;
   }).join('');
   document.getElementById('rgRes').innerHTML=
