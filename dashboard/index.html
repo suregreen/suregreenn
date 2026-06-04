@@ -6944,7 +6944,6 @@ window.dvRender=function(){
 
   var volMes=0;
   (window._entries||[]).forEach(function(e){
-    if(e.status==='pending')return;
     var d=new Date(Number(e.id));
     if(d.getFullYear()===ano&&d.getMonth()===mes)volMes+=parseFloat(e.stake)||0;
   });
@@ -12056,12 +12055,11 @@ function updLucroDia() {
       : `${cntLucro} entrada${cntLucro > 1 ? 's' : ''} positiva${cntLucro > 1 ? 's' : ''} hoje`;
   }
 
-  // ── Volume apostado hoje (só resolvidas: won + lost) ──
+  // ── Volume apostado hoje (todas as entradas, incluindo pendentes) ──
   const volDiaEl = document.getElementById('sVDia');
   const entDiaEl = document.getElementById('sEDia');
-  const hojeResolvidas = hojeApostas.filter(e => e.status === 'won' || e.status === 'lost');
-  const volDia = hojeResolvidas.reduce((s, e) => s + (parseFloat(e.stake) || 0), 0);
-  const totalHoje = hojeResolvidas.length;
+  const volDia = hojeApostas.reduce((s, e) => s + (parseFloat(e.stake) || 0), 0);
+  const totalHoje = hojeApostas.length;
   if (volDiaEl) volDiaEl.textContent = f(volDia);
   if (entDiaEl) {
     entDiaEl.textContent = totalHoje === 0
@@ -21049,9 +21047,10 @@ function dxRenderChart() {
         },
         yVol:{
           type:'linear', position:'right',
-          display: !window.matchMedia('(max-width:768px)').matches,
+          display: !window.matchMedia('(max-width:768px)').matches && dataS[dataS.length-1] > 0,
+          min: 0,
           grid:{ display:false },
-          ticks:{ color:'rgba(122,170,200,0.55)', font:{size:10.5, family:"'DM Sans',sans-serif"}, callback:function(v){ return fmtK(v); } },
+          ticks:{ color:'rgba(122,170,200,0.55)', font:{size:10.5, family:"'DM Sans',sans-serif"}, callback:function(v){ return v < 0 ? '' : fmtK(v); } },
           title:{ display:true, text:'Volume', color:'rgba(122,170,200,0.5)', font:{size:9, weight:'700'}, padding:{bottom:4} }
         }
       }
