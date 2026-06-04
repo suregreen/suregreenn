@@ -268,20 +268,7 @@ h1 .light{font-weight:300;color:rgba(237,242,238,.55)}
 h2{font-family:var(--font);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:800;text-align:center;letter-spacing:-1px;line-height:1.1;margin-bottom:.8rem;color:var(--text)}
 h2 .accent{color:var(--g)}
 .sec-sub{font-size:1rem;color:var(--text2);text-align:center;max-width:480px;margin:0 auto 3rem;line-height:1.8;font-weight:400}
-/* ── Comparativo SureGreen vs Planilha ── */
-.vs-table-wrap{border:1px solid var(--border);border-radius:16px;overflow:hidden;width:100%;max-width:560px;}
-.vs-header{display:grid;grid-template-columns:1fr 120px 120px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border);padding:.75rem 1.25rem;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);}
-.vs-col-sg{display:flex;align-items:center;gap:.5rem;color:var(--g);justify-content:center;}
-.vs-logo-dot{width:7px;height:7px;border-radius:50%;background:var(--g);display:inline-block;}
-.vs-col-pl{text-align:center;color:var(--text3);}
-.vs-row{display:grid;grid-template-columns:1fr 120px 120px;padding:.7rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.04);align-items:center;}
-.vs-row:last-child{border-bottom:none;}
-.vs-row--alt{background:rgba(255,255,255,.02);}
-.vs-feat{font-size:.9rem;color:var(--text2);}
-.vs-sg,.vs-pl{display:flex;align-items:center;justify-content:center;}
-.vs-yes{width:22px;height:22px;border-radius:50%;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:.75rem;font-weight:700;}
-.vs-no{width:22px;height:22px;border-radius:50%;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);display:flex;align-items:center;justify-content:center;color:#f87171;font-size:.75rem;font-weight:700;}
-@media(max-width:768px){.vs-table-wrap{max-width:100%;}.vs-header,.vs-row{grid-template-columns:1fr 80px 80px;padding:.65rem 1rem;}.vs-feat{font-size:.83rem;}.vs-header{font-size:.7rem;}}
+.dor-inner{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:0}
 .dor-section-wrapper{padding:6rem 2.5rem 7rem;background:var(--bg)}
 .dor-label{font-size:.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--g);margin-bottom:.8rem;opacity:.8;display:flex;align-items:center;gap:.55rem}
 .dor-label::before{content:'';width:20px;height:1px;background:var(--g);opacity:.6}
@@ -609,8 +596,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2>Declaração de IR 2026 para Operações Esportivas</h2>
   <p>Operadores que lucram mais de R$ 2.112 por mês precisam declarar imposto de renda. O SureGreen exporta no formato da Receita Federal automaticamente.</p>
 </div>
-
-
 <nav>
   <a href="#" class="nav-logo">
     <div class="nav-logo-mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
@@ -712,7 +697,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-line"></div>
   <div class="hero-inner">
     <div class="reveal">
-      <div class="hero-eyebrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>Copa do Mundo 2026 começa em <strong id="copa-dias" style="color:var(--g);margin:0 2px;">7</strong> dias — prepare sua operação agora.</div>
+      <div class="hero-eyebrow"><span class="bdot"></span>Copa do Mundo 2026 — começa em <strong id="copa-dias" style="color:var(--g);margin:0 3px;">7</strong> dias</div>
       <h1>Pare de perder<br><span class="accent">lucro</span> por falta<br><span class="light">de controle.</span></h1>
       <!-- SEO: hidden keyword anchor for Google — visually zero impact -->
       <div style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
@@ -725,7 +710,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="hero-trust">
         <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Resultado em 1 operação</span>
-        <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Cancele quando quiser</span>
         <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Acesso imediato</span>
         <span class="trust-i"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Garantia de 7 dias</span>
       </div>
@@ -801,52 +785,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="pain-item" id="pi2"><div class="pi-dot bad">✕</div><span>Perdeu freebet porque esqueceu de registrar o rolamento necessário</span></div>
         <div class="pain-item" id="pi3"><div class="pi-dot bad">✕</div><span>Fim do dia sem saber exatamente quanto lucrou — ou quanto perdeu</span></div>
         <div class="gain-item" id="pi4"><div class="pi-dot good">✓</div><span><strong>Com o SureGreen:</strong> você clica, a IA calcula, registra e fecha o dia automaticamente.</span></div>
-
-        <!-- Comparativo SureGreen vs Planilha -->
-        <div class="vs-table-wrap reveal" style="margin-top:2.5rem;">
-          <div class="vs-header">
-            <div class="vs-col-label"></div>
-            <div class="vs-col-sg">
-              <span class="vs-logo-dot"></span>SureGreen
-            </div>
-            <div class="vs-col-pl">Planilha</div>
-          </div>
-          <div class="vs-row">
-            <div class="vs-feat">Cálculo automático de stakes</div>
-            <div class="vs-sg"><span class="vs-yes">✓</span></div>
-            <div class="vs-pl"><span class="vs-no">✕</span></div>
-          </div>
-          <div class="vs-row vs-row--alt">
-            <div class="vs-feat">Controle de Freebet e rolamentos</div>
-            <div class="vs-sg"><span class="vs-yes">✓</span></div>
-            <div class="vs-pl"><span class="vs-no">✕</span></div>
-          </div>
-          <div class="vs-row">
-            <div class="vs-feat">Comparador de odds ao vivo</div>
-            <div class="vs-sg"><span class="vs-yes">✓</span></div>
-            <div class="vs-pl"><span class="vs-no">✕</span></div>
-          </div>
-          <div class="vs-row vs-row--alt">
-            <div class="vs-feat">Fechamento diário automático</div>
-            <div class="vs-sg"><span class="vs-yes">✓</span></div>
-            <div class="vs-pl"><span class="vs-no">✕</span></div>
-          </div>
-          <div class="vs-row">
-            <div class="vs-feat">Declaração IR 2026 automática</div>
-            <div class="vs-sg"><span class="vs-yes">✓</span></div>
-            <div class="vs-pl"><span class="vs-no">✕</span></div>
-          </div>
-          <div class="vs-row vs-row--alt">
-            <div class="vs-feat">Funciona no celular</div>
-            <div class="vs-sg"><span class="vs-yes">✓</span></div>
-            <div class="vs-pl"><span class="vs-no">✕</span></div>
-          </div>
-          <div class="vs-row">
-            <div class="vs-feat">Zero erro de cálculo</div>
-            <div class="vs-sg"><span class="vs-yes">✓</span></div>
-            <div class="vs-pl"><span class="vs-no">✕</span></div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -1186,16 +1124,7 @@ const tEl=document.getElementById('como-funciona');if(tEl)tObs.observe(tEl);
 const painObs=new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)return;['pi1','pi2','pi3','pi4'].forEach((id,idx)=>{const el=document.getElementById(id);if(el)setTimeout(()=>el.classList.add('anim-in'),idx*320);});painObs.disconnect();},{threshold:0.3});
 const painList=document.getElementById('painList');if(painList)painObs.observe(painList);
 document.querySelectorAll('.faq-btn').forEach(btn=>{btn.addEventListener('click',()=>{const it=btn.parentElement,op=it.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!op)it.classList.add('open')})});
-
-// ── Contador Copa do Mundo ──
-(function(){
-  var el=document.getElementById('copa-dias');
-  if(!el)return;
-  var copa=new Date('2026-06-11T00:00:00');
-  var hoje=new Date();
-  var diff=Math.ceil((copa-hoje)/(1000*60*60*24));
-  el.textContent=diff>0?diff:'0';
-})();
+(function(){var el=document.getElementById('copa-dias');if(!el)return;var diff=Math.ceil((new Date('2026-06-11')-new Date())/(1000*60*60*24));el.textContent=diff>0?diff:'0';})();
 window.toggleMenu=function(){const m=document.getElementById('mobileMenu'),b=document.getElementById('navBurger');const open=m.style.display==='block';m.style.display=open?'none':'block';b.style.opacity=open?'1':'.6'}
 window.closeMenu=function(){document.getElementById('mobileMenu').style.display='none';document.getElementById('navBurger').style.opacity='1'}
 window.openModal=function(){document.getElementById('modalOverlay').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('mc-email').focus(),220)}
