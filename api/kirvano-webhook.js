@@ -87,6 +87,33 @@ module.exports = async function handler(req, res) {
     console.log("STATUS RECEBIDO KIRVANO:", status);
     console.log("BODY COMPLETO KIRVANO:", JSON.stringify(body));
 
+    // ── REEMBOLSO / CHARGEBACK — revoga acesso imediatamente ──
+    const REFUND_STATUSES = ["REFUNDED", "REFUND", "CHARGEBACK", "CHARGEBACKED", "CANCELLED", "CANCELED", "DISPUTE", "DISPUTED"];
+    if (REFUND_STATUSES.includes(status)) {
+      console.log("Evento de reembolso detectado:", status, "Email:", email);
+
+      if (!email) {
+        return res.status(200).json({ message: "Reembolso sem email" });
+      }
+
+      const agora = new Date();
+      const snap = await db.collection("usuarios").where("email", "==", email).limit(1).get();
+
+      if (!snap.empty) {
+        await snap.docs[0].ref.update({
+          assinatura_expira: Timestamp.fromDate(agora),
+          status: "revogado",
+          revoadadoEm: Timestamp.fromDate(agora),
+          motivoRevogacao: status,
+        });
+        console.log("Acesso revogado:", email, "| Motivo:", status);
+      } else {
+        console.log("Reembolso recebido mas usuário não encontrado:", email);
+      }
+
+      return res.status(200).json({ message: "Acesso revogado", email, status });
+    }
+
     if (!["APPROVED", "PAID", "COMPLETE", "COMPLETED"].includes(status)) {
       return res.status(200).json({ message: "Ignorado. Status: " + status });
     }
