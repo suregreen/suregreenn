@@ -478,8 +478,8 @@ function calc(){
   const lc=lr>=0?'g':'r',rc=roi>=0?'g':'r',ls=lr>=0?'+':'',rs2=roi>=0?'+':'';
   const ca=cs.filter(c=>c.si>0&&c.of>1);
   const dr=ca.map(c=>{
-    const co=c.lc>=0?'#fff':'#fff',bg=c.lc>=0?'#166534':'#991b1b',bd=c.lc>=0?'#22a85a':'#dc2626',sg=c.lc>=0?'+':'';
-    return `<div class="dr"><div><div class="dl">Casa ${c.n}${c.tp==='lay'?' · Lay':''}${c.fb?' · Freebet':''}</div><div class="ds">R$ ${fmt(c.si)}</div></div><span class="db" style="color:${co};background:${bg};border:1px solid ${bd}">${sg}R$ ${fmt(Math.abs(c.lc))}</span></div>`;
+    const co='#fff',bg=lr>=0?'#166534':'#991b1b',bd=lr>=0?'#22a85a':'#dc2626',sg=lr>=0?'+':'';
+    return `<div class="dr"><div><div class="dl">Casa ${c.n}${c.tp==='lay'?' · Lay':''}${c.fb?' · Freebet':''}</div><div class="ds">R$ ${fmt(c.si)}</div></div><span class="db" style="color:${co};background:${bg};border:1px solid ${bd}">${sg}R$ ${fmt(Math.abs(lr))}</span></div>`;
   }).join('');
   document.getElementById('rgRes').innerHTML=
     `<div class="rp"><div class="rh"><span class="rt">Resultados</span></div>
