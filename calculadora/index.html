@@ -247,6 +247,18 @@ footer a{color:#1EEF78;text-decoration:none;}
   .rg-res{flex-direction:column;}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"O que é surebet?","acceptedAnswer":{"@type":"Answer","text":"Surebet é uma estratégia onde você aposta em todos os resultados de um evento em casas diferentes, garantindo lucro independente do resultado."}},
+    {"@type":"Question","name":"Como usar a calculadora de surebet?","acceptedAnswer":{"@type":"Answer","text":"Insira as odds de cada casa, selecione o tipo (Back ou Lay), defina o stake e a calculadora distribui automaticamente para garantir o maior lucro."}},
+    {"@type":"Question","name":"O que é duplo green?","acceptedAnswer":{"@type":"Answer","text":"Duplo green é quando você lucra nas duas casas simultaneamente, combinando back e lay para maximizar o retorno garantido."}},
+    {"@type":"Question","name":"A calculadora é gratuita?","acceptedAnswer":{"@type":"Answer","text":"Sim, 100% gratuita, sem cadastro, suporta de 2 a 5 casas com back, lay e freebet."}}
+  ]
+}
+</script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -254,17 +266,19 @@ footer a{color:#1EEF78;text-decoration:none;}
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<header>
-  <a href="https://suregreen.com.br" class="logo">
-    <div class="logo-ico">
-      <svg viewBox="0 0 24 24" fill="none" stroke="rgb(15,23,42)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
-      </svg>
-    </div>
-    <span class="logo-nm">Sure<span>Green</span></span>
-  </a>
-</header>
 
+
+<!-- H1 SEO -->
+<div style="text-align:center;padding:20px 20px 0;background:rgb(15,23,42);">
+  <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;">
+    <div style="width:30px;height:30px;background:#1EEF78;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgb(15,23,42)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+    </div>
+    <span style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#fff;">Sure<span style="color:#1EEF78;">Green</span></span>
+  </div>
+  <h1 style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:3px;">Calculadora de Surebet Gratuita</h1>
+  <p style="font-size:12px;color:rgba(209,213,219,.45);font-family:'Montserrat',sans-serif;">Back, Lay, Freebet e Duplo Green — de 2 a 5 casas</p>
+</div>
 <div class="bar">
   <div class="bar-l">
     <span class="bar-title">Configurações</span>
@@ -305,6 +319,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </div>
   </div>
+  <section style="max-width:860px;margin:0 auto 32px;padding:0 20px;">
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:20px;letter-spacing:-.02em;">Perguntas frequentes</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(209,213,219,.08);border-radius:12px;padding:16px 18px;">
+        <strong style="font-size:13px;color:#fff;display:block;margin-bottom:6px;">O que é surebet?</strong>
+        <p style="font-size:12px;color:rgba(209,213,219,.6);line-height:1.6;margin:0;">Surebet é uma estratégia de apostas esportivas onde você aposta em todos os resultados possíveis de um evento em casas diferentes, garantindo lucro independente do resultado.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(209,213,219,.08);border-radius:12px;padding:16px 18px;">
+        <strong style="font-size:13px;color:#fff;display:block;margin-bottom:6px;">O que é duplo green?</strong>
+        <p style="font-size:12px;color:rgba(209,213,219,.6);line-height:1.6;margin:0;">Duplo green é quando você lucra nas duas casas ao mesmo tempo, combinando uma aposta back numa casa com um lay na exchange para maximizar o retorno garantido.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(209,213,219,.08);border-radius:12px;padding:16px 18px;">
+        <strong style="font-size:13px;color:#fff;display:block;margin-bottom:6px;">Como usar a calculadora?</strong>
+        <p style="font-size:12px;color:rgba(209,213,219,.6);line-height:1.6;margin:0;">Insira as odds de cada casa, selecione o tipo (Back ou Lay), informe o stake e a calculadora distribui automaticamente os valores para garantir o maior lucro possível.</p>
+      </div>
+    </div>
+  </section>
 </main>
 
 
@@ -408,7 +439,18 @@ function tc(n){man[n]=false;for(let i=1;i<=N;i++)if(i!==n)man[i]=false;render();
 function tg(n){document.getElementById('cv'+n).classList.toggle('show',document.getElementById('cc'+n).checked);calc();}
 function fs(n){base=n;for(let i=1;i<=N;i++){const b=document.getElementById('fx'+i);if(!b)continue;b.classList.toggle('on',i===n);b.textContent=i===n?'⊙ Fixado':'Fixar Stake';if(i!==n)man[i]=false;}calc();}
 function lc(n){['o'+n,n===1?'v1':'v'+n,'a'+n].forEach(id=>{const el=document.getElementById(id);if(el)el.value=id.startsWith('a')?'0':'';});man[n]=false;clearTimeout(ot[n]);calc();}
-function limparTudo(){for(let i=1;i<=N;i++)man[i]=false;base=1;render();}
+function limparTudo(){
+  for(let i=1;i<=N;i++){
+    man[i]=false;
+    ['o'+i,(i===1?'v1':'v'+i),'a'+i,'cv'+i].forEach(function(id){var el=document.getElementById(id);if(el)el.value=id.startsWith('a')?'0':id.startsWith('cv')?'5':'';});
+    var cc=document.getElementById('cc'+i);if(cc)cc.checked=false;
+    var fb=document.getElementById('fb'+i);if(fb)fb.checked=false;
+    var t=document.getElementById('t'+i);if(t)t.value='back';
+  }
+  base=1;
+  var rs=document.getElementById('rs');if(rs)rs.classList.remove('show');
+  render();
+}
 
 function calc(){
   const rs=document.getElementById('rs'),cs=[];
