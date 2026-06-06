@@ -311,7 +311,7 @@ module.exports = async function handler(req, res) {
     }
 
     // ── Envia e-mail com o código (premium) ──
-    const linkAcesso = "https://suregreen.com.br/?codigo=" + codigo;
+    const linkAcesso = "https://suregreen.com.br/dashboard/?codigo=" + codigo;
     const htmlEmail =
       "<div style='background:#060a0f;padding:40px 20px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif'>" +
         "<div style='max-width:480px;margin:0 auto;background:linear-gradient(160deg,#0e1621,#0a0f17);border:1px solid rgba(34,197,94,.15);border-radius:20px;overflow:hidden'>" +
