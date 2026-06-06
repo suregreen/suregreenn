@@ -310,26 +310,37 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    // ── Envia e-mail com o código ──
+    // ── Envia e-mail com o código (premium) ──
+    const linkAcesso = "https://suregreen.com.br/?codigo=" + codigo;
     const htmlEmail =
-      "<div style='font-family:sans-serif;max-width:480px;margin:0 auto;background:#0d1117;color:#fff;padding:32px;border-radius:16px'>" +
-      "<h2 style='color:#22c55e;text-align:center'>Bem-vindo ao SureGreen!</h2>" +
-      "<p style='color:rgba(255,255,255,.6);text-align:center'>Seu codigo de acesso:</p>" +
-      "<div style='background:#1a1f2e;border:1.5px solid #22c55e;border-radius:12px;padding:20px;text-align:center;margin:20px 0'>" +
-      "<div style='font-size:28px;font-weight:900;color:#22c55e;letter-spacing:6px;font-family:monospace'>" + codigo + "</div>" +
-      "</div>" +
-      "<p style='color:rgba(255,255,255,.7);font-size:14px;line-height:1.7'>" +
-      "1. Acesse <strong style='color:#22c55e'>suregreen.com.br</strong><br>" +
-      "2. Clique em Criar conta<br>" +
-      "3. Digite seu e-mail, senha e o codigo acima</p>" +
-      "<div style='text-align:center;margin-top:20px'>" +
-      "<a href='https://suregreen.com.br' style='background:#22c55e;color:#020d05;padding:14px 32px;border-radius:999px;text-decoration:none;font-weight:800;font-size:15px'>Acessar SureGreen</a>" +
-      "</div></div>";
+      "<div style='background:#060a0f;padding:40px 20px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif'>" +
+        "<div style='max-width:480px;margin:0 auto;background:linear-gradient(160deg,#0e1621,#0a0f17);border:1px solid rgba(34,197,94,.15);border-radius:20px;overflow:hidden'>" +
+          "<div style='padding:36px 32px 28px;text-align:center;border-bottom:1px solid rgba(255,255,255,.05)'>" +
+            "<div style='font-size:22px;font-weight:800;letter-spacing:-.5px'><span style='color:#fff'>Sure</span><span style='color:#22c55e'>Green</span></div>" +
+            "<div style='color:rgba(255,255,255,.4);font-size:12px;margin-top:6px;letter-spacing:.5px'>GESTAO PROFISSIONAL DE APOSTAS</div>" +
+          "</div>" +
+          "<div style='padding:36px 32px'>" +
+            "<h1 style='color:#fff;font-size:22px;font-weight:700;margin:0 0 8px;text-align:center'>Pagamento confirmado!</h1>" +
+            "<p style='color:rgba(255,255,255,.55);font-size:14px;line-height:1.6;text-align:center;margin:0 0 28px'>Sua conta esta pronta. Clique no botao abaixo para ativar seu acesso — seu codigo ja vai preenchido.</p>" +
+            "<div style='text-align:center;margin:0 0 28px'>" +
+              "<a href='" + linkAcesso + "' style='display:inline-block;background:linear-gradient(135deg,#22c55e,#16a34a);color:#04140a;padding:16px 40px;border-radius:999px;text-decoration:none;font-weight:800;font-size:16px;box-shadow:0 8px 24px rgba(34,197,94,.3)'>Ativar meu acesso &rarr;</a>" +
+            "</div>" +
+            "<div style='background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;text-align:center'>" +
+              "<div style='color:rgba(255,255,255,.4);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px'>Seu codigo de acesso</div>" +
+              "<div style='font-size:24px;font-weight:800;color:#22c55e;letter-spacing:5px;font-family:monospace'>" + codigo + "</div>" +
+            "</div>" +
+            "<p style='color:rgba(255,255,255,.35);font-size:12px;line-height:1.6;text-align:center;margin:20px 0 0'>O botao acima ja abre o cadastro com seu codigo preenchido.<br>Se preferir, acesse <strong style='color:rgba(255,255,255,.6)'>suregreen.com.br</strong> e digite o codigo manualmente.</p>" +
+          "</div>" +
+          "<div style='padding:20px 32px;border-top:1px solid rgba(255,255,255,.05);text-align:center'>" +
+            "<p style='color:rgba(255,255,255,.3);font-size:11px;margin:0;line-height:1.6'>Precisa de ajuda? Responda este e-mail.<br>SureGreen &copy; 2026</p>" +
+          "</div>" +
+        "</div>" +
+      "</div>";
 
     await resend.emails.send({
       from: "SureGreen <noreply@suregreen.com.br>",
       to: email,
-      subject: "Seu acesso SureGreen chegou!",
+      subject: "Seu acesso SureGreen esta pronto",
       html: htmlEmail,
     });
 
