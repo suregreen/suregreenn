@@ -1423,6 +1423,12 @@ html body .sep { background:var(--line)!important; }
 ::-webkit-scrollbar{width:6px;height:6px;} ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:10px;} ::-webkit-scrollbar-track{background:transparent;}
 ::selection{background:var(--primary-soft);}
 @keyframes pulseDot{0%,100%{box-shadow:0 0 0 0 rgba(61,158,110,0.6);}50%{box-shadow:0 0 0 5px rgba(61,158,110,0);}}
+
+/* SVG inline de logos - tamanho e estilo */
+.opx-m-logo-wrap > svg{width:100%;height:100%;border-radius:8px;display:block;box-sizing:border-box;}
+.opx-casa-logo-svg{width:20px;height:20px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;overflow:hidden;}
+.opx-casa-logo-svg > svg{width:100%;height:100%;display:block;border-radius:5px;}
+.sgm-book-cell svg.sgm-logo-svg{width:20px;height:20px;border-radius:5px;display:block;background:#fff;padding:1px;box-sizing:border-box;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
@@ -7038,7 +7044,7 @@ window.dvRender=function(){
               var casas=(e.casas||[]).map(function(c){return c.nome;}).join(' · ');
               return '<div class="dp-aprow">'+
                 '<div class="dp-apl">'+
-                  '<div class="dp-apd">'+(e.desc||'—')+'</div>'+
+                  '<div class="dp-apd">'+(sgEsc(e.desc)||'—')+'</div>'+
                   '<div class="dp-apm">'+dvTipoTag(e.tipo)+' '+(casas||'—')+'</div>'+
                 '</div>'+
                 '<div class="dp-apr">'+
@@ -7057,7 +7063,7 @@ window.dvRender=function(){
     return '<div class="dp-dia">'+
       '<div class="dp-drow'+(isH?' hoje':'')+(isOpen?' aberto':'')+'" data-d="'+d+'" onclick="window._dpToggle(this.dataset.d)">'+
         '<div><div class="dp-dd">'+pp[2]+'/'+pp[1]+'</div><div class="dp-dw">'+ds+(isH?' <span style="color:#4AD55E;">hoje</span>':'')+'</div></div>'+
-        '<div class="dp-dobs">'+(i.obs||'<span style="opacity:.2;">—</span>')+'</div>'+
+        '<div class="dp-dobs">'+(sgEsc(i.obs)||'<span style="opacity:.2;">—</span>')+'</div>'+
         '<div class="dp-dnum '+(l>0?'p':'m')+'">'+(l>0?dvFmt(l):'—')+'</div>'+
         '<div class="dp-dnum '+(p>0?'n':'m')+'">'+(p>0?dvFmt(p):'—')+'</div>'+
         '<div><span class="dp-pill '+sc+'">'+(s>=0?'+':'')+'R$ '+s.toFixed(2).replace('.',',')+'</span></div>'+
@@ -10651,13 +10657,15 @@ window.irExportPDF = function(){
     +'  }'
     +'\n'
     +'  var oldDxRenderChart = window.dxRenderChart;'
-    +'  if(typeof oldDxRenderChart === \'function\'){'
-    +'    window.dxRenderChart = function(){'
+    +'  if(typeof oldDxRenderChart === \'function\' && !oldDxRenderChart.__sgSafeMobilePolish){'
+    +'    var wrappedDx = function(){'
     +'      var r = oldDxRenderChart.apply(this, arguments);'
     +'      setTimeout(applyMobileChartPolish, 30);'
     +'      setTimeout(applyMobileChartPolish, 220);'
     +'      return r;'
     +'    };'
+    +'    wrappedDx.__sgSafeMobilePolish = true;'
+    +'    window.dxRenderChart = wrappedDx;'
     +'  }'
     +'\n'
     +'  window.addEventListener(\'load\', function(){'
@@ -10748,30 +10756,8 @@ irCalc();
     return clean.substring(0,3).toUpperCase();
   }
   function svgData(svg){ return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg); }
-  function localLogo(name){
-    var k=key(name);
-    if(k.includes('superbet') || k.includes('sportingbet') || k.includes('sportybet')){
-      return svgData('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1fb6ff"/><stop offset="1" stop-color="#005c9f"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#g)"/><text x="32" y="42" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="31" font-weight="900" font-style="italic" fill="#fff">sb</text></svg>');
-    }
-    if(k.includes('bet365')){
-      return svgData('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="11" fill="#172414"/><rect x="3" y="3" width="58" height="58" rx="9" fill="none" stroke="#68785f" stroke-width="2"/><text x="32" y="28" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="900" fill="#fff">bet</text><text x="32" y="47" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="900" fill="#f3d54e">365</text></svg>');
-    }
-    if(k.includes('betfair')){
-      return svgData('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#f6c244"/><path d="M14 39h18v10l20-17-20-17v10H14z" fill="#111827"/><text x="32" y="57" text-anchor="middle" font-family="Arial" font-size="9" font-weight="900" fill="#111827">betfair</text></svg>');
-    }
-    if(k.includes('betano')){
-      return svgData('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#fff"/><path d="M22 10h19c10 0 15 8 10 16-2 3-5 5-8 6 5 1 8 5 8 10 0 7-6 12-15 12H12L22 10z" fill="#ff5a1f"/><path d="M29 19h9c4 0 6 3 4 6-1 2-3 3-7 3h-10l4-9zm-6 27h11c4 0 7-2 7-5s-2-5-6-5H26l-3 10z" fill="#fff"/></svg>');
-    }
-    if(k.includes('kto')){
-      return svgData('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#050505"/><text x="32" y="39" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="900" fill="#e41119">KTO</text></svg>');
-    }
-    if(k.includes('super') || k==='s'){
-      return svgData('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#ff1717"/><text x="32" y="44" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="43" font-weight="900" fill="#fff">S</text></svg>');
-    }
-    if(k.includes('novibet')){
-      return svgData('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#1f2937"/><text x="32" y="43" text-anchor="middle" font-family="Arial" font-size="36" font-weight="900" fill="#fff">n</text></svg>');
-    }
-    return '';
+  function localLogo(name) {
+    return (typeof window.sgLocalLogoUrl === 'function') ? window.sgLocalLogoUrl(name) : '';
   }
   function domainLogo(name){
     var k=key(name), d='';
@@ -10800,9 +10786,14 @@ irCalc();
   function logoHtml(b){
     if(!b) return '<span class="opx-m-logo-wrap"><span class="opx-m-logo-fallback">--</span></span>';
     var name=b.name||'';
-    var primary=localLogo(name) || domainLogo(name);
-    var fallback=localLogo(name) ? domainLogo(name) : '';
-    return '<span class="opx-m-logo-wrap"><img class="opx-m-logo" src="'+primary+'" '+(fallback?'data-fallback="'+fallback+'" ':'')+'data-name="'+esc(name)+'" alt="'+esc(name)+'" title="'+esc(name)+'" loading="lazy" decoding="async" onerror="__sgLogoFailPro(this)"></span>';
+    // 1) SVG inline (nunca falha) para casas com logo propria
+    var raw=(typeof window.sgLocalLogoSvgRaw==='function')?window.sgLocalLogoSvgRaw(name):'';
+    if(raw){
+      return '<span class="opx-m-logo-wrap" title="'+esc(name)+'">'+raw+'</span>';
+    }
+    // 2) Favicon para as demais
+    var primary=domainLogo(name);
+    return '<span class="opx-m-logo-wrap"><img class="opx-m-logo" src="'+primary+'" data-name="'+esc(name)+'" alt="'+esc(name)+'" title="'+esc(name)+'" loading="lazy" decoding="async" onerror="__sgLogoFailPro(this)"></span>';
   }
   function bests(bk){var h=null,d=null,a=null;(bk||[]).forEach(function(b){if(b.home&&(!h||Number(b.home)>Number(h.home)))h=b;if(b.draw&&(!d||Number(b.draw)>Number(d.draw)))d=b;if(b.away&&(!a||Number(b.away)>Number(a.away)))a=b;});return {home:h,draw:d,away:a};}
   function pctText(b){try{if(!b.home||!b.away)return '';var inv=(1/Number(b.home.home))+(b.draw&&b.draw.draw?1/Number(b.draw.draw):0)+(1/Number(b.away.away));var pct=(1-inv)*100;return pct>0?'+'+pct.toFixed(2):'';}catch(e){return '';}}
@@ -12230,6 +12221,18 @@ window._fbReady = true;
 
 
 <script>
+// === ONBOARDING: funcoes do tour (fecham o modal de forma limpa) ===
+window.obSkip = function(){
+  var m = document.getElementById('onboarding-modal');
+  if(m) m.classList.remove('show');
+  try { localStorage.setItem('sg_ob_done','1'); } catch(e){}
+};
+window.obNext = function(){
+  // Tour simples: avanca passos; ao fim, fecha. Como nao ha passos definidos, fecha direto.
+  window.obSkip();
+};
+
+
 // ════════════════════════════════════════
 // NAVIGATION
 // ════════════════════════════════════════
@@ -13005,6 +13008,56 @@ document.addEventListener('keydown', function(e){
 
 function save(entry) { if(window.fbSave) window.fbSave(entry); }
 
+// === SEGURANCA: escape de HTML para prevenir XSS em campos de usuario ===
+// === LOGOS LOCAIS SVG (global, acessivel em todos os escopos) ===
+window.sgBookDomain = function(name){
+  var MAP = {
+    'bet365':'bet365.com','betano':'betano.com','betfair':'betfair.com','betfairexchange':'betfair.com',
+    'superbet':'superbet.bet.br','sportingbet':'sportingbet.bet.br','novibet':'novibet.bet.br',
+    'kto':'kto.bet.br','vaidebet':'vaidebet.bet.br','pixbet':'pixbet.bet.br','pinnacle':'pinnacle.com',
+    'matchbook':'matchbook.com','smarkets':'smarkets.com','betdaq':'betdaq.com','esportivabet':'esportiva.bet.br',
+    'estrelabet':'estrelabet.bet.br','bolsadeaposta':'bolsadeaposta.bet.br','vivasorte':'vivasorte.bet.br',
+    'apostabet':'aposta.bet.br','betesportes':'betesporte.bet.br','jogodeouro':'jogodeouro.bet.br',
+    'betnacional':'betnacional.bet.br','segurobet':'segurobet.bet.br','galerabet':'galera.bet.br',
+    'betpix365':'betpix365.bet.br','stake':'stake.com','mrjack':'mrjack.bet.br','betvip':'betvip.bet.br',
+    'williamhill':'williamhill.com','unibet':'unibet.com','888sport':'888sport.com','bwin':'bwin.com',
+    'betway':'betway.com','1xbet':'1xbet.com','betsson':'betsson.com','bet7k':'7k.bet.br','betmgm':'betmgm.bet.br',
+    'br4bet':'br4.bet.br','casadeapostas':'casadeapostas.bet.br','betboom':'betboom.com','meridianbet':'meridianbet.bet.br',
+    'lotogreen':'lotogreen.bet.br','f12bet':'f12.bet.br','brbet':'brbet.bet.br'
+  };
+  var k=(name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+  if(MAP[k]) return MAP[k];
+  for(var key in MAP){ if(k.indexOf(key)!==-1 || key.indexOf(k)!==-1) return MAP[key]; }
+  return k+'.bet.br';
+};
+window.sgLocalLogoSvgRaw = function(name){
+  var k=(name||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+  if(k.includes('sporty')) return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="14" fill="#d2122e"/><text x="32" y="44" text-anchor="middle" font-family="Arial" font-size="36" font-weight="900" font-style="italic" fill="#fff">S</text></svg>';
+  if(k.includes('seguro')) return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="14" fill="#0a8f5b"/><path d="M32 12l16 6v12c0 11-7 18-16 22-9-4-16-11-16-22V18z" fill="#fff"/><path d="M24 32l6 6 11-12" fill="none" stroke="#0a8f5b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  if(k.includes('vupi')) return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="vpgr" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a020f0"/><stop offset="1" stop-color="#e83e8c"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#vpgr)"/><text x="32" y="44" text-anchor="middle" font-family="Arial" font-size="34" font-weight="900" fill="#fff">v</text></svg>';
+  if(k.includes('versus')) return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="14" fill="#11151c"/><text x="32" y="42" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="900" font-style="italic" fill="#ff6a00">VS</text></svg>';
+  if(k.includes('tradeball')||k.includes('traderbool')||k.includes('bolsa')) return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="14" fill="#0a1f17"/><path d="M16 24h26l-7-7" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M48 40H22l7 7" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  return '';
+};
+window.sgLocalLogoUrl = function(name){
+  var k=(name||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+  function S(svg){ return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg); }
+  if(k.includes('sporty')) return S('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#d2122e"/><text x="32" y="44" text-anchor="middle" font-family="Arial" font-size="36" font-weight="900" font-style="italic" fill="#fff">S</text></svg>');
+  if(k.includes('seguro')) return S('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a8f5b"/><path d="M32 12l16 6v12c0 11-7 18-16 22-9-4-16-11-16-22V18z" fill="#fff"/><path d="M24 32l6 6 11-12" fill="none" stroke="#0a8f5b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  if(k.includes('vupi')) return S('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="vpg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a020f0"/><stop offset="1" stop-color="#e83e8c"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#vpg)"/><text x="32" y="44" text-anchor="middle" font-family="Arial" font-size="34" font-weight="900" fill="#fff">v</text></svg>');
+  if(k.includes('versus')) return S('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#11151c"/><text x="32" y="42" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="900" font-style="italic" fill="#ff6a00">VS</text></svg>');
+  if(k.includes('tradeball')||k.includes('traderbool')||k.includes('bolsa')) return S('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a1f17"/><path d="M16 24h26l-7-7" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M48 40H22l7 7" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  return '';
+};
+function sgEsc(s){
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
 const LBL = { surebet:'Surebet', superodds:'Super Odds', freebet:'Freebet', apostagrats:'Duplo Green', aposta:'Aposta' };
 const BCL = { surebet:'b-su', superodds:'b-so', freebet:'b-fb', apostagrats:'b-ag', aposta:'b-so' };
 const RCL = { casa:'#3ecf8e', empate:'#e8c97e', fora:'#60a5fa' };
@@ -13059,13 +13112,13 @@ function render() {
     const casasH = (e.casas && e.casas.length)
       ? e.casas.map(c => `<span class="em">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:#9ca3af"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
-          <span class="hn">${c.nome}</span>
+          <span class="hn">${sgEsc(c.nome)}</span>
           <span style="color:${RCL[c.res]||'#9ca3af'};font-size:10px;font-weight:600;">@${c.odd}</span>
         </span>`).join('')
       : '';
 
     const lk = e.link ? `<span class="em"><a href="${e.link}" target="_blank" style="color:#3b82f6;">↗ link</a></span>` : '';
-    const ob = e.obs  ? `<span class="em" style="color:#9ca3af;font-style:italic;">✎ ${e.obs}</span>` : '';
+    const ob = e.obs  ? `<span class="em" style="color:#9ca3af;font-style:italic;">✎ ${sgEsc(e.obs)}</span>` : '';
 
     const animDelay = Math.min(idx * 0.04, 0.4);
 
@@ -13078,7 +13131,7 @@ function render() {
           <span class="etm">${e.date} · ${e.time}</span>
         </div>
         <!-- Descrição da aposta -->
-        <div class="edesc">${e.desc}</div>
+        <div class="edesc">${sgEsc(e.desc)}</div>
         <!-- Casas, stake, obs -->
         <div class="emeta">
           ${casasH}
@@ -13379,7 +13432,7 @@ window.exportPDF = function() {
     const plTxt = e.status==='won' ? `+${f(e.pl)}` : e.status==='lost' ? `-${f(Math.abs(e.pl))}` : `+${f(e.lucroEst)}`;
     return `<tr style="background:${cor};">
       <td style="padding:8px 10px;font-size:11px;color:#aaa;">${e.date}</td>
-      <td style="padding:8px 10px;font-size:12px;color:#fff;max-width:220px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${e.desc}</td>
+      <td style="padding:8px 10px;font-size:12px;color:#fff;max-width:220px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${sgEsc(e.desc)}</td>
       <td style="padding:8px 10px;font-size:11px;color:#c9a84c;">${e.tipo}</td>
       <td style="padding:8px 10px;font-size:12px;color:#fff;text-align:right;">${f(e.stake)}</td>
       <td style="padding:8px 10px;font-size:12px;font-weight:700;text-align:right;color:${e.status==='won'?'#3ecf8e':e.status==='lost'?'#f07080':'#e2b96a'};">${plTxt}</td>
@@ -13597,7 +13650,7 @@ function ldRenderExtras() {
     const hora = new Date(e.id).toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
     return `<div class="ld-extra-item">
       <div class="ld-extra-info">
-        <div class="ld-extra-desc">${e.desc}</div>
+        <div class="ld-extra-desc">${sgEsc(e.desc)}</div>
         <div class="ld-extra-meta">${hora}</div>
       </div>
       <div class="ld-extra-val ${e.valor < 0 ? 'neg' : ''}">${f(e.valor)}</div>
@@ -15244,7 +15297,7 @@ function renderBankroll() {
       var pos = c.roi >= 0;
       var roiStr = c.roi.toFixed(1) + '%';
       return '<div class="roi-row">' +
-        '<div class="roi-nome">' + c.nome + '</div>' +
+        '<div class="roi-nome">' + sgEsc(c.nome) + '</div>' +
         '<div>' +
           '<div style="font-size:11px;font-weight:700;color:' + (pos?'#4AD55E':'#e05c6a') + ';margin-bottom:5px;">' + roiStr + '</div>' +
           '<div class="roi-bar-wrap"><div class="roi-bar ' + (pos?'pos':'neg') + '" style="width:' + pct + '%"></div></div>' +
@@ -15410,7 +15463,7 @@ function bkRender() {
         return '<div class="bk-row">' +
           '<div class="bk-casa-nome">' +
             '<div class="bk-casa-ico" style="background:' + cor + '18;border:1px solid ' + cor + '30;color:' + cor + ';font-weight:800;">' + letra + '</div>' +
-            '<span style="font-size:13px;font-weight:700;color:#eef6ff;">' + (casa.nome || '—') + '</span>' +
+            '<span style="font-size:13px;font-weight:700;color:#eef6ff;">' + (sgEsc(casa.nome) || '—') + '</span>' +
           '</div>' +
           '<div class="bk-num" style="color:rgba(220,235,255,.7);">R$ ' + Math.abs(saldo).toFixed(2).replace('.',',') + '</div>' +
           '<div class="bk-num ' + (stats.lucro >= 0 ? 'pos' : 'neg') + '">' + (stats.cnt > 0 ? (stats.lucro >= 0 ? '+' : '-') + 'R$ ' + Math.abs(stats.lucro).toFixed(2).replace('.',',') : '—') + '</div>' +
@@ -15483,7 +15536,7 @@ function bkRenderPie() {
       var pct = total > 0 ? (Math.max(0, parseFloat(c.saldo||0)) / total * 100).toFixed(0) : 0;
       return '<div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#374151;">' +
         '<div style="width:8px;height:8px;border-radius:50%;background:' + (c.cor||'#00B050') + ';flex-shrink:0;"></div>' +
-        '<span style="flex:1;">' + c.nome + '</span>' +
+        '<span style="flex:1;">' + sgEsc(c.nome) + '</span>' +
         '<span style="font-weight:700;color:#6B7280;">' + pct + '%</span>' +
       '</div>';
     }).join('');
@@ -16351,7 +16404,7 @@ window.diarRender = function() {
         '</div>' +
 
         // Obs
-        (i.obs ? '<div style="font-size:12px;color:var(--t2);margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.05);">' + i.obs + '</div>' : '') +
+        (i.obs ? '<div style="font-size:12px;color:var(--t2);margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.05);">' + sgEsc(i.obs) + '</div>' : '') +
 
         // Lucro / Perda
         '<div style="display:flex;gap:12px;">' +
@@ -16380,7 +16433,7 @@ window.diarRender = function() {
         '<div style="font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:600;color:var(--t1);line-height:1.2;">' + partes[2] + '/' + partes[1] + '</div>' +
         '<div style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);margin-top:1px;">' + nomeAbrev + (isHoje ? '<span style="color:var(--pos);"> · hoje</span>' : '') + '</div>' +
       '</div>' +
-      '<div style="font-size:12px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:16px;">' + (i.obs ? i.obs : '<span style="color:var(--t3);opacity:.4;">—</span>') + '</div>' +
+      '<div style="font-size:12px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:16px;">' + (i.obs ? sgEsc(i.obs) : '<span style="color:var(--t3);opacity:.4;">—</span>') + '</div>' +
       '<div style="text-align:right;font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:500;color:' + (lucro > 0 ? 'var(--t1)' : 'var(--t3)') + ';opacity:' + (lucro > 0 ? '1' : '.3') + ';">' + (lucro > 0 ? 'R$ ' + lucro.toFixed(2).replace('.', ',') : '—') + '</div>' +
       '<div style="text-align:right;font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:500;color:' + (perca > 0 ? 'var(--t1)' : 'var(--t3)') + ';opacity:' + (perca > 0 ? '1' : '.3') + ';">' + (perca > 0 ? 'R$ ' + perca.toFixed(2).replace('.', ',') : '—') + '</div>' +
       '<div style="text-align:right;"><span style="font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:700;color:' + saldoColor + ';background:' + saldoBg + ';border-radius:6px;padding:3px 8px;display:inline-block;">' + saldoPrefix + 'R$ ' + saldoDia.toFixed(2).replace('.', ',') + '</span></div>' +
@@ -16493,7 +16546,7 @@ function entryHTML(e) {
   const d      = new Date(e.id);
   const dtStr  = d.toLocaleDateString('pt-BR') + ' · ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
   const casasH = (e.casas||[]).map(c =>
-    `<span style="display:inline-flex;align-items:center;padding:3px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:6px;font-size:12px;font-weight:500;color:rgba(220,235,255,.55);">${c.nome}</span>`
+    `<span style="display:inline-flex;align-items:center;padding:3px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:6px;font-size:12px;font-weight:500;color:rgba(220,235,255,.55);">${sgEsc(c.nome)}</span>`
   ).join('');
 
   // Botão ícone reutilizável
@@ -16529,7 +16582,7 @@ function entryHTML(e) {
           ${dtStr}
         </span>
       </div>
-      <div style="font-size:15px;font-weight:700;color:#eef6ff;margin-bottom:8px;">${e.desc||'—'}</div>
+      <div style="font-size:15px;font-weight:700;color:#eef6ff;margin-bottom:8px;">${sgEsc(e.desc)||'—'}</div>
       <div style="display:flex;flex-wrap:wrap;gap:5px;">${casasH}</div>
     </div>
 
@@ -18532,9 +18585,24 @@ setTimeout(function() {
     return clean.substring(0, Math.min(3, clean.length)).toUpperCase();
   }
 
+  function _sgmSvg(svg){ return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg); }
+  function _sgmLocalLogo(name) {
+    return (typeof window.sgLocalLogoUrl === 'function') ? window.sgLocalLogoUrl(name) : '';
+  }
   function buildLogoHtml(name, bc, initials) {
     var domain = getBookDomain(name);
-    var logoUrl = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=64';
+    var _raw = (typeof window.sgLocalLogoSvgRaw === 'function') ? window.sgLocalLogoSvgRaw(name) : '';
+    if(_raw){
+      var w0 = document.createElement('div');
+      w0.className = 'sgm-initials';
+      w0.style.background = 'transparent';
+      w0.innerHTML = _raw;
+      var sv = w0.querySelector('svg');
+      if(sv){ sv.setAttribute('class','sgm-logo-svg'); }
+      return w0.outerHTML;
+    }
+    var _local = _sgmLocalLogo(name);
+    var logoUrl = _local || ('https://www.google.com/s2/favicons?domain=' + domain + '&sz=64');
     var wrap = document.createElement('div');
     wrap.className = 'sgm-initials';
     wrap.style.background = bc.bg;
@@ -23697,6 +23765,20 @@ html body .ld-modal {
   }
   #dx-recent-list {
     grid-template-columns: 1fr !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  #dx-recent-list > div {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  /* Conter o card de Ultimas Entradas no mobile (evita vazamento lateral) */
+  .sg-card {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
   }
 
   /* 4. KPI hero cards */
@@ -24654,9 +24736,15 @@ function opxRender(games) {
       if (!b||!b[key]) return '<div class="opx-casa"><div class="opx-casa-top"><span style="width:20px;height:20px;display:inline-block"></span></div><span class="opx-casa-odd" style="color:rgba(220,230,255,.15)">—</span><span class="opx-casa-lbl">'+lbl+'</span></div>';
       var isBest = b[key] === maxOdd;
       var domain = typeof getBookDomain === 'function' ? getBookDomain(b.name) : b.name.toLowerCase().replace(/\s+/g,'')+'.bet.br';
-      var logoUrl = 'https://www.google.com/s2/favicons?domain='+domain+'&sz=32';
+      var _raw = (typeof window.sgLocalLogoSvgRaw === 'function') ? window.sgLocalLogoSvgRaw(b.name) : '';
       var bookUrl = b.url || ('https://'+domain);
-      var logoHtml = '<img class="opx-casa-logo" src="'+logoUrl+'" alt="'+b.name+'" title="'+b.name+'" onerror="this.style.opacity=\'0\'">';
+      var logoHtml;
+      if(_raw){
+        logoHtml = '<span class="opx-casa-logo opx-casa-logo-svg">'+_raw+'</span>';
+      } else {
+        var logoUrl = 'https://www.google.com/s2/favicons?domain='+domain+'&sz=32';
+        logoHtml = '<img class="opx-casa-logo" src="'+logoUrl+'" alt="'+b.name+'" title="'+b.name+'" onerror="this.style.opacity=\'0\'">';
+      }
       var oddVal = '<span class="opx-casa-odd'+(isBest?' best':'')+'">'+b[key].toFixed(2)+'</span>';
       var lnk = '<a href="'+bookUrl+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:3px;">'
         +'<div class="opx-casa-top">'+logoHtml+'</div>'+oddVal+'</a>';
@@ -25050,7 +25138,7 @@ function sgIrPendentes(btn) {
           ? '+R$ ' + (e.lucroEst || 0).toFixed(2).replace('.', ',')
           : '-R$ ' + Math.abs(e.lucroEst || 0).toFixed(2).replace('.', ',');
         return '<div style="background:rgba(255,255,255,.03);border:0.5px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 18px;margin-bottom:8px;">'
-          + '<div style="font-size:13px;font-weight:600;color:#eef6ff;margin-bottom:4px;">' + (e.desc || '—') + '</div>'
+          + '<div style="font-size:13px;font-weight:600;color:#eef6ff;margin-bottom:4px;">' + (sgEsc(e.desc) || '—') + '</div>'
           + '<div style="font-size:11px;color:rgba(148,180,210,.50);">' + (e.tipo || '') + ' · ' + (e.date || '') + '</div>'
           + '<div style="font-size:12px;color:#fbbf24;margin-top:6px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline;vertical-align:-1px;margin-right:3px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Pendente · ' + est + '</div>'
           + '</div>';
@@ -26779,6 +26867,11 @@ function trackRenewalCheckout() {
     if(words.length>1) return (words[0][0]+words[1][0]).toUpperCase();
     return clean.substring(0,3).toUpperCase();
   }
+  function svgData(svg){ return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg); }
+  function _k(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
+  function localLogo(name) {
+    return (typeof window.sgLocalLogoUrl === 'function') ? window.sgLocalLogoUrl(name) : '';
+  }
   window.__sgMobileLogoFail100=function(img){
     var alt=img.getAttribute('data-alt-src');
     if(alt && img.getAttribute('data-tried-alt')!=='1'){
@@ -26795,15 +26888,14 @@ function trackRenewalCheckout() {
   function logoHtml(b){
     if(!b) return '<span class="opx-m-logo-wrap"><span class="opx-m-logo-fallback">--</span></span>';
     var name=b.name||'';
-    // 1) SVG local (sempre funciona)
-    var svgSrc=(typeof localLogo==='function')?localLogo(name):'';
-    if(svgSrc){
-      return '<span class="opx-m-logo-wrap"><img class="opx-m-logo" src="'+svgSrc+'" alt="'+esc(name)+'" title="'+esc(name)+'"></span>';
+    // 1) SVG inline (nunca falha)
+    var raw=(typeof window.sgLocalLogoSvgRaw==='function')?window.sgLocalLogoSvgRaw(name):'';
+    if(raw){
+      return '<span class="opx-m-logo-wrap" title="'+esc(name)+'">'+raw+'</span>';
     }
-    // 2) Google favicon via BOOK_DOMAINS
-    var domain=(typeof getBookDomain==='function')?getBookDomain(name):(String(name).toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'')+'.bet.br');
+    // 2) Google favicon - dominio correto via sgBookDomain (igual ao desktop)
+    var domain=(typeof window.sgBookDomain==='function')?window.sgBookDomain(name):((typeof getBookDomain==='function')?getBookDomain(name):(String(name).toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'')+'.bet.br'));
     var gUrl='https://www.google.com/s2/favicons?domain='+encodeURIComponent(domain)+'&sz=64';
-    var init=(typeof getInitials==='function')?getInitials(name):initials(name);
     return '<span class="opx-m-logo-wrap"><img class="opx-m-logo" src="'+gUrl+'" data-name="'+esc(name)+'" alt="'+esc(name)+'" title="'+esc(name)+'" loading="lazy" decoding="async" onerror="__sgMobileLogoFail100(this)"></span>';
   }
   function bests(bk){
@@ -27241,6 +27333,11 @@ function trackRenewalCheckout() {
     return (Chart.getChart ? Chart.getChart(canvas) : null) || window._dxChart || null;
   }
   function polish(){
+    if(window.__sgPolishing) return;
+    window.__sgPolishing = true;
+    try{ _polishInner(); } finally { setTimeout(function(){ window.__sgPolishing=false; }, 0); }
+  }
+  function _polishInner(){
     if(!mobile()) return;
     var chart = getChart();
     if(!chart) return;
@@ -27331,10 +27428,7 @@ function trackRenewalCheckout() {
     chart.update('none');
   }
   function schedule(){ setTimeout(polish,60); setTimeout(polish,350); setTimeout(polish,900); }
-  var old = window.dxRenderChart;
-  if(typeof old === 'function'){
-    window.dxRenderChart = function(){ var r = old.apply(this, arguments); schedule(); return r; };
-  }
+  // wrapper de polish desativado para evitar recursao (Maximum call stack)
   window.addEventListener('load', schedule);
   window.addEventListener('resize', function(){ setTimeout(polish,160); });
   document.addEventListener('visibilitychange', schedule);
@@ -27418,6 +27512,11 @@ function trackRenewalCheckout() {
     return (Chart.getChart ? Chart.getChart(canvas) : null) || window._dxChart || null;
   }
   function polish(){
+    if(window.__sgPolishing) return;
+    window.__sgPolishing = true;
+    try{ _polishInner(); } finally { setTimeout(function(){ window.__sgPolishing=false; }, 0); }
+  }
+  function _polishInner(){
     if(!isMobile()) return;
     var chart = getChart();
     if(!chart || !chart.options) return;
@@ -27501,12 +27600,7 @@ function trackRenewalCheckout() {
     chart.update('none');
   }
   function schedule(){ setTimeout(polish,80); setTimeout(polish,350); setTimeout(polish,1000); }
-  var old = window.dxRenderChart;
-  if(typeof old === 'function' && !old.__sgSafeMobilePolish){
-    var wrapped = function(){ var result = old.apply(this, arguments); schedule(); return result; };
-    wrapped.__sgSafeMobilePolish = true;
-    window.dxRenderChart = wrapped;
-  }
+  // wrapper de polish desativado para evitar recursao (Maximum call stack)
   window.addEventListener('load', schedule);
   window.addEventListener('resize', function(){ setTimeout(polish,160); });
 })();
