@@ -5203,39 +5203,205 @@ window.addEventListener('unhandledrejection', function(e) {
 </div>
 
 <!-- ── TELA DE CADASTRO ── -->
-<div id="register-screen" style="display:none;position:fixed;inset:0;z-index:9999;background:#080808;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;">
-  <div class="login-box">
-    <div class="login-logo">
-      <div class="login-logo-icon">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
-      </div>
-      <div class="login-logo-name"><span class="w">Sure</span><span class="g">Green</span></div>
-      <div class="login-logo-tagline">Criar Acesso</div>
+<style>
+#register-screen .rg-wrap {
+  width: 100%; max-width: 420px;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0 16px;
+}
+#register-screen .rg-logo-icon {
+  width: 68px; height: 68px; border-radius: 18px;
+  background: linear-gradient(135deg, #0b2318, #0d2e1f);
+  border: 1px solid rgba(76,175,130,0.4);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+  box-shadow: 0 0 0 1px rgba(76,175,130,0.12), 0 8px 24px rgba(61,158,110,0.18);
+}
+#register-screen .rg-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px; font-weight: 800; color: #fff;
+  letter-spacing: -0.03em; margin-bottom: 6px;
+}
+#register-screen .rg-subtitle {
+  font-size: 13px; color: rgba(255,255,255,0.4);
+  text-align: center; line-height: 1.6; margin-bottom: 28px;
+}
+#register-screen .rg-card {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 28px 24px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+#register-screen .rg-field { margin-bottom: 18px; }
+#register-screen .rg-lbl {
+  display: block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  color: #4CAF82; margin-bottom: 8px; text-transform: uppercase;
+}
+#register-screen .rg-inp-wrap {
+  position: relative; display: flex; align-items: center;
+}
+#register-screen .rg-ico {
+  position: absolute; left: 14px;
+  color: rgba(76,175,130,0.5);
+  display: flex; align-items: center; pointer-events: none;
+}
+#register-screen .rg-inp {
+  width: 100%; padding: 13px 14px 13px 42px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  color: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px;
+  outline: none; transition: border-color 0.18s, box-shadow 0.18s;
+}
+#register-screen .rg-inp::placeholder { color: rgba(255,255,255,0.2); }
+#register-screen .rg-inp:focus {
+  border-color: rgba(76,175,130,0.45);
+  box-shadow: 0 0 0 3px rgba(76,175,130,0.1);
+}
+#register-screen .rg-eye {
+  position: absolute; right: 14px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+  color: rgba(255,255,255,0.3); display: flex; align-items: center;
+  transition: color 0.18s;
+}
+#register-screen .rg-eye:hover { color: rgba(255,255,255,0.6); }
+#register-screen .rg-btn {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, #4CAF82, #3D9E6E);
+  border: none; border-radius: 12px;
+  color: #07120E; font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.1em;
+  cursor: pointer; transition: all 0.18s; margin-top: 6px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 8px 24px rgba(61,158,110,0.25);
+}
+#register-screen .rg-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+#register-screen .rg-divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 18px 0 0;
+}
+#register-screen .rg-divider-line {
+  flex: 1; height: 1px; background: rgba(255,255,255,0.08);
+}
+#register-screen .rg-divider-txt {
+  font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.06em;
+}
+#register-screen .rg-login-link {
+  text-align: center; margin-top: 14px;
+  font-size: 13px; color: rgba(255,255,255,0.4);
+}
+#register-screen .rg-login-link button {
+  background: none; border: none; color: #4CAF82;
+  font-family: 'DM Sans', sans-serif; font-size: 13px;
+  font-weight: 600; cursor: pointer;
+}
+#register-screen .rg-footer {
+  margin-top: 20px; display: flex; align-items: center; gap: 7px;
+  color: rgba(255,255,255,0.25); font-size: 12px;
+}
+</style>
+<div id="register-screen" style="display:none;position:fixed;inset:0;z-index:9999;background:#04060c;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;overflow-y:auto;">
+
+  <!-- glow superior -->
+  <div style="position:fixed;top:-300px;left:50%;transform:translateX(-50%);width:700px;height:500px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(61,158,110,0.16) 0%,transparent 65%);pointer-events:none;z-index:0;"></div>
+
+  <div class="rg-wrap" style="position:relative;z-index:1;padding-top:40px;padding-bottom:40px;">
+
+    <!-- Logo -->
+    <div class="rg-logo-icon">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
     </div>
-    <div class="login-card">
-      <div class="login-field">
-        <label class="login-label">Código de acesso</label>
-        <input class="login-input" id="r-code" type="text" placeholder="Código fornecido por SureGreen">
-      </div>
-      <div class="login-field">
-        <label class="login-label">E-mail</label>
-        <input class="login-input" id="r-email" type="email" placeholder="seu@email.com">
-      </div>
-      <div class="login-field">
-        <label class="login-label">Senha</label>
-        <input class="login-input" id="r-pass" type="password" placeholder="Mínimo 6 caracteres"
-          onkeydown="if(event.key==='Enter')doRegister()">
-      </div>
-      <div class="login-field">
-        <label class="login-label">Confirmar senha</label>
-        <input class="login-input" id="r-pass2" type="password" placeholder="Repita a senha">
-      </div>
-      <button class="login-btn" onclick="doRegister()">Criar conta</button>
-      <div class="login-err" id="r-err">Código inválido.</div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px;">
+      <span style="color:#fff;">Sure</span><span style="color:#4CAF82;text-shadow:0 0 20px rgba(76,175,130,0.4);">Green</span>
     </div>
-    <div style="text-align:center;margin-top:16px;">
-      <button onclick="showLogin()" style="background:transparent;border:none;color:var(--t3);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline;">Já tem conta? Entrar</button>
+    <div class="rg-title" style="font-size:22px;margin-bottom:6px;">Criar acesso</div>
+    <div class="rg-subtitle">Crie sua conta e comece a operar<br>com mais inteligência.</div>
+
+    <!-- Card -->
+    <div class="rg-card">
+
+      <!-- Código de acesso -->
+      <div class="rg-field">
+        <label class="rg-lbl">Código de acesso</label>
+        <div class="rg-inp-wrap">
+          <span class="rg-ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <input class="rg-inp" id="r-code" type="text" placeholder="Código fornecido por SureGreen">
+        </div>
+      </div>
+
+      <!-- E-mail -->
+      <div class="rg-field">
+        <label class="rg-lbl">E-mail</label>
+        <div class="rg-inp-wrap">
+          <span class="rg-ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </span>
+          <input class="rg-inp" id="r-email" type="email" placeholder="seu@email.com">
+        </div>
+      </div>
+
+      <!-- Senha -->
+      <div class="rg-field">
+        <label class="rg-lbl">Senha</label>
+        <div class="rg-inp-wrap">
+          <span class="rg-ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <input class="rg-inp" id="r-pass" type="password" placeholder="Mínimo 6 caracteres"
+            onkeydown="if(event.key==='Enter')doRegister()">
+          <button class="rg-eye" type="button" onclick="(function(b){var i=document.getElementById('r-pass');i.type=i.type==='password'?'text':'password';})(this)" title="Mostrar senha">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Confirmar Senha -->
+      <div class="rg-field" style="margin-bottom:22px;">
+        <label class="rg-lbl">Confirmar senha</label>
+        <div class="rg-inp-wrap">
+          <span class="rg-ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <input class="rg-inp" id="r-pass2" type="password" placeholder="Repita a senha">
+          <button class="rg-eye" type="button" onclick="(function(b){var i=document.getElementById('r-pass2');i.type=i.type==='password'?'text':'password';})(this)" title="Mostrar senha">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Botão -->
+      <button class="rg-btn" onclick="doRegister()">
+        CRIAR CONTA
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+
+      <!-- Erro -->
+      <div class="login-err" id="r-err" style="margin-top:12px;">Código inválido.</div>
+
+      <!-- Divisor OU -->
+      <div class="rg-divider">
+        <div class="rg-divider-line"></div>
+        <span class="rg-divider-txt">OU</span>
+        <div class="rg-divider-line"></div>
+      </div>
+
+      <!-- Link login -->
+      <div class="rg-login-link">
+        Já tem conta? <button onclick="showLogin()">Entrar</button>
+      </div>
+
     </div>
+
+    <!-- Rodapé segurança -->
+    <div class="rg-footer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Ambiente seguro e criptografado
+    </div>
+
   </div>
 </div>
 
