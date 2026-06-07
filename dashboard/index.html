@@ -16488,7 +16488,7 @@ window.diarRender = function() {
           '<div style="font-size:10px;color:var(--t3);font-weight:500;">' + label + '</div>' +
           (sub ? '<div style="font-size:10px;color:var(--t3);opacity:.5;margin-top:1px;">' + sub + '</div>' : '') +
         '</div>' +
-        '<div style="font-family:\'Space Grotesk\',sans-serif;font-size:14px;font-weight:700;color:var(--t1);">' + valor + '</div>' +
+        '<div style="font-family:Space Grotesk,sans-serif;font-size:14px;font-weight:700;color:var(--t1);">' + valor + '</div>' +
       '</div>';
     }
 
@@ -16498,7 +16498,7 @@ window.diarRender = function() {
       resumoRow('Fechamentos', totalDias + ' dia' + (totalDias!==1?'s':''), pctAcerto + '% de aproveitamento') +
       '<div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;">' +
         '<div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;">Líquido</div>' +
-        '<div style="font-family:\'Space Grotesk\',sans-serif;font-size:20px;font-weight:800;color:' + saldoColor + ';">' +
+        '<div style="font-family:Space Grotesk,sans-serif;font-size:20px;font-weight:800;color:' + saldoColor + ';">' +
           (saldo > 0 ? '+' : '') + 'R$ ' + saldo.toFixed(2).replace('.',',') +
         '</div>' +
       '</div>';
@@ -16554,11 +16554,11 @@ window.diarRender = function() {
         // Linha topo: data + saldo
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">' +
           '<div>' +
-            '<div style="font-family:\'Space Grotesk\',sans-serif;font-size:14px;font-weight:700;color:var(--t1);">' + partes[2] + '/' + partes[1] + '</div>' +
+            '<div style="font-family:Space Grotesk,sans-serif;font-size:14px;font-weight:700;color:var(--t1);">' + partes[2] + '/' + partes[1] + '</div>' +
             '<div style="font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);margin-top:1px;">' + nomeAbrev + (isHoje ? '<span style="color:var(--pos);"> · hoje</span>' : '') + '</div>' +
           '</div>' +
           '<div style="display:flex;align-items:center;gap:8px;">' +
-            '<span style="font-family:\'Space Grotesk\',sans-serif;font-size:15px;font-weight:800;color:' + saldoColor + ';background:' + saldoBg + ';border-radius:6px;padding:4px 10px;">' +
+            '<span style="font-family:Space Grotesk,sans-serif;font-size:15px;font-weight:800;color:' + saldoColor + ';background:' + saldoBg + ';border-radius:6px;padding:4px 10px;">' +
               saldoPrefix + 'R$ ' + saldoDia.toFixed(2).replace('.', ',') +
             '</span>' +
             '<button onclick="diarExcluir(\'' + i.data + '\')" title="Excluir" ' +
@@ -16596,13 +16596,13 @@ window.diarRender = function() {
       'onmouseout="this.style.background=\'' + (isHoje ? 'rgba(201,168,76,0.04)' : 'transparent') + '\'">' +
 
       '<div>' +
-        '<div style="font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:600;color:var(--t1);line-height:1.2;">' + partes[2] + '/' + partes[1] + '</div>' +
+        '<div style="font-family:Space Grotesk,sans-serif;font-size:13px;font-weight:600;color:var(--t1);line-height:1.2;">' + partes[2] + '/' + partes[1] + '</div>' +
         '<div style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);margin-top:1px;">' + nomeAbrev + (isHoje ? '<span style="color:var(--pos);"> · hoje</span>' : '') + '</div>' +
       '</div>' +
       '<div style="font-size:12px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:16px;">' + (i.obs ? sgEsc(i.obs) : '<span style="color:var(--t3);opacity:.4;">—</span>') + '</div>' +
-      '<div style="text-align:right;font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:500;color:' + (lucro > 0 ? 'var(--t1)' : 'var(--t3)') + ';opacity:' + (lucro > 0 ? '1' : '.3') + ';">' + (lucro > 0 ? 'R$ ' + lucro.toFixed(2).replace('.', ',') : '—') + '</div>' +
-      '<div style="text-align:right;font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:500;color:' + (perca > 0 ? 'var(--t1)' : 'var(--t3)') + ';opacity:' + (perca > 0 ? '1' : '.3') + ';">' + (perca > 0 ? 'R$ ' + perca.toFixed(2).replace('.', ',') : '—') + '</div>' +
-      '<div style="text-align:right;"><span style="font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:700;color:' + saldoColor + ';background:' + saldoBg + ';border-radius:6px;padding:3px 8px;display:inline-block;">' + saldoPrefix + 'R$ ' + saldoDia.toFixed(2).replace('.', ',') + '</span></div>' +
+      '<div style="text-align:right;font-family:Space Grotesk,sans-serif;font-size:13px;font-weight:500;color:' + (lucro > 0 ? 'var(--t1)' : 'var(--t3)') + ';opacity:' + (lucro > 0 ? '1' : '.3') + ';">' + (lucro > 0 ? 'R$ ' + lucro.toFixed(2).replace('.', ',') : '—') + '</div>' +
+      '<div style="text-align:right;font-family:Space Grotesk,sans-serif;font-size:13px;font-weight:500;color:' + (perca > 0 ? 'var(--t1)' : 'var(--t3)') + ';opacity:' + (perca > 0 ? '1' : '.3') + ';">' + (perca > 0 ? 'R$ ' + perca.toFixed(2).replace('.', ',') : '—') + '</div>' +
+      '<div style="text-align:right;"><span style="font-family:Space Grotesk,sans-serif;font-size:13px;font-weight:700;color:' + saldoColor + ';background:' + saldoBg + ';border-radius:6px;padding:3px 8px;display:inline-block;">' + saldoPrefix + 'R$ ' + saldoDia.toFixed(2).replace('.', ',') + '</span></div>' +
       '<div style="text-align:right;"><button onclick="diarExcluir(\'' + i.data + '\')" title="Excluir" style="background:transparent;border:none;border-radius:6px;color:var(--t3);cursor:pointer;font-size:13px;padding:4px 6px;line-height:1;opacity:.4;transition:opacity .15s,color .15s;" onmouseover="this.style.opacity=\'1\';this.style.color=\'#e05c6a\'" onmouseout="this.style.opacity=\'.4\';this.style.color=\'var(--t3)\'">✕</button></div>' +
     '</div>';
   }).join('');
@@ -22990,7 +22990,7 @@ function dxRender() {
       return '<div style="margin-bottom:10px;">'
         + '<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;margin-bottom:5px;">'
         + '<span style="color:var(--body);">' + t.lbl + '</span>'
-        + '<span style="color:var(--label-2);font-family:\'Space Grotesk\',sans-serif;">' + c + '/' + doMes.length + ' · <span style="color:var(--primary-2);font-weight:600;">' + p + '%</span></span>'
+        + '<span style="color:var(--label-2);font-family:Space Grotesk,sans-serif;">' + c + '/' + doMes.length + ' · <span style="color:var(--primary-2);font-weight:600;">' + p + '%</span></span>'
         + '</div>'
         + '<div class="sg-wr-bar-track"><div class="sg-wr-bar-fill" style="width:' + p + '%;"></div></div>'
         + '</div>';
@@ -23039,7 +23039,7 @@ function dxRender() {
         // Linha 1: nome + valor
         + '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-right:20px;">'
         + '<div style="font-size:12.5px;font-weight:600;color:#eef6ff;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;">'+descNorm+'</div>'
-        + '<div style="font-size:13px;font-weight:800;white-space:nowrap;color:'+plC+';font-family:\'Space Grotesk\',sans-serif;flex-shrink:0;">'+plStr+'</div>'
+        + '<div style="font-size:13px;font-weight:800;white-space:nowrap;color:'+plC+';font-family:Space Grotesk,sans-serif;flex-shrink:0;">'+plStr+'</div>'
         + '</div>'
         // Linha 2: tipo
         + '<div style="font-size:10px;font-weight:700;color:rgba(190,215,235,0.5);text-transform:uppercase;letter-spacing:0.12em;">'+tipo+'</div>'
@@ -24500,7 +24500,7 @@ function sgOddsLoad() {
       // var docRef = fs.doc(db, 'odds', 'oddspedia_br'); // OddsPedia (desativado)
       var docRef = fs.doc(db, 'odds', 'lzcommunity_br'); // LZ Community
       _sgOddsUnsubscribe = fs.onSnapshot(docRef, function(snap) {
-        if (!snap.exists()) { sgOddsRender(ODDS_EXAMPLE); return; }
+        if (!snap.exists()) { sgOddsEmpty(); return; }
         var data = snap.data();
         var games = data.games || [];
 
@@ -24545,25 +24545,25 @@ function sgOddsLoad() {
           updEl.textContent = 'Atualizado às ' + d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0') + ' · ' + converted.length + ' jogos';
         }
 
-        sgOddsRender(converted.length > 0 ? converted : ODDS_EXAMPLE);
+        if (converted.length > 0) { sgOddsRender(converted); } else { sgOddsEmpty(); }
         // Inicia auto-reload após primeira carga bem-sucedida
         if (typeof sgOddsStartAutoReload === 'function') sgOddsStartAutoReload();
         // Limpa timeout de segurança
         if (window._sgOddsLoadTimeout) { clearTimeout(window._sgOddsLoadTimeout); window._sgOddsLoadTimeout = null; }
       }, function(err) {
         console.error('Firestore odds error:', err);
-        sgOddsRender(ODDS_EXAMPLE);
+        sgOddsEmpty();
         // Tenta reconectar em 5 segundos
         setTimeout(function() { sgOddsLoad(); }, 5000);
       });
     } catch(e) {
       console.error('sgOddsLoad error:', e);
-      sgOddsRender(ODDS_EXAMPLE);
+      sgOddsEmpty();
       setTimeout(function() { sgOddsLoad(); }, 5000);
     }
   }).catch(function(e) {
     console.error('sgOddsLoad import error:', e);
-    sgOddsRender(ODDS_EXAMPLE);
+    sgOddsEmpty();
     setTimeout(function() { sgOddsLoad(); }, 5000);
   });
 
@@ -24610,6 +24610,19 @@ function sgOddsParseGame(raw) {
     time: time, league: raw.sport_title || '',
     bookmakers: books.slice(0, 10)
   };
+}
+
+function sgOddsEmpty() {
+  var wrap = document.getElementById('opx-cards-wrap');
+  if (wrap) {
+    wrap.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 20px;gap:16px;">' +
+      '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5-2 4-2 4 2 4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>' +
+      '<div style="font-family:Space Grotesk,sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,0.25);">Nenhum jogo dispon\u00edvel agora</div>' +
+      '<div style="font-size:12px;color:rgba(255,255,255,0.15);text-align:center;max-width:260px;line-height:1.6;">As odds são atualizadas automaticamente. Volte em alguns instantes.</div>' +
+    '</div>';
+  }
+  var mWrap = document.getElementById('opx-mobile-wrap');
+  if (mWrap) mWrap.innerHTML = wrap ? wrap.innerHTML : '';
 }
 
 function sgOddsRender(games) {
