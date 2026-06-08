@@ -24613,16 +24613,25 @@ function sgOddsParseGame(raw) {
 }
 
 function sgOddsEmpty() {
+  var emptyHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 20px;gap:16px;">' +
+    '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5-2 4-2 4 2 4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>' +
+    '<div style="font-family:Space Grotesk,sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,0.25);">Nenhum jogo dispon\u00edvel agora</div>' +
+    '<div style="font-size:12px;color:rgba(255,255,255,0.15);text-align:center;max-width:260px;line-height:1.6;">As odds s\u00e3o atualizadas automaticamente. Volte em alguns instantes.</div>' +
+  '</div>';
+  var comBody = document.getElementById('odds-com-pa-body');
+  if (comBody) comBody.innerHTML = emptyHTML;
+  var semBody = document.getElementById('odds-sem-pa-body');
+  if (semBody) semBody.innerHTML = emptyHTML;
   var wrap = document.getElementById('opx-cards-wrap');
-  if (wrap) {
-    wrap.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 20px;gap:16px;">' +
-      '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5-2 4-2 4 2 4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>' +
-      '<div style="font-family:Space Grotesk,sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,0.25);">Nenhum jogo dispon\u00edvel agora</div>' +
-      '<div style="font-size:12px;color:rgba(255,255,255,0.15);text-align:center;max-width:260px;line-height:1.6;">As odds são atualizadas automaticamente. Volte em alguns instantes.</div>' +
-    '</div>';
-  }
+  if (wrap) wrap.innerHTML = emptyHTML;
   var mWrap = document.getElementById('opx-mobile-wrap');
-  if (mWrap) mWrap.innerHTML = wrap ? wrap.innerHTML : '';
+  if (mWrap) mWrap.innerHTML = emptyHTML;
+  var updEl = document.getElementById('odds-update-txt');
+  if (updEl) updEl.textContent = '0 jogos dispon\u00edveis';
+  var updM = document.getElementById('odds-update-txt-m');
+  if (updM) updM.textContent = '0 jogos dispon\u00edveis';
+  var cntEl = document.getElementById('opx-count');
+  if (cntEl) cntEl.textContent = '0';
 }
 
 function sgOddsRender(games) {
