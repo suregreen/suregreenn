@@ -768,13 +768,15 @@ function renderFatChart() {
     if(vals[k]!==undefined) vals[k]+=(p.valor||0);
   });
   const data=days.map(k=>vals[k]);
+  const labels=days.filter((_,i)=>i%5===0||i===days.length-1);
+  const labelData=labels.map(k=>vals[k]||0);
   const grad=ctx.createLinearGradient(0,0,0,180);
   grad.addColorStop(0,'rgba(30,239,120,0.15)'); grad.addColorStop(1,'rgba(30,239,120,0)');
   if(fatCh) fatCh.destroy();
   fatCh=new Chart(ctx,{
     type:'line',
-    data:{labels:days.filter((_,i)=>i%5===0||i===days.length-1),datasets:[{
-      data,borderColor:'#1EEF78',backgroundColor:grad,
+    data:{labels,datasets:[{
+      data:labelData,borderColor:'#1EEF78',backgroundColor:grad,
       borderWidth:2,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,
       pointHoverBackgroundColor:'#1EEF78'
     }]},
