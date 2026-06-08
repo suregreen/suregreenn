@@ -300,8 +300,14 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 .dias-ok { font-size: 11px; font-weight: 600; color: var(--green); background: var(--green-glow); padding: 2px 8px; border-radius: 20px; display: inline-block; }
 .dias-warn { font-size: 11px; font-weight: 600; color: var(--yellow); background: var(--yellow-glow); padding: 2px 8px; border-radius: 20px; display: inline-block; }
 .dias-danger { font-size: 11px; font-weight: 600; color: var(--red); background: var(--red-glow); padding: 2px 8px; border-radius: 20px; display: inline-block; }
-.dots-btn { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 16px; padding: 3px 7px; border-radius: 6px; transition: all .15s; letter-spacing: 2px; }
+.dots-btn { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 16px; padding: 3px 7px; border-radius: 6px; transition: all .15s; letter-spacing: 2px; position:relative; }
 .dots-btn:hover { background: var(--bg3); color: var(--text); }
+.action-menu { position:absolute; right:0; top:100%; background:var(--bg3); border:1px solid var(--border2); border-radius:10px; padding:6px; min-width:170px; z-index:999; box-shadow:0 8px 24px rgba(0,0,0,.5); display:none; flex-direction:column; gap:2px; }
+.action-menu.open { display:flex; }
+.action-item { background:none; border:none; color:var(--text2); font-family:var(--font); font-size:13px; padding:8px 12px; border-radius:7px; cursor:pointer; text-align:left; display:flex; align-items:center; gap:8px; transition:background .15s; white-space:nowrap; }
+.action-item:hover { background:var(--bg4); color:var(--text); }
+.action-item.danger { color:#f87171; }
+.action-item.danger:hover { background:rgba(248,113,113,.1); }
 
 /* ─── MISC ─────────────────────────────────────────────── */
 .loading { display: flex; align-items: center; justify-content: center; min-height: 80px; color: var(--text3); font-size: 12px; gap: 8px; }
@@ -553,6 +559,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
               <button class="fbtn" data-filter="expirando">Expirando em 7d</button>
               <button class="fbtn" data-filter="expirado">Expirados</button>
               <button class="fbtn warn" id="btn-reminder" onclick="sendReminders()">📧 Enviar lembrete</button>
+              <button class="fbtn" onclick="exportCSV()" style="background:var(--bg4);border:1px solid var(--border2);color:var(--text2);">⬇ Exportar CSV</button>
             </div>
           </div>
           <div class="users-right">
@@ -631,7 +638,8 @@ async function loadData() {
       db.collection('usuarios').get(),
       db.collection('pagamentos').orderBy('criadoEm','desc').limit(100).get().catch(()=>({docs:[]}))
     ]);
-    allUsers = us.docs.map(d=>({id:d.id,...d.data()}));
+    const raw = us.docs.filter(d=>!d.id.startsWith('pendente_')).map(d=>({id:d.id,...d.data()}));
+    const seen = {}; allUsers = raw.filter(u=>{ if(!u.email||seen[u.email]) return false; seen[u.email]=true; return true; });
     allPagamentos = ps.docs.map(d=>({id:d.id,...d.data()}));
     processUsers(); processPagamentos();
   } catch(e) {
@@ -881,7 +889,23 @@ function renderTable() {
         '<td><span class="badge '+st+'">'+lb+'</span></td>'+
         '<td style="color:var(--text3);font-size:12px">'+fmtD(u.criadoEm)+'</td>'+
         '<td>'+fmtDias(u.assinatura_expira)+'</td>'+
-        '<td><button class="dots-btn">•••</button></td></tr>';
+        '<td><div style="position:relative;display:inline-block">'+
+        '<button class="dots-btn" onclick="toggleMenu(event,\'menu-'+u.id+'\')">•••</button>'+
+        '<div class="action-menu" id="menu-'+u.id+'">'+
+          '<button class="action-item" onclick="openWhatsApp(\''+u.email+'\',\''+u.id+'\')">'+
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'+
+            'WhatsApp'+
+          '</button>'+
+          '<button class="action-item" onclick="copyEmail(\''+u.email+'\')">'+
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'+
+            'Copiar email'+
+          '</button>'+
+          '<button class="action-item danger" onclick="revogarAcesso(\''+u.id+'\',\''+u.email+'\')">'+
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>'+
+            'Revogar acesso'+
+          '</button>'+
+        '</div>'+
+        '</div></td></tr>';
     }).join('')+'</tbody></table>';
 }
 
@@ -909,6 +933,43 @@ document.querySelectorAll('.nav-item[data-section]').forEach(item => {
     }
   });
 });
+
+window.toggleMenu = function(e, id) {
+  e.stopPropagation();
+  document.querySelectorAll('.action-menu.open').forEach(m => { if(m.id !== id) m.classList.remove('open'); });
+  document.getElementById(id).classList.toggle('open');
+};
+document.addEventListener('click', () => document.querySelectorAll('.action-menu.open').forEach(m => m.classList.remove('open')));
+
+window.openWhatsApp = function(email, uid) {
+  const u = allUsers.find(x => x.id === uid);
+  const dias = u ? fmtDias(u.assinatura_expira) : '';
+  const msg = encodeURIComponent('Olá! Aqui é o Matheus do SureGreen. Tudo bem? Passando para saber como está sua experiência na plataforma. Qualquer dúvida estou à disposição! 🟢');
+  window.open('https://wa.me/?text='+msg, '_blank');
+};
+
+window.revogarAcesso = async function(uid, email) {
+  if(!confirm('Revogar acesso de '+email+'?\n\nIsto irá expirar a assinatura imediatamente.')) return;
+  try {
+    const ontem = new Date(); ontem.setDate(ontem.getDate() - 1);
+    await db.collection('usuarios').doc(uid).update({ assinatura_expira: firebase.firestore.Timestamp.fromDate(ontem), status: 'expirado' });
+    showToast('✓ Acesso de '+email+' revogado!');
+    loadData();
+  } catch(e) { alert('Erro: '+e.message); }
+};
+
+window.exportCSV = function() {
+  const rows = [['Email','Plano','Status','Cadastro','Expira']];
+  allUsers.forEach(u => {
+    rows.push([u.email||'', u.plano||'Mensal', getStatus(u), fmtD(u.criadoEm), fmtD(u.assinatura_expira)]);
+  });
+  const csv = rows.map(r => r.map(v => '"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
+  a.download = 'suregreen-usuarios-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+  showToast('✓ CSV exportado!');
+};
 
 window.sendReminders=async function(){
   const exp=allUsers.filter(u=>getStatus(u)==='expirando');
