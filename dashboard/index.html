@@ -8260,7 +8260,8 @@ function maisGo(pageId, cb) {
 
 <!-- FILTERS DESKTOP -->
 <div class="opx-filters opx-filters-desktop">
-  <button class="opx-filter-btn active">Pré-jogo</button>
+  <button class="opx-filter-btn opx-day-btn active" data-day="today" onclick="sgOddsSetDay(this,'today')">Hoje</button>
+  <button class="opx-filter-btn opx-day-btn" data-day="tomorrow" onclick="sgOddsSetDay(this,'tomorrow')">Amanhã</button>
   <div class="opx-filter-btn">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
     <select id="opx-liga-sel" onchange="opxFilter()">
@@ -8289,6 +8290,12 @@ function maisGo(pageId, cb) {
 
 <!-- FILTERS MOBILE -->
 <div class="opx-filters-mobile" style="display:none;">
+
+  <!-- Linha 1: Hoje / Amanhã -->
+  <div style="padding:0 14px 8px;display:flex;gap:8px;">
+    <button class="opx-day-btn-m active" data-day="today" onclick="sgOddsSetDay(this,'today')" style="flex:1;background:rgba(34,197,94,.16);border:1px solid rgba(34,197,94,.34);border-radius:12px;padding:11px 0;color:#22c55e;font-family:DM Sans,sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Hoje</button>
+    <button class="opx-day-btn-m" data-day="tomorrow" onclick="sgOddsSetDay(this,'tomorrow')" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:11px 0;color:rgba(255,255,255,.65);font-family:DM Sans,sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Amanhã</button>
+  </div>
 
   <!-- Linha 2: Busca -->
   <div style="padding:0 14px 8px;">
@@ -12524,6 +12531,7 @@ window._sgRestorePage = function() {
     goPage(targetId, btn || null);
     if (targetId === 'pg-hist') { try { renderHist(); } catch(e){} }
     if (targetId === 'pg-calc') { try { coRender(); } catch(e){} }
+    if (targetId === 'pg-odds') { try { sgOddsInit(); } catch(e){} }
     // Após mostrar a página, re-renderiza dados (canvas estava oculto antes)
     setTimeout(function() {
       try { if (typeof window.updStats === 'function') window.updStats(); } catch(e){}
@@ -24260,6 +24268,31 @@ html body .ld-modal {
 var _sgOddsDay = 'today';
 var _sgOddsData = [];
 
+// Decide se um jogo é "hoje" ou "amanhã" no fuso de Brasília (UTC-3)
+function _sgIsGameDay(startTime, day) {
+  if (!startTime) return false;
+  var g = new Date(startTime);
+  if (isNaN(g.getTime())) return false;
+  // Converte horário do jogo (UTC) para BRT
+  var gBRT = new Date(g.getTime() - 3 * 60 * 60 * 1000);
+  var gDateStr = gBRT.getUTCFullYear() + '-' +
+    String(gBRT.getUTCMonth()+1).padStart(2,'0') + '-' +
+    String(gBRT.getUTCDate()).padStart(2,'0');
+  // Hoje em BRT
+  var nowBRT = new Date(Date.now() - 3 * 60 * 60 * 1000);
+  var todayStr = nowBRT.getUTCFullYear() + '-' +
+    String(nowBRT.getUTCMonth()+1).padStart(2,'0') + '-' +
+    String(nowBRT.getUTCDate()).padStart(2,'0');
+  // Amanhã em BRT
+  var tomBRT = new Date(nowBRT.getTime() + 24 * 60 * 60 * 1000);
+  var tomStr = tomBRT.getUTCFullYear() + '-' +
+    String(tomBRT.getUTCMonth()+1).padStart(2,'0') + '-' +
+    String(tomBRT.getUTCDate()).padStart(2,'0');
+  if (day === 'today')    return gDateStr === todayStr;
+  if (day === 'tomorrow') return gDateStr === tomStr;
+  return true;
+}
+
 var CASAS_COLOR = {
   'Bet365':'#F7941D','bet365':'#F7941D','Betano':'#e53935','Superbet':'#1976D2',
   'Pinnacle':'#8B5CF6','Sportingbet':'#2E7D32','KTO':'#0288D1','Betfair':'#00796B',
@@ -24352,10 +24385,21 @@ function sgOddsInit() {
 }
 
 function sgOddsSetDay(el, day) {
-  document.querySelectorAll('.odds-day-tab').forEach(function(t) { t.classList.remove('on'); });
-  el.classList.add('on');
   _sgOddsDay = day;
-  sgOddsLoad();
+  // Desktop: classe .active
+  document.querySelectorAll('.opx-day-btn').forEach(function(b) {
+    if (b.getAttribute('data-day') === day) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  // Mobile: estilo inline (cores)
+  document.querySelectorAll('.opx-day-btn-m').forEach(function(b) {
+    var on = b.getAttribute('data-day') === day;
+    b.style.background = on ? 'rgba(34,197,94,.16)' : 'rgba(255,255,255,.05)';
+    b.style.border = on ? '1px solid rgba(34,197,94,.34)' : '1px solid rgba(255,255,255,.08)';
+    b.style.color = on ? '#22c55e' : 'rgba(255,255,255,.65)';
+  });
+  // Re-renderiza com filtro novo (sem ir no Firestore)
+  opxFilter();
 }
 
 var _sgOddsUnsubscribe = null;
@@ -24485,6 +24529,7 @@ function sgOddsStartAutoReload() {
 }
 
 function sgOddsLoad() {
+  window._sgOddsRendered = false;
   var comBody = document.getElementById('odds-com-pa-body');
   var semBody = document.getElementById('odds-sem-pa-body');
   if (comBody) comBody.innerHTML = _LOADING_HTML;
@@ -24514,15 +24559,10 @@ function sgOddsLoad() {
       var db = fs.getFirestore(app);
       // var docRef = fs.doc(db, 'odds', 'oddspedia_br'); // OddsPedia (desativado)
       var docRef = fs.doc(db, 'odds', 'lzcommunity_br'); // LZ Community
-      _sgOddsUnsubscribe = fs.onSnapshot(docRef, function(snap) {
-        if (!snap.exists()) { sgOddsEmpty(); return; }
-        var data = snap.data();
-        var games = data.games || [];
 
-        // Debug: ver estrutura real do primeiro jogo
-        if (games.length > 0 && games[0].bookmakers && games[0].bookmakers.length > 0) {
-          var bk0 = games[0].bookmakers[0];
-        }
+      // Aplica dados do documento de odds (compartilhado: onSnapshot + fallback getDoc)
+      function _sgOddsApply(data) {
+        var games = (data && data.games) || [];
 
         var converted = games.map(function(g) {
           // Estrutura LZ: g.bookmakers = [{name, slug, home, draw, away, pa_category, url}, ...]
@@ -24561,16 +24601,37 @@ function sgOddsLoad() {
         }
 
         if (converted.length > 0) { sgOddsRender(converted); } else { sgOddsEmpty(); }
-        // Inicia auto-reload após primeira carga bem-sucedida
+        window._sgOddsRendered = true;
+        // Inicia auto-reload após carga bem-sucedida
         if (typeof sgOddsStartAutoReload === 'function') sgOddsStartAutoReload();
-        // Limpa timeout de segurança
+        // Limpa timers de segurança
         if (window._sgOddsLoadTimeout) { clearTimeout(window._sgOddsLoadTimeout); window._sgOddsLoadTimeout = null; }
+        if (window._sgOddsWatchdog) { clearTimeout(window._sgOddsWatchdog); window._sgOddsWatchdog = null; }
+      }
+
+      _sgOddsUnsubscribe = fs.onSnapshot(docRef, function(snap) {
+        if (!snap.exists()) { sgOddsEmpty(); return; }
+        _sgOddsApply(snap.data());
       }, function(err) {
         console.error('Firestore odds error:', err);
         sgOddsEmpty();
         // Tenta reconectar em 5 segundos
         setTimeout(function() { sgOddsLoad(); }, 5000);
       });
+
+      // Watchdog: se o onSnapshot não entregar em 3.5s (re-subscribe travado),
+      // força UMA leitura via getDoc para destravar — sem derrubar o listener ao vivo.
+      if (window._sgOddsWatchdog) clearTimeout(window._sgOddsWatchdog);
+      window._sgOddsWatchdog = setTimeout(function() {
+        if (window._sgOddsRendered) return;
+        try {
+          fs.getDoc(docRef).then(function(snap) {
+            if (window._sgOddsRendered) return;
+            if (snap && snap.exists()) { _sgOddsApply(snap.data()); }
+            else { sgOddsEmpty(); }
+          }).catch(function(e) { console.error('sgOdds getDoc fallback error:', e); });
+        } catch(e) { console.error('sgOdds getDoc fallback exception:', e); }
+      }, 3500);
     } catch(e) {
       console.error('sgOddsLoad error:', e);
       sgOddsEmpty();
@@ -24582,11 +24643,10 @@ function sgOddsLoad() {
     setTimeout(function() { sgOddsLoad(); }, 5000);
   });
 
-  // Timeout de segurança — se em 8s não carregou, tenta de novo
+  // Timeout de segurança — se em 8s não renderizou, refaz o ciclo completo
   if (window._sgOddsLoadTimeout) clearTimeout(window._sgOddsLoadTimeout);
   window._sgOddsLoadTimeout = setTimeout(function() {
-    var wrap = document.getElementById('opx-cards-wrap');
-    if (wrap && wrap.innerHTML.indexOf('odds-loading') !== -1) {
+    if (!window._sgOddsRendered) {
       sgOddsLoad();
     }
   }, 8000);
@@ -24651,8 +24711,7 @@ function sgOddsEmpty() {
 
 function sgOddsRender(games) {
   window._opxGames = games;
-  opxRender(games);
-  opxMobileRender(games);
+  opxFilter();
   // Sincronizar texto de update no header mobile
   var upd = document.getElementById('odds-update-txt');
   var updM = document.getElementById('odds-update-txt-m');
@@ -24857,6 +24916,7 @@ function opxFilter() {
   var casa = (document.getElementById('opx-casa-sel') || {}).value || '';
   var srch = ((document.getElementById('opx-search') || {}).value || '').toLowerCase();
   var f = games.filter(function(g) {
+    if (!_sgIsGameDay(g.startTime, _sgOddsDay)) return false;
     if (liga && g.league !== liga) return false;
     if (srch && (g.home+' '+g.away+' '+g.league).toLowerCase().indexOf(srch) === -1) return false;
     if (casa) {
@@ -24896,7 +24956,7 @@ function opxRender(games) {
   var PREFER = ['bet365','betano','novibet','stake','kto','betmgm','vbet','1xbet','sportingbet','superbet'];
   function isPrio(b){ var n=(b.name||'').toLowerCase(); return PREFER.some(function(p){return n.includes(p);}); }
 
-  var headerHtml = '<div class="opx-thead-custom"><span>JOGO</span><span>CASAS DE APOSTA</span><span style="text-align:right">LUCRO</span><span style="text-align:right">A&Ccedil;&Atilde;O</span></div>';
+  var headerHtml = '<div class="opx-thead-custom"><span>JOGO</span><span>CASAS DE APOSTA</span><span></span><span></span></div>';
   var html = '';
 
   // Agrupar por liga
