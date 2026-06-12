@@ -14048,13 +14048,14 @@ function coCalc() {
   const res      = document.getElementById('coResult');
   const sendWrap = document.getElementById('coSendWrap');
 
+  // ── 1) LEITURA DOS INPUTS ──
   const casas = [];
   for (let i = 1; i <= coN; i++) {
     const oddRaw    = parseFloat((document.getElementById('co_odd'  + i)?.value || '').replace(',', '.')) || 0;
     const tipo      = document.getElementById('co_tipo' + i)?.value || 'back';
     const aum       = parseFloat(document.getElementById('co_aum'  + i)?.value) || 0;
     const hasComm   = document.getElementById('co_cc'   + i)?.checked;
-    const commPct   = hasComm ? (parseFloat(document.getElementById('co_cv' + i)?.value) || 0) : 0;
+    const commPct   = hasComm ? (parseFloat((document.getElementById('co_cv' + i)?.value || '0').replace(',', '.')) || 0) : 0;
     const comm      = commPct / 100;
     const isFreebet = document.getElementById('co_fb'   + i)?.checked || false;
     const oddFinal  = oddRaw > 1 ? oddRaw * (1 + aum / 100) : 0;
@@ -14064,8 +14065,7 @@ function coCalc() {
     casas.push({ n: i, oddFinal, tipo, aum, comm, isFreebet, stakeRaw, isManual });
   }
 
-  // (odd final removido do display visual)
-
+  // ── 2) CASA BASE ──
   const baseIdx  = (coBase <= coN && casas[coBase-1]?.oddFinal > 1 && casas[coBase-1]?.stakeRaw > 0) ? coBase - 1 : 0;
   const casaBase = casas[baseIdx];
   const validas  = casas.filter(ca => ca.oddFinal > 1);
@@ -14076,26 +14076,26 @@ function coCalc() {
     return;
   }
 
+  // ── 3) K (valor de equilibração da casa base) ──
   let K;
   if (casaBase.isFreebet)            K = casaBase.stakeRaw * (casaBase.oddFinal - 1);
   else if (casaBase.tipo === 'back') K = casaBase.stakeRaw * (1 + (casaBase.oddFinal - 1) * (1 - casaBase.comm));
   else                               K = casaBase.stakeRaw * (casaBase.oddFinal - casaBase.comm);
 
+  // ── 4) STAKE IDEAL POR CASA + DISPLAY ──
   casas.forEach(ca => {
-    if (ca.n === casaBase.n) { ca.stakeIdeal = ca.stakeRaw; }
-    else if (ca.oddFinal <= 1) { ca.stakeIdeal = 0; }
-    else if (ca.isManual) { ca.stakeIdeal = ca.stakeRaw; }
+    if (ca.n === casaBase.n)        { ca.stakeIdeal = ca.stakeRaw; }
+    else if (ca.oddFinal <= 1)      { ca.stakeIdeal = 0; }
+    else if (ca.isManual)           { ca.stakeIdeal = ca.stakeRaw; }
     else {
       if (ca.isFreebet)            ca.stakeIdeal = K / (ca.oddFinal - 1);
       else if (ca.tipo === 'back') ca.stakeIdeal = K / (1 + (ca.oddFinal - 1) * (1 - ca.comm));
       else                         ca.stakeIdeal = K / (ca.oddFinal - ca.comm);
 
       if (ca.tipo === 'lay') {
-        // LAY: atualiza só o display, não escreve em input
         const dispEl = document.getElementById('co_lay_val' + ca.n);
         if (dispEl) dispEl.textContent = 'R$ ' + ca.stakeIdeal.toFixed(2).replace('.', ',');
       } else {
-        // BACK: escreve no campo input — mas não se o usuário está editando
         const elId = ca.n === 1 ? 'co_val1_inp' : 'co_val' + ca.n;
         const el   = document.getElementById(elId);
         if (el && document.activeElement !== el) {
@@ -14105,48 +14105,49 @@ function coCalc() {
         }
       }
     }
+    // Responsabilidade (apenas para lay)
     ca.liability = ca.tipo === 'lay' && ca.stakeIdeal > 0 ? ca.stakeIdeal * (ca.oddFinal - 1) : 0;
     const liabEl = document.getElementById('co_liab' + ca.n);
     if (liabEl) liabEl.textContent = ca.liability > 0 ? 'R$ ' + ca.liability.toFixed(2).replace('.', ',') : '—';
   });
 
+  // Responsabilidade da casa base (caso ela seja lay)
   casaBase.liability = casaBase.tipo === 'lay' && casaBase.stakeRaw > 0 ? casaBase.stakeRaw * (casaBase.oddFinal - 1) : 0;
   const liabBaseEl = document.getElementById('co_liab' + casaBase.n);
   if (liabBaseEl) liabBaseEl.textContent = casaBase.liability > 0 ? 'R$ ' + casaBase.liability.toFixed(2).replace('.', ',') : '—';
 
+  // ── 5) CUSTO REAL (investimento total) ──
+  // Para BACK: soma a stake. Para LAY: soma a responsabilidade. Freebet não conta.
   const custoReal = casas.reduce((s, ca) => {
     if (!ca.stakeIdeal || ca.oddFinal <= 1 || ca.isFreebet) return s;
     return s + (ca.tipo === 'lay' ? ca.liability : ca.stakeIdeal);
   }, 0);
 
+  // ── 6) RETORNO POR CENÁRIO (porta da gratuita) ──
+  // BACK: stake * (1 + (odd-1)*(1-comm))
+  // LAY:  stake * (odd - comm)          ← inclui retorno da responsabilidade
+  // FREEBET: stake * (odd-1)
   casas.forEach(ca => {
     if (!ca.stakeIdeal || ca.oddFinal <= 1) { ca.retorno = 0; ca.lucroCenario = 0; return; }
     if (ca.isFreebet)            ca.retorno = ca.stakeIdeal * (ca.oddFinal - 1);
     else if (ca.tipo === 'back') ca.retorno = ca.stakeIdeal * (1 + (ca.oddFinal - 1) * (1 - ca.comm));
-    else                         ca.retorno = ca.stakeIdeal * (1 - ca.comm);
+    else                         ca.retorno = ca.stakeIdeal * (ca.oddFinal - ca.comm);
+    // No cenário em que a LAY ganha, a responsabilidade volta ao bolso → subtrai do custo
     const custo = ca.tipo === 'lay' ? custoReal - ca.liability : custoReal;
     ca.lucroCenario = ca.retorno - custo;
   });
 
-  // Retorno REAL no bolso por cenário (o que volta pro bolso quando aquela casa ganha):
-  // BACK ganha: retorno = stakeIdeal * oddFinal
-  // LAY ganha:  retorno = stakeIdeal*(1-comm) + liability  (recebe stake do back + recupera liability)
-  //             = stakeIdeal*(oddFinal - comm) = K (por construção)
-  // FREEBET:    retorno = stakeIdeal*(oddFinal-1)
-  casas.forEach(ca => {
-    if (!ca.stakeIdeal || ca.oddFinal <= 1) { ca.retornoBolso = 0; return; }
-    if (ca.isFreebet)            ca.retornoBolso = ca.stakeIdeal * (ca.oddFinal - 1);
-    else if (ca.tipo === 'back') ca.retornoBolso = ca.stakeIdeal * (1 + (ca.oddFinal - 1) * (1 - ca.comm));
-    else /* lay */               ca.retornoBolso = ca.stakeIdeal * (ca.oddFinal - ca.comm);
-  });
-  const retornosBolso = casas.filter(ca => ca.retornoBolso > 0).map(ca => ca.retornoBolso);
-  const Kreal = retornosBolso.length > 0 ? Math.min(...retornosBolso) : K;
-  // lucroReal = menor lucro entre todos os cenários (lucro garantido)
-  const lucrosCenario = casas.filter(ca => ca.stakeIdeal > 0 && ca.oddFinal > 1).map(ca => ca.lucroCenario);
-  const lucroReal = lucrosCenario.length > 0 ? Math.min(...lucrosCenario) : Kreal - custoReal;
-  const roiPct    = custoReal > 0 ? (lucroReal / custoReal) * 100 : 0;
-  coLastLucro     = lucroReal;
+  // ── 7) RETORNO GARANTIDO (Kreal) = mínimo dos retornos ──
+  const retornos = casas.filter(ca => ca.retorno > 0).map(ca => ca.retorno);
+  const Kreal    = retornos.length > 0 ? Math.min(...retornos) : K;
 
+  // ── 8) LUCRO GARANTIDO = mínimo dos cenários ──
+  const lucrosCenario = casas.filter(ca => ca.stakeIdeal > 0 && ca.oddFinal > 1).map(ca => ca.lucroCenario);
+  const lucroReal     = lucrosCenario.length > 0 ? Math.min(...lucrosCenario) : Kreal - custoReal;
+  const roiPct        = custoReal > 0 ? (lucroReal / custoReal) * 100 : 0;
+  coLastLucro         = lucroReal;
+
+  // ── 9) BADGES & FORMATAÇÃO ──
   const temLay     = validas.some(ca => ca.tipo === 'lay');
   const hasFreebet = casas.some(ca => ca.isFreebet);
   const backV      = validas.filter(ca => ca.tipo === 'back' && !ca.isFreebet);
@@ -14177,19 +14178,20 @@ function coCalc() {
     </div>
   </div>`;
 
+  // Distribuição: mostra o LUCRO GLOBAL em todas as casas (como a calculadora gratuita)
   const distRows = casasAtivas.map(ca => {
-    const isLay = ca.tipo === 'lay';
-    const cor   = ca.lucroCenario >= 0 ? '#00D68F' : '#FF6B6B';
-    const bgCor = ca.lucroCenario >= 0 ? 'rgba(0,176,80,.10)' : 'rgba(255,76,76,.10)';
-    const bdCor = ca.lucroCenario >= 0 ? 'rgba(0,176,80,.22)' : 'rgba(255,76,76,.22)';
-    const sig   = ca.lucroCenario >= 0 ? '+' : '-';
-    const info = `<div style="font-size:16px;font-weight:800;color:#FFFFFF;margin-top:4px;letter-spacing:-.02em;font-family:'Space Grotesk',sans-serif">R$ ${fmt(ca.stakeIdeal)}</div>`;
+    const cor   = lucroReal >= 0 ? '#00D68F' : '#FF6B6B';
+    const bgCor = lucroReal >= 0 ? 'rgba(0,176,80,.10)' : 'rgba(255,76,76,.10)';
+    const bdCor = lucroReal >= 0 ? 'rgba(0,176,80,.22)' : 'rgba(255,76,76,.22)';
+    const sig   = lucroReal >= 0 ? '+' : '-';
+    const tag   = ca.tipo === 'lay' ? ' · Lay' : (ca.isFreebet ? ' · Freebet' : '');
+    const info  = `<div style="font-size:16px;font-weight:800;color:#FFFFFF;margin-top:4px;letter-spacing:-.02em;font-family:'Space Grotesk',sans-serif">R$ ${fmt(ca.stakeIdeal)}</div>`;
     return `<div style="padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;gap:12px">
       <div>
-        <span style="font-size:10px;font-weight:700;color:#9ec4de;text-transform:uppercase;letter-spacing:.12em">CASA ${ca.n}</span>
+        <span style="font-size:10px;font-weight:700;color:#9ec4de;text-transform:uppercase;letter-spacing:.12em">CASA ${ca.n}${tag}</span>
         ${info}
       </div>
-      <span style="font-size:13px;font-weight:800;color:${cor};background:${bgCor};border:1px solid ${bdCor};border-radius:7px;padding:4px 11px;white-space:nowrap">${sig}R$ ${fmt(Math.abs(ca.lucroCenario))}</span>
+      <span style="font-size:13px;font-weight:800;color:${cor};background:${bgCor};border:1px solid ${bdCor};border-radius:7px;padding:4px 11px;white-space:nowrap">${sig}R$ ${fmt(Math.abs(lucroReal))}</span>
     </div>`;
   }).join('');
 
