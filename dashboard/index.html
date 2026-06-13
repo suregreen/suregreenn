@@ -14217,16 +14217,26 @@ function coSendToOrg() {
   const casas = [];
   let custoSoma = 0; // custo real: stake para BACK, liability para LAY
   for (let i = 1; i <= coN; i++) {
-    const valEl   = i === 1
-      ? document.getElementById('co_val1_inp')
-      : document.getElementById('co_val' + i);
-    const stakeI  = parseFloat(valEl?.value) || 0;
-    const oddRaw  = parseFloat((document.getElementById('co_odd'  + i)?.value || '').replace(',', '.')) || 0;
     const tipo    = document.getElementById('co_tipo' + i)?.value || 'back';
+    const oddRaw  = parseFloat((document.getElementById('co_odd'  + i)?.value || '').replace(',', '.')) || 0;
     const aum     = parseFloat(document.getElementById('co_aum'  + i)?.value) || 0;
     const hasComm = document.getElementById('co_cc' + i)?.checked;
     const commPct = hasComm ? (parseFloat(document.getElementById('co_cv' + i)?.value) || 0) : 0;
     const oddCalc = oddRaw > 1 ? oddRaw * (1 + aum / 100) : 0;
+
+    // LAY usa display calculado (co_lay_val); BACK/freebet usa input numérico
+    let stakeI = 0;
+    if (tipo === 'lay') {
+      const layDisp = document.getElementById('co_lay_val' + i);
+      if (layDisp) {
+        const txt = (layDisp.textContent || '').replace('R$', '').replace(/\./g,'').replace(',', '.').trim();
+        stakeI = parseFloat(txt) || 0;
+      }
+    } else {
+      const valEl = i === 1 ? document.getElementById('co_val1_inp') : document.getElementById('co_val' + i);
+      stakeI = parseFloat(valEl?.value) || 0;
+    }
+
     if (oddCalc > 1 && stakeI > 0) {
       const liability = tipo === 'lay' ? stakeI * (oddCalc - 1) : 0;
       custoSoma += tipo === 'lay' ? liability : stakeI;
@@ -14304,12 +14314,24 @@ function coAbrirModalRegistro() {
   const casas = [];
   let custoSoma = 0;
   for (let i = 1; i <= coN; i++) {
-    const valEl   = i === 1 ? document.getElementById('co_val1_inp') : document.getElementById('co_val' + i);
-    const stakeI  = parseFloat(valEl?.value) || 0;
-    const oddRaw  = parseFloat((document.getElementById('co_odd' + i)?.value || '').replace(',', '.')) || 0;
     const tipo    = document.getElementById('co_tipo' + i)?.value || 'back';
+    const oddRaw  = parseFloat((document.getElementById('co_odd' + i)?.value || '').replace(',', '.')) || 0;
     const aum     = parseFloat(document.getElementById('co_aum' + i)?.value) || 0;
     const oddCalc = oddRaw > 1 ? oddRaw * (1 + aum / 100) : 0;
+
+    // LAY usa display calculado (co_lay_val); BACK/freebet usa input numérico
+    let stakeI = 0;
+    if (tipo === 'lay') {
+      const layDisp = document.getElementById('co_lay_val' + i);
+      if (layDisp) {
+        const txt = (layDisp.textContent || '').replace('R$', '').replace(/\./g,'').replace(',', '.').trim();
+        stakeI = parseFloat(txt) || 0;
+      }
+    } else {
+      const valEl = i === 1 ? document.getElementById('co_val1_inp') : document.getElementById('co_val' + i);
+      stakeI = parseFloat(valEl?.value) || 0;
+    }
+
     if (oddCalc > 1 && stakeI > 0) {
       const liability = tipo === 'lay' ? stakeI * (oddCalc - 1) : 0;
       custoSoma += tipo === 'lay' ? liability : stakeI;
