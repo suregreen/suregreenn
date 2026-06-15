@@ -610,7 +610,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="nav-right">
     <a href="https://suregreen.com.br/dashboard/" class="nav-login">Entrar</a>
-    <button class="nav-cta" onclick="openModal()">Criar conta</button>
+    <button class="nav-cta" onclick="openModal()">Já assinou? Acessar</button>
   </div>
   <button class="nav-burger" id="navBurger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -627,7 +627,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div style="display:flex;gap:.65rem">
     <a href="https://suregreen.com.br/dashboard/" style="flex:1;text-align:center;padding:.8rem;border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:.88rem;font-weight:600">Entrar</a>
-    <button onclick="openModal();closeMenu()" style="flex:1;background:var(--g);color:#020d06;border:none;padding:.8rem;border-radius:8px;font-family:var(--font);font-size:.88rem;font-weight:700;cursor:pointer">Criar conta</button>
+    <button onclick="openModal();closeMenu()" style="flex:1;background:var(--g);color:#020d06;border:none;padding:.8rem;border-radius:8px;font-family:var(--font);font-size:.88rem;font-weight:700;cursor:pointer">Já assinou? Acessar</button>
   </div>
 </div>
 
@@ -640,7 +640,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="modal-logo-mark"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1df078" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
         <div class="modal-logo-text">Sure<span>Green</span></div>
       </div>
-      <div class="modal-title">Criar sua conta</div>
+      <div class="modal-title">Ativar sua conta</div>
       <div class="modal-sub">Insira seu código de acesso recebido por e-mail após a compra.</div>
       <div class="modal-msg" id="modalMsg"></div>
       <div class="modal-field">
@@ -656,7 +656,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <input class="modal-input modal-input-code" id="mc-code" type="text" placeholder="Ex: SUREGBC42" autocomplete="off" oninput="this.value=this.value.toUpperCase()">
         <div class="modal-code-hint">Recebido no e-mail após a compra</div>
       </div>
-      <button class="modal-btn" id="modalSubmitBtn" onclick="handleSignup()">Criar conta e acessar</button>
+      <button class="modal-btn" id="modalSubmitBtn" onclick="handleSignup()">Ativar e acessar</button>
       <div class="modal-divider"><span>ou</span></div>
       <div class="modal-footer">Já tem conta? <a href="https://suregreen.com.br/dashboard/">Entrar agora</a></div>
       <div class="modal-footer" style="margin-top:.5rem">Ainda não assinou? <a href="https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c" target="_blank" onclick="trackBeginCheckoutAndOpen('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c',79.90,'mensal');return false;">Assinar agora — R$ 79,90/mês</a></div>
@@ -666,7 +666,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="modal-success">
         <div class="modal-success-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
         <div class="modal-success-title">Acesso liberado!</div>
-        <div class="modal-success-sub">Conta criada com sucesso.<br>Redirecionando para o dashboard...</div>
+        <div class="modal-success-sub">Conta ativada com sucesso.<br>Redirecionando para o dashboard...</div>
       </div>
     </div>
     <div id="modalForgot" style="display:none">
@@ -697,13 +697,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-line"></div>
   <div class="hero-inner">
     <div class="reveal">
-      <div class="hero-eyebrow"><span class="bdot"></span>Copa do Mundo 2026 — começa em <strong id="copa-dias" style="color:var(--g);margin:0 3px;">7</strong> dias</div>
-      <h1>Pare de perder<br><span class="accent">lucro</span> por falta<br><span class="light">de controle.</span></h1>
+      <div class="hero-eyebrow"><span class="bdot"></span><span id="copa-eyebrow">Copa do Mundo 2026 — está acontecendo agora</span></div>
+      <h1>Calcular stake<br><span class="accent">na mão</span> acabou.<br><span class="light">Tudo em 1 clique.</span></h1>
       <!-- SEO: hidden keyword anchor for Google — visually zero impact -->
       <div style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
         Calculadora de surebet automática, gestão de freebet e duplo green, IR 2026 operações esportivas Brasil
       </div>
-      <p class="hero-p">Surebet, Freebet, Super Odd, Duplo Green — o SureGreen <strong>calcula os stakes, registra cada operação e fecha o dia sozinho.</strong> Sem planilha. Sem erro. Controle total.</p>
+      <p class="hero-p">O SureGreen calcula automaticamente <strong>quanto você deve apostar em cada casa</strong>, registra suas operações em 1 clique e mostra seu ROI em tempo real. Funciona para surebet, freebet, super odd e duplo green.</p>
       <div class="hero-btns">
         <button class="btn-main" onclick="trackBeginCheckoutAndOpen('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c',79.90,'mensal')">Começar agora — R$ 79,90/mês</button>
         <button class="btn-out" onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">Ver como funciona</button>
@@ -784,7 +784,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="pain-item" id="pi1"><div class="pi-dot bad">✕</div><span>Você recebe 20+ oportunidades por dia nos seus grupos e já perdeu a conta de qual registrou</span></div>
         <div class="pain-item" id="pi2"><div class="pi-dot bad">✕</div><span>Perdeu freebet porque esqueceu de registrar o rolamento necessário</span></div>
         <div class="pain-item" id="pi3"><div class="pi-dot bad">✕</div><span>Fim do dia sem saber exatamente quanto lucrou — ou quanto perdeu</span></div>
-        <div class="gain-item" id="pi4"><div class="pi-dot good">✓</div><span><strong>Com o SureGreen:</strong> você clica, a IA calcula, registra e fecha o dia automaticamente.</span></div>
+        <div class="gain-item" id="pi4"><div class="pi-dot good">✓</div><span><strong>Com o SureGreen:</strong> você clica, o sistema calcula, registra e fecha o dia automaticamente.</span></div>
       </div>
     </div>
   </div>
@@ -794,11 +794,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="sec-wrap">
     <div class="sec-label">Passo a passo</div>
     <h2>Da entrada ao fechamento,<br>você não pensa — <span class="accent">só clica</span></h2>
-    <p class="sec-sub">Quatro passos. A IA cuida do resto.</p>
+    <p class="sec-sub">Quatro passos. A automação cuida do resto.</p>
     <div class="timeline-wrap reveal">
       <div class="timeline-nodes">
         <div class="tnode" data-step="1"><div class="tnode-num">01</div><div class="tnode-card"><div class="tnode-tag">Passo 1</div><div class="tnode-title">Você recebe o sinal no seu grupo</div><div class="tnode-desc">Chegou a oportunidade no grupo? Abra o SureGreen, selecione o tipo: Surebet, Freebet, Super Odd ou Duplo Green. Leva menos de 5 segundos.</div></div></div>
-        <div class="tnode" data-step="2"><div class="tnode-num">02</div><div class="tnode-card"><div class="tnode-tag">Passo 2</div><div class="tnode-title">A IA calcula tudo automaticamente</div><div class="tnode-desc">Stakes por casa, margem calculada automaticamente, rolamento de freebet — em tempo real. Sem fórmula. Sem erro.</div></div></div>
+        <div class="tnode" data-step="2"><div class="tnode-num">02</div><div class="tnode-card"><div class="tnode-tag">Passo 2</div><div class="tnode-title">O cálculo acontece em tempo real</div><div class="tnode-desc">Stakes por casa, margem calculada automaticamente, rolamento de freebet — em tempo real. Sem fórmula. Sem erro.</div></div></div>
         <div class="tnode" data-step="3"><div class="tnode-num">03</div><div class="tnode-card"><div class="tnode-tag">Passo 3</div><div class="tnode-title">Registre o resultado em 1 clique</div><div class="tnode-desc">Deu green, red ou duplo green? Um toque e o dashboard atualiza na hora com o lucro ou perda do dia.</div></div></div>
         <div class="tnode" data-step="4"><div class="tnode-num">04</div><div class="tnode-card"><div class="tnode-tag">Fim do dia</div><div class="tnode-title">Fechamento automático com resumo completo</div><div class="tnode-desc">Lucro líquido, freebets ativas, greens do dia, IR 2026 — tudo gerado sozinho. Você só lê o resultado.</div></div></div>
       </div>
@@ -823,9 +823,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div style="max-width:1200px;margin:0 auto">
     <div class="sec-label">Automacoes</div>
     <h2>Cada clique seu dispara<br>uma <span class="accent">cadeia automática</span></h2>
-    <p class="sec-sub">Enquanto você opera, a IA registra, calcula, organiza e já prepara o IR. Ao mesmo tempo.</p>
+    <p class="sec-sub">Enquanto você opera, o sistema registra, calcula, organiza e já prepara o IR. Ao mesmo tempo.</p>
     <div class="bento-grid reveal">
-      <div class="bento-cell bc-a"><div class="bento-icon g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="bento-tag g">Cálculo em tempo real</span><div class="bento-title">Você digita o stake. A IA distribui tudo.</div><div class="bento-desc">Ela calcula quanto distribuir em cada casa para resultado calculado — em menos de 1 segundo.</div><div class="calc-live" id="calcLive"><div class="calc-header"><span class="calc-header-label">SureGreen · Calculadora</span><span class="calc-live-dot"></span></div><div class="calc-input-area"><div class="calc-input-label">Stake total</div><div class="calc-input-val"><span class="currency">R$</span><span id="calcStakeDisplay">0</span><span class="calc-input-cursor" id="calcCursor"></span></div></div><div class="calc-rows"><div class="cr" id="cr1"><span class="cr-label">Casa A &nbsp;@ 1.88</span><span class="cr-val" id="cv1">—</span></div><div class="cr" id="cr2"><span class="cr-label">Casa B &nbsp;@ 2.12</span><span class="cr-val" id="cv2">—</span></div><div class="cr" id="cr3"><span class="cr-label">Margem calculada</span><span class="cr-val amber" id="cv3">—</span></div></div><div class="calc-result" id="calcResult"><span class="calc-result-label">Resultado calculado</span><div style="display:flex;align-items:center"><span class="calc-result-val" id="calcProfit">+R$ 18,40</span><div class="calc-check">✓</div></div></div></div></div>
+      <div class="bento-cell bc-a"><div class="bento-icon g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="bento-tag g">Cálculo em tempo real</span><div class="bento-title">Você digita o stake. A distribuição é automática.</div><div class="bento-desc">Ela calcula quanto distribuir em cada casa para resultado calculado — em menos de 1 segundo.</div><div class="calc-live" id="calcLive"><div class="calc-header"><span class="calc-header-label">SureGreen · Calculadora</span><span class="calc-live-dot"></span></div><div class="calc-input-area"><div class="calc-input-label">Stake total</div><div class="calc-input-val"><span class="currency">R$</span><span id="calcStakeDisplay">0</span><span class="calc-input-cursor" id="calcCursor"></span></div></div><div class="calc-rows"><div class="cr" id="cr1"><span class="cr-label">Casa A &nbsp;@ 1.88</span><span class="cr-val" id="cv1">—</span></div><div class="cr" id="cr2"><span class="cr-label">Casa B &nbsp;@ 2.12</span><span class="cr-val" id="cv2">—</span></div><div class="cr" id="cr3"><span class="cr-label">Margem calculada</span><span class="cr-val amber" id="cv3">—</span></div></div><div class="calc-result" id="calcResult"><span class="calc-result-label">Resultado calculado</span><div style="display:flex;align-items:center"><span class="calc-result-val" id="calcProfit">+R$ 18,40</span><div class="calc-check">✓</div></div></div></div></div>
       <div class="bento-cell bc-b"><div class="bento-icon b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><span class="bento-tag b">Registro automatico</span><div class="bento-title">Operação registrada antes de você fechar a tela</div><div class="bento-desc">Tipo, casa, stake, odd, resultado, lucro. Nada se perde.</div></div>
       <div class="bento-cell bc-c"><div class="bento-icon y"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div><span class="bento-tag y">IR automatico</span><div class="bento-title">Cada entrada já vira dado fiscal</div><div class="bento-desc">A Receita pede. Você já tem.</div></div>
       <div class="bento-cell bc-d"><div class="bento-icon g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="bento-tag g">Freebet inteligente</span><div class="bento-title">Nunca mais perca uma freebet por esquecimento</div><div class="bento-desc">Rastreia conquista, ativação e uso. Alerta automático.</div></div>
@@ -921,7 +921,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2>Operadores reais.<br><span class="accent">Resultados reais.</span></h2>
     <div class="testi-grid reveal">
       <div class="testi"><div class="stars">★★★★★</div><div class="testi-txt">"Eu recebia mais de 20 oportunidades por dia e esquecia metade na planilha. Com o SureGreen, registro tudo em segundos. Minha organização melhorou muito e parei de perder freebets."</div><div class="testi-who"><div class="testi-av">M</div><div><div class="testi-name">Marcos R.</div><div class="testi-role">Operador profissional · São Paulo</div></div></div></div>
-      <div class="testi"><div class="stars">★★★★★</div><div class="testi-txt">"O duplo green sempre me confundia nos cálculos. A IA calcula e registra automaticamente. Tecnologia que realmente funciona de verdade."</div><div class="testi-who"><div class="testi-av">C</div><div><div class="testi-name">Camila T.</div><div class="testi-role">Usuária da plataforma · Rio de Janeiro</div></div></div></div>
+      <div class="testi"><div class="stars">★★★★★</div><div class="testi-txt">"O duplo green sempre me confundia nos cálculos. Hoje calcula e registra automaticamente — sem chance de errar."</div><div class="testi-who"><div class="testi-av">C</div><div><div class="testi-name">Camila T.</div><div class="testi-role">Usuária da plataforma · Rio de Janeiro</div></div></div></div>
       <div class="testi"><div class="stars">★★★★★</div><div class="testi-txt">"O fechamento diário automático mudou minha vida. Antes ficava 30 min somando tudo na planilha. Agora abro o app e está tudo lá, incluindo o IR já calculado."</div><div class="testi-who"><div class="testi-av">R</div><div><div class="testi-name">Rafael S.</div><div class="testi-role">Ex-usuário de planilha · Belo Horizonte</div></div></div></div>
     </div>
   </div>
@@ -1019,6 +1019,15 @@ IR automático e calculadora inclusos.</div>
         </div>
         <button class="pc-btn solid" onclick="trackBeginCheckoutAndOpen('https://pay.kirvano.com/78ee4ab9-b0e5-4eee-a9e5-8e2e6abfcf1c',199,'trimestral')">Assinar Trimestral — R$ 199,00</button>
         <div class="pc-fine">Pagamento único · Acesso imediato</div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;background:linear-gradient(135deg,rgba(29,240,120,.10),rgba(29,240,120,.04));border:1.5px solid rgba(29,240,120,.35);border-radius:14px;padding:1.4rem 1.6rem;display:flex;align-items:center;gap:1.2rem;max-width:860px;margin-left:auto;margin-right:auto;">
+      <div style="width:52px;height:52px;min-width:52px;border-radius:50%;background:rgba(29,240,120,.18);border:1.5px solid rgba(29,240,120,.45);display:flex;align-items:center;justify-content:center;color:var(--g);flex-shrink:0;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:.95rem;font-weight:800;color:var(--text);margin-bottom:.25rem;letter-spacing:-.2px;">Garantia incondicional de 7 dias</div>
+        <div style="font-size:.85rem;color:var(--text2);line-height:1.5;">Testou e não gostou? Devolvemos <strong style="color:var(--g);">100% do seu dinheiro</strong>. Sem perguntas, sem burocracia, sem precisar justificar.</div>
       </div>
     </div>
     <div class="price-guarantees">
@@ -1125,7 +1134,7 @@ const tEl=document.getElementById('como-funciona');if(tEl)tObs.observe(tEl);
 const painObs=new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)return;['pi1','pi2','pi3','pi4'].forEach((id,idx)=>{const el=document.getElementById(id);if(el)setTimeout(()=>el.classList.add('anim-in'),idx*320);});painObs.disconnect();},{threshold:0.3});
 const painList=document.getElementById('painList');if(painList)painObs.observe(painList);
 document.querySelectorAll('.faq-btn').forEach(btn=>{btn.addEventListener('click',()=>{const it=btn.parentElement,op=it.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!op)it.classList.add('open')})});
-(function(){var el=document.getElementById('copa-dias');if(!el)return;var diff=Math.ceil((new Date('2026-06-11')-new Date())/(1000*60*60*24));el.textContent=diff>0?diff:'0';})();
+(function(){var el=document.getElementById('copa-eyebrow');if(!el)return;var now=new Date();var start=new Date('2026-06-11');var end=new Date('2026-07-19');if(now<start){var diff=Math.ceil((start-now)/(1000*60*60*24));el.innerHTML='Copa do Mundo 2026 — começa em <strong style="color:var(--g);margin:0 3px;">'+diff+'</strong> dias';}else if(now<=end){el.textContent='Copa do Mundo 2026 — está acontecendo agora';}else{el.textContent='SureGreen — sua operação organizada o ano todo';}})();
 window.toggleMenu=function(){const m=document.getElementById('mobileMenu'),b=document.getElementById('navBurger');const open=m.style.display==='block';m.style.display=open?'none':'block';b.style.opacity=open?'1':'.6'}
 window.closeMenu=function(){document.getElementById('mobileMenu').style.display='none';document.getElementById('navBurger').style.opacity='1'}
 window.openModal=function(){document.getElementById('modalOverlay').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('mc-email').focus(),220)}
@@ -1162,9 +1171,9 @@ window.handleSignup=async function(){
     // 1. Verifica se o código existe e não foi usado
     const codeRef=doc(db,'codigos',code);
     const codeSnap=await getDoc(codeRef);
-    if(!codeSnap.exists()){msg.className='modal-msg error';msg.textContent='Codigo invalido.';btn.disabled=false;btn.textContent='Criar conta e acessar';return}
+    if(!codeSnap.exists()){msg.className='modal-msg error';msg.textContent='Codigo invalido.';btn.disabled=false;btn.textContent='Ativar e acessar';return}
     const cd=codeSnap.data();
-    if(cd.usado){msg.className='modal-msg error';msg.textContent='Este codigo ja foi utilizado.';btn.disabled=false;btn.textContent='Criar conta e acessar';return}
+    if(cd.usado){msg.className='modal-msg error';msg.textContent='Este codigo ja foi utilizado.';btn.disabled=false;btn.textContent='Ativar e acessar';return}
 
     btn.textContent='Criando conta...';
 
@@ -1197,7 +1206,7 @@ window.handleSignup=async function(){
     setTimeout(()=>{window.location.href='https://suregreen.com.br/dashboard/'},2000);
 
   }catch(err){
-    btn.disabled=false;btn.textContent='Criar conta e acessar';
+    btn.disabled=false;btn.textContent='Ativar e acessar';
     if(err.code==='auth/email-already-in-use'){msg.className='modal-msg error';msg.textContent='Este e-mail ja possui uma conta.';}
     else{msg.className='modal-msg error';msg.textContent='Erro: '+err.message;}
   }
