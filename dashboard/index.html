@@ -5559,8 +5559,55 @@ window.addEventListener('unhandledrejection', function(e) {
 </style>
 
 <!-- MODAL EXTRAS -->
+<style id="sg-ld-modal-mobile-fix">
+/* Fix: modal cresce demais com muitos extras + sem botão de sair visível no mobile.
+   Solução: max-height + scroll interno + X sticky no topo direito. */
+html body .ld-modal {
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+html body .ld-modal-xbar {
+  position: sticky;
+  top: 0;
+  height: 0;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 10;
+  pointer-events: none;
+}
+html body .ld-modal-x {
+  pointer-events: auto;
+  transform: translate(-2px, 2px);
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(20, 40, 60, 0.92);
+  border: 1px solid rgba(255,255,255,.16);
+  color: rgba(255,255,255,.7);
+  font-size: 22px; line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: inherit;
+  padding: 0;
+  transition: all .18s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+html body .ld-modal-x:hover,
+html body .ld-modal-x:active {
+  background: rgba(255,107,107,.16);
+  border-color: rgba(255,107,107,.45);
+  color: #FF6B6B;
+}
+/* Garantir respiro extra no fim da lista pra o "Fechar" não grudar */
+html body .ld-modal > div[style*="text-align:center"]:last-child {
+  padding-bottom: 4px;
+}
+</style>
+
 <div class="ld-modal-bg" id="ld-modal-bg" onclick="if(event.target===this)ldCloseModal()">
   <div class="ld-modal">
+    <div class="ld-modal-xbar"><button class="ld-modal-x" type="button" onclick="ldCloseModal()" aria-label="Fechar">×</button></div>
     <div class="ld-modal-title">Ganhos Extras</div>
     <div class="ld-modal-sub">Cassino, bônus, cashback, outros — soma ao Lucro do Dia</div>
     <div class="fg"><label class="fl">Descrição <span style="color:var(--label);font-weight:400;">(opcional)</span></label><input class="sg-input fi" id="ld-ex-desc" type="text" placeholder="Ex: Cassino, Bônus Bet365..." style="margin-bottom:8px;"></div>
@@ -12574,6 +12621,7 @@ const CASA_OPTS = [
   'Apostabet','Betesportes','Jogo de Ouro','Fulltbet',
   'Jogodeouro',
   'Aposta Tudo','Betnacional','f12.bet','Brbet',
+  'Faz o Bet','KingPanda','Meridianbet','Pagolbet',
   'Segurobet','Onabet','Betsul','Galera.bet',
   'Betpix365','Reals','4BET','Bodog','Parimatch',
   'BetsBola','Sportaza','Betcris','Rivalo',
@@ -12621,6 +12669,8 @@ function sgGetCasaLogoUrl(nome) {
     'lotogreen': 'lotogreen.bet.br', 'sportybet': 'sportybet.bet.br',
     'versusbet': 'versus.bet.br', 'vupibet': 'vupi.bet.br',
     'f12.bet': 'f12.bet.br', 'brbet': 'brbet.bet.br',
+    'pagolbet': 'pagolbet.bet.br', 'kingpanda': 'kingpanda.bet.br',
+    'faz o bet': 'fazobet.bet.br', 'fazobet': 'fazobet.bet.br',
   };
   var key = (nome || '').toLowerCase().trim();
   if (CASA_DOMAIN_MAP[key]) return 'https://www.google.com/s2/favicons?domain=' + CASA_DOMAIN_MAP[key] + '&sz=32';
@@ -15467,7 +15517,8 @@ function renderBankroll() {
     'betfa','betway','888sport','unibet','william hill','pinnacle','betdaq',
     'parimatch','mozzartbet','meridianbet','esporte da sorte','jogo de ouro',
     'betesporte','betao','lottu','betcris','apostabet','vaidebet','br4bet',
-    'bet3','galera.bet','888sport','bolsadeaposta'
+    'bet3','galera.bet','888sport','bolsadeaposta',
+    'kingpanda','faz o bet','fazobet'
   ];
 
   var casas = Object.keys(casaMap).map(function(key) {
@@ -15805,8 +15856,10 @@ var BK_CASAS_DATA = {
   'Outras Casas': [
     {n:'Apostabet',c:'#6b7280'},{n:'BetPix365',c:'#6b7280'},{n:'Betcris',c:'#6b7280'},
     {n:'Betesporte',c:'#6b7280'},{n:'Br4bet',c:'#6b7280'},{n:'Estrela Bet',c:'#f59e0b'},
-    {n:'F12.bet',c:'#6b7280'},{n:'Fulltbet',c:'#6b7280'},{n:'Galera.bet',c:'#22c55e'},
-    {n:'Mr.Jack',c:'#6b7280'},{n:'Pagolbet',c:'#6b7280'},{n:'Vaidebet',c:'#6b7280'}
+    {n:'F12.bet',c:'#6b7280'},{n:'Faz o Bet',c:'#6b7280'},{n:'Fulltbet',c:'#6b7280'},
+    {n:'Galera.bet',c:'#22c55e'},{n:'KingPanda',c:'#6b7280'},{n:'Meridianbet',c:'#6b7280'},
+    {n:'Mr.Jack',c:'#6b7280'},{n:'Pagolbet',c:'#6b7280'},{n:'Vaidebet',c:'#6b7280'},
+    {n:'Viva Sorte',c:'#6b7280'}
   ]
 };
 
@@ -18752,6 +18805,10 @@ setTimeout(function() {
     'kto':        { bg: '#0f2027', color: '#67e8f9', initials: 'KTO' },
     'stake':      { bg: '#003320', color: '#4ade80', initials: 'STK' },
     'meridianbet':{ bg: '#1e3a5f', color: '#7dd3fc', initials: 'MRD' },
+    'pagolbet':   { bg: '#3d1f00', color: '#fdba74', initials: 'PGL' },
+    'kingpanda':  { bg: '#1a1a1a', color: '#fbbf24', initials: 'KP'  },
+    'fazobet':    { bg: '#1f2937', color: '#a3a3a3', initials: 'FZB' },
+    'vivasorte':  { bg: '#14532d', color: '#86efac', initials: 'VS'  },
   };
 
   function getBookDomain(name) {
