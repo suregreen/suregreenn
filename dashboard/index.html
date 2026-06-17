@@ -14038,7 +14038,11 @@ function coRender() {
     const valField = lay
       // LAY: campo somente-leitura com a stake calculada + stake display abaixo
       ? `<div class="co-field">
-           <div class="co-lbl">Stake <span style="font-size:9px;color:#9CA3AF;font-weight:400;">(calculado)</span></div>
+           <div class="co-lbl">Valores <span style="font-size:9px;color:#9CA3AF;font-weight:400;">(calculado)</span></div>
+           <div id="co_liab_box${n}" style="display:flex;justify-content:space-between;align-items:center;background:rgba(251,146,60,0.08);border:1.5px solid rgba(251,146,60,.30);border-radius:10px;padding:11px 14px;margin-bottom:8px;">
+             <span style="font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.10em;">Responsab.:</span>
+             <span id="co_liab${n}" style="color:#FFFFFF;font-size:15px;font-weight:800;font-family:'Space Grotesk',sans-serif;">—</span>
+           </div>
            <div class="co-odd-final" id="co_lay_stake${n}" style="background:rgba(0,176,80,0.07);border:1.5px solid rgba(0,176,80,.25);border-radius:10px;padding:11px 14px;">
              <span class="co-odd-final-lbl" style="font-size:10px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.10em;">Stake:</span>
              <span class="co-odd-final-val" id="co_lay_val${n}" style="color:#005C28;font-size:15px;font-weight:800;">—</span>
