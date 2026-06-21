@@ -12354,7 +12354,11 @@ onAuthStateChanged(auth, user => {
       sgMostrarApp(user, ls, ash);
     });
   } else {
-    ls.style.display = 'flex';
+    var rsCheck = document.getElementById('register-screen');
+    var rsJaAberta = rsCheck && rsCheck.style.display === 'flex';
+    if (!rsJaAberta) {
+      ls.style.display = 'flex';
+    }
     ash.style.display = 'none';
     var bloq = document.getElementById('sg-bloqueio');
     if (bloq) bloq.style.display = 'none';
@@ -28073,6 +28077,19 @@ function trackRenewalCheckout() {
   function preencherCodigo(){
     try{
       var params = new URLSearchParams(window.location.search);
+
+      // Suporte a ?modo=trial — abre cadastro direto na aba de teste gratis
+      if (params.get('modo') === 'trial') {
+        var ls2 = document.getElementById('login-screen');
+        var rs2 = document.getElementById('register-screen');
+        if (ls2) ls2.style.display = 'none';
+        if (rs2) rs2.style.display = 'flex';
+        if (typeof window.setModoCadastro === 'function') window.setModoCadastro('trial');
+        var em2 = document.getElementById('r-email');
+        if (em2) setTimeout(function(){ try{ em2.focus(); }catch(e){} }, 200);
+        return true;
+      }
+
       var cod = params.get('codigo') || params.get('code') || params.get('c');
       if(!cod) return false;
       cod = cod.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
