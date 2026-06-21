@@ -5089,13 +5089,12 @@ window.addEventListener('unhandledrejection', function(e) {
     <div class="ob-steps" id="ob-steps"></div>
     <div class="ob-icon" id="ob-icon">👋</div>
     <div class="ob-title" id="ob-title-text">Bem-vindo à <span>SureGreen</span></div>
-    <div class="ob-desc" id="ob-desc">Sua plataforma de gestão de apostas esportivas. Vamos te mostrar o que você pode fazer em menos de 1 minuto.</div>
+    <div class="ob-desc" id="ob-desc">Odds de duplo green ao vivo, cálculo automático e registro em 1 clique. Veja como começar em menos de 2 minutos.</div>
     <div id="ob-features" class="ob-feat" style="display:none;"></div>
     <div class="ob-btns">
-      <button class="ob-btn-skip" id="ob-skip" onclick="obSkip()">Pular tour</button>
-      <button class="ob-btn-next" id="ob-next" onclick="obNext()">Próximo →</button>
+      <button class="ob-btn-skip" id="ob-skip" onclick="obSkip()">Agora não</button>
+      <button class="ob-btn-next" id="ob-next" onclick="obGoGuide()">Ver guia rápido →</button>
     </div>
-    <div class="ob-progress" id="ob-progress">Passo 1 de 4</div>
   </div>
 </div>
 
@@ -5125,13 +5124,8 @@ window.addEventListener('unhandledrejection', function(e) {
 </div>
 
 <div id="login-screen">
-  <!-- BG GRAPH tela cheia (fundo completo) -->
-  <div style="position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;opacity:0.35;">
-    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;">
-      <polyline points="0,400 100,360 200,250 300,320 400,150 500,220 600,100 700,200 800,160" fill="none" stroke="#4CAF82" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <polyline points="0,480 100,440 200,460 300,400 400,440 500,360 600,400 700,320 800,360" fill="none" stroke="#4CAF82" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-    </svg>
-  </div>
+  <!-- Glow superior — mesmo estilo da tela de registro -->
+  <div style="position:fixed;top:-300px;left:50%;transform:translateX(-50%);width:700px;height:500px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(61,158,110,0.16) 0%,transparent 65%);pointer-events:none;z-index:0;"></div>
   <div class="login-box" style="position:relative;z-index:1;">
 
     <!-- LOGO -->
@@ -5322,8 +5316,14 @@ window.addEventListener('unhandledrejection', function(e) {
     <!-- Card -->
     <div class="rg-card">
 
+      <!-- Toggle: código vs trial -->
+      <div class="rg-modo-toggle" style="display:flex;gap:8px;margin-bottom:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:4px;">
+        <button type="button" id="modo-codigo-btn" onclick="setModoCadastro('codigo')" style="flex:1;padding:10px;border:none;border-radius:9px;background:rgba(76,175,130,.15);color:#4CAF82;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .15s;">Tenho código</button>
+        <button type="button" id="modo-trial-btn" onclick="setModoCadastro('trial')" style="flex:1;padding:10px;border:none;border-radius:9px;background:transparent;color:rgba(255,255,255,.5);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .15s;">Testar 7 dias grátis</button>
+      </div>
+
       <!-- Código de acesso -->
-      <div class="rg-field">
+      <div class="rg-field" id="r-code-wrap">
         <label class="rg-lbl">Código de acesso</label>
         <div class="rg-inp-wrap">
           <span class="rg-ico">
@@ -5375,7 +5375,7 @@ window.addEventListener('unhandledrejection', function(e) {
 
       <!-- Botão -->
       <button class="rg-btn" onclick="doRegister()">
-        CRIAR CONTA
+        <span id="r-btn-txt">CRIAR CONTA</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
 
@@ -11920,14 +11920,41 @@ window.showLogin = function() {
   document.getElementById('login-screen').style.display = 'flex';
 }
 
-// ── Cadastro ──
+// ── Toggle: código de acesso vs trial 7 dias ──
+window._sgModoCadastro = 'codigo';
+window.setModoCadastro = function(modo){
+  window._sgModoCadastro = modo;
+  var codeWrap  = document.getElementById('r-code-wrap');
+  var btnCodigo = document.getElementById('modo-codigo-btn');
+  var btnTrial  = document.getElementById('modo-trial-btn');
+  var btnTxt    = document.getElementById('r-btn-txt');
+  var ativo   = 'rgba(76,175,130,.15)', ativoCor = '#4CAF82';
+  var inativo = 'transparent', inativoCor = 'rgba(255,255,255,.5)';
+  if (modo === 'trial') {
+    if (codeWrap) codeWrap.style.display = 'none';
+    if (btnTrial)  { btnTrial.style.background  = ativo;   btnTrial.style.color  = ativoCor; }
+    if (btnCodigo) { btnCodigo.style.background = inativo; btnCodigo.style.color = inativoCor; }
+    if (btnTxt) btnTxt.textContent = 'COMEÇAR TESTE GRÁTIS';
+  } else {
+    if (codeWrap) codeWrap.style.display = '';
+    if (btnCodigo) { btnCodigo.style.background = ativo;   btnCodigo.style.color  = ativoCor; }
+    if (btnTrial)  { btnTrial.style.background  = inativo; btnTrial.style.color  = inativoCor; }
+    if (btnTxt) btnTxt.textContent = 'CRIAR CONTA';
+  }
+};
+
+// ── Cadastro (modo: código de acesso da Kirvano) ──
 window.doRegister = async function() {
+  if (window._sgModoCadastro === 'trial') {
+    return window._sgRegisterTrial();
+  }
   const code  = document.getElementById('r-code').value.trim().toUpperCase();
   const email = document.getElementById('r-email').value.trim();
   const pass  = document.getElementById('r-pass').value;
   const pass2 = document.getElementById('r-pass2').value;
   const err   = document.getElementById('r-err');
-  const btn   = document.querySelector('#register-screen .login-btn');
+  const btn   = document.querySelector('#register-screen .rg-btn');
+  const btnTxt = document.getElementById('r-btn-txt');
 
   err.classList.remove('show');
 
@@ -11948,7 +11975,7 @@ window.doRegister = async function() {
     err.classList.add('show'); return;
   }
 
-  btn.textContent = 'Verificando código...';
+  if (btnTxt) btnTxt.textContent = 'Verificando código...';
   btn.disabled = true;
 
   try {
@@ -11960,7 +11987,7 @@ window.doRegister = async function() {
     if (snap.empty) {
       err.textContent = '⚠ Código de acesso inválido.';
       err.classList.add('show');
-      btn.textContent = 'Criar conta';
+      if (btnTxt) btnTxt.textContent = 'CRIAR CONTA';
       btn.disabled = false;
       return;
     }
@@ -11972,7 +11999,7 @@ window.doRegister = async function() {
     if (dados.usado === true) {
       err.textContent = '⚠ Este código já foi utilizado.';
       err.classList.add('show');
-      btn.textContent = 'Criar conta';
+      if (btnTxt) btnTxt.textContent = 'CRIAR CONTA';
       btn.disabled = false;
       return;
     }
@@ -11983,14 +12010,14 @@ window.doRegister = async function() {
       if (hoje > dados.expira) {
         err.textContent = '⚠ Este código está expirado.';
         err.classList.add('show');
-        btn.textContent = 'Criar conta';
+        if (btnTxt) btnTxt.textContent = 'CRIAR CONTA';
         btn.disabled = false;
         return;
       }
     }
 
     // Código válido — cria a conta
-    btn.textContent = 'Criando conta...';
+    if (btnTxt) btnTxt.textContent = 'Criando conta...';
     await createUserWithEmailAndPassword(auth, email, pass);
 
     // Marca código como usado e registra o email
@@ -12007,10 +12034,77 @@ window.doRegister = async function() {
     if (e.code === 'auth/invalid-email')        msg = 'E-mail inválido.';
     err.textContent = msg;
     err.classList.add('show');
-    btn.textContent = 'Criar conta';
+    if (btnTxt) btnTxt.textContent = 'CRIAR CONTA';
     btn.disabled = false;
   }
 }
+
+// ── Cadastro (modo: trial 7 dias grátis, sem código) ──
+window._sgRegisterTrial = async function() {
+  const email = document.getElementById('r-email').value.trim();
+  const pass  = document.getElementById('r-pass').value;
+  const pass2 = document.getElementById('r-pass2').value;
+  const err   = document.getElementById('r-err');
+  const btn   = document.querySelector('#register-screen .rg-btn');
+  const btnTxt = document.getElementById('r-btn-txt');
+
+  err.classList.remove('show');
+
+  if (!email) {
+    err.textContent = '⚠ Digite um e-mail válido.';
+    err.classList.add('show'); return;
+  }
+  if (pass.length < 6) {
+    err.textContent = '⚠ A senha precisa ter pelo menos 6 caracteres.';
+    err.classList.add('show'); return;
+  }
+  if (pass !== pass2) {
+    err.textContent = '⚠ As senhas não coincidem.';
+    err.classList.add('show'); return;
+  }
+
+  if (btnTxt) btnTxt.textContent = 'Criando conta...';
+  btn.disabled = true;
+
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    const uid  = cred.user.uid;
+
+    const agora  = new Date();
+    const expira = new Date(agora.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+    await setDoc(doc(db, 'usuarios', uid), {
+      email: email,
+      status: 'trial',
+      trial: true,
+      codigo: 'TRIAL7',
+      criadoEm: agora,
+      assinatura_expira: expira
+    });
+
+    // Tentativa de registrar o uso do trial (não bloqueia o cadastro se falhar)
+    try {
+      await setDoc(doc(db, 'trials_usados', email.toLowerCase()), {
+        usadoEm: agora,
+        uid: uid
+      });
+    } catch(e2) {
+      console.error('Aviso: nao foi possivel registrar trials_usados', e2);
+    }
+
+    // onAuthStateChanged cuida do resto
+
+  } catch(e) {
+    console.error('Erro no cadastro trial:', e.code, e.message);
+    let msg = 'Erro ao criar conta.';
+    if (e.code === 'auth/email-already-in-use') msg = 'Este e-mail já está cadastrado.';
+    if (e.code === 'auth/invalid-email')        msg = 'E-mail inválido.';
+    err.textContent = msg;
+    err.classList.add('show');
+    if (btnTxt) btnTxt.textContent = 'COMEÇAR TESTE GRÁTIS';
+    btn.disabled = false;
+  }
+};
 
 // ── Login ──
 window.doLogin = async function() {
@@ -12269,6 +12363,8 @@ onAuthStateChanged(auth, user => {
 
 function sgMostrarApp(user, ls, ash) {
   ls.style.display = 'none';
+  const rs = document.getElementById('register-screen');
+  if (rs) rs.style.display = 'none';
   ash.style.display = 'flex';
   ash.style.flexDirection = 'row';
   ash.style.minHeight = '100vh';
@@ -12462,9 +12558,23 @@ window.obSkip = function(){
   if(m) m.classList.remove('show');
   try { localStorage.setItem('sg_ob_done','1'); } catch(e){}
 };
-window.obNext = function(){
-  // Tour simples: avanca passos; ao fim, fecha. Como nao ha passos definidos, fecha direto.
-  window.obSkip();
+window.obGoGuide = function(){
+  var m = document.getElementById('onboarding-modal');
+  if(m) m.classList.remove('show');
+  try { localStorage.setItem('sg_ob_done','1'); } catch(e){}
+  if (typeof goPage === 'function') goPage('pg-ajuda', null);
+};
+// === ONBOARDING: mostra automaticamente pra quem ainda nao tem nenhuma entrada ===
+window._sgMaybeShowOnboarding = function(){
+  if (window._sgOnboardingChecked) return;
+  window._sgOnboardingChecked = true;
+  try {
+    if (localStorage.getItem('sg_ob_done')) return;
+  } catch(e){}
+  if (window._entries && window._entries.length === 0) {
+    var m = document.getElementById('onboarding-modal');
+    if (m) m.classList.add('show');
+  }
 };
 
 
@@ -14912,7 +15022,6 @@ window.addEventListener('resize', () => {
 });
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 // ════════════════════════════════════════
 // HISTÓRICO
@@ -18290,13 +18399,13 @@ document.getElementById('fg-email').addEventListener('keydown', function(e) {
 <!-- ══════════════════════════════════════════════════
      TELA DE BOAS-VINDAS — aparece só quando sem entradas
      ══════════════════════════════════════════════════ -->
-<div id="sg-welcome-overlay" style="display:none;position:fixed;inset:0;background:rgba(7,14,26,0.92);z-index:9000;align-items:center;justify-content:center;padding:20px;">
+<div id="sg-welcome-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:9000;align-items:center;justify-content:center;padding:20px;">
 <style>
-.sgw-box{background:#0f1e30;border:1px solid rgba(255,255,255,0.10);border-radius:20px;width:100%;max-width:520px;overflow:hidden;}
-.sgw-header{background:linear-gradient(135deg,#0d1e2f,#0a1a28);padding:32px 36px 28px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.sgw-box{background:var(--l1);border:1px solid rgba(255,255,255,0.10);border-radius:20px;width:100%;max-width:520px;overflow:hidden;}
+.sgw-header{background:var(--l0);padding:32px 36px 28px;border-bottom:1px solid rgba(255,255,255,0.07);}
 .sgw-logo{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
 .sgw-logo-ico{width:36px;height:36px;background:#22c55e;border-radius:10px;display:flex;align-items:center;justify-content:center;}
-.sgw-logo-ico svg{width:18px;height:18px;stroke:#0a1a28;fill:none;stroke-width:2.5;stroke-linecap:round;}
+.sgw-logo-ico svg{width:18px;height:18px;stroke:var(--l0);fill:none;stroke-width:2.5;stroke-linecap:round;}
 .sgw-logo-name{font-family:"Space Grotesk",sans-serif;font-size:18px;font-weight:700;color:#eef6ff;}
 .sgw-title{font-family:"Space Grotesk",sans-serif;font-size:22px;font-weight:700;color:#eef6ff;letter-spacing:-.02em;margin-bottom:6px;}
 .sgw-sub{font-size:14px;color:rgba(190,215,235,0.6);line-height:1.5;}
@@ -18564,7 +18673,7 @@ document.getElementById('fg-email').addEventListener('keydown', function(e) {
       <div class="sgw-logo-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
       <span class="sgw-logo-name">SureGreen</span>
     </div>
-    <div class="sgw-title">Bem-vindo! 👋</div>
+    <div class="sgw-title">Bem-vindo</div>
     <div class="sgw-sub">Vamos te ajudar a configurar tudo em 3 passos simples para você começar a registrar suas apostas.</div>
   </div>
 
@@ -18619,7 +18728,7 @@ document.getElementById('fg-email').addEventListener('keydown', function(e) {
           <div class="sgw-step-title">Configure seu Bankroll</div>
           <div class="sgw-step-desc">Na barra lateral esquerda, clique em <strong style="color:#eef6ff">Bankroll</strong>. Lá você define seu saldo inicial e acompanha a evolução do seu capital.</div>
           <div class="sgw-tip">
-            <strong>💡 O que é Bankroll?</strong> É o valor total que você reservou exclusivamente para apostas. Exemplo: se você tem R$ 500 para apostar, esse é seu bankroll.
+            <strong>O que é Bankroll?</strong> É o valor total que você reservou exclusivamente para apostas. Exemplo: se você tem R$ 500 para apostar, esse é seu bankroll.
           </div>
         </div>
       </div>
