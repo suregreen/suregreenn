@@ -668,6 +668,7 @@ function getStatus(u) {
   return d<0?'expirado':d<=7?'expirando':'ativo';
 }
 function mask(e) { if(!e) return '—'; const [l,d]=e.split('@'); return l.slice(0,3)+'***@'+(d||''); }
+function planoLabel(u) { return u && u.trial===true ? 'Trial 7 dias' : (u && u.plano) || 'Mensal'; }
 function fmtD(ts) { if(!ts) return '—'; return (ts.toDate?ts.toDate():new Date(ts)).toLocaleDateString('pt-BR'); }
 function fmtR(v) { if(!v&&v!==0) return '—'; return 'R$ '+Number(v).toFixed(2).replace('.',','); }
 function fmtDias(ts) {
@@ -841,7 +842,7 @@ function renderChurn() {
   document.getElementById('churn-list').innerHTML=list.length
     ?list.map(u=>`<div class="exp-item">
       <div class="exp-av" style="background:${avcol(u.email)};color:var(--red)">${ini(u.email)}</div>
-      <div class="exp-info"><div class="exp-email">${mask(u.email)}</div><div class="exp-plan">${u.plano||'Plano Mensal'}</div></div>
+      <div class="exp-info"><div class="exp-email">${mask(u.email)}</div><div class="exp-plan">${planoLabel(u)}</div></div>
       <div style="text-align:right"><div class="exp-badge">Expirado</div><div class="exp-date">${fmtD(u.assinatura_expira)}</div></div>
     </div>`).join('')
     :'<p style="color:var(--text3);font-size:12px">Nenhum expirado recentemente</p>';
@@ -901,7 +902,7 @@ function renderTable() {
       return '<tr>'+
         '<td><div class="user-cell"><div class="user-av" style="background:'+avcol(u.email)+';color:#6b7280">'+ini(u.email)+'</div>'+
         '<span class="user-email" onclick="copyEmail(\''+u.email+'\')" title="Clique para copiar">'+mask(u.email)+'</span></div></td>'+
-        '<td style="color:var(--text2)">'+(u.plano||'Mensal')+'</td>'+
+        '<td>'+(u.trial===true?'<span class="badge" style="background:rgba(124,92,255,.12);color:#9b87ff;border:1px solid rgba(124,92,255,.3)">Trial 7 dias</span>':'<span style="color:var(--text2)">'+planoLabel(u)+'</span>')+'</td>'+
         '<td><span class="badge '+st+'">'+lb+'</span></td>'+
         '<td style="color:var(--text3);font-size:12px">'+fmtD(u.criadoEm)+'</td>'+
         '<td>'+fmtDias(u.assinatura_expira)+'</td>'+
@@ -977,7 +978,7 @@ window.revogarAcesso = async function(uid, email) {
 window.exportCSV = function() {
   const rows = [['Email','Plano','Status','Cadastro','Expira']];
   allUsers.forEach(u => {
-    rows.push([u.email||'', u.plano||'Mensal', getStatus(u), fmtD(u.criadoEm), fmtD(u.assinatura_expira)]);
+    rows.push([u.email||'', planoLabel(u), getStatus(u), fmtD(u.criadoEm), fmtD(u.assinatura_expira)]);
   });
   const csv = rows.map(r => r.map(v => '"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
   const a = document.createElement('a');
