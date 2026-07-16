@@ -24731,6 +24731,13 @@ function sgOddsStartAutoReload() {
   }, 30 * 1000); // 30 segundos
 }
 
+var _BASEODDS_API = 'https://suregreen-apostabet.matheus11mantovi.workers.dev/melhores';
+var _BASEODDS_LIGAS = [
+  'brasileirao_a', 'brasileirao_b', 'copa_do_mundo', 'copa_do_brasil',
+  'libertadores', 'sul_americana', 'premier_league', 'la_liga',
+  'serie_a_italia', 'bundesliga', 'ligue_1', 'champions', 'europa_league'
+];
+
 function sgOddsLoad() {
   window._sgOddsRendered = false;
   var comBody = document.getElementById('odds-com-pa-body');
@@ -24740,119 +24747,82 @@ function sgOddsLoad() {
 
   if (_sgOddsUnsubscribe) { _sgOddsUnsubscribe(); _sgOddsUnsubscribe = null; }
 
-  var firebaseConfig = {
-    apiKey: "AIzaSyAwVfYGWzkJ74FaWpeF2LQhRTMlCEyJdFw",
-    authDomain: "xuxa-bet.firebaseapp.com",
-    projectId: "xuxa-bet",
-    storageBucket: "xuxa-bet.firebasestorage.app",
-    messagingSenderId: "825878560179",
-    appId: "1:825878560179:web:9f838f06dc4c2894111fc6"
-  };
+  var fetches = _BASEODDS_LIGAS.map(function(liga) {
+    return fetch(_BASEODDS_API + '?liga=' + liga)
+      .then(function(r) { return r.json(); })
+      .catch(function() { return { jogos: [] }; });
+  });
 
-  Promise.all([
-    import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js'),
-    import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js')
-  ]).then(function(mods) {
-    var appMod = mods[0];
-    var fs = mods[1];
-    try {
-      var app;
-      try { app = appMod.getApp('suregreen-odds'); }
-      catch(e) { app = appMod.initializeApp(firebaseConfig, 'suregreen-odds'); }
-      var db = fs.getFirestore(app);
-      // var docRef = fs.doc(db, 'odds', 'oddspedia_br'); // OddsPedia (desativado)
-      var docRef = fs.doc(db, 'odds', 'lzcommunity_br'); // LZ Community
+  Promise.all(fetches).then(function(results) {
+    var allGames = [];
+    var latestUpdate = null;
 
-      // Aplica dados do documento de odds (compartilhado: onSnapshot + fallback getDoc)
-      function _sgOddsApply(data) {
-        var games = (data && data.games) || [];
+    results.forEach(function(data) {
+      var ligaNome = data.liga || '';
+      var atualizado = data._atualizadoEm || null;
+      if (atualizado && (!latestUpdate || atualizado > latestUpdate)) latestUpdate = atualizado;
 
-        var converted = games.map(function(g) {
-          // Estrutura LZ: g.bookmakers = [{name, slug, home, draw, away, pa_category, url}, ...]
-          var books = (g.bookmakers || []).map(function(bk) {
-            // Normalizar pa_category — pode vir como string ou objeto Firestore
-            var paCat = bk.pa_category;
-            if (paCat && typeof paCat === 'object') paCat = paCat.stringValue || '';
-            paCat = (paCat || '').toString().toUpperCase().trim();
-            return {
-              name: bk.name || bk.slug || '',
-              slug: bk.slug || '',
-              home: parseFloat(bk.home) || null,
-              draw: parseFloat(bk.draw) || null,
-              away: parseFloat(bk.away) || null,
-              pa_category: paCat || 'SEM_PA',
-              url: bk.url || '',
-              home_pa: null, draw_pa: null, away_pa: null
-            };
-          }).filter(function(b) { return b.home && b.away; });
-
-          return {
-            id: g.id || '',
-            home: g.home || '',
-            away: g.away || '',
-            time: g.time || '--:--',
-            league: g.tournament || '',
-            startTime: g.startTime || '',
-            bookmakers: books
-          };
-        });
-
-        var updEl = document.getElementById('odds-update-txt');
-        if (updEl && data.updatedAt) {
-          var d = new Date(data.updatedAt);
-          updEl.textContent = 'Atualizado às ' + d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0') + ' · ' + converted.length + ' jogos';
+      (data.jogos || []).forEach(function(jg) {
+        var parts = jg.jogo ? jg.jogo.split(/\s+vs\.?\s+/i) : ['',''];
+        var home = (parts[0] || '').trim();
+        var away = (parts[1] || '').trim();
+        var time = '--:--';
+        if (jg.todasCasas && jg.todasCasas[0] && jg.todasCasas[0].inicio) {
+          try {
+            var d = new Date(jg.todasCasas[0].inicio);
+            if (!isNaN(d)) time = d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+          } catch(e) {}
         }
 
-        if (converted.length > 0) { sgOddsRender(converted); } else { sgOddsEmpty(); }
-        window._sgOddsRendered = true;
-        // Inicia auto-reload após carga bem-sucedida
-        if (typeof sgOddsStartAutoReload === 'function') sgOddsStartAutoReload();
-        // Limpa timers de segurança
-        if (window._sgOddsLoadTimeout) { clearTimeout(window._sgOddsLoadTimeout); window._sgOddsLoadTimeout = null; }
-        if (window._sgOddsWatchdog) { clearTimeout(window._sgOddsWatchdog); window._sgOddsWatchdog = null; }
-      }
+        var books = (jg.todasCasas || []).map(function(c) {
+          return {
+            name: c.casa || '',
+            slug: (c.casa || '').toLowerCase().replace(/\s+/g, '_'),
+            home: c.casa_odd || null,
+            draw: c.empate_odd || null,
+            away: c.fora_odd || null,
+            pa_category: c.temPA ? 'COM_PA' : 'SEM_PA',
+            url: c.url || '',
+            home_pa: null, draw_pa: null, away_pa: null
+          };
+        }).filter(function(b) { return b.home && b.away; });
 
-      _sgOddsUnsubscribe = fs.onSnapshot(docRef, function(snap) {
-        if (!snap.exists()) { sgOddsEmpty(); return; }
-        _sgOddsApply(snap.data());
-      }, function(err) {
-        console.error('Firestore odds error:', err);
-        sgOddsEmpty();
-        // Tenta reconectar em 5 segundos
-        setTimeout(function() { sgOddsLoad(); }, 5000);
+        if (books.length > 0) {
+          allGames.push({
+            id: jg.srMatch || '',
+            home: home,
+            away: away,
+            time: time,
+            league: ligaNome,
+            startTime: (jg.todasCasas && jg.todasCasas[0]) ? jg.todasCasas[0].inicio || '' : '',
+            bookmakers: books
+          });
+        }
       });
+    });
 
-      // Watchdog: se o onSnapshot não entregar em 3.5s (re-subscribe travado),
-      // força UMA leitura via getDoc para destravar — sem derrubar o listener ao vivo.
-      if (window._sgOddsWatchdog) clearTimeout(window._sgOddsWatchdog);
-      window._sgOddsWatchdog = setTimeout(function() {
-        if (window._sgOddsRendered) return;
-        try {
-          fs.getDoc(docRef).then(function(snap) {
-            if (window._sgOddsRendered) return;
-            if (snap && snap.exists()) { _sgOddsApply(snap.data()); }
-            else { sgOddsEmpty(); }
-          }).catch(function(e) { console.error('sgOdds getDoc fallback error:', e); });
-        } catch(e) { console.error('sgOdds getDoc fallback exception:', e); }
-      }, 3500);
-    } catch(e) {
-      console.error('sgOddsLoad error:', e);
-      sgOddsEmpty();
-      setTimeout(function() { sgOddsLoad(); }, 5000);
+    var updEl = document.getElementById('odds-update-txt');
+    if (updEl && latestUpdate) {
+      var d = new Date(latestUpdate);
+      updEl.textContent = 'Atualizado às ' + d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0') + ' · ' + allGames.length + ' jogos';
     }
+
+    if (allGames.length > 0) { sgOddsRender(allGames); } else { sgOddsEmpty(); }
+    window._sgOddsRendered = true;
+    if (typeof sgOddsStartAutoReload === 'function') sgOddsStartAutoReload();
+    if (window._sgOddsLoadTimeout) { clearTimeout(window._sgOddsLoadTimeout); window._sgOddsLoadTimeout = null; }
   }).catch(function(e) {
-    console.error('sgOddsLoad import error:', e);
+    console.error('sgOddsLoad error:', e);
     sgOddsEmpty();
     setTimeout(function() { sgOddsLoad(); }, 5000);
   });
 
-  // Timeout de segurança — se em 8s não renderizou, refaz o ciclo completo
   if (window._sgOddsLoadTimeout) clearTimeout(window._sgOddsLoadTimeout);
   window._sgOddsLoadTimeout = setTimeout(function() {
     if (!window._sgOddsRendered) {
       sgOddsLoad();
     }
-  }, 8000);
+  }, 15000);
 }
 
 var _LOADING_HTML = '<div class="odds-loading"><div><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span><span class="odds-loading-dot"></span></div><div class="odds-loading-txt">Carregando...</div></div>';
