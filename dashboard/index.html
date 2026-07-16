@@ -25100,6 +25100,7 @@ function opxFilter() {
 }
 
 function opxRender(games) {
+  window._opxFiltered = games;
   // Garantir wrapper de cards (substitui a tabela antiga)
   var wrap = document.getElementById('opx-cards-wrap');
   if (!wrap) {
@@ -25190,7 +25191,7 @@ function opxRender(games) {
       +'<span>'+(typeof trT==='function'?trT(g.home):g.home)+' <span class="opx-row-vs">vs</span> '+(typeof trT==='function'?trT(g.away):g.away)+'</span></div></div>'
       +'<div class="opx-casas-cell">'+oddCell(bHome,'home','CASA')+oddCell(bDraw,'draw','X')+oddCell(bAway,'away','FORA')+'</div>'
       +'<div class="opx-lucro-cell">'+lucroHtml+'</div>'
-      +'<div class="opx-action-cell"><button class="opx-usar" onclick="event.stopPropagation();sgOddsOpenModal((window._opxGames||[])['+gi+'])">Ver Odds</button>'
+      +'<div class="opx-action-cell"><button class="opx-usar" onclick="event.stopPropagation();sgOddsOpenModal((window._opxFiltered||[])['+gi+'])">Ver Odds</button>'
       +'<svg class="opx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>'
       +'</div></div>';
 
