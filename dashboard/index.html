@@ -25235,7 +25235,7 @@ function opxTog(rid,eid){
 
 function opxRowClick(event, el) {
   var gi = parseInt(el.dataset.gi);
-  var games = window._opxGames || [];
+  var games = window._opxFiltered || window._opxGames || [];
   var game = games[gi];
   if (game && typeof sgOddsOpenModal === 'function') {
     sgOddsOpenModal(game);
@@ -25252,7 +25252,7 @@ function opxTab(eid,idx,el){
 }
 
 function opxUsarTop(gi){
-  var games=window._opxGames||[];
+  var games=window._opxFiltered||window._opxGames||[];
   var g=games[parseInt(gi)];if(!g)return;
   var bk=g.bookmakers||[];
   var bHome=null;
