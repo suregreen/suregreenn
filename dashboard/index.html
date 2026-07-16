@@ -24763,13 +24763,12 @@ function sgOddsLoad() {
       if (atualizado && (!latestUpdate || atualizado > latestUpdate)) latestUpdate = atualizado;
 
       (data.jogos || []).forEach(function(jg) {
-        var parts = jg.jogo ? jg.jogo.split(/\s+vs\.?\s+/i) : ['',''];
-        var home = (parts[0] || '').trim();
-        var away = (parts[1] || '').trim();
+        var home = jg.home || '';
+        var away = jg.away || '';
         var time = '--:--';
-        if (jg.todasCasas && jg.todasCasas[0] && jg.todasCasas[0].inicio) {
+        if (jg.inicio) {
           try {
-            var d = new Date(jg.todasCasas[0].inicio);
+            var d = new Date(jg.inicio);
             if (!isNaN(d)) time = d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
           } catch(e) {}
         }
@@ -24794,7 +24793,7 @@ function sgOddsLoad() {
             away: away,
             time: time,
             league: ligaNome,
-            startTime: (jg.todasCasas && jg.todasCasas[0]) ? jg.todasCasas[0].inicio || '' : '',
+            startTime: jg.inicio || '',
             bookmakers: books
           });
         }
