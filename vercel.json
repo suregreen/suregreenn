@@ -1,7 +1,7 @@
 {
   "redirects": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/|$).+)",
       "destination": "https://www.baseodds.com.br",
       "permanent": true
     }
